@@ -1,0 +1,8 @@
+{
+  "model": "bge-m3:567m",
+  "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+  "dimensions": 1024,
+  "input_policy": "bge-m3-raw-text-v1",
+  "normalization": "client-l2-float32-v1",
+  "metric": "cosine"
+}

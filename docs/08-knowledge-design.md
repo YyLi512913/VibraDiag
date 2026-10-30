@@ -1,8 +1,8 @@
 # 08 正式知识发布与检索设计
 
-> 版本：v0.1，T03a文本版本/发布基础；日期：2026-10-30。
+> 版本：v0.2，T03a文本发布＋T03b1固定Embedding身份；日期：2026-10-31。
 > 上游：[需求F1—F3](01-requirements.md)、[M3设计](07-m3-agent-design.md)。
-> 本轮不接Embedding/pgvector索引、语义排序或Agent引用。文本已发布也明确返回formal_retrieval_available=false。
+> T03b1已实现独立真实Embedding适配和只读环境检查，尚未接入正式索引/检索API或Agent引用。文本发布接口继续返回formal_retrieval_available=false。
 
 ## 1. 阶段范围
 
@@ -101,3 +101,11 @@ T03c接Agent只读知识动作和真实knowledge_chunk引用，重查发布/撤�
 ## 10. 下一步
 
 进入T03b索引身份与授权向量检索，之后T03c接入Agent。知识前端、独立专业审核和共享试用准入仍归M4/M6，不用本机文本发布成功替代现场审核或RAG效果。
+
+## 11. T03b1 实施与索引承接
+
+已新增固定身份的LocalEmbedding适配器及backend/config/embedding-bge-m3.json，保存本机已有bge-m3:567m实际manifest digest、1024维、原文输入策略、float32/L2规范化与cosine；该配置是当前开发基线，不代表通过正式召回选型。模型卡说明BGE-M3不要求查询指令前缀，本轮仅使用dense输出。
+
+每批1—8段、每段最多2000字符，截断关闭；输入块直接使用规范化原文，不自动拼接可能超限的标题。编码前后校验本地tag digest；不自动拉模型或在身份错误时换候选。回环HTTP、禁止代理/重定向、2MiB流响应上限、向量形状/有限值/范数校验、单进程一个名额及最长120秒可配置超时。默认60秒，HTTP/流检查不保证服务端推理已取消，下一步构建调度不能将其当作硬进程终止。
+
+只读检查开发/测试库两类角色的vector安装和权限；不改变现有0015、38张业务表或4张检查点表。详见[T03b1验证](acceptance/M3-T03b1-verification.md)。下一步T03b2先处理受控扩展安装，再接不可变模型/索引身份、构建失败状态及原子切换、权限前置的精确cosine检索；未测量前不建ANN或锁定相关性阈值。T03c仍负责Agent引用。

@@ -231,3 +231,16 @@ formal_graph_executed=true仅表示持久规则图已运行，model_called仍fal
 ```
 
 详见[08设计](../docs/08-knowledge-design.md)及[T03a记录](../docs/acceptance/M3-T03a-verification.md)。知识前端留M4；本轮用本机API文档和HTTP脚本操作。
+
+## M3-T03b1 固定Embedding身份
+
+正式索引将使用独立LocalEmbedding适配器，配置见config/embedding-bge-m3.json；固定本机BGE-M3的实际digest、1024维与输入/规范化策略。仅允许回环Ollama，不自动下载、切换或混用旧原型NPZ。当前只提供适配器和验证脚本，尚未接知识API/后台索引或Agent。
+
+从仓库根目录先运行专项测试，再运行真实本地模型检查：
+
+```bat
+.venv\Scripts\python.exe -m pytest -c backend\pyproject.toml backend\tests\unit\test_formal_embedding.py backend\tests\integration\test_vector_readiness.py -q --junitxml=experiments\m3-t03b1-embedding-tests.xml
+.venv\Scripts\python.exe backend\scripts\verify_formal_embedding.py
+```
+
+脚本还只读检查开发/测试库的扩展安装与账号权限，不更改扩展、schema或角色。vector未安装时记录阻塞，不能视作pgvector检索已完成；接入步骤见[设计08](../docs/08-knowledge-design.md)和[T03b1记录](../docs/acceptance/M3-T03b1-verification.md)。重复运行覆盖同名本阶段回执，历史冻结回执不改写。

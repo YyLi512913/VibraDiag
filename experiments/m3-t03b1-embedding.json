@@ -1,0 +1,173 @@
+{
+  "passed": true,
+  "scope": "M3-T03b1 pinned dense embedding adapter and read-only database preflight",
+  "run_id": "7d63c0479406467d95a3346a4b5e0085",
+  "recorded_at": "2026-10-30T16:22:15.487042+00:00",
+  "python": "3.11.15",
+  "platform": "Windows-10-10.0.22000-SP0",
+  "provider": {
+    "identity": {
+      "model": "bge-m3:567m",
+      "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+      "dimensions": 1024,
+      "input_policy": "bge-m3-raw-text-v1",
+      "normalization": "client-l2-float32-v1",
+      "metric": "cosine"
+    },
+    "fingerprint": "a96b0899062b5260502a054a13ddb851c4d4db3db8ed20e61506fa28ad3e85ce",
+    "ollama_version": "0.40.13",
+    "capability": "embedding"
+  },
+  "embedding": {
+    "real_model_called": true,
+    "batches": 2,
+    "source_chunk_count": 2,
+    "query_count": 1,
+    "source_sha256": "91874b0ee35b95126a9033eb26420134cbd19bc6bd73b7addc99ff99e3bf7347",
+    "normalized_text_sha256": "c9f7e88304f9b04da95b1727d91c50dba9ad5551fb5554a7ca37263ed20e5710",
+    "input_sha256": [
+      "47347376abf3d85dd151278123b810fbb7e6515b6553a92d84cb0fb20403e600",
+      "b279aec8b35df4676b7bdd330163f7372b17ce18e9d8ca49744821b81822687c",
+      "f7e4ccc4a0e7329cbf9e909d27d2c5a033c130f4fd8081bd51b6b59bdec57bde"
+    ],
+    "vector_sha256": "e120409383f27e063a5812243d5eac4885b26736cd43e88d653e1980b7f45c99",
+    "vector_dtype": "float32",
+    "vector_shape": [
+      3,
+      1024
+    ],
+    "finite": true,
+    "l2_normalized": true,
+    "repeat_query_cosine": 1.0,
+    "timing": {
+      "identity_fingerprint": "a96b0899062b5260502a054a13ddb851c4d4db3db8ed20e61506fa28ad3e85ce",
+      "wall_seconds": 0.4690000000009604,
+      "count": 3,
+      "dimensions": 1024,
+      "device_requested": "cpu"
+    },
+    "repeat_timing": {
+      "identity_fingerprint": "a96b0899062b5260502a054a13ddb851c4d4db3db8ed20e61506fa28ad3e85ce",
+      "wall_seconds": 0.21899999999914144,
+      "count": 1,
+      "dimensions": 1024,
+      "device_requested": "cpu"
+    },
+    "incorrect_pin_rejected": true,
+    "identity_stable_before_after": true
+  },
+  "database_preflight": {
+    "development_application": {
+      "postgresql_version": "18.6",
+      "available_version": "0.8.6",
+      "installation_requires_superuser": true,
+      "installation_trusted": false,
+      "installed_version": null,
+      "extension_schema": null,
+      "superuser": false,
+      "create_database": false,
+      "create_role": false,
+      "public_ddl": false,
+      "ready_for_vector_migration": false,
+      "extension_modified": false,
+      "blockers": [
+        "vector_extension_not_installed"
+      ]
+    },
+    "development_migration": {
+      "postgresql_version": "18.6",
+      "available_version": "0.8.6",
+      "installation_requires_superuser": true,
+      "installation_trusted": false,
+      "installed_version": null,
+      "extension_schema": null,
+      "superuser": false,
+      "create_database": false,
+      "create_role": false,
+      "public_ddl": true,
+      "ready_for_vector_migration": false,
+      "extension_modified": false,
+      "blockers": [
+        "vector_extension_not_installed"
+      ]
+    },
+    "test_application": {
+      "postgresql_version": "18.6",
+      "available_version": "0.8.6",
+      "installation_requires_superuser": true,
+      "installation_trusted": false,
+      "installed_version": null,
+      "extension_schema": null,
+      "superuser": false,
+      "create_database": false,
+      "create_role": false,
+      "public_ddl": false,
+      "ready_for_vector_migration": false,
+      "extension_modified": false,
+      "blockers": [
+        "vector_extension_not_installed"
+      ]
+    },
+    "test_migration": {
+      "postgresql_version": "18.6",
+      "available_version": "0.8.6",
+      "installation_requires_superuser": true,
+      "installation_trusted": false,
+      "installed_version": null,
+      "extension_schema": null,
+      "superuser": false,
+      "create_database": false,
+      "create_role": false,
+      "public_ddl": true,
+      "ready_for_vector_migration": false,
+      "extension_modified": false,
+      "blockers": [
+        "vector_extension_not_installed"
+      ]
+    }
+  },
+  "vector_index_integrated": false,
+  "agent_knowledge_integrated": false,
+  "database_modified": false,
+  "embedding_called_from_formal_api": false,
+  "tests": {
+    "tests": "44",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "1.513"
+  },
+  "full_backend_tests": {
+    "tests": "646",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "328.714"
+  },
+  "limitations": [
+    "Synthetic developer text; no engineering or retrieval quality qualification",
+    "No PostgreSQL vector extension installation, schema/index mutation or privilege escalation",
+    "No persisted formal index, scoped semantic search, Agent citation or frontend integration",
+    "Tag checks detect observed drift, not cryptographic attestation of a trusted local Ollama server",
+    "HTTP timeouts and stream deadline checks do not terminate server-side inference; single process slot only",
+    "CPU was requested through Ollama; no independent hardware execution attestation"
+  ],
+  "source_sha256": {
+    "backend/src/vibradiag/infrastructure/retrieval/embedding.py": "f1107919177a4eb5db2288cbaf88d0fb8e240b2ce609636cb23ad1010e02903a",
+    "backend/src/vibradiag/infrastructure/retrieval/vector_readiness.py": "732370d1010c8b9b309461e717a0f73775a19d5b6239c7c38acd9095553663d4",
+    "backend/src/vibradiag/domain/knowledge_text.py": "d4e709c1e5f88ddf5195aecaf3ddf5ba3f336241aad9c15127be956332a8c6d5",
+    "backend/scripts/verify_formal_embedding.py": "edce9b7187d27f0a08166bc3f9c148dc7862f5c4601a139b7d22890713df5e11",
+    "backend/tests/unit/test_formal_embedding.py": "b938010329ae69fe54d6728db36d9740d6c82c244a384b3a6c50d70158940cf8",
+    "backend/tests/integration/test_vector_readiness.py": "b3775b4c7a544c1d46fa72c3b901c23b0178280518aec9494a6e928000210589",
+    "backend/config/embedding-bge-m3.json": "b152680043e01fb299b1b5a18ee872d472e943370d05f714f31264a525aeddfa",
+    "backend/requirements.lock.txt": "0d62d852c7ecdf17eddd4d5a459b56b9d4c198d52f1c8ce26ead6e329b0b50c7",
+    "experiments/m3-t03b1-embedding-tests.xml": "3083cbc5fb4795079a7196861751d347b303e407fb42d1c20640eb615d59feec",
+    "experiments/m3-t03b1-tests.xml": "0c2a485fbfca713293cf6bde964ed87a48ab6d1c339ab6911f2f3f3ad9ec3654",
+    "README.md": "4becb71026037cc9cf3a7cf6f24c22752b4e85e961ab53b5c691ddd459258224",
+    "backend/README.md": "1986f40817af3e4da5c97e88756ed7e7ee01d54abd10a1f987c2798e43532a03",
+    "docs/README.md": "ef3aa199ca1c51ae1683235163c2440ee907afbe3f8f9dd0327f08d69a40b89d",
+    "docs/03-milestones.md": "3b4bfa0057a41ff0fcd47d598bf425bd6d61b656aec08324d03ada304dece857",
+    "docs/08-knowledge-design.md": "48949bcaa0669b113d664d443a0f9cb403a8fc897b617170035524fff8c8af52",
+    "docs/acceptance/M3-T03b1-verification.md": "680ecbc6117a4dbdb5c9b0018e54d29d8035bcdc17e6b9a32f3f77436a8bba6d"
+  }
+}
