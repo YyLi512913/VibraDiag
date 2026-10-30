@@ -1,6 +1,6 @@
 # 07 M3 Agent取证闭环详细设计
 
-> 版本：v0.5，T02b3纯数值子进程、统一容量与可终止执行；日期：2026-10-30。
+> 版本：v0.6，T03b2版本化知识索引与授权检索；日期：2026-10-31。
 > 上游：[需求](01-requirements.md)、[阶段计划](03-milestones.md)、[M2总验收](acceptance/M2-acceptance.md)、[M2工具契约](contracts/m2-tool-contract.json)。
 > T01已实现DTO、纯策略与机器契约；T02a已实现数据库任务、幂等命令、调用账本及托管规则执行器。T02b2已将新任务接入分步LangGraph持久规则图，RAG与DeepSeek决策仍未接入。M2-R01—R04继续阻断正式诊断发布。
 
@@ -215,3 +215,9 @@ Windows通过暂停创建、先加入Job Object再恢复执行，配置关闭Job
 [08知识设计](08-knowledge-design.md)已单列来源/版本/块/审核发布/撤回。0015新增6表，当前38张业务表及4张检查点表。审核权由管理员密码复核后显式授予，工程师/管理员角色均无隐含发布权；待审核/发布/历史读取仍按当前身份和设备范围判断。新草稿不替换旧发布，撤回保留原块和来源。
 
 本轮只有文本发布及授权预过滤，没有Embedding、pgvector索引或语义排序，所有formal_retrieval_available为false。Agent的explain_method继续原有拒答，不能用开发卡片或未建立索引的文本自动补造KB引用。T03b接真实索引/检索，T03c再接只读知识动作和knowledge_chunk来源校验；详见[T03a记录](acceptance/M3-T03a-verification.md)。
+
+## 19. T03b2 正式索引与检索服务
+
+[08设计](08-knowledge-design.md)已接固定BGE-M3身份、真实本地Embedding和pgvector精确cosine检索；新路径/api/v1/knowledge-indexes独立于开发原型。0016新增索引代、向量、活动头及检索账本4表，当前42张业务表、4张检查点表。构建须显式审核能力，失败不覆盖原索引；查询先按发布/组织/设备/适用范围/模型及运行版本过滤，排名后再次授权并返回稳定块来源。
+
+[T03b2验证](acceptance/M3-T03b2-verification.md)说明同步128块/120秒构建、10000候选/top5、开发内容默认排除、原发起人账本和撤回历史边界。Agent尚未调用该服务，explain_method继续拒答正式知识未接入；方法解释与信号诊断事实仍分开。T03c完成只读动作、预算和引用校验后再改此拒答，T04才接DeepSeek决策；不得把可检索块或cosine分数直接当成设备故障证据。

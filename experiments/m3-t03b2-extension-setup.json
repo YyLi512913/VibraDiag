@@ -1,0 +1,104 @@
+{
+  "passed": true,
+  "scope": "M3-T03b2 explicit maintenance and both-database permissions",
+  "databases": {
+    "development": {
+      "existing_installation_verified": true,
+      "repeated_maintenance_idempotent": true,
+      "installation": {
+        "installed": true,
+        "created": false,
+        "version": "0.8.6",
+        "schema": "vibradiag_extensions",
+        "runtime_ddl_granted": false
+      },
+      "roles": {
+        "application": {
+          "postgresql_version": "18.6",
+          "available_version": "0.8.6",
+          "installation_requires_superuser": true,
+          "installation_trusted": false,
+          "installed_version": "0.8.6",
+          "extension_schema": "vibradiag_extensions",
+          "superuser": false,
+          "create_database": false,
+          "create_role": false,
+          "public_ddl": false,
+          "ready_for_vector_migration": true,
+          "extension_modified": false,
+          "blockers": [],
+          "extension_schema_usage": true,
+          "extension_schema_create": false
+        },
+        "migration": {
+          "postgresql_version": "18.6",
+          "available_version": "0.8.6",
+          "installation_requires_superuser": true,
+          "installation_trusted": false,
+          "installed_version": "0.8.6",
+          "extension_schema": "vibradiag_extensions",
+          "superuser": false,
+          "create_database": false,
+          "create_role": false,
+          "public_ddl": true,
+          "ready_for_vector_migration": true,
+          "extension_modified": false,
+          "blockers": [],
+          "extension_schema_usage": true,
+          "extension_schema_create": false
+        }
+      }
+    },
+    "test": {
+      "existing_installation_verified": true,
+      "repeated_maintenance_idempotent": true,
+      "installation": {
+        "installed": true,
+        "created": false,
+        "version": "0.8.6",
+        "schema": "vibradiag_extensions",
+        "runtime_ddl_granted": false
+      },
+      "roles": {
+        "application": {
+          "postgresql_version": "18.6",
+          "available_version": "0.8.6",
+          "installation_requires_superuser": true,
+          "installation_trusted": false,
+          "installed_version": "0.8.6",
+          "extension_schema": "vibradiag_extensions",
+          "superuser": false,
+          "create_database": false,
+          "create_role": false,
+          "public_ddl": false,
+          "ready_for_vector_migration": true,
+          "extension_modified": false,
+          "blockers": [],
+          "extension_schema_usage": true,
+          "extension_schema_create": false
+        },
+        "migration": {
+          "postgresql_version": "18.6",
+          "available_version": "0.8.6",
+          "installation_requires_superuser": true,
+          "installation_trusted": false,
+          "installed_version": "0.8.6",
+          "extension_schema": "vibradiag_extensions",
+          "superuser": false,
+          "create_database": false,
+          "create_role": false,
+          "public_ddl": true,
+          "ready_for_vector_migration": true,
+          "extension_modified": false,
+          "blockers": [],
+          "extension_schema_usage": true,
+          "extension_schema_create": false
+        }
+      }
+    }
+  },
+  "credentials_recorded": false,
+  "source_sha256": {
+    "backend/scripts/setup_vector_extension.py": "9c67dfd9452d4d7f0e057f4c6a0800312fa51ec1126468d77685532bae88aa84"
+  }
+}

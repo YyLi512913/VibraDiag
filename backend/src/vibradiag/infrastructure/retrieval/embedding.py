@@ -19,6 +19,11 @@ MAX_BATCH = 8
 MAX_TEXT = 2000
 
 
+def configured_identity():
+    from vibradiag.core.paths import BACKEND_ROOT
+    return EmbeddingIdentity(**json.loads((BACKEND_ROOT/'config/embedding-bge-m3.json').read_text(encoding='utf8')))
+
+
 def failure(code, status=503):
     # Never expose server response bodies, input text, credentials or endpoint URLs.
     raise MeasurementError(code, 'Pinned local embedding is unavailable or incompatible', status=status)

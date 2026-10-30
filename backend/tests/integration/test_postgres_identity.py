@@ -31,7 +31,7 @@ def principal(data,user,roles):
 def test_schema_and_non_superuser(database):
     with transaction() as conn:
         tables=conn.execute(text("SELECT tablename FROM pg_tables WHERE schemaname='public' AND tablename<>'alembic_version'" )).scalars().all()
-        assert len(tables)==38  # M1/M2 and four persistent M3 task tables.
+        assert len(tables)==42  # Business tables; extension/checkpoint schemas remain separate.
         assert not conn.execute(text('SELECT rolsuper OR rolcreatedb OR rolcreaterole FROM pg_roles WHERE rolname=current_user')).scalar()
         assert not conn.execute(text("SELECT has_table_privilege(current_user,'audit_events','UPDATE')")).scalar()
         assert not conn.execute(text("SELECT has_table_privilege(current_user,'alembic_version','UPDATE')")).scalar()

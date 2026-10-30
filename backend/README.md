@@ -244,3 +244,21 @@ formal_graph_executed=true仅表示持久规则图已运行，model_called仍fal
 ```
 
 脚本还只读检查开发/测试库的扩展安装与账号权限，不更改扩展、schema或角色。vector未安装时记录阻塞，不能视作pgvector检索已完成；接入步骤见[设计08](../docs/08-knowledge-design.md)和[T03b1记录](../docs/acceptance/M3-T03b1-verification.md)。重复运行覆盖同名本阶段回执，历史冻结回执不改写。
+
+## M3-T03b2 索引构建与授权检索
+
+先由独立维护连接设置仅当前进程使用的VIBRADIAG_VECTOR_ADMIN_URL，针对开发/测试库分别运行scripts/setup_vector_extension.py，随后移除维护变量；维护、迁移和应用URL须指向同一目标库。扩展固定0.8.6，位于独立vibradiag_extensions schema；应用/迁移角色无该schema的CREATE权限。之后按原迁移账号运行scripts/migrate.py到0016，重启API。API不会自动安装扩展。
+
+POST /api/v1/knowledge-indexes/revisions/{id}/build要求显式审核能力、已发布原文、Cookie/CSRF/Idempotency-Key，输入expected_version、expected_document_version、expected_index_version（首次0）及reason。同步构建上限128块/每批8块，processing先提交，成功原子写入向量/ready/活动头，失败保留原索引。返回201表示本次构建已登记，必须核对status和error_code，不等于索引成功；相同键重放200不重算。过期processing用新键显式重试。
+
+POST /api/v1/knowledge-indexes/search输入query和可选asset_id/equipment/component/limit（1—5）/include_developer。需要当前业务身份与CSRF，每次独立查询记账，无业务幂等键；JSON上限16KiB。默认排除开发内容，include_developer仅显式审核工程师可用。先过滤当前发布、组织/设备/适用范围、活动索引模型/运行版本，再精确cosine排序，已授权文本hash去重，最多10000候选；无合格候选不调用模型，超限明确拒绝。
+
+GET /knowledge-indexes/revisions/{id}和/runs/{id}按原文范围授权；GET /retrievals/{id}仅原发起人可读历史账本，无正文，不代替当前引用授权。原文/块响应新增active_index_id/index_version/latest_index_status等；失败重建可以同时显示活动ready和最新failed。已发布并不等于索引完成，原文下载不依赖模型在线。Agent方法解释仍拒答正式知识未接入，T03c再处理。
+
+```bat
+.venv\Scripts\python.exe -m pytest -c backend\pyproject.toml backend\tests -q --junitxml=experiments\m3-t03b2-tests.xml
+.venv\Scripts\python.exe -m pytest -c backend\pyproject.toml backend\tests\integration\test_knowledge_indexes.py -q --junitxml=experiments\m3-t03b2-index-tests.xml
+.venv\Scripts\python.exe backend\scripts\verify_knowledge_retrieval.py
+```
+
+详见[T03b2验收](../docs/acceptance/M3-T03b2-verification.md)。上述命令从仓库根目录执行，HTTP验证须在pytest结束后运行，使用专用测试库和真实本地模型。旧阶段回执保留历史范围，新记录不覆盖旧结果。

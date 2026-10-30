@@ -2,10 +2,12 @@ from fastapi import APIRouter
 from .v1 import analyses,diagnoses,knowledge,identity,assets,measurements,persistent_analyses,tool_runs,evidence
 from .v1 import agent_tasks
 from .v1 import knowledge_documents
+from .v1 import knowledge_indexes
 
 router=APIRouter(prefix='/api/v1')
 router.include_router(agent_tasks.router)
 router.include_router(knowledge_documents.router)
+router.include_router(knowledge_indexes.router)
 router.include_router(identity.router)
 router.include_router(assets.router)
 router.include_router(measurements.router)

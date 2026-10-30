@@ -1,8 +1,8 @@
 # 08 正式知识发布与检索设计
 
-> 版本：v0.2，T03a文本发布＋T03b1固定Embedding身份；日期：2026-10-31。
+> 版本：v0.3，T03b2版本化向量索引与授权精确检索；日期：2026-10-31。
 > 上游：[需求F1—F3](01-requirements.md)、[M3设计](07-m3-agent-design.md)。
-> T03b1已实现独立真实Embedding适配和只读环境检查，尚未接入正式索引/检索API或Agent引用。文本发布接口继续返回formal_retrieval_available=false。
+> T03b2已接真实Embedding、pgvector和授权精确检索；Agent引用留T03c。索引就绪与文本发布、模型实时健康及相关性准入分别记录。
 
 ## 1. 阶段范围
 
@@ -45,7 +45,7 @@ knowledge-lines-v1每块最多1800个Unicode码点，无重叠。按LF行贪心�
 
 ## 5. 数据与状态
 
-0015新增6张业务表：knowledge_documents、knowledge_revisions、knowledge_chunks、knowledge_review_grants、knowledge_commands、knowledge_events。当前38张业务表，另有4张检查点表，pgvector扩展本轮未修改。
+0015新增6张业务表：knowledge_documents、knowledge_revisions、knowledge_chunks、knowledge_review_grants、knowledge_commands、knowledge_events。T03a当时共38张业务表及4张检查点表，未修改扩展；T03b2的0016再新增4表，当前42张业务表、4张检查点表，扩展位于独立schema。
 
 ```mermaid
 flowchart LR
@@ -59,7 +59,7 @@ flowchart LR
 
 退回后正文重新私有，审核命令仅返回最小状态回执，不借命令重放泄露草稿。内容变更只能新建版本，范围/作者不可原地变更；revision_no、内容标签content_version和并发row_version分别保存，不混用。
 
-需求中的处理中/失败由T03b索引运行状态补齐，不把Embedding失败伪装成文本发布失败。本轮4种文本状态与vector_index=not_integrated分开，索引失败/替换策略尚未实现。
+需求中的处理中/失败由T03b2独立索引运行状态processing/ready/failed承载，不把Embedding失败伪装成文本发布失败。4种文本状态与索引活动头分开；失败重建保留原索引，新发布内容尚未就绪时不回退到撤回版本。
 
 ## 6. API
 
@@ -100,7 +100,7 @@ T03c接Agent只读知识动作和真实knowledge_chunk引用，重查发布/撤�
 
 ## 10. 下一步
 
-进入T03b索引身份与授权向量检索，之后T03c接入Agent。知识前端、独立专业审核和共享试用准入仍归M4/M6，不用本机文本发布成功替代现场审核或RAG效果。
+T03b2已实现索引身份与授权精确向量检索，下一步T03c接入Agent。知识前端、独立专业审核和共享试用准入仍归M4/M6，不用本机文本发布成功替代现场审核或RAG效果。
 
 ## 11. T03b1 实施与索引承接
 
@@ -109,3 +109,15 @@ T03c接Agent只读知识动作和真实knowledge_chunk引用，重查发布/撤�
 每批1—8段、每段最多2000字符，截断关闭；输入块直接使用规范化原文，不自动拼接可能超限的标题。编码前后校验本地tag digest；不自动拉模型或在身份错误时换候选。回环HTTP、禁止代理/重定向、2MiB流响应上限、向量形状/有限值/范数校验、单进程一个名额及最长120秒可配置超时。默认60秒，HTTP/流检查不保证服务端推理已取消，下一步构建调度不能将其当作硬进程终止。
 
 只读检查开发/测试库两类角色的vector安装和权限；不改变现有0015、38张业务表或4张检查点表。详见[T03b1验证](acceptance/M3-T03b1-verification.md)。下一步T03b2先处理受控扩展安装，再接不可变模型/索引身份、构建失败状态及原子切换、权限前置的精确cosine检索；未测量前不建ANN或锁定相关性阈值。T03c仍负责Agent引用。
+
+## 12. T03b2 实施与下一步
+
+维护连接显式安装vector 0.8.6到vibradiag_extensions；应用/迁移账号仅获该schema的USAGE，不获CREATE，扩展不随public业务schema重建或回滚。0016新增4张业务表，保存不可变索引代、向量、可CAS切换的活动头和原发起人的检索账本。
+
+建索引须当前显式审核能力、已发布版本与文档/版本/索引头CAS。同步构建每次最多128块，每批8块；processing先提交，模型调用不占数据库连接，完成后重查权限/发布/来源并一次提交全部向量、ready与活动头。失败保留原索引；过期中断需新幂等键显式重试，没有后台恢复消费者。
+
+新/api/v1/knowledge-indexes/search按当前发布、组织、设备权限、适用范围、活动模型指纹及实际Ollama版本先过滤，MATERIALIZED授权候选后精确cosine排序，按已授权文本hash去重；最多10000候选/top5，不建ANN。模型与排序后再重查授权和撤回。开发语料默认排除，显式开发验证仅向审核工程师开放，不能冒充正式检索。
+
+所有命中包含源块UUID、版本/索引代、原文位置/hash/来源声明及相似度；relevance_qualified=false，分数不是诊断概率。查询账本归原发起人，仅记录当时ID和分数，不替代当前正文授权。原文响应的ready不代表服务实时健康，相关性和工程审核仍须独立评测。
+
+详见[T03b2验收](acceptance/M3-T03b2-verification.md)。下一步T03c接Agent只读检索、任务预算与真实引用重查；DeepSeek决策仍留T04。历史T03a/T03b1回执保留当时范围，不改写为已完成索引的证据。

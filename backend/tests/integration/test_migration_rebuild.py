@@ -19,8 +19,8 @@ def test_all_migrations_build_an_empty_schema_and_rollback_cleanly(database):
                 config.attributes['connection']=connection
                 command.upgrade(config,'head')
                 count=connection.execute(text('SELECT count(*) FROM information_schema.tables WHERE table_schema=:schema'),dict(schema=schema)).scalar_one()
-                assert count==39  # 38 business tables and Alembic version table; checkpoints use a separate schema.
-                assert connection.execute(text('SELECT version_num FROM alembic_version')).scalar_one()=='0015_knowledge_documents'
+                assert count==43  # 42 business tables and Alembic version table; extension/checkpoints are separate.
+                assert connection.execute(text('SELECT version_num FROM alembic_version')).scalar_one()=='0016_knowledge_vectors'
                 checkpoints=connection.execute(text('SELECT count(*) FROM information_schema.tables WHERE table_schema=:schema'),dict(schema=schema+'_agent_checkpoints')).scalar_one()
                 assert checkpoints==4
             finally:
@@ -28,5 +28,7 @@ def test_all_migrations_build_an_empty_schema_and_rollback_cleanly(database):
         with owner.connect() as connection:
             assert connection.execute(text('SELECT to_regnamespace(:schema)'),dict(schema=schema)).scalar_one() is None
             assert connection.execute(text('SELECT to_regnamespace(:schema)'),dict(schema=schema+'_agent_checkpoints')).scalar_one() is None
+            assert connection.execute(text("SELECT extversion FROM pg_extension WHERE extname='vector'")).scalar_one()=='0.8.6'
+            assert connection.execute(text("SELECT to_regnamespace('vibradiag_extensions')")).scalar_one() is not None
     finally:
         owner.dispose()

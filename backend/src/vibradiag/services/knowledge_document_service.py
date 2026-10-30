@@ -1,4 +1,4 @@
-"""T03a authorized text publication. No vector ranking or Agent knowledge integration yet."""
+"""Authorized immutable text publication; vector readiness is distinct from publication."""
 from hashlib import sha256
 import json
 from uuid import uuid4
@@ -220,7 +220,21 @@ def read_revision(identifier,principal,*,acknowledge=False):
             original_filename=row['original_filename'],format=row['format'],source_sha256=row['source_sha256'],text_sha256=row['text_sha256'],
             chunk_policy=row['chunk_policy'],chunk_count=row['chunk_count'],published_at=row['published_at'],withdrawn_at=row['withdrawn_at'],
             created_by=str(row['created_by']),published_by=str(row['published_by']) if row['published_by'] else None,withdrawn_by=str(row['withdrawn_by']) if row['withdrawn_by'] else None,
-            vector_index='not_integrated',formal_retrieval_available=False)
+            **_index_state(connection,row))
+
+
+def _index_state(connection,row):
+    from vibradiag.infrastructure.retrieval.embedding import configured_identity
+    head=connection.execute(text('''SELECT h.run_id,h.row_version,i.identity_sha256,i.status,i.runtime_version FROM knowledge_active_indexes h
+        JOIN knowledge_index_runs i ON i.id=h.run_id WHERE h.revision_id=:id'''),dict(id=row['id'])).mappings().first()
+    latest=connection.execute(text('SELECT status FROM knowledge_index_runs WHERE revision_id=:id ORDER BY created_at DESC,id LIMIT 1'),dict(id=row['id'])).scalar_one_or_none()
+    try:identity=configured_identity().fingerprint if head else None
+    except (OSError,ValueError,TypeError):identity=None  # Immutable source history remains readable without a valid model configuration.
+    compatible=bool(head and head['status']=='ready' and head['identity_sha256']==identity)
+    return dict(vector_index='ready' if compatible else 'identity_mismatch' if head else latest or 'not_indexed',latest_index_status=latest,
+        active_index_id=str(head['run_id']) if head else None,index_version=head['row_version'] if head else 0,
+        index_runtime_version=head['runtime_version'] if head else None,model_availability_checked=False,
+        formal_retrieval_available=compatible and row['status']=='published' and row['metadata']['content_origin']!='developer_test')
 
 
 def read_document(identifier,principal):
@@ -249,14 +263,15 @@ def chunks(identifier,principal,page,page_size):
     with transaction() as connection:
         current=business(connection,principal);row,_=_revision(connection,current,identifier)
         records=connection.execute(text('SELECT * FROM knowledge_chunks WHERE revision_id=:id ORDER BY chunk_no LIMIT :limit OFFSET :offset'),dict(id=identifier,limit=page_size,offset=(page-1)*page_size)).mappings().all()
-        return dict(items=[_chunk_response(row,c) for c in records],page=page,page_size=page_size)
+        state=_index_state(connection,row)
+        return dict(items=[_chunk_response(row,c,index=state) for c in records],page=page,page_size=page_size)
 
 
-def _chunk_response(row,chunk):
+def _chunk_response(row,chunk,*,index=None):
     _verify_chunk(row,chunk)
     return dict(id=str(chunk['id']),revision_id=str(row['id']),document_id=str(row['document_id']),chunk_no=chunk['chunk_no'],text=chunk['text_content'],
         text_sha256=chunk['text_sha256'],source_sha256=row['source_sha256'],heading_path=chunk['heading_path'],line_start=chunk['line_start'],line_end=chunk['line_end'],
-        char_start=chunk['char_start'],char_end=chunk['char_end'],status=row['status'],content_origin=row['metadata']['content_origin'],formal_retrieval_available=False)
+        char_start=chunk['char_start'],char_end=chunk['char_end'],status=row['status'],content_origin=row['metadata']['content_origin'],**(index or dict(formal_retrieval_available=False)))
 
 
 def read_chunk(identifier,principal):
@@ -264,7 +279,7 @@ def read_chunk(identifier,principal):
         current=business(connection,principal)
         chunk=connection.execute(text('SELECT * FROM knowledge_chunks WHERE id=:id AND organization_id=:org'),dict(id=identifier,org=current.organization_id)).mappings().first()
         if not chunk:not_found()
-        row,_=_revision(connection,current,chunk['revision_id']);return _chunk_response(row,chunk)
+        row,_=_revision(connection,current,chunk['revision_id']);return _chunk_response(row,chunk,index=_index_state(connection,row))
 
 
 def original(identifier,principal):
@@ -289,4 +304,4 @@ def published_candidates(principal,*,asset_id=None,equipment='motor',component='
               AND (:developer OR r.metadata->>'content_origin'<>'developer_test')
             ORDER BY d.id,c.chunk_no LIMIT :limit'''),dict(org=current.organization_id,actor=current.user_id,asset=asset_id,equipment=equipment,component=component,developer=include_developer,limit=min(max(limit,1),5))).scalars().all()
     items=[read_chunk(identifier,principal) for identifier in records]
-    return [item for item in items if item['status']=='published']
+    return [dict(item,formal_retrieval_available=False) for item in items if item['status']=='published']
