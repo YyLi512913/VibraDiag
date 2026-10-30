@@ -19,8 +19,8 @@ def test_all_migrations_build_an_empty_schema_and_rollback_cleanly(database):
                 config.attributes['connection']=connection
                 command.upgrade(config,'head')
                 count=connection.execute(text('SELECT count(*) FROM information_schema.tables WHERE table_schema=:schema'),dict(schema=schema)).scalar_one()
-                assert count==33  # 32 business tables and Alembic version table; checkpoints use a separate schema.
-                assert connection.execute(text('SELECT version_num FROM alembic_version')).scalar_one()=='0014_agent_graph'
+                assert count==39  # 38 business tables and Alembic version table; checkpoints use a separate schema.
+                assert connection.execute(text('SELECT version_num FROM alembic_version')).scalar_one()=='0015_knowledge_documents'
                 checkpoints=connection.execute(text('SELECT count(*) FROM information_schema.tables WHERE table_schema=:schema'),dict(schema=schema+'_agent_checkpoints')).scalar_one()
                 assert checkpoints==4
             finally:

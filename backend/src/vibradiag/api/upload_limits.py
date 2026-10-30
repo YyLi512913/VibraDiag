@@ -11,17 +11,20 @@ class MeasurementBodyLimit:
         self.app=app
 
     async def __call__(self, scope, receive, send):
-        if scope['type']!='http' or scope['method']!='POST' or scope['path']!='/api/v1/measurements':
+        measurement=scope.get('path')=='/api/v1/measurements'
+        knowledge=scope.get('path')=='/api/v1/knowledge-documents' or (scope.get('path','').startswith('/api/v1/knowledge-documents/') and scope.get('path','').endswith('/revisions'))
+        if scope['type']!='http' or scope['method']!='POST' or not (measurement or knowledge):
             return await self.app(scope,receive,send)
         received=0
+        limit=BODY_LIMIT if measurement else 5*1024*1024+64*1024
 
         async def limited_receive():
             nonlocal received
             message=await receive()
             received+=len(message.get('body',b''))
-            if received>BODY_LIMIT:
+            if received>limit:
                 # Starlette closes temporary multipart files on MultiPartException.
-                raise MultiPartException(LIMIT_MESSAGE)
+                raise MultiPartException(LIMIT_MESSAGE if measurement else 'knowledge multipart body exceeds limit')
             return message
 
         await self.app(scope,limited_receive,send)

@@ -210,3 +210,24 @@ formal_graph_executed=true仅表示持久规则图已运行，model_called仍fal
 ```
 
 详细实际验证及限制见[T02b3记录](../docs/acceptance/M3-T02b3-verification.md)。数据库仍0014/32业务表与4检查点表，重启API后生效。下一步正式知识发布/检索。
+
+## M3-T03a 文本知识版本与发布
+
+迁移0015新增6表，当前38张业务表加4张检查点表。新正式路径为`/api/v1/knowledge-documents`，独立于旧原型`/api/v1/knowledge/search`；无需启用原型。
+
+工程师上传UTF-8 MD/TXT（5MiB、20万LF行、4096块上限），multipart恰好file＋metadata JSON，写操作要求Cookie、CSRF、Idempotency-Key。元数据包含title/source_note/equipment_scope/component_scope/content_version/usage_rights/content_origin/visibility/reason；设备范围另需asset_id。修订路径`/{document_id}/revisions`另需expected_document_version。原字节保留，规范化正文以固定策略分块，原文下载仅text/plain/attachment。
+
+`/revisions/{id}/submit|reject|publish|withdraw`需要expected_version、expected_document_version和reason。工程师只可导入/修订/提交自己的文档；发布/退回/撤回还需要显式审核能力。管理员POST`/review-grants`须复核本人password，指定同组织工程师user_id、enabled、expected_version（首次0）及理由；管理员无默认正文或发布权。密码不进入命令或事件。
+
+新草稿保留原发布版；新发布原子替换旧发布并标撤回历史。`/revisions/{id}/chunks`与`/chunks/{id}`提供稳定UUID、标题路径、行/字符位置和hash，撤回后仍可在原权限下追溯。列表按权限过滤后分页，草稿不泄漏给他人；撤销审核/设备权限立即影响后续请求。
+
+这是文本发布基础，没有向量排序或模型调用。所有formal_retrieval_available=false，Agent方法解释仍拒答。已有本地BGE-M3和pgvector扩展接入在T03b，T03c才接Agent引用。开发内容不自动成为正式语料，元数据的来源/许可声明不等于独立认证。
+
+```bat
+.venv\Scripts\python.exe backend\scripts\migrate.py
+.venv\Scripts\python.exe -m pytest -c backend\pyproject.toml backend\tests -q --junitxml=experiments\m3-t03a-tests.xml
+.venv\Scripts\python.exe -m pytest -c backend\pyproject.toml backend\tests\unit\test_knowledge_text.py backend\tests\integration\test_knowledge_documents.py -q --junitxml=experiments\m3-t03a-knowledge-tests.xml
+.venv\Scripts\python.exe backend\scripts\verify_knowledge_publication.py
+```
+
+详见[08设计](../docs/08-knowledge-design.md)及[T03a记录](../docs/acceptance/M3-T03a-verification.md)。知识前端留M4；本轮用本机API文档和HTTP脚本操作。
