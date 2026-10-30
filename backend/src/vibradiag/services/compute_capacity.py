@@ -1,4 +1,4 @@
-"""One process-wide budget shared by M1 analysis and future M2 tool execution."""
+"""One admission gate owned by the leased API; all M1/M2 numerical children share two slots."""
 from threading import BoundedSemaphore
 
 capacity = BoundedSemaphore(2)

@@ -22,7 +22,7 @@
 | M0 可行性原型 | prototype，不作正式发布 | 基础CSV分析、真实模型调用、开发检索、前后端工程分离 | 已有验证记录，存在已知限制 |
 | M1 数据与基础分析 | v0.1，本机阶段 | PostgreSQL基础、文件/参数版本、基础身份范围、可靠分析记录 | T01—T05及本机限定范围验收通过，见M1记录 |
 | M2 轴承工具与证据 | v0.2 | 包络、理论频率、匹配/歧义、结构化事实和证据规则 | 本机探索工具范围有条件通过，见M2总验收；正式诊断/试用准入未通过 |
-| M3 Agent取证闭环 | v0.3 | 真实工具决策、挂起/拒答、持久执行、受控RAG与正式评测初版 | T01/T02a/T02b2已实现，T02b1兼容性已验证；T02b3—T05待实现 |
+| M3 Agent取证闭环 | v0.3 | 真实工具决策、挂起/拒答、持久执行、受控RAG与正式评测初版 | T01/T02a/T02b2/T02b3已实现，T02b1兼容性已验证；T03—T05待实现 |
 | M4 工作台与报告复核 | v0.4 | 正式交互、台账/知识管理、报告版本与人工复核 | 待实现，依赖M1/M3 |
 | M5 工单与复测 | v0.5 | 审批、幂等工单、状态与复测关联 | 待实现，依赖M2/M4 |
 | M6 试用准入 | v1.0-rc → v1.0 | 全P0回归、部署/备份/恢复、安全、容量与效果验收 | 待实现，依赖M1—M5 |
@@ -91,7 +91,7 @@ T01形成[06设计](06-m2-tool-design.md)，T02a已实现纯数值模块/测试�
 
 ## 6. M3：Agent与受控RAG闭环
 
-[T01详细设计](07-m3-agent-design.md)及[契约/策略记录](acceptance/M3-T01-verification.md)已完成。[T02a](acceptance/M3-T02a-verification.md)已实现任务/命令/账本与真实授权规则执行，正式LangGraph图、RAG及模型决策尚未接入；[T02b1](acceptance/M3-T02b1-verification.md)已验证官方检查点与隔离进程；[T02b2](acceptance/M3-T02b2-verification.md)已接分步业务规则图及围栏，下一步T02b3数值隔离。
+[T01详细设计](07-m3-agent-design.md)及[契约/策略记录](acceptance/M3-T01-verification.md)已完成。[T02a](acceptance/M3-T02a-verification.md)已实现任务/命令/账本与真实授权规则执行，正式LangGraph图、RAG及模型决策尚未接入；[T02b1](acceptance/M3-T02b1-verification.md)已验证官方检查点与隔离进程；[T02b2](acceptance/M3-T02b2-verification.md)已接分步业务规则图及围栏，[T02b3](acceptance/M3-T02b3-verification.md)已接纯数值子进程、统一容量与可终止执行；下一步T03正式知识发布/检索。
 
 | 任务 | 交付 |
 | --- | --- |
@@ -254,6 +254,6 @@ v1.0-rc只交给受控测试；全部软件准入通过后标记v1.0。对具体
 
 ## 14. 下一步行动
 
-进入 **M3-T02b：持久图检查点、完整恢复对账与隔离执行**。[T02a](acceptance/M3-T02a-verification.md)已接任务API、幂等命令、真实M1/M2规则执行、预算累计、取消围栏及托管消费者。[T02b1](acceptance/M3-T02b1-verification.md)已验证官方PostgresSaver、迁移角色、节点重入与隔离子进程终止。[T02b2](acceptance/M3-T02b2-verification.md)已接入有身份/租约围栏的分步持久图；下一步T02b3落实业务数值隔离、委托身份和跨进程总容量；规则链不能充当DeepSeek Agent效果验证。M2诊断资格门槛继续保留。
+进入 **M3-T02b：持久图检查点、完整恢复对账与隔离执行**。[T02a](acceptance/M3-T02a-verification.md)已接任务API、幂等命令、真实M1/M2规则执行、预算累计、取消围栏及托管消费者。[T02b1](acceptance/M3-T02b1-verification.md)已验证官方PostgresSaver、迁移角色、节点重入与隔离子进程终止。[T02b2](acceptance/M3-T02b2-verification.md)已接入有身份/租约围栏的分步持久图；[T02b3](acceptance/M3-T02b3-verification.md)已实现API授权后的纯数值快照委托、统一两名额及数值终止；下一步T03正式知识发布/检索；规则链不能充当DeepSeek Agent效果验证。M2诊断资格门槛继续保留。
 
 M1通过仅代表本机数据基础能力，M2—M6仍依次验证；软件试用准入留M6，不能由原型模型输出或本机性能基线代替。

@@ -25,6 +25,8 @@ async def lifespan(app):
         try:
             if hosted:agent_runtime.stop()
         finally:
+            from vibradiag.infrastructure.compute.runner import stop_all
+            stop_all()
             runtime.stop()
 
 app=FastAPI(title='VibraDiag API',version='0.1.0',lifespan=lifespan)

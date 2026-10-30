@@ -204,7 +204,9 @@ def load_parents(snapshot,principal,*,require_active):
 
 def compute(snapshot,principal):
     inputs,_=load_parents(snapshot,principal,require_active=True)
-    return compare_measurements(**inputs)
+    from vibradiag.infrastructure.compute import runner as numeric
+    from vibradiag.services.analysis_runtime import runtime
+    return numeric.run('comparison',inputs,lambda:compare_measurements(**inputs),check=runtime.ensure)
 
 
 def recheck(connection,current,run):

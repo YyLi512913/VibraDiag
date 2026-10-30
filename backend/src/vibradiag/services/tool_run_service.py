@@ -25,6 +25,7 @@ from vibradiag.services.tool_profile_service import resolve_profile
 from vibradiag.services.identity_service import audit
 from vibradiag.services.measurement_service import fresh, not_found, original_bytes, authorized_measurement
 from vibradiag.services import matching_service, evidence_service, comparison_service
+from vibradiag.infrastructure.compute import runner as numeric
 
 REQUEST = TypeAdapter(ToolRunRequest)
 
@@ -158,21 +159,29 @@ def create_run(payload, key, principal, request_id):
         started = perf_counter()
         try:
             raw = original_bytes(FileStore(), record)
-            if payload.tool_name == 'analyze_envelope':
-                computed = analyze_envelope(parse_csv(raw).values, parameters)
-            elif payload.tool_name == 'calculate_bearing_frequencies':
-                computed = calculate_bearing_frequencies(parameters)
-            elif payload.tool_name=='compare_measurements':
-                computed=comparison_service.compute(snapshot,principal)
-            else:
-                computed = matching_service.compute(snapshot,principal)
+            def live():
+                runtime.ensure()
+                with transaction() as connection:
+                    current=fresh(connection,principal,write=True)
+                    run,_,_=authorized_run(connection,current,identifier,write=True)
+                    if run['status']!='running':raise MeasurementError('TOOL_INTERRUPTED','Tool run no longer active',status=409)
+                    if not confirmation_active(connection,run):raise MeasurementError('CONFIRMATION_REVOKED','Input confirmation revoked',status=409)
+            with numeric.supervising(live):
+                if payload.tool_name == 'analyze_envelope':
+                    computed = numeric.run('envelope',dict(raw=raw,parameters=parameters),lambda:analyze_envelope(parse_csv(raw).values, parameters),check=runtime.ensure)
+                elif payload.tool_name == 'calculate_bearing_frequencies':
+                    computed = numeric.run('frequency',dict(parameters=parameters),lambda:calculate_bearing_frequencies(parameters),check=runtime.ensure)
+                elif payload.tool_name=='compare_measurements':
+                    computed=comparison_service.compute(snapshot,principal)
+                else:
+                    computed = matching_service.compute(snapshot,principal)
             if computed.status == 'failed':
                 fail_run(identifier, computed.error_code or 'TOOL_NUMERIC_FAILED')
             else:
                 metadata = computed.metadata()
                 result = dict(metadata, tool_execution_id=str(identifier), measurement_revision_id=str(revision['id']),
                     input_sha256=record['sha256'], input_fingerprint=fingerprint,
-                    compute_elapsed_seconds=perf_counter()-started,
+                    compute_elapsed_seconds=perf_counter()-started,compute_execution=numeric.execution_receipt(),
                     provenance_notice='Engineering declarations are not independent source authentication or field calibration')
                 facts=[]; evidence=[]
                 if payload.tool_name == 'match_frequency_evidence':

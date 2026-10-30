@@ -75,4 +75,7 @@ def compute(snapshot, principal):
     parameters=dict(envelope_source=dict(common,execution_id=snapshot['parents']['envelope']['id']),
         frequency_source=dict(common,execution_id=snapshot['parents']['frequency']['id']),
         basic_source=dict(common,execution_id=snapshot['parents']['basic']['id']))
-    return match_frequency_evidence(parents['envelope'],parents['frequency'],parameters,basic_spectrum=parents['basic'])
+    from vibradiag.infrastructure.compute import runner as numeric
+    from vibradiag.services.analysis_runtime import runtime
+    return numeric.run('matching',dict(envelope=parents['envelope'],frequencies=parents['frequency'],parameters=parameters,basic_spectrum=parents['basic']),
+        lambda:match_frequency_evidence(parents['envelope'],parents['frequency'],parameters,basic_spectrum=parents['basic']),check=runtime.ensure)

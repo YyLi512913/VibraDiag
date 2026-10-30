@@ -236,6 +236,8 @@ def cancel_task(identifier,expected_version,key,principal):
             if row['version']!=expected_version or row['status'] in TERMINAL:conflict()
             _change(connection,row,'cancelled',error='USER_CANCELLED')
             _save_command(connection,current,identifier,'cancel',digest,request)
+    from vibradiag.infrastructure.compute.runner import stop_task
+    stop_task(identifier)
     return read_task(identifier,principal),200
 
 
@@ -321,8 +323,10 @@ def _dispatch(identifier,token,action,payload,principal):
         if not result.get('input_confirmation_active',True):conflict('INPUT_CONFIRMATION_REVOKED')
         return result
     try:
-        if resource_kind=='analysis':result,_=basic.create_analysis(AnalysisRequest.model_validate(execution_payload),call['logical_key'],principal,uuid4())
-        else:result,_=tools.create_run(TypeAdapter(ToolRunRequest).validate_python(execution_payload),call['logical_key'],principal,uuid4())
+        from vibradiag.infrastructure.compute.runner import bound_task
+        with bound_task(identifier,token,principal):
+            if resource_kind=='analysis':result,_=basic.create_analysis(AnalysisRequest.model_validate(execution_payload),call['logical_key'],principal,uuid4())
+            else:result,_=tools.create_run(TypeAdapter(ToolRunRequest).validate_python(execution_payload),call['logical_key'],principal,uuid4())
         rid=UUID(result['analysis_id'] if resource_kind=='analysis' else result['tool_execution_id'])
         state=result['status']
         if state=='completed':state={'unavailable':'unavailable','failed':'failed'}.get(result.get('result_status'),'completed')

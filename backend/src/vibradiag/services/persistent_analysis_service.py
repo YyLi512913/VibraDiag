@@ -18,6 +18,7 @@ from vibradiag.services.identity_service import asset_allowed, audit
 from vibradiag.services.measurement_service import (authorized_measurement, fresh, not_found,
                                                   original_bytes, revision_payload)
 
+from vibradiag.infrastructure.compute import runner as numeric
 from vibradiag.services.compute_capacity import capacity as _capacity
 CONFIG_HASH=sha256(json_bytes(CONFIG)).hexdigest()
 
@@ -108,10 +109,18 @@ def create_analysis(payload,key,principal,request_id):
             result=read_analysis(existing_id,principal)
             return result,202 if result['status']=='running' else 200
         try:
-            parsed=parse_csv(original_bytes(FileStore(),record))
-            computed=compute_basic(parsed.values,revision['sampling_rate_hz'],revision['acceleration_unit'])
+            raw=original_bytes(FileStore(),record)
+            def live():
+                runtime.ensure()
+                with transaction() as connection:
+                    current=fresh(connection,principal,write=True)
+                    run,_=authorized_analysis(connection,current,identifier,write=True)
+                    if run['status']!='running':raise MeasurementError('ANALYSIS_INTERRUPTED','Run no longer active',status=409)
+                    if run['confirmation_revoked_at'] is not None:raise MeasurementError('CONFIRMATION_REVOKED','Input confirmation revoked',status=409)
+            computed=numeric.run('basic',dict(raw=raw,sampling_rate=revision['sampling_rate_hz'],unit=revision['acceleration_unit']),
+                lambda:compute_basic(parse_csv(raw).values,revision['sampling_rate_hz'],revision['acceleration_unit']),check=live)
             result=dict(computed.summary,analysis_id=str(identifier),measurement_revision_id=str(revision['id']),
-                        input_sha256=record['sha256'],algorithm_version=ALGORITHM_VERSION,config_hash=CONFIG_HASH)
+                        input_sha256=record['sha256'],algorithm_version=ALGORITHM_VERSION,config_hash=CONFIG_HASH,compute_execution=numeric.execution_receipt())
             artifacts=AnalysisStore().publish(current.organization_id,identifier,result,computed)
             runtime.ensure()
             with transaction() as connection:

@@ -192,3 +192,21 @@ uv pip check --python .venv\Scripts\python.exe
 ```
 
 formal_graph_executed=true仅表示持久规则图已运行，model_called仍false。模型决策、正式知识、任务前端和数值进程硬取消尚未接入；下一步T02b3处理业务数值隔离、委托身份与跨进程总容量。
+
+## M3-T02b3 数值子进程
+
+默认`VIBRADIAG_NUMERIC_BACKEND=process`，五类纯数值核心独立解释器执行，API保留全部授权/来源/产物/事务。`VIBRADIAG_NUMERIC_TIMEOUT_MS`为100—120000ms，默认120000，Agent任务可用剩余预算会进一步缩短。Windows先将暂停进程纳入Job再运行，默认Job提交内存上限1GiB、最多2个进程（启动器/解释器）；环境清理并固定数值库单线程。
+
+所有M1/M2子进程共用现有API两名额，不在子进程各建容量池；单API租约仍必需。数值超时由独立看门狗终止，任务取消终止对应Job并等待收尾。异常/超时保存failed来源，无空成功；正常结束清理本次UUID IPC目录。强制API退出时内核终止数值进程，可能留下私有IPC文件，生产保留/对账策略留M6。
+
+`compute_execution`执行回执记录process、协议、有效期限、PID和耗时，可在正式来源结果中核对。无需给子进程数据库或模型凭据。固定JSON/NPZ协议不支持pickle、动态函数/任意文件路径。数值进程为同用户可信代码隔离，未提供OS文件/网络安全沙箱；Windows已验证，Linux分支待验证。宿主准备/IO/入库不属于可硬中断数值进程，不能按此宣称整个HTTP请求硬实时。
+
+历史故障注入使用专用测试库限定的inline_test；真实子进程专项显式process。inline_test和故障场景都不是公开请求字段，生产不能启用或自动回退。
+
+```bat
+.venv\Scripts\python.exe -m pytest -c backend\pyproject.toml backend\tests -q --junitxml=experiments\m3-t02b3-tests.xml
+.venv\Scripts\python.exe -m pytest -c backend\pyproject.toml backend\tests\integration\test_numeric_process.py -q --junitxml=experiments\m3-t02b3-process-tests.xml
+.venv\Scripts\python.exe backend\scripts\verify_m3_isolation_flow.py
+```
+
+详细实际验证及限制见[T02b3记录](../docs/acceptance/M3-T02b3-verification.md)。数据库仍0014/32业务表与4检查点表，重启API后生效。下一步正式知识发布/检索。
