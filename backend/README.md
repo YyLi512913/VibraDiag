@@ -134,3 +134,7 @@ T04a新增62项的历史结果见[T04a记录](../docs/acceptance/M2-T04a-verific
 ## M2结项与M3承接
 
 [M2总验收](../docs/acceptance/M2-acceptance.md)在本机探索工具范围有条件通过。`export_m2_tool_contract.py`导出当前请求schema/四类工具版本与权限边界；新匹配执行为frequency-matching-v2（阈值配置仍matching-v1），旧结果不重算。`verify_m2_release_baseline.py`复现规则/邻带基线，三个HTTP验证脚本支持--receipt与--tests-report以保留历史，`verify_m2_acceptance.py`核验18项实际测试、源码指纹、构建与资源证据。公开严格匹配覆盖0/52，诊断profile发布数0；M3仅先接探索/澄清/拒答，正式诊断仍有发布阻断。
+
+## M3-T01 正式Agent契约（未接运行API）
+
+`agents/formal_contracts.py`定义任务/恢复、候选选择、预算及未发布草稿；`formal_policy.py`提供无IO的预算/候选/引用检查。现有`agents/graph.py`仍是M0原型，本轮没有连接正式任务API、Worker或模型。`export_m3_agent_contract.py`导出机器契约，`verify_m3_t01.py`核对实际JUnit与源码。见[07设计](../docs/07-m3-agent-design.md)，下一步T02a持久任务及真实授权执行。

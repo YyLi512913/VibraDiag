@@ -1,0 +1,34 @@
+{
+  "passed": true,
+  "scope": "M3-T01 detailed design, DTOs and pure policy checks only",
+  "full_backend_tests": {
+    "tests": "506",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "190.702"
+  },
+  "new_contract_policy_tests": 21,
+  "python": "3.11.15",
+  "langgraph_installed": "1.2.18",
+  "formal_task_api_implemented": false,
+  "formal_agent_graph_executed": false,
+  "database_migration_added": false,
+  "worker_or_durable_recovery_implemented": false,
+  "model_called": false,
+  "published_knowledge_integrated": false,
+  "semantic_claim_verification_implemented": false,
+  "formal_diagnostic_release_approved": false,
+  "source_sha256": {
+    "backend/src/vibradiag/agents/formal_contracts.py": "004e977c80467977bf8c2ec1f1c7f23b0a6a08c497dddc791cc0dd48641bd7b9",
+    "backend/src/vibradiag/agents/formal_policy.py": "150b19e0025cb29ea4fb17a82f125357bbb07188d41a504ad52b979268e3b077",
+    "backend/tests/unit/test_formal_agent_policy.py": "cae5b7349ded5fdeba166ec77fcb0fe6e8824c8b4d38ae827faed710671dc79a",
+    "backend/scripts/export_m3_agent_contract.py": "8a5ce69fc65a18202ebc232712ae28c8f83af906e0aa4b6ecdff89671c2aacc7",
+    "backend/scripts/verify_m3_t01.py": "7ddaaa577b79fcf5a2b3dfdec3835e85d2cf5f50d7c060810e29bd9971c02301",
+    "backend/requirements.lock.txt": "db7bca83a22a77ed4e06f2c15ebfadf31947b268acebe406d8cccdfda889e88f",
+    "docs/07-m3-agent-design.md": "bd9ba552448fd61a9379e330cb540825b183bcf2df9a89acee3ba78b412b848f",
+    "docs/contracts/m2-tool-contract.json": "b16ffb02124f9d4d53def28c6bbce242a444a4709d1d25402d6ccd338a72c744",
+    "docs/contracts/m3-agent-contract.json": "b01694898fb03787351fa92e77534c2abd8b19ffa968ec118b7986326fbe322e",
+    "experiments/m3-t01-tests.xml": "c1de4f5b13e7a04c94de9ea4f2905491beeca1a0c09cf0cf5773771c4110a6ff"
+  }
+}
