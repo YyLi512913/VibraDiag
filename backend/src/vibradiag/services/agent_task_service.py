@@ -1,9 +1,10 @@
-"""M3-T02a durable rule-backed task scaffold. No LLM, RAG or LangGraph execution."""
+"""M3-T02a durable rule-backed task scaffold. Versioned durable rules graph; no LLM or RAG decisions."""
 from datetime import datetime,timezone
 from hashlib import sha256
 import json
 from uuid import UUID,uuid4
 
+from vibradiag.agents.graph_state import EXECUTOR,GRAPH_VERSION,GraphWait,defer_wait
 from pydantic import TypeAdapter
 from sqlalchemy import text
 from vibradiag.agents.formal_contracts import CreateAgentTask,ResumeAgentTask,ExecutionBudget,ExploratoryDraft
@@ -141,7 +142,7 @@ def create_task(payload,key,principal):
             count=connection.execute(text('''SELECT count(*) FROM agent_tasks WHERE organization_id=:org AND requested_by=:actor
                 AND status IN ('queued','running','waiting_information','interrupted')'''),dict(org=current.organization_id,actor=current.user_id)).scalar_one()
             if count>=MAX_PENDING:raise MeasurementError('AGENT_QUEUE_FULL','Too many unfinished tasks',status=429)
-            roots=_roots(connection,current,payload);snapshot={'roots':roots,'executor':'rules_scaffold_v1'}
+            roots=_roots(connection,current,payload);snapshot={'roots':roots,'executor':EXECUTOR}
             identifier=uuid4()
             before=next((root['revision_id'] for root in roots if root['revision_id']!=str(payload.measurement_revision_id)),None)
             if payload.goal=='compare_measurements' and before is None:before=str(payload.measurement_revision_id)
@@ -151,6 +152,9 @@ def create_task(payload,key,principal):
                 dict(id=identifier,org=current.organization_id,actor=current.user_id,session=current.session_id,revision=payload.measurement_revision_id,
                     before=before,goal=payload.goal,payload=json_bytes(data).decode(),hash=fingerprint(data),snapshot=json_bytes(snapshot).decode(),fingerprint=fingerprint(snapshot)))
             row=connection.execute(text('SELECT * FROM agent_tasks WHERE id=:id'),dict(id=identifier)).mappings().one()
+            connection.execute(text('''INSERT INTO agent_graph_bindings(task_id,organization_id,requested_by,thread_id,graph_version,input_fingerprint)
+                VALUES (:task,:org,:actor,:thread,:version,:fingerprint)'''),dict(task=identifier,org=current.organization_id,
+                actor=current.user_id,thread=str(uuid4()),version=GRAPH_VERSION,fingerprint=row['input_fingerprint']))
             _event(connection,row,'accepted');_save_command(connection,current,identifier,'create',digest,request);status=202
     return read_task(identifier,principal),status
 
@@ -160,6 +164,9 @@ def read_task(identifier,principal):
         row,current,active=_authorize(connection,principal,identifier)
         calls=connection.execute(text('SELECT * FROM agent_calls WHERE task_id=:id ORDER BY call_no'),dict(id=identifier)).mappings().all()
         events=connection.execute(text('SELECT task_version,kind,details,created_at FROM agent_events WHERE task_id=:id ORDER BY created_at,id LIMIT 200'),dict(id=identifier)).mappings().all()
+    with transaction() as connection:
+        binding=connection.execute(text('SELECT * FROM agent_graph_bindings WHERE task_id=:id'),dict(id=identifier)).mappings().first()
+        checkpoint_count=connection.execute(text('SELECT count(*) FROM public_agent_checkpoints.checkpoints WHERE thread_id=:thread'),dict(thread=binding['thread_id'])).scalar_one() if binding else 0
     confirmations=True;contexts=True
     for call in calls:
         if call['resource_id']:
@@ -178,7 +185,8 @@ def read_task(identifier,principal):
         'calls':[{'id':str(c['id']),'call_no':c['call_no'],'action':c['action_name'],'state':c['state'],
             'resource_kind':c['resource_kind'],'resource_id':str(c['resource_id']) if c['resource_id'] else None,
             'logical_call_key':c['logical_key'],'error_code':c['error_code']} for c in calls],
-        'events':[dict(e) for e in events],'executor':'rules_scaffold_v1','model_called':False,'formal_graph_executed':False}
+        'events':[dict(e) for e in events],'executor':row['input_snapshot']['executor'],'model_called':False,'formal_graph_executed':bool(checkpoint_count),
+        'graph':{'version':binding['graph_version'],'checkpoint_count':checkpoint_count} if binding else None}
 
 
 def list_tasks(principal,page,page_size):
@@ -238,6 +246,7 @@ def _running(connection,identifier,token):
 
 
 def _wait(identifier,token,code,*,choices=None,selection_field=None,status='waiting_information'):
+    if defer_wait.get():raise GraphWait(code,choices,selection_field,status)
     question={'id':str(uuid4()),'code':code,'choices':choices or [],'selection_field':selection_field,
         'note':'Answer text does not change measurement parameters, confirm inputs, or establish calibration.'}
     with transaction() as connection:
@@ -350,7 +359,7 @@ def _finish(identifier,token,principal,status,observations,missing=(),error=None
     draft=ExploratoryDraft(status='insufficient_evidence' if missing else 'analysis_only',
         summary='规则托管执行完成；尚未执行模型Agent诊断。' if not missing else '已保留可用分析；必要条件仍不足。',
         observations=tuple(observations),missing_requirements=tuple(dict.fromkeys(missing)),
-        limitations=('M3-T02a规则执行基础，不是DeepSeek或LangGraph Agent决策。','探索数值不能直接用于故障定类、健康或维修有效结论。'),
+        limitations=('持久规则执行基础，未执行DeepSeek模型自主决策。','探索数值不能直接用于故障定类、健康或维修有效结论。'),
         next_steps=('结合有来源的参数及人工复核；后续接入正式Agent与知识服务。',)).model_dump(mode='json')
     # Re-read all referenced outcomes after computation; no stale/corrupt result can be published.
     with transaction() as connection:
@@ -377,6 +386,9 @@ def execute_claimed(task):
         with transaction() as connection:
             _running(connection,identifier,token);row,current,_=_authorize(connection,principal,identifier,write=True,current_only=True)
         principal=current;payload=CreateAgentTask.model_validate(row['payload'])
+        if row['input_snapshot']['executor']==EXECUTOR:
+            from vibradiag.agents.rules_graph import execute
+            execute(task,principal);return
         if payload.goal=='explain_method':
             _finish(identifier,token,principal,'refused',(),('published_knowledge_service_not_integrated',));return
         confirmation=_confirmation(payload.measurement_revision_id,principal)
@@ -417,6 +429,9 @@ def execute_claimed(task):
         else:missing.append('matching_parents_or_uncertainty_incomplete')
         missing.append('diagnostic_profile_not_qualified')
         _finish(identifier,token,principal,'completed_degraded',observations,missing)
+    except GraphWait as wait:
+        try:_wait(identifier,token,wait.code,choices=wait.choices,selection_field=wait.selection_field,status=wait.status)
+        except (YieldTask,Fenced):pass
     except (YieldTask,Fenced):return
     except PolicyStop as error:
         try:

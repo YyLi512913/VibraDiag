@@ -64,7 +64,7 @@ def test_accept_replay_conflict_and_real_basic_draft(case):
     assert source.status_code==200 and source.json()['status']=='completed'
     assert result['draft']['observations'][0]['citations'][0]['id']==result['calls'][0]['resource_id']
     assert result['draft']['publication_state']=='unpublished_draft'
-    assert result['executor']=='rules_scaffold_v1' and not result['model_called'] and not result['formal_graph_executed']
+    assert result['executor']=='rules_graph_v1' and not result['model_called'] and result['formal_graph_executed']
     assert any(event['kind']=='call_reserved' for event in result['events'])
     assert create(case,key=key).json()['status']=='completed'
 

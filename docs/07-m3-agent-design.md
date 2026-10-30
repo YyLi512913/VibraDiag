@@ -1,8 +1,8 @@
 # 07 M3 Agent取证闭环详细设计
 
-> 版本：v0.3，M3-T01契约、T02a规则任务及T02b1检查点兼容性验证；日期：2026-10-30。
+> 版本：v0.4，T02b2业务持久规则图与授权/租约围栏；日期：2026-10-30。
 > 上游：[需求](01-requirements.md)、[阶段计划](03-milestones.md)、[M2总验收](acceptance/M2-acceptance.md)、[M2工具契约](contracts/m2-tool-contract.json)。
-> T01已实现DTO、纯策略与机器契约；T02a已实现数据库任务、幂等命令、调用账本及托管规则执行器。尚未接入正式LangGraph持久图、RAG或DeepSeek决策。M2-R01—R04继续阻断正式诊断发布。
+> T01已实现DTO、纯策略与机器契约；T02a已实现数据库任务、幂等命令、调用账本及托管规则执行器。T02b2已将新任务接入分步LangGraph持久规则图，RAG与DeepSeek决策仍未接入。M2-R01—R04继续阻断正式诊断发布。
 
 ## 1. 目标与首轮范围
 
@@ -105,7 +105,7 @@ numeric_fact只接受基础分析/事实；exploratory_observation接受工具�
 
 [Interrupts](https://docs.langchain.com/oss/python/langgraph/interrupts)说明恢复会重新进入中断节点，因此中断前的外部副作用必须受账本/幂等保护。使用服务器生成thread_id，不能把知道thread_id当作授权。恢复数据先通过本项目schema和业务校验，再提交图恢复命令。
 
-T02b1已安装锁定的官方PostgresSaver依赖，并在专用测试库的隔离schema验证跨进程持久化。所有验证表由迁移身份创建，应用身份不执行DDL/setup；验证schema结束时按标记删除，业务迁移仍0013/31表。业务执行器尚未连接检查点，不使用MemorySaver替代跨重启恢复。
+T02b1已安装锁定的官方PostgresSaver依赖，并在专用测试库的隔离schema验证跨进程持久化。所有验证表由迁移身份创建，应用身份不执行DDL/setup；验证schema结束时按标记删除，业务迁移仍0013/31表。T02b1当时未接业务；T02b2现已通过0014接入任务绑定与独立检查点schema，不使用MemorySaver替代跨重启恢复。
 
 ## 10. T02任务/Worker落地计划
 
@@ -173,3 +173,21 @@ T01覆盖C01—C05纯契约/策略用例；T02a新增真实数据库/API/工具/
 T02b2必须先补：任务与服务器生成thread_id的一对一绑定、图版本校验、每次读取/写入的当前身份和租约围栏、取消/恢复与检查点提交窗口的对账；不能把原始Saver对象或任意thread_id读取接口暴露给浏览器。检查点是可重建光标，M1/M2来源和agent_calls账本仍是执行权威。
 
 隔离进程超时目前仅针对验证子进程，未替换业务任务线程。下一步先接有授权围栏的分步持久规则图，再落实数值隔离、受控委托身份与跨进程总容量；不能直接在新进程各开并发2或让独立Worker绕过现有API租约。DeepSeek动作选择仍归T04，不因验证图可运行而提前声明模型Agent已实现。
+
+## 16. T02b2业务持久规则图
+
+本轮新任务默认executor=rules_graph_v1，绑定graph_version=rules-graph-v1。服务器在创建任务事务中同时生成不可变agent_graph_bindings，绑定task、组织、发起人、thread_id和input_fingerprint。旧rules_scaffold_v1任务继续原执行器，不更新历史快照或擅自改图版本。下一版本拓扑必须另立版本，未知版本不能静默回退。
+
+图分为prepare、basic、profile、envelope、context、frequency、bound_envelope、matching、comparison九个命名节点，按目标和真实条件路由。每个节点前从业务表核对当前身份/输入/租约；匹配父条件不足不进入matching。节点调用既有授权服务及agent_calls，数值结果从来源重读。模型未参与动作选择，formal_graph_executed=true只说明已运行持久图，不代表模型Agent决策或诊断资格。
+
+检查点只包含task_id与graph_version这两个领域字段，及LangGraph运行光标；不保存Cookie、角色、预算、工具数值、原CSV或聊天回答。正式恢复校验字段、版本、大小（检查点及单个序列化载荷最多64KiB）和允许的节点/写入通道，禁用pickle和额外构造器。预算、选项、确认和引用必须重读业务表。严格类型/来源检查不是检查点加密签名或设备故障语义验证。
+
+0014新增1张业务绑定表及独立schema内4张官方检查点表，业务表32张。生产命名空间为public_agent_checkpoints；空schema重建用该schema的独立后缀，整个迁移事务回滚。迁移账号负责DDL，应用账号只能读迁移版本及读写运行记录，不能setup、删历史、prune或公开列出原始检查点。
+
+TaskSaver每次读/写重查当前身份、数据范围、输入指纹和图绑定；在检查点事务中对任务行FOR SHARE，核对running和租约令牌。数据库触发器再检查该连接的受控租约与绑定thread_id，拒绝未知thread、非空namespace、旧租约和终态写入。取消/恢复更新任务时须等这次短事务结束，迟到写入不能覆盖终态。应用仍是可信数据库客户端，未引入跨所有业务表的数据库RLS。
+
+业务挂起/恢复继续使用既有question_id、expected_version、幂等命令和累计预算。节点需等待时先保留失败/待执行光标，外层再把任务转为waiting_information/interrupted；恢复用invoke(None)继续待执行节点，不把浏览器回答直接作为LangGraph Command。若进程在检查点与挂起事务之间终止，启动恢复将running改为interrupted，再由显式恢复对账。
+
+工具账本已完成而节点检查点未提交时，重入节点只复用已核验调用；图已经END而任务终态未提交时，不重新跑节点，而是重读所有必需来源并在当前租约下完成未发布草稿。最终任务提交在图保存结束后执行，因此不会为了写最后一个checkpoint而放松终态围栏。无来源/来源失效的光标不能构造草稿。
+
+详见[T02b2记录](acceptance/M3-T02b2-verification.md)。本轮仍是单API租约、单托管消费者、M1/M2共享并发2；协作取消和步骤预算不变。T02b3再接真实数值子进程、跨进程容量与受控委托身份，T03/T04分别接正式知识和DeepSeek决策。

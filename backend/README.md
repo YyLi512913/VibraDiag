@@ -174,3 +174,21 @@ uv pip check --python .venv\Scripts\python.exe
 真实子进程验证：首次运行动态中断，下一进程恢复后在节点提交前阻塞，父进程超时终止自建进程，再由新进程从持久resume继续。解析正弦基础计算登记一次，节点会重入三次；这证明需要幂等账本，不是检查点天然提供exactly-once。0.5秒终止门槛从子进程就绪开始计时，排除解释器启动；不是业务API硬超时或设备效果指标。
 
 显式限制反序列化类型并禁用pickle；官方严格模式仍可能把未批准构造对象变成普通数据，业务图恢复必须另做状态校验。原始Saver不含组织/操作者/租约授权，T02b2完成任务绑定及读写围栏后才能接正式图；业务跨进程容量和委托身份另行实现。详见[验证记录](../docs/acceptance/M3-T02b1-verification.md)。
+
+## M3-T02b2 业务持久规则图
+
+新任务默认rules_graph_v1 / rules-graph-v1，旧rules_scaffold_v1任务继续原版本。任务创建事务生成不可变服务器thread绑定；任务详情只返回图版本/检查点数量，不提供原始检查点或任意thread_id访问。LangGraph PostgreSQL依赖现已提升为主依赖；checkpoint-probe组保留作为前一阶段安装命令的兼容别名。
+
+迁移0014建立agent_graph_bindings及public_agent_checkpoints内4张官方表，当前32张业务表，另有4张检查点表。先用迁移账号执行`backend/scripts/migrate.py`再重启API；运行账号不能自动setup或修改迁移版本/删除图历史。新建规则图仍只有一个托管消费者，不支持另起多API或独立Worker绕过总容量。
+
+每次检查点读写重查当前身份、输入和绑定；短事务对任务行FOR SHARE，再由数据库触发器核对running与租约。旧Saver在取消/重启后失效。图状态只含任务/版本和运行光标，拒绝未知字段/节点、pickle及超限载荷；预算和真实结果始终重读业务表。缺信息保留待执行节点，受控resume后invoke(None)继续；不把浏览器回答直接传给图Command。
+
+测试覆盖“工具完成但检查点未提交”与“图完成但业务终态未提交”两个窗口，恢复复用来源而不重复计算。完整执行/限制见[T02b2记录](../docs/acceptance/M3-T02b2-verification.md)。
+
+```bat
+.venv\Scripts\python.exe -m pytest -c backend\pyproject.toml backend\tests -q --junitxml=experiments\m3-t02b2-tests.xml
+.venv\Scripts\python.exe -m pytest -c backend\pyproject.toml backend\tests\integration\test_agent_tasks.py -q --junitxml=experiments\m3-t02b2-task-tests.xml
+.venv\Scripts\python.exe backend\scripts\verify_m3_durable_flow.py
+```
+
+formal_graph_executed=true仅表示持久规则图已运行，model_called仍false。模型决策、正式知识、任务前端和数值进程硬取消尚未接入；下一步T02b3处理业务数值隔离、委托身份与跨进程总容量。
