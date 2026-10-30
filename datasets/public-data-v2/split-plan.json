@@ -1,0 +1,25 @@
+{
+  "version": "paderborn-entity-holdout-plan-v1",
+  "frozen_on": "2026-10-30",
+  "purpose": "Freeze bearing identities before downloading or examining held-out signals",
+  "development_manifest": "datasets/public-data-v1/manifest.json",
+  "development_manifest_sha256": "1dca73047ba4b589ffa946926a6246fd3e31eb12ed2b83c2a7a29e8029f491d8",
+  "validation": [
+    {"bearing_id": "K002", "label": "healthy_reference", "origin": "healthy_reference"},
+    {"bearing_id": "KA03", "label": "outer_race", "origin": "artificial_electric_engraver"},
+    {"bearing_id": "KI03", "label": "inner_race", "origin": "artificial_electric_engraver"}
+  ],
+  "sealed_test": [
+    {"bearing_id": "K003", "label": "healthy_reference", "origin": "healthy_reference"},
+    {"bearing_id": "KA04", "label": "outer_race", "origin": "accelerated_lifetime_test"},
+    {"bearing_id": "KI04", "label": "inner_race", "origin": "accelerated_lifetime_test"}
+  ],
+  "conditions": ["N15_M07_F10", "N09_M07_F10", "N15_M01_F10", "N15_M07_F04"],
+  "validation_repetitions": [1, 2],
+  "channel": "vibration_1",
+  "sealed_policy": "Hash original archives only. Do not list/extract test MAT members, parse signals, calculate features, or tune against test data in this stage.",
+  "evaluation_scope": "Three-class source subset only; rolling-element class absent. One bearing per class per held-out split, not sufficient for a generalization claim.",
+  "label_source": "https://mb.uni-paderborn.de/fileadmin-mb/kat/PDF/Veroeffentlichungen/20160703_PHME16_CM_bearing.pdf",
+  "license": "CC-BY-NC-4.0",
+  "commercial_distribution_approved": false
+}

@@ -1,0 +1,203 @@
+{
+  "version": "m2-local-exploratory-exit-v1",
+  "scope": "M2 v0.2 deterministic tools, scoped persistence, exploratory observations and reproducible baselines; M3 development entry only",
+  "expected_case_count": 18,
+  "cases": [
+    {
+      "id": "M2-AT01-E01",
+      "tests": [
+        "tests.unit.test_envelope::test_fixed_amplitude_and_boundary_contract"
+      ],
+      "status": "passed",
+      "limitation": null
+    },
+    {
+      "id": "M2-AT01-E02",
+      "tests": [
+        "tests.unit.test_matching::test_unmodulated_real_carrier_does_not_claim_support_or_health",
+        "tests.unit.test_m2_release::test_unmodulated_and_out_of_band_controls_have_no_significant_support"
+      ],
+      "status": "passed",
+      "limitation": null
+    },
+    {
+      "id": "M2-AT01-E03",
+      "tests": [
+        "tests.unit.test_envelope::test_odd_effective_length_and_unit_equivalence"
+      ],
+      "status": "passed",
+      "limitation": null
+    },
+    {
+      "id": "M2-AT01-E04",
+      "tests": [
+        "tests.unit.test_envelope::test_lengths_cycles_and_narrow_band_budget_are_unavailable",
+        "tests.unit.test_envelope::test_invalid_parameters_fail_before_computation"
+      ],
+      "status": "passed",
+      "limitation": null
+    },
+    {
+      "id": "M2-AT01-E05",
+      "tests": [
+        "tests.unit.test_envelope::test_boundary_impulses_are_not_deleted_or_hidden_as_original_data",
+        "tests.unit.test_m2_release::test_beating_preserves_alternative_and_boundary_impulse_remains_in_original"
+      ],
+      "status": "passed",
+      "limitation": null
+    },
+    {
+      "id": "M2-AT01-E06",
+      "tests": [
+        "tests.unit.test_matching::test_actual_two_carrier_pipeline_preserves_beating_alternative"
+      ],
+      "status": "passed",
+      "limitation": null
+    },
+    {
+      "id": "M2-AT02-F01",
+      "tests": [
+        "tests.unit.test_bearing_frequencies::test_closed_form_geometry_rpm_scaling_and_alias_lineage"
+      ],
+      "status": "passed",
+      "limitation": null
+    },
+    {
+      "id": "M2-AT02-F02",
+      "tests": [
+        "tests.unit.test_bearing_frequencies::test_missing_and_out_of_scope_conditions_do_not_produce_frequencies"
+      ],
+      "status": "passed",
+      "limitation": null
+    },
+    {
+      "id": "M2-AT02-F03",
+      "tests": [
+        "tests.unit.test_bearing_frequencies::test_equal_units_and_coefficient_path_match_geometry",
+        "tests.unit.test_bearing_frequencies::test_conflicts_and_bsf_definitions_do_not_silently_choose_a_value"
+      ],
+      "status": "passed",
+      "limitation": null
+    },
+    {
+      "id": "M2-AT03-M01",
+      "tests": [
+        "tests.unit.test_matching::test_local_peak_supported_in_window_with_exact_observation_and_limits",
+        "tests.unit.test_matching::test_multiple_insignificant_peaks_do_not_create_ambiguity"
+      ],
+      "status": "passed",
+      "limitation": null
+    },
+    {
+      "id": "M2-AT03-M02",
+      "tests": [
+        "tests.unit.test_matching::test_speed_and_coefficient_uncertainty_preserve_cross_term",
+        "tests.unit.test_matching::test_short_observation_marks_resolution_limited_without_clamping"
+      ],
+      "status": "passed",
+      "limitation": null
+    },
+    {
+      "id": "M2-AT03-M03",
+      "tests": [
+        "tests.unit.test_matching::test_shared_peak_identity_and_overlap_group_are_consistent",
+        "tests.unit.test_matching::test_shaft_overlap_and_2bsf_alias_do_not_create_independent_support"
+      ],
+      "status": "passed",
+      "limitation": null
+    },
+    {
+      "id": "M2-AT03-M04",
+      "tests": [
+        "tests.unit.test_matching::test_harmonic_sideband_alias_and_nonpositive_targets_remain_explicit",
+        "tests.unit.test_matching::test_raw_source_required_and_bounded_screen_does_not_claim_exclusion"
+      ],
+      "status": "passed",
+      "limitation": null
+    },
+    {
+      "id": "M2-AT03-P01",
+      "tests": [
+        "tests.integration.test_matching_runs::test_existing_graph_ids_do_not_bypass_org_and_record_scope",
+        "tests.integration.test_matching_runs::test_parent_artifact_corruption_invalidates_matching_and_graph_reads",
+        "tests.integration.test_matching_runs::test_existing_matching_result_is_not_recomputed_by_new_algorithm_version"
+      ],
+      "status": "passed",
+      "limitation": null
+    },
+    {
+      "id": "M2-AT04-C01",
+      "tests": [
+        "tests.unit.test_comparison::test_same_scoped_conditions_have_correct_deltas_and_no_repair_claim",
+        "tests.unit.test_comparison::test_zero_baseline_and_unavailable_shape_metrics_are_null_not_huge_rates"
+      ],
+      "status": "passed",
+      "limitation": null
+    },
+    {
+      "id": "M2-AT04-C02",
+      "tests": [
+        "tests.unit.test_comparison::test_incomplete_or_different_conditions_block_comparison",
+        "tests.unit.test_comparison::test_duplicate_or_same_source_not_independent_before_after"
+      ],
+      "status": "passed",
+      "limitation": null
+    },
+    {
+      "id": "M2-AT05-D01",
+      "tests": [
+        "tests.unit.test_public_datasets::test_checked_in_inventory_never_claims_heldout_readiness",
+        "tests.unit.test_public_holdouts::test_frozen_entities_are_disjoint_and_test_remains_archive_only"
+      ],
+      "status": "limited",
+      "limitation": "CWRU license unspecified on reviewed pages; external source subset lacks rolling-element class; raw data not distributed"
+    },
+    {
+      "id": "M2-AT05-D02",
+      "tests": [
+        "tests.unit.test_m2_release::test_public_denominator_is_not_an_invented_tool_execution_or_accuracy"
+      ],
+      "status": "limited",
+      "limitation": "Public strict matching coverage 0/52; no diagnostic effectiveness or accuracy established"
+    }
+  ],
+  "required_current_receipts": [
+    "experiments/m2-release-baseline.json",
+    "experiments/m2-acceptance-tool-http.json",
+    "experiments/m2-acceptance-matching-http.json",
+    "experiments/m2-acceptance-comparison-http.json"
+  ],
+  "release_conditions": [
+    {
+      "id": "M2-R01",
+      "blocking_for": "formal diagnostic release / M6 trial",
+      "condition": "Verified input scale, stored timebase semantics and sourced speed/bearing uncertainty",
+      "owner": "M3 diagnostic eligibility gate; M6 release review"
+    },
+    {
+      "id": "M2-R02",
+      "blocking_for": "diagnostic_evidence publication",
+      "condition": "Controlled numeric-profile qualification and publication, with scoped sensitivity/calibration records",
+      "owner": "M3 tool/evidence integration; M6 release review"
+    },
+    {
+      "id": "M2-R03",
+      "blocking_for": "industrial fault-effectiveness claim",
+      "condition": "Independent entity-level evaluation with suitable class coverage and measured results",
+      "owner": "M3 fixed diagnostic evaluation; M6 release lock"
+    },
+    {
+      "id": "M2-R04",
+      "blocking_for": "source data distribution / commercial dataset use",
+      "condition": "Resolve source licensing for proposed use; research data excluded from factory product",
+      "owner": "M6 delivery review"
+    }
+  ],
+  "m3_entry_constraints": [
+    "Use existing authorized tool services and public reference-only schemas",
+    "Allow exploratory observations, clarification and refusal; no unsupported fault/health/severity/maintenance verdict",
+    "Do not promote research adapters or derived figures to diagnostic or independent evidence",
+    "Keep sealed test signals opaque until a separate frozen release/duplicate-check protocol"
+  ],
+  "factory_trial_approved": false
+}

@@ -1,0 +1,1062 @@
+{
+  "created_at": "2026-10-29T07:17:12.439955+00:00",
+  "purpose": "3 authored tool-routing and output-validation smoke cases per model; not fault accuracy or held-out benchmark",
+  "protocol": {
+    "thinking": false,
+    "temperature": 0,
+    "seed": 42,
+    "context": 4096,
+    "max_output_tokens": 512,
+    "max_decision_rounds": 2,
+    "repetitions": 1,
+    "embedding_model": "bge-m3:567m",
+    "model_order": [
+      "qwen3.5:2b",
+      "qwen3.5:0.8b"
+    ],
+    "warmup": false,
+    "signal_sha256": "3f7e3228b42310c47553f37a940c79293b770d6b25c50ff95d2f2b6590b14670",
+    "limitation": "latency includes model loading; no warm/cold performance conclusion from three cases"
+  },
+  "ollama": {
+    "version": "0.40.12"
+  },
+  "models": [
+    {
+      "metadata": {
+        "model": "qwen3.5:2b",
+        "digest": "53a3cb30c58c8971d650fd15e50fabe4e72bd40dcbf25fa08371460e49ee0b05",
+        "size_bytes": 2749050705,
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "qwen35",
+          "families": [
+            "qwen35",
+            "clip"
+          ],
+          "parameter_size": "2.3B",
+          "quantization_level": "Q8_0",
+          "runner": "llamacpp"
+        },
+        "capabilities": [
+          "completion",
+          "vision",
+          "tools",
+          "thinking"
+        ]
+      },
+      "cases": [
+        {
+          "id": "A01",
+          "description": "只查看这份信号的RMS和主频，不讨论轴承故障类型。",
+          "rpm": 1480,
+          "expected_tool": "inspect_spectrum",
+          "tool_route_pass": true,
+          "draft_validation_pass": true,
+          "result": {
+            "model": "qwen3.5:2b",
+            "embedding_model": "bge-m3:567m",
+            "wall_seconds": 57.51006029999917,
+            "draft": {
+              "status": "analysis_only",
+              "summary": "转速为1480rpm，信号特征显示存在高频振动，但无法确认是否为滚动体故障。",
+              "observations": [
+                {
+                  "text": "检测到转速为1480rpm的旋转信号。",
+                  "evidence_ids": [
+                    "EV-001"
+                  ]
+                },
+                {
+                  "text": "频谱分析显示存在高频振动分量，但普通频谱无法确诊滚动体故障。",
+                  "evidence_ids": [
+                    "EV-001"
+                  ]
+                }
+              ],
+              "missing_information": [
+                "需要确认是否存在滚动体故障"
+              ],
+              "next_steps": [
+                "进行包络解调分析以获取更清晰的振动频谱"
+              ]
+            },
+            "error": null,
+            "trace": [
+              {
+                "stage": "model_decision",
+                "tool_names": [
+                  "inspect_spectrum"
+                ]
+              },
+              {
+                "stage": "tool",
+                "name": "inspect_spectrum",
+                "arguments": {},
+                "result": {
+                  "id": "EV-001",
+                  "kind": "signal",
+                  "features": {
+                    "mean": -2.38727765854152e-17,
+                    "rms": 0.7071067811865476,
+                    "ac_rms": 0.7071067811865476,
+                    "peak": 1.0,
+                    "peak_to_peak": 2.0,
+                    "crest_factor": 1.414213562373095,
+                    "pearson_kurtosis": 1.4999999999999996
+                  },
+                  "peaks": [
+                    {
+                      "hz": 128.0,
+                      "amplitude": 0.9999999999999999
+                    },
+                    {
+                      "hz": 1615.0,
+                      "amplitude": 5.057116242879235e-15
+                    },
+                    {
+                      "hz": 1359.0,
+                      "amplitude": 5.023439055431999e-15
+                    },
+                    {
+                      "hz": 1617.0,
+                      "amplitude": 4.915733493351069e-15
+                    },
+                    {
+                      "hz": 1361.0,
+                      "amplitude": 4.808358771421281e-15
+                    }
+                  ],
+                  "unit": "m/s2",
+                  "limitation": "普通频谱不是包络证据，不能据此确诊"
+                }
+              },
+              {
+                "stage": "model_decision",
+                "tool_names": []
+              },
+              {
+                "stage": "draft_validation",
+                "passed": true
+              }
+            ],
+            "metrics": [
+              {
+                "wall_seconds": 46.931281500001205,
+                "load_seconds": 39.1473873,
+                "input_tokens": 541,
+                "output_tokens": 15,
+                "done_reason": "stop"
+              },
+              {
+                "wall_seconds": 3.76141540000026,
+                "load_seconds": 0.0099944,
+                "input_tokens": 943,
+                "output_tokens": 99,
+                "done_reason": "stop"
+              },
+              {
+                "wall_seconds": 6.765162799998507,
+                "load_seconds": 0.0058779,
+                "input_tokens": 762,
+                "output_tokens": 181,
+                "done_reason": "stop"
+              }
+            ],
+            "evidence": {
+              "EV-001": {
+                "id": "EV-001",
+                "kind": "signal",
+                "features": {
+                  "mean": -2.38727765854152e-17,
+                  "rms": 0.7071067811865476,
+                  "ac_rms": 0.7071067811865476,
+                  "peak": 1.0,
+                  "peak_to_peak": 2.0,
+                  "crest_factor": 1.414213562373095,
+                  "pearson_kurtosis": 1.4999999999999996
+                },
+                "peaks": [
+                  {
+                    "hz": 128.0,
+                    "amplitude": 0.9999999999999999
+                  },
+                  {
+                    "hz": 1615.0,
+                    "amplitude": 5.057116242879235e-15
+                  },
+                  {
+                    "hz": 1359.0,
+                    "amplitude": 5.023439055431999e-15
+                  },
+                  {
+                    "hz": 1617.0,
+                    "amplitude": 4.915733493351069e-15
+                  },
+                  {
+                    "hz": 1361.0,
+                    "amplitude": 4.808358771421281e-15
+                  }
+                ],
+                "unit": "m/s2",
+                "limitation": "普通频谱不是包络证据，不能据此确诊"
+              }
+            },
+            "prototype_limitations": [
+              "本机开发原型，无账号授权和工单写入",
+              "包络及轴承故障定类尚未实现",
+              "结构与引用校验不等于语义诊断已正确"
+            ]
+          }
+        },
+        {
+          "id": "A02",
+          "description": "我怀疑内圈或外圈故障，但不知道本次采集转速，请先检查诊断必要条件。",
+          "rpm": null,
+          "expected_tool": "check_bearing_preconditions",
+          "tool_route_pass": true,
+          "draft_validation_pass": false,
+          "result": {
+            "model": "qwen3.5:2b",
+            "embedding_model": "bge-m3:567m",
+            "wall_seconds": 10.031694500001322,
+            "draft": null,
+            "error": "模型草稿未通过发布前结构/引用校验：1 validation error for Draft\nobservations.1.evidence_ids\n  List should have at least 1 item after validation, not 0 [type=too_short, input_value=[], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.14/v/too_short",
+            "trace": [
+              {
+                "stage": "model_decision",
+                "tool_names": [
+                  "check_bearing_preconditions"
+                ]
+              },
+              {
+                "stage": "tool",
+                "name": "check_bearing_preconditions",
+                "arguments": {},
+                "result": {
+                  "id": "EV-001",
+                  "kind": "preconditions",
+                  "missing": [
+                    "本次采集的可靠转速",
+                    "经核对的目标轴承及几何参数/频率系数"
+                  ],
+                  "available": false,
+                  "limitation": "本原型尚未实现包络及轴承频率匹配，不能输出故障定类"
+                }
+              },
+              {
+                "stage": "model_decision",
+                "tool_names": [
+                  "inspect_spectrum"
+                ]
+              },
+              {
+                "stage": "tool",
+                "name": "inspect_spectrum",
+                "arguments": {},
+                "result": {
+                  "id": "EV-002",
+                  "kind": "signal",
+                  "features": {
+                    "mean": -2.38727765854152e-17,
+                    "rms": 0.7071067811865476,
+                    "ac_rms": 0.7071067811865476,
+                    "peak": 1.0,
+                    "peak_to_peak": 2.0,
+                    "crest_factor": 1.414213562373095,
+                    "pearson_kurtosis": 1.4999999999999996
+                  },
+                  "peaks": [
+                    {
+                      "hz": 128.0,
+                      "amplitude": 0.9999999999999999
+                    },
+                    {
+                      "hz": 1615.0,
+                      "amplitude": 5.057116242879235e-15
+                    },
+                    {
+                      "hz": 1359.0,
+                      "amplitude": 5.023439055431999e-15
+                    },
+                    {
+                      "hz": 1617.0,
+                      "amplitude": 4.915733493351069e-15
+                    },
+                    {
+                      "hz": 1361.0,
+                      "amplitude": 4.808358771421281e-15
+                    }
+                  ],
+                  "unit": "m/s2",
+                  "limitation": "普通频谱不是包络证据，不能据此确诊"
+                }
+              },
+              {
+                "stage": "draft_validation",
+                "passed": false
+              }
+            ],
+            "metrics": [
+              {
+                "wall_seconds": 1.088033500000165,
+                "load_seconds": 0.0059992,
+                "input_tokens": 541,
+                "output_tokens": 18,
+                "done_reason": "stop"
+              },
+              {
+                "wall_seconds": 0.7328620000007504,
+                "load_seconds": 0.007004,
+                "input_tokens": 638,
+                "output_tokens": 15,
+                "done_reason": "stop"
+              },
+              {
+                "wall_seconds": 8.201970199999778,
+                "load_seconds": 0.0100005,
+                "input_tokens": 831,
+                "output_tokens": 224,
+                "done_reason": "stop"
+              }
+            ],
+            "evidence": {
+              "EV-001": {
+                "id": "EV-001",
+                "kind": "preconditions",
+                "missing": [
+                  "本次采集的可靠转速",
+                  "经核对的目标轴承及几何参数/频率系数"
+                ],
+                "available": false,
+                "limitation": "本原型尚未实现包络及轴承频率匹配，不能输出故障定类"
+              },
+              "EV-002": {
+                "id": "EV-002",
+                "kind": "signal",
+                "features": {
+                  "mean": -2.38727765854152e-17,
+                  "rms": 0.7071067811865476,
+                  "ac_rms": 0.7071067811865476,
+                  "peak": 1.0,
+                  "peak_to_peak": 2.0,
+                  "crest_factor": 1.414213562373095,
+                  "pearson_kurtosis": 1.4999999999999996
+                },
+                "peaks": [
+                  {
+                    "hz": 128.0,
+                    "amplitude": 0.9999999999999999
+                  },
+                  {
+                    "hz": 1615.0,
+                    "amplitude": 5.057116242879235e-15
+                  },
+                  {
+                    "hz": 1359.0,
+                    "amplitude": 5.023439055431999e-15
+                  },
+                  {
+                    "hz": 1617.0,
+                    "amplitude": 4.915733493351069e-15
+                  },
+                  {
+                    "hz": 1361.0,
+                    "amplitude": 4.808358771421281e-15
+                  }
+                ],
+                "unit": "m/s2",
+                "limitation": "普通频谱不是包络证据，不能据此确诊"
+              }
+            },
+            "prototype_limitations": [
+              "本机开发原型，无账号授权和工单写入",
+              "包络及轴承故障定类尚未实现",
+              "结构与引用校验不等于语义诊断已正确"
+            ]
+          }
+        },
+        {
+          "id": "A03",
+          "description": "先检索知识资料：为什么需要做包络分析？我想了解分析方法，不要先算故障频率。",
+          "rpm": 1480,
+          "expected_tool": "search_knowledge",
+          "tool_route_pass": true,
+          "draft_validation_pass": false,
+          "result": {
+            "model": "qwen3.5:2b",
+            "embedding_model": "bge-m3:567m",
+            "wall_seconds": 21.519112300000415,
+            "draft": null,
+            "error": "模型草稿未通过发布前结构/引用校验：2 validation errors for Draft\nobservations.0.evidence_ids\n  List should have at least 1 item after validation, not 0 [type=too_short, input_value=[], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.14/v/too_short\nobservations.2.evidence_ids\n  List should have at least 1 item after validation, not 0 [type=too_short, input_value=[], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.14/v/too_short",
+            "trace": [
+              {
+                "stage": "model_decision",
+                "tool_names": [
+                  "search_knowledge"
+                ]
+              },
+              {
+                "stage": "tool",
+                "name": "search_knowledge",
+                "arguments": {
+                  "query": "为什么需要做包络分析？分析方法原理"
+                },
+                "result": {
+                  "id": "EV-001",
+                  "kind": "knowledge",
+                  "hits": [
+                    {
+                      "id": "KB-03",
+                      "title": "包络谱的用途与滤波记录",
+                      "text": "包络分析用于观察高频振动的低频幅值调制和重复冲击。需要记录带通频段、滤波器、边界处理和包络谱幅值标定。非法频段、带宽未知或记录太短时不能声称取得可靠轴承证据。",
+                      "score": 0.7157713391852487,
+                      "source": "开发自编知识卡片，未经现场专家审核",
+                      "corpus_sha256": "f925f09f0cf2c13944f8b1f44396855d37fb6836da8fd72b18ee7b68ec22350d"
+                    },
+                    {
+                      "id": "KB-05",
+                      "title": "外圈故障候选与BPFO证据",
+                      "text": "轴承外圈故障候选可检查BPFO附近的包络谱重复成分及其谐波。峰的表现受载荷区和传感器位置影响。没有显著BPFO峰不能完全排除外圈问题，存在峰也不能直接确诊。",
+                      "score": 0.5154506506499665,
+                      "source": "开发自编知识卡片，未经现场专家审核",
+                      "corpus_sha256": "f925f09f0cf2c13944f8b1f44396855d37fb6836da8fd72b18ee7b68ec22350d"
+                    },
+                    {
+                      "id": "KB-04",
+                      "title": "内圈故障候选与BPFI证据",
+                      "text": "轴承内圈故障候选通常检查BPFI附近的包络谱成分、谐波与转频调制。频率匹配需要可靠转速及轴承参数。一个匹配峰不能单独证明内圈故障，还应检查干扰和其他候选。",
+                      "score": 0.513170509034679,
+                      "source": "开发自编知识卡片，未经现场专家审核",
+                      "corpus_sha256": "f925f09f0cf2c13944f8b1f44396855d37fb6836da8fd72b18ee7b68ec22350d"
+                    }
+                  ],
+                  "limitation": "开发自编资料，不是当前设备测量或专家审核意见"
+                }
+              },
+              {
+                "stage": "model_decision",
+                "tool_names": []
+              },
+              {
+                "stage": "draft_validation",
+                "passed": false
+              }
+            ],
+            "metrics": [
+              {
+                "wall_seconds": 1.692828000002919,
+                "load_seconds": 0.0100007,
+                "input_tokens": 546,
+                "output_tokens": 33,
+                "done_reason": "stop"
+              },
+              {
+                "wall_seconds": 7.760103600001457,
+                "load_seconds": 0.0089994,
+                "input_tokens": 1164,
+                "output_tokens": 211,
+                "done_reason": "stop"
+              },
+              {
+                "wall_seconds": 9.208994100001291,
+                "load_seconds": 0.0097046,
+                "input_tokens": 960,
+                "output_tokens": 252,
+                "done_reason": "stop"
+              }
+            ],
+            "evidence": {
+              "EV-001": {
+                "id": "EV-001",
+                "kind": "knowledge",
+                "hits": [
+                  {
+                    "id": "KB-03",
+                    "title": "包络谱的用途与滤波记录",
+                    "text": "包络分析用于观察高频振动的低频幅值调制和重复冲击。需要记录带通频段、滤波器、边界处理和包络谱幅值标定。非法频段、带宽未知或记录太短时不能声称取得可靠轴承证据。",
+                    "score": 0.7157713391852487,
+                    "source": "开发自编知识卡片，未经现场专家审核",
+                    "corpus_sha256": "f925f09f0cf2c13944f8b1f44396855d37fb6836da8fd72b18ee7b68ec22350d"
+                  },
+                  {
+                    "id": "KB-05",
+                    "title": "外圈故障候选与BPFO证据",
+                    "text": "轴承外圈故障候选可检查BPFO附近的包络谱重复成分及其谐波。峰的表现受载荷区和传感器位置影响。没有显著BPFO峰不能完全排除外圈问题，存在峰也不能直接确诊。",
+                    "score": 0.5154506506499665,
+                    "source": "开发自编知识卡片，未经现场专家审核",
+                    "corpus_sha256": "f925f09f0cf2c13944f8b1f44396855d37fb6836da8fd72b18ee7b68ec22350d"
+                  },
+                  {
+                    "id": "KB-04",
+                    "title": "内圈故障候选与BPFI证据",
+                    "text": "轴承内圈故障候选通常检查BPFI附近的包络谱成分、谐波与转频调制。频率匹配需要可靠转速及轴承参数。一个匹配峰不能单独证明内圈故障，还应检查干扰和其他候选。",
+                    "score": 0.513170509034679,
+                    "source": "开发自编知识卡片，未经现场专家审核",
+                    "corpus_sha256": "f925f09f0cf2c13944f8b1f44396855d37fb6836da8fd72b18ee7b68ec22350d"
+                  }
+                ],
+                "limitation": "开发自编资料，不是当前设备测量或专家审核意见"
+              }
+            },
+            "prototype_limitations": [
+              "本机开发原型，无账号授权和工单写入",
+              "包络及轴承故障定类尚未实现",
+              "结构与引用校验不等于语义诊断已正确"
+            ]
+          }
+        }
+      ],
+      "tool_route_pass_count": 3,
+      "draft_validation_pass_count": 1
+    },
+    {
+      "metadata": {
+        "model": "qwen3.5:0.8b",
+        "digest": "f1e6f0684a22457e8eb5b09d26041e8171c248c6b252c267a0b35ac5afc24ed6",
+        "size_bytes": 1041941492,
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "qwen35",
+          "families": [
+            "qwen35",
+            "clip"
+          ],
+          "parameter_size": "873.44M",
+          "quantization_level": "Q8_0",
+          "runner": "llamacpp"
+        },
+        "capabilities": [
+          "completion",
+          "vision",
+          "tools",
+          "thinking"
+        ]
+      },
+      "cases": [
+        {
+          "id": "A01",
+          "description": "只查看这份信号的RMS和主频，不讨论轴承故障类型。",
+          "rpm": 1480,
+          "expected_tool": "inspect_spectrum",
+          "tool_route_pass": true,
+          "draft_validation_pass": false,
+          "result": {
+            "model": "qwen3.5:0.8b",
+            "embedding_model": "bge-m3:567m",
+            "wall_seconds": 11.910178499998437,
+            "draft": null,
+            "error": "模型草稿未通过发布前结构/引用校验：1 validation error for Draft\n  Invalid JSON: EOF while parsing an object at line 1 column 1341 [type=json_invalid, input_value='{\"schema\": {\"$defs\": {\"O..., \"amplitude\": 5.057116', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/json_invalid",
+            "trace": [
+              {
+                "stage": "model_decision",
+                "tool_names": [
+                  "inspect_spectrum"
+                ]
+              },
+              {
+                "stage": "tool",
+                "name": "inspect_spectrum",
+                "arguments": {},
+                "result": {
+                  "id": "EV-001",
+                  "kind": "signal",
+                  "features": {
+                    "mean": -2.38727765854152e-17,
+                    "rms": 0.7071067811865476,
+                    "ac_rms": 0.7071067811865476,
+                    "peak": 1.0,
+                    "peak_to_peak": 2.0,
+                    "crest_factor": 1.414213562373095,
+                    "pearson_kurtosis": 1.4999999999999996
+                  },
+                  "peaks": [
+                    {
+                      "hz": 128.0,
+                      "amplitude": 0.9999999999999999
+                    },
+                    {
+                      "hz": 1615.0,
+                      "amplitude": 5.057116242879235e-15
+                    },
+                    {
+                      "hz": 1359.0,
+                      "amplitude": 5.023439055431999e-15
+                    },
+                    {
+                      "hz": 1617.0,
+                      "amplitude": 4.915733493351069e-15
+                    },
+                    {
+                      "hz": 1361.0,
+                      "amplitude": 4.808358771421281e-15
+                    }
+                  ],
+                  "unit": "m/s2",
+                  "limitation": "普通频谱不是包络证据，不能据此确诊"
+                }
+              },
+              {
+                "stage": "model_decision",
+                "tool_names": []
+              },
+              {
+                "stage": "draft_validation",
+                "passed": false
+              }
+            ],
+            "metrics": [
+              {
+                "wall_seconds": 4.035193600000639,
+                "load_seconds": 3.3690237,
+                "input_tokens": 541,
+                "output_tokens": 15,
+                "done_reason": "stop"
+              },
+              {
+                "wall_seconds": 2.321098799999163,
+                "load_seconds": 0.0070003,
+                "input_tokens": 943,
+                "output_tokens": 167,
+                "done_reason": "stop"
+              },
+              {
+                "wall_seconds": 5.547555100001773,
+                "load_seconds": 0.0055647,
+                "input_tokens": 762,
+                "output_tokens": 512,
+                "done_reason": "length"
+              }
+            ],
+            "evidence": {
+              "EV-001": {
+                "id": "EV-001",
+                "kind": "signal",
+                "features": {
+                  "mean": -2.38727765854152e-17,
+                  "rms": 0.7071067811865476,
+                  "ac_rms": 0.7071067811865476,
+                  "peak": 1.0,
+                  "peak_to_peak": 2.0,
+                  "crest_factor": 1.414213562373095,
+                  "pearson_kurtosis": 1.4999999999999996
+                },
+                "peaks": [
+                  {
+                    "hz": 128.0,
+                    "amplitude": 0.9999999999999999
+                  },
+                  {
+                    "hz": 1615.0,
+                    "amplitude": 5.057116242879235e-15
+                  },
+                  {
+                    "hz": 1359.0,
+                    "amplitude": 5.023439055431999e-15
+                  },
+                  {
+                    "hz": 1617.0,
+                    "amplitude": 4.915733493351069e-15
+                  },
+                  {
+                    "hz": 1361.0,
+                    "amplitude": 4.808358771421281e-15
+                  }
+                ],
+                "unit": "m/s2",
+                "limitation": "普通频谱不是包络证据，不能据此确诊"
+              }
+            },
+            "prototype_limitations": [
+              "本机开发原型，无账号授权和工单写入",
+              "包络及轴承故障定类尚未实现",
+              "结构与引用校验不等于语义诊断已正确"
+            ]
+          }
+        },
+        {
+          "id": "A02",
+          "description": "我怀疑内圈或外圈故障，但不知道本次采集转速，请先检查诊断必要条件。",
+          "rpm": null,
+          "expected_tool": "check_bearing_preconditions",
+          "tool_route_pass": true,
+          "draft_validation_pass": false,
+          "result": {
+            "model": "qwen3.5:0.8b",
+            "embedding_model": "bge-m3:567m",
+            "wall_seconds": 6.3235961999998835,
+            "draft": null,
+            "error": "模型草稿未通过发布前结构/引用校验：1 validation error for Draft\n  Invalid JSON: EOF while parsing an object at line 1 column 1504 [type=json_invalid, input_value='{\"schema\": {\"$defs\": {\"O...kurtosis\": 1.4999999999', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/json_invalid",
+            "trace": [
+              {
+                "stage": "model_decision",
+                "tool_names": [
+                  "check_bearing_preconditions"
+                ]
+              },
+              {
+                "stage": "tool",
+                "name": "check_bearing_preconditions",
+                "arguments": {},
+                "result": {
+                  "id": "EV-001",
+                  "kind": "preconditions",
+                  "missing": [
+                    "本次采集的可靠转速",
+                    "经核对的目标轴承及几何参数/频率系数"
+                  ],
+                  "available": false,
+                  "limitation": "本原型尚未实现包络及轴承频率匹配，不能输出故障定类"
+                }
+              },
+              {
+                "stage": "model_decision",
+                "tool_names": [
+                  "inspect_spectrum"
+                ]
+              },
+              {
+                "stage": "tool",
+                "name": "inspect_spectrum",
+                "arguments": {},
+                "result": {
+                  "id": "EV-002",
+                  "kind": "signal",
+                  "features": {
+                    "mean": -2.38727765854152e-17,
+                    "rms": 0.7071067811865476,
+                    "ac_rms": 0.7071067811865476,
+                    "peak": 1.0,
+                    "peak_to_peak": 2.0,
+                    "crest_factor": 1.414213562373095,
+                    "pearson_kurtosis": 1.4999999999999996
+                  },
+                  "peaks": [
+                    {
+                      "hz": 128.0,
+                      "amplitude": 0.9999999999999999
+                    },
+                    {
+                      "hz": 1615.0,
+                      "amplitude": 5.057116242879235e-15
+                    },
+                    {
+                      "hz": 1359.0,
+                      "amplitude": 5.023439055431999e-15
+                    },
+                    {
+                      "hz": 1617.0,
+                      "amplitude": 4.915733493351069e-15
+                    },
+                    {
+                      "hz": 1361.0,
+                      "amplitude": 4.808358771421281e-15
+                    }
+                  ],
+                  "unit": "m/s2",
+                  "limitation": "普通频谱不是包络证据，不能据此确诊"
+                }
+              },
+              {
+                "stage": "draft_validation",
+                "passed": false
+              }
+            ],
+            "metrics": [
+              {
+                "wall_seconds": 0.422429900001589,
+                "load_seconds": 0.0054357,
+                "input_tokens": 541,
+                "output_tokens": 18,
+                "done_reason": "stop"
+              },
+              {
+                "wall_seconds": 0.2692821999989974,
+                "load_seconds": 0.006001,
+                "input_tokens": 638,
+                "output_tokens": 15,
+                "done_reason": "stop"
+              },
+              {
+                "wall_seconds": 5.627573099998699,
+                "load_seconds": 0.0053608,
+                "input_tokens": 831,
+                "output_tokens": 512,
+                "done_reason": "length"
+              }
+            ],
+            "evidence": {
+              "EV-001": {
+                "id": "EV-001",
+                "kind": "preconditions",
+                "missing": [
+                  "本次采集的可靠转速",
+                  "经核对的目标轴承及几何参数/频率系数"
+                ],
+                "available": false,
+                "limitation": "本原型尚未实现包络及轴承频率匹配，不能输出故障定类"
+              },
+              "EV-002": {
+                "id": "EV-002",
+                "kind": "signal",
+                "features": {
+                  "mean": -2.38727765854152e-17,
+                  "rms": 0.7071067811865476,
+                  "ac_rms": 0.7071067811865476,
+                  "peak": 1.0,
+                  "peak_to_peak": 2.0,
+                  "crest_factor": 1.414213562373095,
+                  "pearson_kurtosis": 1.4999999999999996
+                },
+                "peaks": [
+                  {
+                    "hz": 128.0,
+                    "amplitude": 0.9999999999999999
+                  },
+                  {
+                    "hz": 1615.0,
+                    "amplitude": 5.057116242879235e-15
+                  },
+                  {
+                    "hz": 1359.0,
+                    "amplitude": 5.023439055431999e-15
+                  },
+                  {
+                    "hz": 1617.0,
+                    "amplitude": 4.915733493351069e-15
+                  },
+                  {
+                    "hz": 1361.0,
+                    "amplitude": 4.808358771421281e-15
+                  }
+                ],
+                "unit": "m/s2",
+                "limitation": "普通频谱不是包络证据，不能据此确诊"
+              }
+            },
+            "prototype_limitations": [
+              "本机开发原型，无账号授权和工单写入",
+              "包络及轴承故障定类尚未实现",
+              "结构与引用校验不等于语义诊断已正确"
+            ]
+          }
+        },
+        {
+          "id": "A03",
+          "description": "先检索知识资料：为什么需要做包络分析？我想了解分析方法，不要先算故障频率。",
+          "rpm": 1480,
+          "expected_tool": "search_knowledge",
+          "tool_route_pass": true,
+          "draft_validation_pass": false,
+          "result": {
+            "model": "qwen3.5:0.8b",
+            "embedding_model": "bge-m3:567m",
+            "wall_seconds": 6.968516000000818,
+            "draft": null,
+            "error": "模型草稿未通过发布前结构/引用校验：1 validation error for Draft\n  Invalid JSON: EOF while parsing a value at line 1 column 1598 [type=json_invalid, input_value='{\"schema\": {\"$defs\": {\"O...候选与BPFO证据\",', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/json_invalid",
+            "trace": [
+              {
+                "stage": "model_decision",
+                "tool_names": [
+                  "search_knowledge"
+                ]
+              },
+              {
+                "stage": "tool",
+                "name": "search_knowledge",
+                "arguments": {
+                  "query": "为什么需要做包络分析？分析方法"
+                },
+                "result": {
+                  "id": "EV-001",
+                  "kind": "knowledge",
+                  "hits": [
+                    {
+                      "id": "KB-03",
+                      "title": "包络谱的用途与滤波记录",
+                      "text": "包络分析用于观察高频振动的低频幅值调制和重复冲击。需要记录带通频段、滤波器、边界处理和包络谱幅值标定。非法频段、带宽未知或记录太短时不能声称取得可靠轴承证据。",
+                      "score": 0.7194194933196572,
+                      "source": "开发自编知识卡片，未经现场专家审核",
+                      "corpus_sha256": "f925f09f0cf2c13944f8b1f44396855d37fb6836da8fd72b18ee7b68ec22350d"
+                    },
+                    {
+                      "id": "KB-05",
+                      "title": "外圈故障候选与BPFO证据",
+                      "text": "轴承外圈故障候选可检查BPFO附近的包络谱重复成分及其谐波。峰的表现受载荷区和传感器位置影响。没有显著BPFO峰不能完全排除外圈问题，存在峰也不能直接确诊。",
+                      "score": 0.5358385616126253,
+                      "source": "开发自编知识卡片，未经现场专家审核",
+                      "corpus_sha256": "f925f09f0cf2c13944f8b1f44396855d37fb6836da8fd72b18ee7b68ec22350d"
+                    },
+                    {
+                      "id": "KB-04",
+                      "title": "内圈故障候选与BPFI证据",
+                      "text": "轴承内圈故障候选通常检查BPFI附近的包络谱成分、谐波与转频调制。频率匹配需要可靠转速及轴承参数。一个匹配峰不能单独证明内圈故障，还应检查干扰和其他候选。",
+                      "score": 0.5292786339313652,
+                      "source": "开发自编知识卡片，未经现场专家审核",
+                      "corpus_sha256": "f925f09f0cf2c13944f8b1f44396855d37fb6836da8fd72b18ee7b68ec22350d"
+                    }
+                  ],
+                  "limitation": "开发自编资料，不是当前设备测量或专家审核意见"
+                }
+              },
+              {
+                "stage": "model_decision",
+                "tool_names": [
+                  "inspect_spectrum"
+                ]
+              },
+              {
+                "stage": "tool",
+                "name": "inspect_spectrum",
+                "arguments": {},
+                "result": {
+                  "id": "EV-002",
+                  "kind": "signal",
+                  "features": {
+                    "mean": -2.38727765854152e-17,
+                    "rms": 0.7071067811865476,
+                    "ac_rms": 0.7071067811865476,
+                    "peak": 1.0,
+                    "peak_to_peak": 2.0,
+                    "crest_factor": 1.414213562373095,
+                    "pearson_kurtosis": 1.4999999999999996
+                  },
+                  "peaks": [
+                    {
+                      "hz": 128.0,
+                      "amplitude": 0.9999999999999999
+                    },
+                    {
+                      "hz": 1615.0,
+                      "amplitude": 5.057116242879235e-15
+                    },
+                    {
+                      "hz": 1359.0,
+                      "amplitude": 5.023439055431999e-15
+                    },
+                    {
+                      "hz": 1617.0,
+                      "amplitude": 4.915733493351069e-15
+                    },
+                    {
+                      "hz": 1361.0,
+                      "amplitude": 4.808358771421281e-15
+                    }
+                  ],
+                  "unit": "m/s2",
+                  "limitation": "普通频谱不是包络证据，不能据此确诊"
+                }
+              },
+              {
+                "stage": "draft_validation",
+                "passed": false
+              }
+            ],
+            "metrics": [
+              {
+                "wall_seconds": 0.5862649000009696,
+                "load_seconds": 0.0093734,
+                "input_tokens": 546,
+                "output_tokens": 32,
+                "done_reason": "stop"
+              },
+              {
+                "wall_seconds": 0.34108150000247406,
+                "load_seconds": 0.0069984,
+                "input_tokens": 1164,
+                "output_tokens": 15,
+                "done_reason": "stop"
+              },
+              {
+                "wall_seconds": 5.8042343000015535,
+                "load_seconds": 0.0060072,
+                "input_tokens": 1342,
+                "output_tokens": 512,
+                "done_reason": "length"
+              }
+            ],
+            "evidence": {
+              "EV-001": {
+                "id": "EV-001",
+                "kind": "knowledge",
+                "hits": [
+                  {
+                    "id": "KB-03",
+                    "title": "包络谱的用途与滤波记录",
+                    "text": "包络分析用于观察高频振动的低频幅值调制和重复冲击。需要记录带通频段、滤波器、边界处理和包络谱幅值标定。非法频段、带宽未知或记录太短时不能声称取得可靠轴承证据。",
+                    "score": 0.7194194933196572,
+                    "source": "开发自编知识卡片，未经现场专家审核",
+                    "corpus_sha256": "f925f09f0cf2c13944f8b1f44396855d37fb6836da8fd72b18ee7b68ec22350d"
+                  },
+                  {
+                    "id": "KB-05",
+                    "title": "外圈故障候选与BPFO证据",
+                    "text": "轴承外圈故障候选可检查BPFO附近的包络谱重复成分及其谐波。峰的表现受载荷区和传感器位置影响。没有显著BPFO峰不能完全排除外圈问题，存在峰也不能直接确诊。",
+                    "score": 0.5358385616126253,
+                    "source": "开发自编知识卡片，未经现场专家审核",
+                    "corpus_sha256": "f925f09f0cf2c13944f8b1f44396855d37fb6836da8fd72b18ee7b68ec22350d"
+                  },
+                  {
+                    "id": "KB-04",
+                    "title": "内圈故障候选与BPFI证据",
+                    "text": "轴承内圈故障候选通常检查BPFI附近的包络谱成分、谐波与转频调制。频率匹配需要可靠转速及轴承参数。一个匹配峰不能单独证明内圈故障，还应检查干扰和其他候选。",
+                    "score": 0.5292786339313652,
+                    "source": "开发自编知识卡片，未经现场专家审核",
+                    "corpus_sha256": "f925f09f0cf2c13944f8b1f44396855d37fb6836da8fd72b18ee7b68ec22350d"
+                  }
+                ],
+                "limitation": "开发自编资料，不是当前设备测量或专家审核意见"
+              },
+              "EV-002": {
+                "id": "EV-002",
+                "kind": "signal",
+                "features": {
+                  "mean": -2.38727765854152e-17,
+                  "rms": 0.7071067811865476,
+                  "ac_rms": 0.7071067811865476,
+                  "peak": 1.0,
+                  "peak_to_peak": 2.0,
+                  "crest_factor": 1.414213562373095,
+                  "pearson_kurtosis": 1.4999999999999996
+                },
+                "peaks": [
+                  {
+                    "hz": 128.0,
+                    "amplitude": 0.9999999999999999
+                  },
+                  {
+                    "hz": 1615.0,
+                    "amplitude": 5.057116242879235e-15
+                  },
+                  {
+                    "hz": 1359.0,
+                    "amplitude": 5.023439055431999e-15
+                  },
+                  {
+                    "hz": 1617.0,
+                    "amplitude": 4.915733493351069e-15
+                  },
+                  {
+                    "hz": 1361.0,
+                    "amplitude": 4.808358771421281e-15
+                  }
+                ],
+                "unit": "m/s2",
+                "limitation": "普通频谱不是包络证据，不能据此确诊"
+              }
+            },
+            "prototype_limitations": [
+              "本机开发原型，无账号授权和工单写入",
+              "包络及轴承故障定类尚未实现",
+              "结构与引用校验不等于语义诊断已正确"
+            ]
+          }
+        }
+      ],
+      "tool_route_pass_count": 3,
+      "draft_validation_pass_count": 0
+    }
+  ]
+}

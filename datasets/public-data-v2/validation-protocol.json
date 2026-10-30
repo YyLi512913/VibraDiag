@@ -1,0 +1,16 @@
+{
+  "version": "public-readiness-validation-v1",
+  "purpose": "Evaluate input readiness only, with no classifier, model, feature selection, or diagnostic evidence promotion",
+  "frozen_on": "2026-10-30",
+  "channel": "vibration_1",
+  "sampling_rate_hz": 64000.0,
+  "rate_source": "Original Paderborn measuring logs and official benchmark paper",
+  "time_axis_relative_tolerance": 0.001,
+  "time_axis_rule": "Require strictly increasing, length-matched stored X axis and both max-step and record-duration relative errors <= tolerance. Preserve all originals; no resampling or index-axis substitution.",
+  "unit_rule": "An empty unit or sensor sensitivity alone does not establish the stored channel's physical unit or calibration scale.",
+  "matching_rule": "Do not perform physical frequency matching until channel unit/timebase and measured speed/bearing uncertainty provenance satisfy existing tool requirements.",
+  "prediction": null,
+  "accuracy": null,
+  "sealed_test_policy": "Original archive hash/byte verification only; never list or extract test members in this runner.",
+  "eligibility": "Input readiness is separate from statistical sample sufficiency and diagnostic profile qualification. Three source labels only, one held-out bearing per class."
+}

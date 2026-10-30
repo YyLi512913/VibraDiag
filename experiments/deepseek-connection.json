@@ -1,0 +1,17 @@
+{
+  "status": "ok",
+  "configured_model": "deepseek-flash",
+  "models": [
+    {
+      "id": "deepseek-flash",
+      "name": "DeepSeek-V4.1-Flash",
+      "owned_by": "deepseek"
+    },
+    {
+      "id": "deepseek-v4-pro",
+      "name": "DeepSeek-V4-Pro",
+      "owned_by": "deepseek"
+    }
+  ],
+  "configured_available": true
+}

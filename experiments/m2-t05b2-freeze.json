@@ -1,0 +1,22 @@
+{
+  "purpose": "Candidate frozen after synthetic truth checks and before public feature evaluation",
+  "protocol_sha256": "766e74b214a92e8ba8f127b5958eb186439338f7f66003c1d704bad4f057180d",
+  "synthetic_receipt_sha256": "2b23c10336b9027bce19088fc225774ba69784a1db74c77c97687af555a036c4",
+  "source_sha256": {
+    "backend/src/vibradiag/evaluation/time_adaptation.py": "17447412cce087cb7b0764e033857a418ba3d487a7aa597d0768add29de62101",
+    "backend/src/vibradiag/analysis/envelope.py": "dd769a9d8f1fe2ab010ed2ed8372d40af5bc50e72e07fbe447e89ec708b83d87",
+    "backend/src/vibradiag/analysis/basic.py": "5378fef761cd169a8ff70c851e0a8794aa0ebdf3ffa7c6071652bf82a373670e",
+    "backend/src/vibradiag/evaluation/datasets.py": "1bb74f5d6864c8a3be56ba26942e56f0d64cc9cc8822a8456916f153bb314847",
+    "backend/scripts/verify_time_adaptation.py": "3028f356b4953550ebcbbb2c810a56e4bcd159619b155e4eee307e514d12c2bf",
+    "backend/requirements.lock.txt": "db7bca83a22a77ed4e06f2c15ebfadf31947b268acebe406d8cccdfda889e88f",
+    "backend/scripts/benchmark_time_adaptation.py": "d0c95a053564f224ae10b702d0e9b40b8e73db34c3aa3d15807085fd4ab917ef",
+    "backend/tests/unit/test_time_adaptation.py": "1c3cd7c520b2da7177cd486060fc381d08c3fe7c25bf9ce49711a88c3e3b9f85",
+    "datasets/public-data-v1/manifest.json": "1dca73047ba4b589ffa946926a6246fd3e31eb12ed2b83c2a7a29e8029f491d8",
+    "datasets/public-data-v2/validation-manifest.json": "7405b2765a1bb72c2f20600b6275b6daf28cb248822d174b54ce3bb4646791ba",
+    "datasets/public-data-v2/catalog.json": "e464483180aa87b0eca79eab4bdd74822ee353169f9dcecb7b944d709b22841b",
+    "datasets/public-data-v2/split-plan.json": "fd255e22e096597d90f45f47732b6bb402335badc8a7c27bf7b40574b605ae91",
+    "backend/src/vibradiag/evaluation/holdout.py": "c00674e446e3e683dc671fc50a607ed802a9a3626f422796c42b95b3b0a35b6a"
+  },
+  "prior_validation_access": "Readiness/time blockers already inspected at T05b1; not a fully blind validation",
+  "sealed_test_release": false
+}

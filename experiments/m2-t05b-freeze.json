@@ -1,0 +1,44 @@
+{
+  "plan_sha256": "fd255e22e096597d90f45f47732b6bb402335badc8a7c27bf7b40574b605ae91",
+  "protocol_sha256": "12ca02db7183bdac6a26f99e69148e4ced20a2566da0bef2174beb08ccc53bde",
+  "stage": "before validation member extraction or loading",
+  "sealed_test_policy": "archive bytes/SHA only; no archive listing/extraction or MAT reads",
+  "assets": [
+    {
+      "bearing_id": "K002",
+      "sha256": "1040da8b74d169c4e8c8545afa335d7a3a320bcaf36a471250c3e434bc4caffd",
+      "bytes": 161981588,
+      "seconds": 73.8
+    },
+    {
+      "bearing_id": "KA03",
+      "sha256": "21f188899e46183a29752e5dbc830e3132e0fee4d7eb5507450d1730a5b264b5",
+      "bytes": 176196084,
+      "seconds": 76.08
+    },
+    {
+      "bearing_id": "KI03",
+      "sha256": "725010ee4158256eef9ef7f58da835fc2150579d6e97b5d48bcd2ee70795d77e",
+      "bytes": 159217524,
+      "seconds": 84.25
+    },
+    {
+      "bearing_id": "K003",
+      "sha256": "d7d1edf6047fac088efe118198abd0856c5280dd8653496fbac9a5d877180f1e",
+      "bytes": 173194389,
+      "seconds": 47.23
+    },
+    {
+      "bearing_id": "KA04",
+      "sha256": "6fc317157e2cd4cb55bc54d6fac1b1753f8ab31abcccd1ac68cbfb78e5e8299d",
+      "bytes": 180920703,
+      "seconds": 80.86
+    },
+    {
+      "bearing_id": "KI04",
+      "sha256": "8fde861a9ceac4b41fe8a030b4c5bbb4b9b9af0590d9338a8de0150b4661be77",
+      "bytes": 172644279,
+      "seconds": 77.88
+    }
+  ]
+}

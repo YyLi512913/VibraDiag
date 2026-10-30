@@ -1,0 +1,208 @@
+{
+  "version": "paderborn-heldout-assets-v1",
+  "plan_sha256": "fd255e22e096597d90f45f47732b6bb402335badc8a7c27bf7b40574b605ae91",
+  "protocol_sha256": "12ca02db7183bdac6a26f99e69148e4ced20a2566da0bef2174beb08ccc53bde",
+  "assets": [
+    {
+      "bearing_id": "K002",
+      "split": "validation",
+      "relative_path": "paderborn/K002.rar",
+      "url": "https://groups.uni-paderborn.de/kat/BearingDataCenter/K002.rar",
+      "sha256": "1040da8b74d169c4e8c8545afa335d7a3a320bcaf36a471250c3e434bc4caffd",
+      "bytes": 161981588,
+      "members": [
+        {
+          "member": "K002/N15_M07_F10_K002_1.mat",
+          "relative_path": "paderborn/K002/N15_M07_F10_K002_1.mat",
+          "sha256": "e2955b32c984c2e2557248ef2c7fbe213c180ade11dcfab8e4456712f785aabb",
+          "bytes": 8714904
+        },
+        {
+          "member": "K002/N15_M07_F10_K002_2.mat",
+          "relative_path": "paderborn/K002/N15_M07_F10_K002_2.mat",
+          "sha256": "c1f4ea201d157be12c0f7f4587281804e0f7af5c9a3ce6b75b6a34f90fbdf62d",
+          "bytes": 8714904
+        },
+        {
+          "member": "K002/N09_M07_F10_K002_1.mat",
+          "relative_path": "paderborn/K002/N09_M07_F10_K002_1.mat",
+          "sha256": "b5707fd0384a6ca21c5bfb370f23345daa0678be2cb345279eccd2761b2aeace",
+          "bytes": 8714904
+        },
+        {
+          "member": "K002/N09_M07_F10_K002_2.mat",
+          "relative_path": "paderborn/K002/N09_M07_F10_K002_2.mat",
+          "sha256": "38a19ddad1da41d320b43bf814708a750d54cfd071c45ac5498582912e4b933f",
+          "bytes": 8714904
+        },
+        {
+          "member": "K002/N15_M01_F10_K002_1.mat",
+          "relative_path": "paderborn/K002/N15_M01_F10_K002_1.mat",
+          "sha256": "f2797493d7bfcabd4f78a9137e7f97e08dfd1ef6aec72e482b007c69e900d2f4",
+          "bytes": 8883352
+        },
+        {
+          "member": "K002/N15_M01_F10_K002_2.mat",
+          "relative_path": "paderborn/K002/N15_M01_F10_K002_2.mat",
+          "sha256": "51867f87e33af5c78d9f3321d413153490887aeb7a7edf23b18a614b1315bebb",
+          "bytes": 8714904
+        },
+        {
+          "member": "K002/N15_M07_F04_K002_1.mat",
+          "relative_path": "paderborn/K002/N15_M07_F04_K002_1.mat",
+          "sha256": "c882f239602508c7c4fd56e2134207d1fbdda9bff7aa223970b19e23056558ab",
+          "bytes": 8714904
+        },
+        {
+          "member": "K002/N15_M07_F04_K002_2.mat",
+          "relative_path": "paderborn/K002/N15_M07_F04_K002_2.mat",
+          "sha256": "e903a254d45bea6b040952ad3e5c3e86a0d5c96d0a50cf31a220627f6a9f746c",
+          "bytes": 8714904
+        }
+      ]
+    },
+    {
+      "bearing_id": "KA03",
+      "split": "validation",
+      "relative_path": "paderborn/KA03.rar",
+      "url": "https://groups.uni-paderborn.de/kat/BearingDataCenter/KA03.rar",
+      "sha256": "21f188899e46183a29752e5dbc830e3132e0fee4d7eb5507450d1730a5b264b5",
+      "bytes": 176196084,
+      "members": [
+        {
+          "member": "KA03/N15_M07_F10_KA03_1.mat",
+          "relative_path": "paderborn/KA03/N15_M07_F10_KA03_1.mat",
+          "sha256": "1ab2102e54b727381384f2f8def2880b979d214683bb317863cd413d48e471bd",
+          "bytes": 8715000
+        },
+        {
+          "member": "KA03/N15_M07_F10_KA03_2.mat",
+          "relative_path": "paderborn/KA03/N15_M07_F10_KA03_2.mat",
+          "sha256": "218b02ccaf8500eab97700171311825c9b63dc0f82918e55e0e59abab6e035e5",
+          "bytes": 9600248
+        },
+        {
+          "member": "KA03/N09_M07_F10_KA03_1.mat",
+          "relative_path": "paderborn/KA03/N09_M07_F10_KA03_1.mat",
+          "sha256": "051e73d8b7a6d0649010091b4b875bc1ee82741f18e373e4b82e6376157b028f",
+          "bytes": 8714904
+        },
+        {
+          "member": "KA03/N09_M07_F10_KA03_2.mat",
+          "relative_path": "paderborn/KA03/N09_M07_F10_KA03_2.mat",
+          "sha256": "4297df48ff2687f9487f291b968333bc13906e5309cc522bcf77052a568d292f",
+          "bytes": 8714840
+        },
+        {
+          "member": "KA03/N15_M01_F10_KA03_1.mat",
+          "relative_path": "paderborn/KA03/N15_M01_F10_KA03_1.mat",
+          "sha256": "820e2ebeb8769ccf39df03ec235e572b009680421323b03e06794c5128496f40",
+          "bytes": 8714936
+        },
+        {
+          "member": "KA03/N15_M01_F10_KA03_2.mat",
+          "relative_path": "paderborn/KA03/N15_M01_F10_KA03_2.mat",
+          "sha256": "7ddd3372cd26cc6524f43bb174ada7093825b597539998580e5799fffa50413f",
+          "bytes": 8715032
+        },
+        {
+          "member": "KA03/N15_M07_F04_KA03_1.mat",
+          "relative_path": "paderborn/KA03/N15_M07_F04_KA03_1.mat",
+          "sha256": "d0740302d82367e15643448a8f8360661950ffd688a64a425cb075ce521e5d4b",
+          "bytes": 8714904
+        },
+        {
+          "member": "KA03/N15_M07_F04_KA03_2.mat",
+          "relative_path": "paderborn/KA03/N15_M07_F04_KA03_2.mat",
+          "sha256": "dc751c796d98f97a85efc89a1ab91197c519edafe304225dfb63a0379eca5ec1",
+          "bytes": 9390520
+        }
+      ]
+    },
+    {
+      "bearing_id": "KI03",
+      "split": "validation",
+      "relative_path": "paderborn/KI03.rar",
+      "url": "https://groups.uni-paderborn.de/kat/BearingDataCenter/KI03.rar",
+      "sha256": "725010ee4158256eef9ef7f58da835fc2150579d6e97b5d48bcd2ee70795d77e",
+      "bytes": 159217524,
+      "members": [
+        {
+          "member": "KI03/N15_M07_F10_KI03_1.mat",
+          "relative_path": "paderborn/KI03/N15_M07_F10_KI03_1.mat",
+          "sha256": "33c2a580de1a1517dcd6c9ad7b70d0c2a237ae87781870a67bd7222fcb7452f7",
+          "bytes": 8717912
+        },
+        {
+          "member": "KI03/N15_M07_F10_KI03_2.mat",
+          "relative_path": "paderborn/KI03/N15_M07_F10_KI03_2.mat",
+          "sha256": "ff1b6e9ba608e637420d82080ba532a6d545bfabb5b44325328be250ef4c0927",
+          "bytes": 8714904
+        },
+        {
+          "member": "KI03/N09_M07_F10_KI03_1.mat",
+          "relative_path": "paderborn/KI03/N09_M07_F10_KI03_1.mat",
+          "sha256": "9fc7bf258f1593250898c1b4b66d3687cdfa4475070e2fa4049c61b01a6af90d",
+          "bytes": 8717592
+        },
+        {
+          "member": "KI03/N09_M07_F10_KI03_2.mat",
+          "relative_path": "paderborn/KI03/N09_M07_F10_KI03_2.mat",
+          "sha256": "d507c8d822d50aa25887b20b70e6fd58af5a3692cdf4d7e3044722cb3f26c573",
+          "bytes": 8725240
+        },
+        {
+          "member": "KI03/N15_M01_F10_KI03_1.mat",
+          "relative_path": "paderborn/KI03/N15_M01_F10_KI03_1.mat",
+          "sha256": "fa78d1c3ab352c44ec0c77f88a60729f880b4b7ec4f8349f8085251b2affe06e",
+          "bytes": 8717768
+        },
+        {
+          "member": "KI03/N15_M01_F10_KI03_2.mat",
+          "relative_path": "paderborn/KI03/N15_M01_F10_KI03_2.mat",
+          "sha256": "52d3460537b5c760d344c217c8a6367fa44c9e02d015287ade11c196651eeb34",
+          "bytes": 8714904
+        },
+        {
+          "member": "KI03/N15_M07_F04_KI03_1.mat",
+          "relative_path": "paderborn/KI03/N15_M07_F04_KI03_1.mat",
+          "sha256": "83dba7e266329746c94cda3b06c28f671e600186ab2aceba531251f9892da0cf",
+          "bytes": 8714904
+        },
+        {
+          "member": "KI03/N15_M07_F04_KI03_2.mat",
+          "relative_path": "paderborn/KI03/N15_M07_F04_KI03_2.mat",
+          "sha256": "b81379537cc20179d7feeb5ae02c46e838c6ce3d85fe46808adf28b558493dd4",
+          "bytes": 8714904
+        }
+      ]
+    },
+    {
+      "bearing_id": "K003",
+      "split": "sealed_test",
+      "relative_path": "paderborn/K003.rar",
+      "url": "https://groups.uni-paderborn.de/kat/BearingDataCenter/K003.rar",
+      "sha256": "d7d1edf6047fac088efe118198abd0856c5280dd8653496fbac9a5d877180f1e",
+      "bytes": 173194389,
+      "members": []
+    },
+    {
+      "bearing_id": "KA04",
+      "split": "sealed_test",
+      "relative_path": "paderborn/KA04.rar",
+      "url": "https://groups.uni-paderborn.de/kat/BearingDataCenter/KA04.rar",
+      "sha256": "6fc317157e2cd4cb55bc54d6fac1b1753f8ab31abcccd1ac68cbfb78e5e8299d",
+      "bytes": 180920703,
+      "members": []
+    },
+    {
+      "bearing_id": "KI04",
+      "split": "sealed_test",
+      "relative_path": "paderborn/KI04.rar",
+      "url": "https://groups.uni-paderborn.de/kat/BearingDataCenter/KI04.rar",
+      "sha256": "8fde861a9ceac4b41fe8a030b4c5bbb4b9b9af0590d9338a8de0150b4661be77",
+      "bytes": 172644279,
+      "members": []
+    }
+  ]
+}

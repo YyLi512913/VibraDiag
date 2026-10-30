@@ -1,0 +1,4 @@
+# Acceptance receipts bind raw file SHA256 values. Preserve exact bytes on
+# every platform; automatic CRLF/LF conversion would invalidate frozen evidence.
+* -text
+*.png binary

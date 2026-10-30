@@ -1,0 +1,846 @@
+{
+  "execution_completed": true,
+  "purpose": "Frozen validation input-readiness audit, not fault-classification accuracy",
+  "environment": {
+    "python": "3.11.15",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1"
+  },
+  "plan_sha256": "fd255e22e096597d90f45f47732b6bb402335badc8a7c27bf7b40574b605ae91",
+  "protocol_sha256": "12ca02db7183bdac6a26f99e69148e4ced20a2566da0bef2174beb08ccc53bde",
+  "protocol": {
+    "version": "public-readiness-validation-v1",
+    "purpose": "Evaluate input readiness only, with no classifier, model, feature selection, or diagnostic evidence promotion",
+    "frozen_on": "2026-10-30",
+    "channel": "vibration_1",
+    "sampling_rate_hz": 64000.0,
+    "rate_source": "Original Paderborn measuring logs and official benchmark paper",
+    "time_axis_relative_tolerance": 0.001,
+    "time_axis_rule": "Require strictly increasing, length-matched stored X axis and both max-step and record-duration relative errors <= tolerance. Preserve all originals; no resampling or index-axis substitution.",
+    "unit_rule": "An empty unit or sensor sensitivity alone does not establish the stored channel's physical unit or calibration scale.",
+    "matching_rule": "Do not perform physical frequency matching until channel unit/timebase and measured speed/bearing uncertainty provenance satisfy existing tool requirements.",
+    "prediction": null,
+    "accuracy": null,
+    "sealed_test_policy": "Original archive hash/byte verification only; never list or extract test members in this runner.",
+    "eligibility": "Input readiness is separate from statistical sample sufficiency and diagnostic profile qualification. Three source labels only, one held-out bearing per class."
+  },
+  "source_sha256": {
+    "datasets/public-data-v1/manifest.json": "1dca73047ba4b589ffa946926a6246fd3e31eb12ed2b83c2a7a29e8029f491d8",
+    "datasets/public-data-v2/split-plan.json": "fd255e22e096597d90f45f47732b6bb402335badc8a7c27bf7b40574b605ae91",
+    "datasets/public-data-v2/validation-protocol.json": "12ca02db7183bdac6a26f99e69148e4ced20a2566da0bef2174beb08ccc53bde",
+    "datasets/public-data-v2/catalog.json": "e464483180aa87b0eca79eab4bdd74822ee353169f9dcecb7b944d709b22841b",
+    "datasets/public-data-v2/validation-manifest.json": "7405b2765a1bb72c2f20600b6275b6daf28cb248822d174b54ce3bb4646791ba",
+    "datasets/public-data-v2/metadata-review.json": "2447611801502790b766925c318a58b80c7141148849c0a7224aedd3a02c88ab",
+    "backend/src/vibradiag/evaluation/datasets.py": "1bb74f5d6864c8a3be56ba26942e56f0d64cc9cc8822a8456916f153bb314847",
+    "backend/src/vibradiag/evaluation/holdout.py": "c00674e446e3e683dc671fc50a607ed802a9a3626f422796c42b95b3b0a35b6a",
+    "backend/src/vibradiag/evaluation/readiness.py": "972d4de0baf8456814a3d3343212ed87c105269a5530f207727dcd9c9e4f7be8",
+    "backend/scripts/prepare_public_data.py": "0f9ab70e052adb87406328698c51062e6d327b18191f6b925f94c2f4adaa61cc",
+    "backend/scripts/prepare_holdout_data.py": "ef1ced477a2cadf3a6b680f72264c66c2bda6a3e9e82fd69179c78c4a55c408e",
+    "backend/scripts/validate_public_readiness.py": "bec6613e0ad6ffe1672543fbfe7fdbd4b58988b23cd4c87dcee61e548478821f",
+    "backend/scripts/verify_holdout_reproduction.py": "8c6aadec44be631cc9b83d58202c1fe6df6150242f0675017e7493843dbb9b39",
+    "backend/tests/unit/test_public_holdouts.py": "a8518854909af439ad666c65348804af43896eae06422f0a5fa59c3900269b9d",
+    "backend/requirements.lock.txt": "db7bca83a22a77ed4e06f2c15ebfadf31947b268acebe406d8cccdfda889e88f",
+    "experiments/m2-t05b-freeze.json": "8931fd2df950e16aacc8c068f90aa1151a67125a194b04e095b78d517252110a"
+  },
+  "split_audit": {
+    "cross_split_leakage": false,
+    "record_count": 52,
+    "entity_group_count": 10,
+    "split_counts": {
+      "development": 28,
+      "validation": 24,
+      "sealed_test": 0
+    },
+    "label_coverage": {
+      "development": [
+        "healthy_reference",
+        "inner_race",
+        "outer_race",
+        "rolling_element"
+      ],
+      "validation": [
+        "healthy_reference",
+        "inner_race",
+        "outer_race"
+      ],
+      "sealed_test": []
+    },
+    "missing_four_class_labels": {
+      "development": [],
+      "validation": [
+        "rolling_element"
+      ],
+      "sealed_test": [
+        "healthy_reference",
+        "inner_race",
+        "outer_race",
+        "rolling_element"
+      ]
+    },
+    "four_class_evaluation_ready": false,
+    "statistical_independence_established": false
+  },
+  "validation_records": [
+    {
+      "record_id": "pu-N15-M07-F10-K002-1",
+      "entity_group": "paderborn-bearing-K002",
+      "label": "healthy_reference",
+      "input_ready": false,
+      "blocking_reasons": [
+        "STORED_ACCELERATION_UNIT_NOT_ESTABLISHED",
+        "ORIGINAL_TIME_AXIS_NOT_UNIFORM_AT_NOMINAL_RATE"
+      ],
+      "time_axis_check": {
+        "sample_count": 256001,
+        "record_duration_s": 3.9999987168344475,
+        "min_step_nominal": 0.9580969457232413,
+        "max_step_nominal": 1.0128453426432316,
+        "max_step_relative_error": 0.04190305427675867,
+        "duration_relative_error": 3.20791388119801e-07,
+        "gaps_over_two_nominal_intervals": 0,
+        "tolerance": 0.001
+      },
+      "resampled": false,
+      "unit_overridden": false,
+      "features_computed": false,
+      "prediction": null,
+      "diagnostic_evidence_eligible": false,
+      "remaining_diagnostic_requirements": [
+        "sourced_rpm_and_geometry_uncertainty",
+        "numeric_profile_qualification",
+        "verified_input_context_and_evidence_registration"
+      ]
+    },
+    {
+      "record_id": "pu-N15-M07-F10-K002-2",
+      "entity_group": "paderborn-bearing-K002",
+      "label": "healthy_reference",
+      "input_ready": false,
+      "blocking_reasons": [
+        "STORED_ACCELERATION_UNIT_NOT_ESTABLISHED",
+        "ORIGINAL_TIME_AXIS_NOT_UNIFORM_AT_NOMINAL_RATE"
+      ],
+      "time_axis_check": {
+        "sample_count": 256001,
+        "record_duration_s": 3.9999905901192827,
+        "min_step_nominal": 0.49273557206674923,
+        "max_step_nominal": 1.0128453426432316,
+        "max_step_relative_error": 0.5072644279332508,
+        "duration_relative_error": 2.352470179323163e-06,
+        "gaps_over_two_nominal_intervals": 0,
+        "tolerance": 0.001
+      },
+      "resampled": false,
+      "unit_overridden": false,
+      "features_computed": false,
+      "prediction": null,
+      "diagnostic_evidence_eligible": false,
+      "remaining_diagnostic_requirements": [
+        "sourced_rpm_and_geometry_uncertainty",
+        "numeric_profile_qualification",
+        "verified_input_context_and_evidence_registration"
+      ]
+    },
+    {
+      "record_id": "pu-N09-M07-F10-K002-1",
+      "entity_group": "paderborn-bearing-K002",
+      "label": "healthy_reference",
+      "input_ready": false,
+      "blocking_reasons": [
+        "STORED_ACCELERATION_UNIT_NOT_ESTABLISHED",
+        "ORIGINAL_TIME_AXIS_NOT_UNIFORM_AT_NOMINAL_RATE"
+      ],
+      "time_axis_check": {
+        "sample_count": 256001,
+        "record_duration_s": 3.999999572278149,
+        "min_step_nominal": 0.9580969457237964,
+        "max_step_nominal": 1.0128453426432316,
+        "max_step_relative_error": 0.041903054276203555,
+        "duration_relative_error": 1.0693046270660034e-07,
+        "gaps_over_two_nominal_intervals": 0,
+        "tolerance": 0.001
+      },
+      "resampled": false,
+      "unit_overridden": false,
+      "features_computed": false,
+      "prediction": null,
+      "diagnostic_evidence_eligible": false,
+      "remaining_diagnostic_requirements": [
+        "sourced_rpm_and_geometry_uncertainty",
+        "numeric_profile_qualification",
+        "verified_input_context_and_evidence_registration"
+      ]
+    },
+    {
+      "record_id": "pu-N09-M07-F10-K002-2",
+      "entity_group": "paderborn-bearing-K002",
+      "label": "healthy_reference",
+      "input_ready": false,
+      "blocking_reasons": [
+        "STORED_ACCELERATION_UNIT_NOT_ESTABLISHED",
+        "ORIGINAL_TIME_AXIS_NOT_UNIFORM_AT_NOMINAL_RATE"
+      ],
+      "time_axis_check": {
+        "sample_count": 256001,
+        "record_duration_s": 3.999996578225194,
+        "min_step_nominal": 0.7938517550201141,
+        "max_step_nominal": 1.0128453426432316,
+        "max_step_relative_error": 0.20614824497988593,
+        "duration_relative_error": 8.554437015417804e-07,
+        "gaps_over_two_nominal_intervals": 0,
+        "tolerance": 0.001
+      },
+      "resampled": false,
+      "unit_overridden": false,
+      "features_computed": false,
+      "prediction": null,
+      "diagnostic_evidence_eligible": false,
+      "remaining_diagnostic_requirements": [
+        "sourced_rpm_and_geometry_uncertainty",
+        "numeric_profile_qualification",
+        "verified_input_context_and_evidence_registration"
+      ]
+    },
+    {
+      "record_id": "pu-N15-M01-F10-K002-1",
+      "entity_group": "paderborn-bearing-K002",
+      "label": "healthy_reference",
+      "input_ready": false,
+      "blocking_reasons": [
+        "STORED_ACCELERATION_UNIT_NOT_ESTABLISHED",
+        "ORIGINAL_TIME_AXIS_NOT_UNIFORM_AT_NOMINAL_RATE"
+      ],
+      "time_axis_check": {
+        "sample_count": 261265,
+        "record_duration_s": 3.9999987168344475,
+        "min_step_nominal": 0.10949679378313704,
+        "max_step_nominal": 1.094967937973479,
+        "max_step_relative_error": 0.890503206216863,
+        "duration_relative_error": 0.020148516912377398,
+        "gaps_over_two_nominal_intervals": 0,
+        "tolerance": 0.001
+      },
+      "resampled": false,
+      "unit_overridden": false,
+      "features_computed": false,
+      "prediction": null,
+      "diagnostic_evidence_eligible": false,
+      "remaining_diagnostic_requirements": [
+        "sourced_rpm_and_geometry_uncertainty",
+        "numeric_profile_qualification",
+        "verified_input_context_and_evidence_registration"
+      ]
+    },
+    {
+      "record_id": "pu-N15-M01-F10-K002-2",
+      "entity_group": "paderborn-bearing-K002",
+      "label": "healthy_reference",
+      "input_ready": false,
+      "blocking_reasons": [
+        "STORED_ACCELERATION_UNIT_NOT_ESTABLISHED",
+        "ORIGINAL_TIME_AXIS_NOT_UNIFORM_AT_NOMINAL_RATE"
+      ],
+      "time_axis_check": {
+        "sample_count": 256001,
+        "record_duration_s": 3.999991873284835,
+        "min_step_nominal": 0.49273557209517094,
+        "max_step_nominal": 1.0128453426432316,
+        "max_step_relative_error": 0.5072644279048291,
+        "duration_relative_error": 2.031678791203362e-06,
+        "gaps_over_two_nominal_intervals": 0,
+        "tolerance": 0.001
+      },
+      "resampled": false,
+      "unit_overridden": false,
+      "features_computed": false,
+      "prediction": null,
+      "diagnostic_evidence_eligible": false,
+      "remaining_diagnostic_requirements": [
+        "sourced_rpm_and_geometry_uncertainty",
+        "numeric_profile_qualification",
+        "verified_input_context_and_evidence_registration"
+      ]
+    },
+    {
+      "record_id": "pu-N15-M07-F04-K002-1",
+      "entity_group": "paderborn-bearing-K002",
+      "label": "healthy_reference",
+      "input_ready": false,
+      "blocking_reasons": [
+        "STORED_ACCELERATION_UNIT_NOT_ESTABLISHED",
+        "ORIGINAL_TIME_AXIS_NOT_UNIFORM_AT_NOMINAL_RATE"
+      ],
+      "time_axis_check": {
+        "sample_count": 256001,
+        "record_duration_s": 4.0,
+        "min_step_nominal": 0.9580969457237964,
+        "max_step_nominal": 1.0128453426432316,
+        "max_step_relative_error": 0.041903054276203555,
+        "duration_relative_error": 0.0,
+        "gaps_over_two_nominal_intervals": 0,
+        "tolerance": 0.001
+      },
+      "resampled": false,
+      "unit_overridden": false,
+      "features_computed": false,
+      "prediction": null,
+      "diagnostic_evidence_eligible": false,
+      "remaining_diagnostic_requirements": [
+        "sourced_rpm_and_geometry_uncertainty",
+        "numeric_profile_qualification",
+        "verified_input_context_and_evidence_registration"
+      ]
+    },
+    {
+      "record_id": "pu-N15-M07-F04-K002-2",
+      "entity_group": "paderborn-bearing-K002",
+      "label": "healthy_reference",
+      "input_ready": false,
+      "blocking_reasons": [
+        "STORED_ACCELERATION_UNIT_NOT_ESTABLISHED",
+        "ORIGINAL_TIME_AXIS_NOT_UNIFORM_AT_NOMINAL_RATE"
+      ],
+      "time_axis_check": {
+        "sample_count": 256001,
+        "record_duration_s": 3.9999974336688955,
+        "min_step_nominal": 0.8759743503787831,
+        "max_step_nominal": 1.0128453426432316,
+        "max_step_relative_error": 0.12402564962121687,
+        "duration_relative_error": 6.415827761285797e-07,
+        "gaps_over_two_nominal_intervals": 0,
+        "tolerance": 0.001
+      },
+      "resampled": false,
+      "unit_overridden": false,
+      "features_computed": false,
+      "prediction": null,
+      "diagnostic_evidence_eligible": false,
+      "remaining_diagnostic_requirements": [
+        "sourced_rpm_and_geometry_uncertainty",
+        "numeric_profile_qualification",
+        "verified_input_context_and_evidence_registration"
+      ]
+    },
+    {
+      "record_id": "pu-N15-M07-F10-KA03-1",
+      "entity_group": "paderborn-bearing-KA03",
+      "label": "outer_race",
+      "input_ready": false,
+      "blocking_reasons": [
+        "STORED_ACCELERATION_UNIT_NOT_ESTABLISHED",
+        "ORIGINAL_TIME_AXIS_NOT_UNIFORM_AT_NOMINAL_RATE"
+      ],
+      "time_axis_check": {
+        "sample_count": 256004,
+        "record_duration_s": 3.9999905899623127,
+        "min_step_nominal": 0.2737465509028425,
+        "max_step_nominal": 1.012862238354728,
+        "max_step_relative_error": 0.7262534490971575,
+        "duration_relative_error": 1.4071094526127258e-05,
+        "gaps_over_two_nominal_intervals": 0,
+        "tolerance": 0.001
+      },
+      "resampled": false,
+      "unit_overridden": false,
+      "features_computed": false,
+      "prediction": null,
+      "diagnostic_evidence_eligible": false,
+      "remaining_diagnostic_requirements": [
+        "sourced_rpm_and_geometry_uncertainty",
+        "numeric_profile_qualification",
+        "verified_input_context_and_evidence_registration"
+      ]
+    },
+    {
+      "record_id": "pu-N15-M07-F10-KA03-2",
+      "entity_group": "paderborn-bearing-KA03",
+      "label": "outer_race",
+      "input_ready": false,
+      "blocking_reasons": [
+        "STORED_ACCELERATION_UNIT_NOT_ESTABLISHED",
+        "ORIGINAL_TIME_AXIS_NOT_UNIFORM_AT_NOMINAL_RATE"
+      ],
+      "time_axis_check": {
+        "sample_count": 283668,
+        "record_duration_s": 3.9999961504391277,
+        "min_step_nominal": 0.1642479305417055,
+        "max_step_nominal": 1.0402368934308015,
+        "max_step_relative_error": 0.8357520694582945,
+        "duration_relative_error": 0.09753424392649057,
+        "gaps_over_two_nominal_intervals": 0,
+        "tolerance": 0.001
+      },
+      "resampled": false,
+      "unit_overridden": false,
+      "features_computed": false,
+      "prediction": null,
+      "diagnostic_evidence_eligible": false,
+      "remaining_diagnostic_requirements": [
+        "sourced_rpm_and_geometry_uncertainty",
+        "numeric_profile_qualification",
+        "verified_input_context_and_evidence_registration"
+      ]
+    },
+    {
+      "record_id": "pu-N09-M07-F10-KA03-1",
+      "entity_group": "paderborn-bearing-KA03",
+      "label": "outer_race",
+      "input_ready": false,
+      "blocking_reasons": [
+        "STORED_ACCELERATION_UNIT_NOT_ESTABLISHED",
+        "ORIGINAL_TIME_AXIS_NOT_UNIFORM_AT_NOMINAL_RATE"
+      ],
+      "time_axis_check": {
+        "sample_count": 256001,
+        "record_duration_s": 3.9999893067753556,
+        "min_step_nominal": 0.3011212060073376,
+        "max_step_nominal": 1.012862238354728,
+        "max_step_relative_error": 0.6988787939926624,
+        "duration_relative_error": 2.67330616110506e-06,
+        "gaps_over_two_nominal_intervals": 0,
+        "tolerance": 0.001
+      },
+      "resampled": false,
+      "unit_overridden": false,
+      "features_computed": false,
+      "prediction": null,
+      "diagnostic_evidence_eligible": false,
+      "remaining_diagnostic_requirements": [
+        "sourced_rpm_and_geometry_uncertainty",
+        "numeric_profile_qualification",
+        "verified_input_context_and_evidence_registration"
+      ]
+    },
+    {
+      "record_id": "pu-N09-M07-F10-KA03-2",
+      "entity_group": "paderborn-bearing-KA03",
+      "label": "outer_race",
+      "input_ready": false,
+      "blocking_reasons": [
+        "STORED_ACCELERATION_UNIT_NOT_ESTABLISHED",
+        "ORIGINAL_TIME_AXIS_NOT_UNIFORM_AT_NOMINAL_RATE"
+      ],
+      "time_axis_check": {
+        "sample_count": 255999,
+        "record_duration_s": 3.9999858849434693,
+        "min_step_nominal": 0.4927437916251165,
+        "max_step_nominal": 2.600592233562793,
+        "max_step_relative_error": 1.600592233562793,
+        "duration_relative_error": 4.283769334308785e-06,
+        "gaps_over_two_nominal_intervals": 1,
+        "tolerance": 0.001
+      },
+      "resampled": false,
+      "unit_overridden": false,
+      "features_computed": false,
+      "prediction": null,
+      "diagnostic_evidence_eligible": false,
+      "remaining_diagnostic_requirements": [
+        "sourced_rpm_and_geometry_uncertainty",
+        "numeric_profile_qualification",
+        "verified_input_context_and_evidence_registration"
+      ]
+    },
+    {
+      "record_id": "pu-N15-M01-F10-KA03-1",
+      "entity_group": "paderborn-bearing-KA03",
+      "label": "outer_race",
+      "input_ready": false,
+      "blocking_reasons": [
+        "STORED_ACCELERATION_UNIT_NOT_ESTABLISHED",
+        "ORIGINAL_TIME_AXIS_NOT_UNIFORM_AT_NOMINAL_RATE"
+      ],
+      "time_axis_check": {
+        "sample_count": 256002,
+        "record_duration_s": 3.9999850294854977,
+        "min_step_nominal": 0.0547493101805685,
+        "max_step_nominal": 1.423482064694781,
+        "max_step_relative_error": 0.9452506898194315,
+        "duration_relative_error": 7.6488487471615e-06,
+        "gaps_over_two_nominal_intervals": 0,
+        "tolerance": 0.001
+      },
+      "resampled": false,
+      "unit_overridden": false,
+      "features_computed": false,
+      "prediction": null,
+      "diagnostic_evidence_eligible": false,
+      "remaining_diagnostic_requirements": [
+        "sourced_rpm_and_geometry_uncertainty",
+        "numeric_profile_qualification",
+        "verified_input_context_and_evidence_registration"
+      ]
+    },
+    {
+      "record_id": "pu-N15-M01-F10-KA03-2",
+      "entity_group": "paderborn-bearing-KA03",
+      "label": "outer_race",
+      "input_ready": false,
+      "blocking_reasons": [
+        "STORED_ACCELERATION_UNIT_NOT_ESTABLISHED",
+        "ORIGINAL_TIME_AXIS_NOT_UNIFORM_AT_NOMINAL_RATE"
+      ],
+      "time_axis_check": {
+        "sample_count": 256005,
+        "record_duration_s": 3.999996150439128,
+        "min_step_nominal": 0.2737465508744208,
+        "max_step_nominal": 1.012862238354728,
+        "max_step_relative_error": 0.7262534491255792,
+        "duration_relative_error": 1.6587131044114337e-05,
+        "gaps_over_two_nominal_intervals": 0,
+        "tolerance": 0.001
+      },
+      "resampled": false,
+      "unit_overridden": false,
+      "features_computed": false,
+      "prediction": null,
+      "diagnostic_evidence_eligible": false,
+      "remaining_diagnostic_requirements": [
+        "sourced_rpm_and_geometry_uncertainty",
+        "numeric_profile_qualification",
+        "verified_input_context_and_evidence_registration"
+      ]
+    },
+    {
+      "record_id": "pu-N15-M07-F04-KA03-1",
+      "entity_group": "paderborn-bearing-KA03",
+      "label": "outer_race",
+      "input_ready": false,
+      "blocking_reasons": [
+        "STORED_ACCELERATION_UNIT_NOT_ESTABLISHED",
+        "ORIGINAL_TIME_AXIS_NOT_UNIFORM_AT_NOMINAL_RATE"
+      ],
+      "time_axis_check": {
+        "sample_count": 256001,
+        "record_duration_s": 3.9999995722710144,
+        "min_step_nominal": 0.9581129281513723,
+        "max_step_nominal": 1.012862238354728,
+        "max_step_relative_error": 0.04188707184862772,
+        "duration_relative_error": 1.069322463909117e-07,
+        "gaps_over_two_nominal_intervals": 0,
+        "tolerance": 0.001
+      },
+      "resampled": false,
+      "unit_overridden": false,
+      "features_computed": false,
+      "prediction": null,
+      "diagnostic_evidence_eligible": false,
+      "remaining_diagnostic_requirements": [
+        "sourced_rpm_and_geometry_uncertainty",
+        "numeric_profile_qualification",
+        "verified_input_context_and_evidence_registration"
+      ]
+    },
+    {
+      "record_id": "pu-N15-M07-F04-KA03-2",
+      "entity_group": "paderborn-bearing-KA03",
+      "label": "outer_race",
+      "input_ready": false,
+      "blocking_reasons": [
+        "STORED_ACCELERATION_UNIT_NOT_ESTABLISHED",
+        "ORIGINAL_TIME_AXIS_NOT_UNIFORM_AT_NOMINAL_RATE"
+      ],
+      "time_axis_check": {
+        "sample_count": 277114,
+        "record_duration_s": 3.9999970058970997,
+        "min_step_nominal": 0.2737465508744208,
+        "max_step_nominal": 1.012862238354728,
+        "max_step_relative_error": 0.7262534491255792,
+        "duration_relative_error": 0.07618982733608895,
+        "gaps_over_two_nominal_intervals": 0,
+        "tolerance": 0.001
+      },
+      "resampled": false,
+      "unit_overridden": false,
+      "features_computed": false,
+      "prediction": null,
+      "diagnostic_evidence_eligible": false,
+      "remaining_diagnostic_requirements": [
+        "sourced_rpm_and_geometry_uncertainty",
+        "numeric_profile_qualification",
+        "verified_input_context_and_evidence_registration"
+      ]
+    },
+    {
+      "record_id": "pu-N15-M07-F10-KI03-1",
+      "entity_group": "paderborn-bearing-KI03",
+      "label": "inner_race",
+      "input_ready": false,
+      "blocking_reasons": [
+        "STORED_ACCELERATION_UNIT_NOT_ESTABLISHED",
+        "ORIGINAL_TIME_AXIS_NOT_UNIFORM_AT_NOMINAL_RATE"
+      ],
+      "time_axis_check": {
+        "sample_count": 256091,
+        "record_duration_s": 3.999986740565913,
+        "min_step_nominal": 0.27374315533279514,
+        "max_step_nominal": 1.0128496748507132,
+        "max_step_relative_error": 0.7262568446672049,
+        "duration_relative_error": 0.000354752640796408,
+        "gaps_over_two_nominal_intervals": 0,
+        "tolerance": 0.001
+      },
+      "resampled": false,
+      "unit_overridden": false,
+      "features_computed": false,
+      "prediction": null,
+      "diagnostic_evidence_eligible": false,
+      "remaining_diagnostic_requirements": [
+        "sourced_rpm_and_geometry_uncertainty",
+        "numeric_profile_qualification",
+        "verified_input_context_and_evidence_registration"
+      ]
+    },
+    {
+      "record_id": "pu-N15-M07-F10-KI03-2",
+      "entity_group": "paderborn-bearing-KI03",
+      "label": "inner_race",
+      "input_ready": false,
+      "blocking_reasons": [
+        "STORED_ACCELERATION_UNIT_NOT_ESTABLISHED",
+        "ORIGINAL_TIME_AXIS_NOT_UNIFORM_AT_NOMINAL_RATE"
+      ],
+      "time_axis_check": {
+        "sample_count": 256001,
+        "record_duration_s": 3.999997861381599,
+        "min_step_nominal": 0.547486310694012,
+        "max_step_nominal": 1.3687157767634517,
+        "max_step_relative_error": 0.452513689305988,
+        "duration_relative_error": 5.346546002593655e-07,
+        "gaps_over_two_nominal_intervals": 0,
+        "tolerance": 0.001
+      },
+      "resampled": false,
+      "unit_overridden": false,
+      "features_computed": false,
+      "prediction": null,
+      "diagnostic_evidence_eligible": false,
+      "remaining_diagnostic_requirements": [
+        "sourced_rpm_and_geometry_uncertainty",
+        "numeric_profile_qualification",
+        "verified_input_context_and_evidence_registration"
+      ]
+    },
+    {
+      "record_id": "pu-N09-M07-F10-KI03-1",
+      "entity_group": "paderborn-bearing-KI03",
+      "label": "inner_race",
+      "input_ready": false,
+      "blocking_reasons": [
+        "STORED_ACCELERATION_UNIT_NOT_ESTABLISHED",
+        "ORIGINAL_TIME_AXIS_NOT_UNIFORM_AT_NOMINAL_RATE"
+      ],
+      "time_axis_check": {
+        "sample_count": 256080,
+        "record_duration_s": 3.999987168289593,
+        "min_step_nominal": 0.9854753592435372,
+        "max_step_nominal": 1.0128496748507132,
+        "max_step_relative_error": 0.014524640756462759,
+        "duration_relative_error": 0.0003117054872366065,
+        "gaps_over_two_nominal_intervals": 0,
+        "tolerance": 0.001
+      },
+      "resampled": false,
+      "unit_overridden": false,
+      "features_computed": false,
+      "prediction": null,
+      "diagnostic_evidence_eligible": false,
+      "remaining_diagnostic_requirements": [
+        "sourced_rpm_and_geometry_uncertainty",
+        "numeric_profile_qualification",
+        "verified_input_context_and_evidence_registration"
+      ]
+    },
+    {
+      "record_id": "pu-N09-M07-F10-KI03-2",
+      "entity_group": "paderborn-bearing-KI03",
+      "label": "inner_race",
+      "input_ready": false,
+      "blocking_reasons": [
+        "STORED_ACCELERATION_UNIT_NOT_ESTABLISHED",
+        "ORIGINAL_TIME_AXIS_NOT_UNIFORM_AT_NOMINAL_RATE"
+      ],
+      "time_axis_check": {
+        "sample_count": 256324,
+        "record_duration_s": 3.9999974336579185,
+        "min_step_nominal": 0.02737431555033254,
+        "max_step_nominal": 1.0128496748222915,
+        "max_step_relative_error": 0.9726256844496675,
+        "duration_relative_error": 0.0012607695988779619,
+        "gaps_over_two_nominal_intervals": 0,
+        "tolerance": 0.001
+      },
+      "resampled": false,
+      "unit_overridden": false,
+      "features_computed": false,
+      "prediction": null,
+      "diagnostic_evidence_eligible": false,
+      "remaining_diagnostic_requirements": [
+        "sourced_rpm_and_geometry_uncertainty",
+        "numeric_profile_qualification",
+        "verified_input_context_and_evidence_registration"
+      ]
+    },
+    {
+      "record_id": "pu-N15-M01-F10-KI03-1",
+      "entity_group": "paderborn-bearing-KI03",
+      "label": "inner_race",
+      "input_ready": false,
+      "blocking_reasons": [
+        "STORED_ACCELERATION_UNIT_NOT_ESTABLISHED",
+        "ORIGINAL_TIME_AXIS_NOT_UNIFORM_AT_NOMINAL_RATE"
+      ],
+      "time_axis_check": {
+        "sample_count": 256086,
+        "record_duration_s": 3.999989306907994,
+        "min_step_nominal": 0.2737431553505587,
+        "max_step_nominal": 1.0128496748222915,
+        "max_step_relative_error": 0.7262568446494413,
+        "duration_relative_error": 0.0003345934275274552,
+        "gaps_over_two_nominal_intervals": 0,
+        "tolerance": 0.001
+      },
+      "resampled": false,
+      "unit_overridden": false,
+      "features_computed": false,
+      "prediction": null,
+      "diagnostic_evidence_eligible": false,
+      "remaining_diagnostic_requirements": [
+        "sourced_rpm_and_geometry_uncertainty",
+        "numeric_profile_qualification",
+        "verified_input_context_and_evidence_registration"
+      ]
+    },
+    {
+      "record_id": "pu-N15-M01-F10-KI03-2",
+      "entity_group": "paderborn-bearing-KI03",
+      "label": "inner_race",
+      "input_ready": false,
+      "blocking_reasons": [
+        "STORED_ACCELERATION_UNIT_NOT_ESTABLISHED",
+        "ORIGINAL_TIME_AXIS_NOT_UNIFORM_AT_NOMINAL_RATE"
+      ],
+      "time_axis_check": {
+        "sample_count": 256001,
+        "record_duration_s": 3.9999995722763195,
+        "min_step_nominal": 0.9581010437313131,
+        "max_step_nominal": 1.0128496748222915,
+        "max_step_relative_error": 0.04189895626868689,
+        "duration_relative_error": 1.0693092011848648e-07,
+        "gaps_over_two_nominal_intervals": 0,
+        "tolerance": 0.001
+      },
+      "resampled": false,
+      "unit_overridden": false,
+      "features_computed": false,
+      "prediction": null,
+      "diagnostic_evidence_eligible": false,
+      "remaining_diagnostic_requirements": [
+        "sourced_rpm_and_geometry_uncertainty",
+        "numeric_profile_qualification",
+        "verified_input_context_and_evidence_registration"
+      ]
+    },
+    {
+      "record_id": "pu-N15-M07-F04-KI03-1",
+      "entity_group": "paderborn-bearing-KI03",
+      "label": "inner_race",
+      "input_ready": false,
+      "blocking_reasons": [
+        "STORED_ACCELERATION_UNIT_NOT_ESTABLISHED",
+        "ORIGINAL_TIME_AXIS_NOT_UNIFORM_AT_NOMINAL_RATE"
+      ],
+      "time_axis_check": {
+        "sample_count": 256001,
+        "record_duration_s": 3.999998289105279,
+        "min_step_nominal": 0.9307267281712939,
+        "max_step_nominal": 1.0128496748222915,
+        "max_step_relative_error": 0.06927327182870613,
+        "duration_relative_error": 4.2772368025190133e-07,
+        "gaps_over_two_nominal_intervals": 0,
+        "tolerance": 0.001
+      },
+      "resampled": false,
+      "unit_overridden": false,
+      "features_computed": false,
+      "prediction": null,
+      "diagnostic_evidence_eligible": false,
+      "remaining_diagnostic_requirements": [
+        "sourced_rpm_and_geometry_uncertainty",
+        "numeric_profile_qualification",
+        "verified_input_context_and_evidence_registration"
+      ]
+    },
+    {
+      "record_id": "pu-N15-M07-F04-KI03-2",
+      "entity_group": "paderborn-bearing-KI03",
+      "label": "inner_race",
+      "input_ready": false,
+      "blocking_reasons": [
+        "STORED_ACCELERATION_UNIT_NOT_ESTABLISHED",
+        "ORIGINAL_TIME_AXIS_NOT_UNIFORM_AT_NOMINAL_RATE"
+      ],
+      "time_axis_check": {
+        "sample_count": 256001,
+        "record_duration_s": 3.99999957227632,
+        "min_step_nominal": 0.9581010437313131,
+        "max_step_nominal": 1.0128496748222915,
+        "max_step_relative_error": 0.04189895626868689,
+        "duration_relative_error": 1.0693092000746418e-07,
+        "gaps_over_two_nominal_intervals": 0,
+        "tolerance": 0.001
+      },
+      "resampled": false,
+      "unit_overridden": false,
+      "features_computed": false,
+      "prediction": null,
+      "diagnostic_evidence_eligible": false,
+      "remaining_diagnostic_requirements": [
+        "sourced_rpm_and_geometry_uncertainty",
+        "numeric_profile_qualification",
+        "verified_input_context_and_evidence_registration"
+      ]
+    }
+  ],
+  "input_ready_count": 0,
+  "blocking_reason_counts": {
+    "STORED_ACCELERATION_UNIT_NOT_ESTABLISHED": 24,
+    "ORIGINAL_TIME_AXIS_NOT_UNIFORM_AT_NOMINAL_RATE": 24
+  },
+  "per_class": {
+    "healthy_reference": {
+      "records": 8,
+      "input_ready": 0
+    },
+    "inner_race": {
+      "records": 8,
+      "input_ready": 0
+    },
+    "outer_race": {
+      "records": 8,
+      "input_ready": 0
+    }
+  },
+  "sealed_test": {
+    "bearings": [
+      "K003",
+      "KA04",
+      "KI04"
+    ],
+    "scope": "opaque archives retained; no members listed, extracted or parsed",
+    "signals_read": 0,
+    "signal_level_duplicates_checked": false,
+    "released_for_evaluation": false
+  },
+  "accuracy": null,
+  "prediction_count": 0,
+  "diagnostic_profiles_qualified": 0,
+  "factory_data_used": false,
+  "model_called": false,
+  "limitations": [
+    "One bearing per class per held-out split; three labels only, rolling-element class absent",
+    "Known source entity and byte/hash separation does not establish statistical independence",
+    "Unknown physical scale and contradictory timing remain blockers; no silent metadata overrides",
+    "Test archive integrity does not replace signal/channel-level duplicate checks before eventual test release"
+  ]
+}

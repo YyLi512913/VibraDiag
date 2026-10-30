@@ -1,0 +1,392 @@
+{
+  "contract_version": "m2-agent-handoff-v1",
+  "stage": "M2 v0.2 local exploratory tools",
+  "transport": {
+    "create": "POST /api/v1/tool-runs",
+    "history": "GET /api/v1/tool-runs",
+    "read": "GET /api/v1/tool-runs/{id}",
+    "facts": "GET /api/v1/facts/{id}",
+    "evidence": "GET /api/v1/evidence/{id}",
+    "authorization": "Existing authenticated principal, CSRF for writes, current role and resource scopes"
+  },
+  "request_json_schema": {
+    "$defs": {
+      "ComparisonRunRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "measurement_revision_id": {
+            "format": "uuid",
+            "title": "Measurement Revision Id",
+            "type": "string"
+          },
+          "confirmation_id": {
+            "format": "uuid",
+            "title": "Confirmation Id",
+            "type": "string"
+          },
+          "retry_of": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Retry Of"
+          },
+          "tool_name": {
+            "const": "compare_measurements",
+            "title": "Tool Name",
+            "type": "string"
+          },
+          "declaration_id": {
+            "format": "uuid",
+            "title": "Declaration Id",
+            "type": "string"
+          },
+          "before_confirmation_id": {
+            "format": "uuid",
+            "title": "Before Confirmation Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "measurement_revision_id",
+          "confirmation_id",
+          "tool_name",
+          "declaration_id",
+          "before_confirmation_id"
+        ],
+        "title": "ComparisonRunRequest",
+        "type": "object"
+      },
+      "EnvelopeRunRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "measurement_revision_id": {
+            "format": "uuid",
+            "title": "Measurement Revision Id",
+            "type": "string"
+          },
+          "confirmation_id": {
+            "format": "uuid",
+            "title": "Confirmation Id",
+            "type": "string"
+          },
+          "retry_of": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Retry Of"
+          },
+          "tool_name": {
+            "const": "analyze_envelope",
+            "title": "Tool Name",
+            "type": "string"
+          },
+          "profile_id": {
+            "format": "uuid",
+            "title": "Profile Id",
+            "type": "string"
+          },
+          "context_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Context Id"
+          },
+          "mode": {
+            "default": "exploratory",
+            "enum": [
+              "exploratory",
+              "diagnostic_evidence"
+            ],
+            "title": "Mode",
+            "type": "string"
+          }
+        },
+        "required": [
+          "measurement_revision_id",
+          "confirmation_id",
+          "tool_name",
+          "profile_id"
+        ],
+        "title": "EnvelopeRunRequest",
+        "type": "object"
+      },
+      "FrequencyRunRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "measurement_revision_id": {
+            "format": "uuid",
+            "title": "Measurement Revision Id",
+            "type": "string"
+          },
+          "confirmation_id": {
+            "format": "uuid",
+            "title": "Confirmation Id",
+            "type": "string"
+          },
+          "retry_of": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Retry Of"
+          },
+          "tool_name": {
+            "const": "calculate_bearing_frequencies",
+            "title": "Tool Name",
+            "type": "string"
+          },
+          "context_id": {
+            "format": "uuid",
+            "title": "Context Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "measurement_revision_id",
+          "confirmation_id",
+          "tool_name",
+          "context_id"
+        ],
+        "title": "FrequencyRunRequest",
+        "type": "object"
+      },
+      "MatchingRunRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "measurement_revision_id": {
+            "format": "uuid",
+            "title": "Measurement Revision Id",
+            "type": "string"
+          },
+          "confirmation_id": {
+            "format": "uuid",
+            "title": "Confirmation Id",
+            "type": "string"
+          },
+          "retry_of": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Retry Of"
+          },
+          "tool_name": {
+            "const": "match_frequency_evidence",
+            "title": "Tool Name",
+            "type": "string"
+          },
+          "context_id": {
+            "format": "uuid",
+            "title": "Context Id",
+            "type": "string"
+          },
+          "envelope_run_id": {
+            "format": "uuid",
+            "title": "Envelope Run Id",
+            "type": "string"
+          },
+          "frequency_run_id": {
+            "format": "uuid",
+            "title": "Frequency Run Id",
+            "type": "string"
+          },
+          "basic_analysis_id": {
+            "format": "uuid",
+            "title": "Basic Analysis Id",
+            "type": "string"
+          },
+          "config_profile": {
+            "const": "matching-v1",
+            "default": "matching-v1",
+            "title": "Config Profile",
+            "type": "string"
+          }
+        },
+        "required": [
+          "measurement_revision_id",
+          "confirmation_id",
+          "tool_name",
+          "context_id",
+          "envelope_run_id",
+          "frequency_run_id",
+          "basic_analysis_id"
+        ],
+        "title": "MatchingRunRequest",
+        "type": "object"
+      }
+    },
+    "discriminator": {
+      "mapping": {
+        "analyze_envelope": "#/$defs/EnvelopeRunRequest",
+        "calculate_bearing_frequencies": "#/$defs/FrequencyRunRequest",
+        "compare_measurements": "#/$defs/ComparisonRunRequest",
+        "match_frequency_evidence": "#/$defs/MatchingRunRequest"
+      },
+      "propertyName": "tool_name"
+    },
+    "oneOf": [
+      {
+        "$ref": "#/$defs/EnvelopeRunRequest"
+      },
+      {
+        "$ref": "#/$defs/FrequencyRunRequest"
+      },
+      {
+        "$ref": "#/$defs/MatchingRunRequest"
+      },
+      {
+        "$ref": "#/$defs/ComparisonRunRequest"
+      }
+    ]
+  },
+  "tools": [
+    {
+      "name": "analyze_envelope",
+      "algorithm_version": "envelope-sos-hilbert-v1",
+      "available_purpose": "exploratory",
+      "requires": [
+        "current input revision",
+        "own input confirmation",
+        "controlled profile_id"
+      ],
+      "independent_of": [
+        "rpm",
+        "bearing geometry"
+      ],
+      "diagnostic_profile_publication_available": false
+    },
+    {
+      "name": "calculate_bearing_frequencies",
+      "algorithm_version": "bearing-kinematics-v1",
+      "available_purpose": "ideal kinematic expectations",
+      "requires": [
+        "current input revision",
+        "own input confirmation",
+        "authorized context_id",
+        "sourced speed and bearing parameters"
+      ],
+      "missing_uncertainty": "Nominal values may be retained; matching remains unavailable"
+    },
+    {
+      "name": "match_frequency_evidence",
+      "algorithm_version": "frequency-matching-v2",
+      "available_purpose": "exploratory observations",
+      "requires": [
+        "same-input envelope, frequency and basic parent IDs",
+        "current input revision and own confirmation",
+        "authorized context_id"
+      ],
+      "config_profile": "matching-v1",
+      "states": [
+        "observed_support",
+        "no_observed_support",
+        "ambiguous",
+        "not_evaluable"
+      ],
+      "significance_rule": "Only threshold-passing peaks create multiple-peak ambiguity"
+    },
+    {
+      "name": "compare_measurements",
+      "algorithm_version": "measurement-comparison-v1",
+      "available_purpose": "conditional numerical differences",
+      "requires": [
+        "controlled declaration_id binding both inputs and parents",
+        "own after and before confirmations",
+        "both input scopes"
+      ],
+      "states": [
+        "comparable",
+        "not_comparable",
+        "related_or_same_acquisition"
+      ],
+      "repair_effectiveness": null
+    }
+  ],
+  "execution": {
+    "states": [
+      "running",
+      "completed",
+      "failed",
+      "interrupted"
+    ],
+    "numerical_states": [
+      "ok",
+      "unavailable",
+      "failed"
+    ],
+    "completed_does_not_imply_numerical_success": true,
+    "shared_m1_m2_capacity": 2,
+    "persistent_queue": false,
+    "hard_cancel_available": false
+  },
+  "retry": {
+    "unknown_response": "replay identical payload with original Idempotency-Key",
+    "failed_or_interrupted": "explicit retry_of with a new key, after source/permission revalidation",
+    "missing_conditions": "obtain valid sourced inputs; do not blindly repeat unchanged request"
+  },
+  "runtime_errors": {
+    "401": "login required",
+    "403": "role or write permission denied",
+    "404": "resource unavailable or concealed",
+    "409": "stale input/confirmation, source integrity or idempotency conflict",
+    "422": "public request validation failed",
+    "429": "shared execution capacity exhausted",
+    "503": "dependency unavailable"
+  },
+  "authority_boundary": {
+    "model_supplied_trusted_flags": false,
+    "model_writes_asset_or_profile": false,
+    "model_confirms_inputs_for_user": false,
+    "raw_arrays_in_model_summary": false,
+    "research_adapters_in_tool_allowlist": false,
+    "diagnostic_release_approved": false,
+    "side_effects": "Immutable execution/artifact/fact/audit records only; no work order, device control or maintenance action"
+  },
+  "interpretation": {
+    "observed_support_is_fault_diagnosis": false,
+    "no_support_is_health": false,
+    "derived_figures_are_independent_acquisitions": false,
+    "model_may_invent_evidence_ids": false,
+    "unknown_source_parameters_may_be_filled_from_label_or_rag": false,
+    "read_before_reusing_ids": "Resolve current authorized service resources and validity flags; JSON contract is not permission"
+  },
+  "remaining_release_blocks": [
+    "verified physical input scale/timebase",
+    "sourced speed and bearing uncertainty",
+    "controlled numerical-profile qualification publication",
+    "independent diagnostic effectiveness evaluation"
+  ]
+}

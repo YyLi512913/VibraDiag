@@ -1,0 +1,93 @@
+{
+  "passed": true,
+  "purpose": "M2-T02a standalone numerics, not full M2 acceptance",
+  "environment": {
+    "python": "3.11.15",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "os": "Windows-10-10.0.22000-SP0"
+  },
+  "source_sha256": {
+    "backend/src/vibradiag/analysis/envelope.py": "dd769a9d8f1fe2ab010ed2ed8372d40af5bc50e72e07fbe447e89ec708b83d87",
+    "backend/src/vibradiag/analysis/bearing_frequencies.py": "c242d9173964844941021ab013aa15833b91339cc75c68ff997215a25c2154b8",
+    "backend/src/vibradiag/domain/tool_results.py": "014a18c8803214b3b5a981fb9f2f746d9d70493a1bd4a74f38d3ca8e749ee7c8",
+    "backend/src/vibradiag/schemas/tools.py": "1baf54398e28a032f28e39346d311e47f055b5d5dad2c61a5d9133aa2f85d9de",
+    "backend/tests/unit/test_envelope.py": "582e99f09add38f6123db66ef8f3f267964ba2b6dbcf884cfceb6c766e097622",
+    "backend/tests/unit/test_bearing_frequencies.py": "ccc556ec74c402a1fda9080e9d8b37ac19af5e471c0b674614c9bd772ea3b4b6",
+    "backend/scripts/verify_m2_numerics.py": "28c2c67e4b9f314e07e7486b548846af9dd9888aa7b417325af68adb3de965f7",
+    "backend/requirements.lock.txt": "db7bca83a22a77ed4e06f2c15ebfadf31947b268acebe406d8cccdfda889e88f"
+  },
+  "envelope_cases": [
+    {
+      "effective_count": 48000,
+      "modulation_depth": 0.25,
+      "expected_peak_amplitude_m_s2": 0.5,
+      "actual_peak_amplitude_m_s2": 0.499999990040888,
+      "max_envelope_error_m_s2": 0.010381108873830147,
+      "max_10_to_500_hz_amplitude_m_s2": 0.499999990040888,
+      "float64_samples_sha256": "58ff15262658a4b2a07f68777515ebf9749067671180d2d1b033e0b0c350cb06",
+      "seconds": 0.02615969999897061,
+      "configuration_sha256": "c120af93047e0ac04a0bf2ceb64a6ebbc3ac17260213daef0be6aa845567b637",
+      "evidence_preconditions_satisfied": false
+    },
+    {
+      "effective_count": 48000,
+      "modulation_depth": 0.0,
+      "expected_peak_amplitude_m_s2": 0.0,
+      "actual_peak_amplitude_m_s2": 4.5966567239687464e-15,
+      "max_envelope_error_m_s2": 0.01078003808662098,
+      "max_10_to_500_hz_amplitude_m_s2": 9.858679614725267e-13,
+      "float64_samples_sha256": "a2ec9c10b9142c0850ce87248aac9845765dc1165cb64032d3723f79ff508004",
+      "seconds": 0.024713399998290697,
+      "configuration_sha256": "c120af93047e0ac04a0bf2ceb64a6ebbc3ac17260213daef0be6aa845567b637",
+      "evidence_preconditions_satisfied": false
+    },
+    {
+      "effective_count": 48001,
+      "modulation_depth": 0.25,
+      "expected_peak_amplitude_m_s2": 0.5,
+      "actual_peak_amplitude_m_s2": 0.4999999896969416,
+      "max_envelope_error_m_s2": 0.008695890396402284,
+      "max_10_to_500_hz_amplitude_m_s2": 0.4999999896969416,
+      "float64_samples_sha256": "7d90c5957f314a9108da5ae5f10975e28f413c9f7765d79414bc984f73b42a03",
+      "seconds": 0.023001400000794092,
+      "configuration_sha256": "c120af93047e0ac04a0bf2ceb64a6ebbc3ac17260213daef0be6aa845567b637",
+      "evidence_preconditions_satisfied": false
+    },
+    {
+      "effective_count": 48001,
+      "modulation_depth": 0.0,
+      "expected_peak_amplitude_m_s2": 0.0,
+      "actual_peak_amplitude_m_s2": 5.167155653093033e-15,
+      "max_envelope_error_m_s2": 0.009808993041857672,
+      "max_10_to_500_hz_amplitude_m_s2": 9.08558712580622e-12,
+      "float64_samples_sha256": "76505738b7f8052e8378d4eb5adf8a2414e6e5273d84acd3481ee3197dfabba0",
+      "seconds": 0.021809600002598017,
+      "configuration_sha256": "c120af93047e0ac04a0bf2ceb64a6ebbc3ac17260213daef0be6aa845567b637",
+      "evidence_preconditions_satisfied": false
+    }
+  ],
+  "million_point_smoke": {
+    "status": "ok",
+    "input_count": 1000000,
+    "effective_count": 999678,
+    "seconds": 0.7326668999994581,
+    "arrays_bytes": 24044040,
+    "all_arrays_finite": true,
+    "float64_samples_sha256": "e888575179ccd888eda7175cc0e504f1375d48da0341fe69e0a5264f62e31bd4",
+    "timing_scope": "pure function; not HTTP/persistence, not a memory peak measurement"
+  },
+  "frequency_fixture": {
+    "FTF": 11.25,
+    "BPFO": 90.0,
+    "BPFI": 150.0,
+    "BSF": 56.25,
+    "2BSF": 112.5
+  },
+  "domain_references_are_synthetic_not_database_records": true,
+  "published_profiles": 0,
+  "factory_data_used": false,
+  "database_schema_changed": false,
+  "api_or_ui_integrated": false,
+  "model_called": false
+}

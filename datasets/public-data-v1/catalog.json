@@ -1,0 +1,220 @@
+{
+  "version": "official-public-assets-v1",
+  "reviewed_on": "2026-10-30",
+  "raw_data_in_repository": false,
+  "commercial_or_product_distribution_approved": false,
+  "sources": {
+    "cwru": {
+      "owner": "Case Western Reserve University Bearing Data Center",
+      "entry_url": "https://engineering.case.edu/bearingdatacenter/download-data-file",
+      "license_status": "not_specified_on_reviewed_pages",
+      "distribution": "Do not infer a redistribution or commercial license from public download availability"
+    },
+    "paderborn": {
+      "owner": "Paderborn University, Chair of Design and Drive Technology (KAt)",
+      "entry_url": "https://mb.uni-paderborn.de/en/kat/research/bearing-datacenter",
+      "license_status": "CC-BY-NC-4.0",
+      "license_url": "https://creativecommons.org/licenses/by-nc/4.0/",
+      "citation": "Lessmeier, C.; Kimotho, J. K.; Zimmer, D.; Sextro, W. Condition Monitoring of Bearing Damage in Electromechanical Drive Systems by Using Motor Current Signals of Electric Motors: A Benchmark Data Set for Data-Driven Classification. European Conference of the PHM Society, 2016.",
+      "distribution": "Local noncommercial research evaluation; raw archives excluded from product/repository"
+    }
+  },
+  "assets": [
+    {
+      "relative_path": "cwru/97.mat",
+      "url": "https://engineering.case.edu/sites/default/files/97.mat",
+      "bytes": 3903344,
+      "sha256": "16bf48babcf1c7ac224bc1a81cd9eafdb27e42d5cf559761907e067e8eeadf3c",
+      "members": []
+    },
+    {
+      "relative_path": "cwru/105.mat",
+      "url": "https://engineering.case.edu/sites/default/files/105.mat",
+      "bytes": 2910768,
+      "sha256": "f80b0ea04fd06b372a0eaec7c056543ea37e4bb4727a5b173d2a5bacd2aa9cab",
+      "members": []
+    },
+    {
+      "relative_path": "cwru/118.mat",
+      "url": "https://engineering.case.edu/sites/default/files/118.mat",
+      "bytes": 2942112,
+      "sha256": "b00628f8dd8d1d930af77fa465d1e5cdb385fe259489053f91f3680bda7f640e",
+      "members": []
+    },
+    {
+      "relative_path": "cwru/130.mat",
+      "url": "https://engineering.case.edu/sites/default/files/130.mat",
+      "bytes": 2928192,
+      "sha256": "35a095307d0971477049b343a1b5981dde465a58fb7f233ad89b035068c1717d",
+      "members": []
+    },
+    {
+      "relative_path": "paderborn/K001.rar",
+      "url": "https://groups.uni-paderborn.de/kat/BearingDataCenter/K001.rar",
+      "bytes": 173881721,
+      "sha256": "0f119ebdb28fb2f4d9fac1beb1319429f63f7ae1256c23c872f280f3560918e5",
+      "members": [
+        {
+          "member": "K001/N15_M07_F10_K001_1.mat",
+          "relative_path": "paderborn/K001/N15_M07_F10_K001_1.mat",
+          "sha256": "e1a971e93991e5f8bbfdcacde5a0fec895a4248f8232d52b59ff85d034c9c00d",
+          "bytes": 8714904
+        },
+        {
+          "member": "K001/N15_M07_F10_K001_2.mat",
+          "relative_path": "paderborn/K001/N15_M07_F10_K001_2.mat",
+          "sha256": "9ed50c2cf9b280e65471ee9dde35b280b5deb43a6fc861fabd7935bd772f969a",
+          "bytes": 8714904
+        },
+        {
+          "member": "K001/N09_M07_F10_K001_1.mat",
+          "relative_path": "paderborn/K001/N09_M07_F10_K001_1.mat",
+          "sha256": "c55f4c6a5d6d9a83d18d24dce4f164ffc85721e4e358df1c1ac9886583c2269f",
+          "bytes": 8741432
+        },
+        {
+          "member": "K001/N09_M07_F10_K001_2.mat",
+          "relative_path": "paderborn/K001/N09_M07_F10_K001_2.mat",
+          "sha256": "353451b91afc757be1883b4af2ba36724d58534a24b310662be7cd93dba156bb",
+          "bytes": 8714904
+        },
+        {
+          "member": "K001/N15_M01_F10_K001_1.mat",
+          "relative_path": "paderborn/K001/N15_M01_F10_K001_1.mat",
+          "sha256": "84ff03769c3efa9cd2c3e0cbeefa60ed6bcec3436efa804637788a638b5f23f3",
+          "bytes": 8717240
+        },
+        {
+          "member": "K001/N15_M01_F10_K001_2.mat",
+          "relative_path": "paderborn/K001/N15_M01_F10_K001_2.mat",
+          "sha256": "a47179a2266ebb83132ccd844cc6b685cdfd5355c9d6fd53a13f1744d9e05304",
+          "bytes": 8714904
+        },
+        {
+          "member": "K001/N15_M07_F04_K001_1.mat",
+          "relative_path": "paderborn/K001/N15_M07_F04_K001_1.mat",
+          "sha256": "4790406e566cd6ed93241bc0a1e51ea7b9603c38a712a93d2946140dfa581458",
+          "bytes": 8800280
+        },
+        {
+          "member": "K001/N15_M07_F04_K001_2.mat",
+          "relative_path": "paderborn/K001/N15_M07_F04_K001_2.mat",
+          "sha256": "b0eea67e384a64b4585273a81dc48fd6093c57a98e2e25966187b6c914e73b72",
+          "bytes": 8872536
+        }
+      ]
+    },
+    {
+      "relative_path": "paderborn/KA01.rar",
+      "url": "https://groups.uni-paderborn.de/kat/BearingDataCenter/KA01.rar",
+      "bytes": 166571438,
+      "sha256": "6a6be1e11132730cc6f560d51eacedcbfd5fd74b829e9d8d3728c6c8a7cd4c0e",
+      "members": [
+        {
+          "member": "KA01/N15_M07_F10_KA01_1.mat",
+          "relative_path": "paderborn/KA01/N15_M07_F10_KA01_1.mat",
+          "sha256": "9bcbe610566aa4476d012928b62aaff60b720cd4c42216104c52319ba958369d",
+          "bytes": 8714872
+        },
+        {
+          "member": "KA01/N15_M07_F10_KA01_2.mat",
+          "relative_path": "paderborn/KA01/N15_M07_F10_KA01_2.mat",
+          "sha256": "a842cbac0900059d69edaead6e38d2098a13a52910fc48f086852b6c52daf649",
+          "bytes": 8718104
+        },
+        {
+          "member": "KA01/N09_M07_F10_KA01_1.mat",
+          "relative_path": "paderborn/KA01/N09_M07_F10_KA01_1.mat",
+          "sha256": "e3e603da7d18332e548d0c8b4b3fdbfe116a259255c524b2f39265bc37c9d536",
+          "bytes": 8714904
+        },
+        {
+          "member": "KA01/N09_M07_F10_KA01_2.mat",
+          "relative_path": "paderborn/KA01/N09_M07_F10_KA01_2.mat",
+          "sha256": "43c68b73658a8a9e25b2f6b0e88be8f97bc2c8c10587f038b0cfb4a0318ad53f",
+          "bytes": 8717848
+        },
+        {
+          "member": "KA01/N15_M01_F10_KA01_1.mat",
+          "relative_path": "paderborn/KA01/N15_M01_F10_KA01_1.mat",
+          "sha256": "49176ea6dd58836a0fd1f51f09a04184d3c78a347f5b10a49f58662dbdbb5f19",
+          "bytes": 8717496
+        },
+        {
+          "member": "KA01/N15_M01_F10_KA01_2.mat",
+          "relative_path": "paderborn/KA01/N15_M01_F10_KA01_2.mat",
+          "sha256": "be0ba8b94b211f38160131f955f3ef5c260abaeac748712e6b80754c036ffa6e",
+          "bytes": 8714936
+        },
+        {
+          "member": "KA01/N15_M07_F04_KA01_1.mat",
+          "relative_path": "paderborn/KA01/N15_M07_F04_KA01_1.mat",
+          "sha256": "fba77932339810cc4b70a719a5e1e142fda381f5cdd91b1e4acd42d0ddd49d65",
+          "bytes": 8717848
+        },
+        {
+          "member": "KA01/N15_M07_F04_KA01_2.mat",
+          "relative_path": "paderborn/KA01/N15_M07_F04_KA01_2.mat",
+          "sha256": "1a348a8e10882ac8b478ddd14cc2b0a2242bff2656514b51924586bcbf13ac1a",
+          "bytes": 8714872
+        }
+      ]
+    },
+    {
+      "relative_path": "paderborn/KI01.rar",
+      "url": "https://groups.uni-paderborn.de/kat/BearingDataCenter/KI01.rar",
+      "bytes": 175265779,
+      "sha256": "b1dd6d99bb64d556f889fefaedb7e6e672900f5f015125615feaae776f055348",
+      "members": [
+        {
+          "member": "KI01/N15_M07_F10_KI01_1.mat",
+          "relative_path": "paderborn/KI01/N15_M07_F10_KI01_1.mat",
+          "sha256": "2c416a31264ec26cabff14922cd204c62bf0ee95fa309289a94e4ddb6c66d8fd",
+          "bytes": 8779128
+        },
+        {
+          "member": "KI01/N15_M07_F10_KI01_2.mat",
+          "relative_path": "paderborn/KI01/N15_M07_F10_KI01_2.mat",
+          "sha256": "902fe4136dc86d9c5e339e77fa0918de8f5e2cb87e3d3cf90a9aa28ec7cdbc88",
+          "bytes": 8748216
+        },
+        {
+          "member": "KI01/N09_M07_F10_KI01_1.mat",
+          "relative_path": "paderborn/KI01/N09_M07_F10_KI01_1.mat",
+          "sha256": "b8e3628db7ad70db6b8677d9011aeb75cf10ace259241ab18ba9b43e19bf3b2e",
+          "bytes": 8714904
+        },
+        {
+          "member": "KI01/N09_M07_F10_KI01_2.mat",
+          "relative_path": "paderborn/KI01/N09_M07_F10_KI01_2.mat",
+          "sha256": "98cc02d4f468d200b0230d76994453211a148ccec8ca4b80fb2cc9fc235d158a",
+          "bytes": 8714904
+        },
+        {
+          "member": "KI01/N15_M01_F10_KI01_1.mat",
+          "relative_path": "paderborn/KI01/N15_M01_F10_KI01_1.mat",
+          "sha256": "a7b69399749e07b82648fd730613db60e639cbe55ea892447eda433ab459094d",
+          "bytes": 8740728
+        },
+        {
+          "member": "KI01/N15_M01_F10_KI01_2.mat",
+          "relative_path": "paderborn/KI01/N15_M01_F10_KI01_2.mat",
+          "sha256": "fdf8b10f5cb06fcda4c5913fa3f01e831c6abac4a1711f839662b58e9ad57835",
+          "bytes": 8714904
+        },
+        {
+          "member": "KI01/N15_M07_F04_KI01_1.mat",
+          "relative_path": "paderborn/KI01/N15_M07_F04_KI01_1.mat",
+          "sha256": "b29c7a7433fa7e6210b500eb2ed808bcfccd24d1c4761af07abb21538823ff7a",
+          "bytes": 8757400
+        },
+        {
+          "member": "KI01/N15_M07_F04_KI01_2.mat",
+          "relative_path": "paderborn/KI01/N15_M07_F04_KI01_2.mat",
+          "sha256": "4317c1b7a873a15a45dbcc70a716af14307c45742c44f171cd6627bf616b0b84",
+          "bytes": 8745184
+        }
+      ]
+    }
+  ]
+}

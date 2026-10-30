@@ -1,0 +1,4466 @@
+{
+  "execution_completed": true,
+  "purpose": "Conditional research feature sensitivity; not metadata repair or diagnostic accuracy",
+  "environment": {
+    "python": "3.11.15",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1"
+  },
+  "protocol": {
+    "version": "stored-axis-shape-research-v1",
+    "purpose": "Conditional time-axis sensitivity research, not a repair of source metadata or qualified diagnostic evidence",
+    "time_axis_assumption": "Treat stored vibration_1 X coordinates as seconds for this research hypothesis; source semantics remain unverified",
+    "sampling_rate_hz": 64000.0,
+    "interpolation": "piecewise_linear_on_stored_coordinates",
+    "grid": "start at first stored coordinate; stop inside last coordinate; no extrapolation",
+    "min_step_nominal": 0.1,
+    "max_step_nominal": 2.0,
+    "max_count_duration_relative_error": 0.02,
+    "max_time_ulp_nominal": 1e-06,
+    "min_points": 1024,
+    "max_points": 1000000,
+    "carrier_band_hz": [
+      2000.0,
+      4000.0
+    ],
+    "modulation_range_hz": [
+      10.0,
+      500.0
+    ],
+    "scale": "Normalize by original absolute peak; export shape features only, never physical amplitude",
+    "counterfactual": "Also compute shape features under an explicitly hypothetical nominal-rate index axis; never overwrite the stored axis",
+    "sensitivity_rule": "Flag dominant-frequency difference greater than twice the larger FFT bin spacing; this is not diagnostic confidence",
+    "synthetic_acceptance": {
+      "carriers_hz": [
+        2200.0,
+        3000.0,
+        3800.0
+      ],
+      "modulation_hz": [
+        60.0,
+        120.0,
+        240.0
+      ],
+      "modulation_depth": 0.3,
+      "duration_s": 2.0,
+      "timing_patterns": [
+        "bounded_jitter",
+        "short_intervals"
+      ],
+      "max_waveform_relative_rms_error": 0.03,
+      "max_envelope_relative_rms_error": 0.05,
+      "max_dominant_frequency_error_bins": 2.0
+    },
+    "development_basis": "Bounds chosen from prior development timing inspection and numerical scope, not validation signal features or class performance",
+    "validation_disclosure": "Validation readiness and timing blockers were already inspected in T05b1; this is a frozen feature protocol, not a fully blind validation study",
+    "sealed_test": "No archive member listing/extraction, signal reads or evaluation",
+    "prediction": null,
+    "diagnostic_evidence_eligible": false,
+    "limitations": [
+      "Linear interpolation is not an anti-alias filter or a full-band waveform reconstruction guarantee",
+      "Source timing semantics and physical channel scaling remain unresolved",
+      "Only narrow-band shape observations under stated assumptions; no severity, maintenance effectiveness or classification accuracy",
+      "Original data and T05a/T05b1 strict readiness decisions remain intact"
+    ]
+  },
+  "protocol_sha256": "766e74b214a92e8ba8f127b5958eb186439338f7f66003c1d704bad4f057180d",
+  "source_sha256": {
+    "backend/src/vibradiag/evaluation/time_adaptation.py": "17447412cce087cb7b0764e033857a418ba3d487a7aa597d0768add29de62101",
+    "backend/src/vibradiag/analysis/envelope.py": "dd769a9d8f1fe2ab010ed2ed8372d40af5bc50e72e07fbe447e89ec708b83d87",
+    "backend/src/vibradiag/analysis/basic.py": "5378fef761cd169a8ff70c851e0a8794aa0ebdf3ffa7c6071652bf82a373670e",
+    "backend/src/vibradiag/evaluation/datasets.py": "1bb74f5d6864c8a3be56ba26942e56f0d64cc9cc8822a8456916f153bb314847",
+    "backend/scripts/verify_time_adaptation.py": "3028f356b4953550ebcbbb2c810a56e4bcd159619b155e4eee307e514d12c2bf",
+    "backend/requirements.lock.txt": "db7bca83a22a77ed4e06f2c15ebfadf31947b268acebe406d8cccdfda889e88f",
+    "backend/scripts/benchmark_time_adaptation.py": "d0c95a053564f224ae10b702d0e9b40b8e73db34c3aa3d15807085fd4ab917ef",
+    "backend/tests/unit/test_time_adaptation.py": "1c3cd7c520b2da7177cd486060fc381d08c3fe7c25bf9ce49711a88c3e3b9f85",
+    "datasets/public-data-v1/manifest.json": "1dca73047ba4b589ffa946926a6246fd3e31eb12ed2b83c2a7a29e8029f491d8",
+    "datasets/public-data-v2/validation-manifest.json": "7405b2765a1bb72c2f20600b6275b6daf28cb248822d174b54ce3bb4646791ba",
+    "datasets/public-data-v2/catalog.json": "e464483180aa87b0eca79eab4bdd74822ee353169f9dcecb7b944d709b22841b",
+    "datasets/public-data-v2/split-plan.json": "fd255e22e096597d90f45f47732b6bb402335badc8a7c27bf7b40574b605ae91",
+    "backend/src/vibradiag/evaluation/holdout.py": "c00674e446e3e683dc671fc50a607ed802a9a3626f422796c42b95b3b0a35b6a"
+  },
+  "freeze_receipt_sha256": "02c8314342ba2456334ae93b660a57fd86fdb5d71c78aa6c66fdb0991fce3bfb",
+  "split_audit": {
+    "cross_split_leakage": false,
+    "record_count": 52,
+    "entity_group_count": 10,
+    "split_counts": {
+      "development": 28,
+      "validation": 24,
+      "sealed_test": 0
+    },
+    "label_coverage": {
+      "development": [
+        "healthy_reference",
+        "inner_race",
+        "outer_race",
+        "rolling_element"
+      ],
+      "validation": [
+        "healthy_reference",
+        "inner_race",
+        "outer_race"
+      ],
+      "sealed_test": []
+    },
+    "missing_four_class_labels": {
+      "development": [],
+      "validation": [
+        "rolling_element"
+      ],
+      "sealed_test": [
+        "healthy_reference",
+        "inner_race",
+        "outer_race",
+        "rolling_element"
+      ]
+    },
+    "four_class_evaluation_ready": false,
+    "statistical_independence_established": false
+  },
+  "partitions": {
+    "development": {
+      "records": 24,
+      "adaptation_status": {
+        "ok": 22,
+        "unavailable": 2
+      },
+      "unavailable_reasons": {
+        "GAP_EXCEEDS_RESEARCH_LIMIT": 2
+      },
+      "timebase_sensitive_count": 0,
+      "per_class": {
+        "healthy_reference": {
+          "records": 8,
+          "conditional_features_available": 7
+        },
+        "inner_race": {
+          "records": 8,
+          "conditional_features_available": 7
+        },
+        "outer_race": {
+          "records": 8,
+          "conditional_features_available": 8
+        }
+      }
+    },
+    "validation": {
+      "records": 24,
+      "adaptation_status": {
+        "ok": 18,
+        "unavailable": 6
+      },
+      "unavailable_reasons": {
+        "CADENCE_DIFFERS_FROM_RESEARCH_SCOPE": 3,
+        "GAP_EXCEEDS_RESEARCH_LIMIT": 1,
+        "INTERVAL_BELOW_RESEARCH_LIMIT": 2
+      },
+      "timebase_sensitive_count": 0,
+      "per_class": {
+        "healthy_reference": {
+          "records": 8,
+          "conditional_features_available": 7
+        },
+        "inner_race": {
+          "records": 8,
+          "conditional_features_available": 7
+        },
+        "outer_race": {
+          "records": 8,
+          "conditional_features_available": 4
+        }
+      }
+    }
+  },
+  "records": [
+    {
+      "record_id": "pu-N15_M07_F10-K001-1",
+      "split": "development",
+      "entity_group": "paderborn-bearing-K001",
+      "original_file_sha256": "e1a971e93991e5f8bbfdcacde5a0fec895a4248f8232d52b59ff85d034c9c00d",
+      "label_for_inventory_only": "healthy_reference",
+      "physical_input_ready": false,
+      "diagnostic_evidence_eligible": false,
+      "prediction": null,
+      "matching_status": "unavailable",
+      "matching_reasons": [
+        "stored_unit_and_time_semantics_unverified",
+        "sourced_speed_and_bearing_uncertainty_required",
+        "diagnostic_profile_not_qualified"
+      ],
+      "adaptation_status": "ok",
+      "adaptation": {
+        "algorithm_version": "stored-axis-linear-shape-v1",
+        "time_axis_semantics_verified": false,
+        "physical_unit_established": false,
+        "diagnostic_evidence_eligible": false,
+        "prediction": null,
+        "input_count": 256001,
+        "original_samples_sha256": "98e348e6f929ca2303caecbc704ee88ad81dc2855784c4a92079704ab2c25194",
+        "original_axis_sha256": "d56dc0e772b744cc45f2eaea582566f757356b99b38d8ff6767e125ce052e73b",
+        "first_stored_coordinate": 0.0,
+        "duration_s_under_assumption": 3.999998716828959,
+        "min_step_nominal": 0.9307267281997156,
+        "max_step_nominal": 1.0128496748222915,
+        "count_duration_relative_error": 3.207928631569061e-07,
+        "time_ulp_nominal": 2.8421709430404007e-11,
+        "reason": null,
+        "output_count": 256000,
+        "grid_start_relative_s": 0.0,
+        "grid_last_relative_s": 3.999984375,
+        "uncovered_tail_s": 1.4341828959096858e-05,
+        "normalization_divisor_in_original_numeric_scale": 4.928588863930368,
+        "output_proxy_sha256": "35d663d5593149791047906871ab98e476f21a00fcecb56faabe713b0f017df2",
+        "output_axis_sha256": "cc029ff6aa01ce0a4a43ae5aa16caf2350607c75649329e71991248e7beb5fe8",
+        "proxy_unit": "1",
+        "operation": "explicit linear interpolation; no extrapolation; no anti-alias qualification"
+      },
+      "stored_axis_hypothesis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 11.361109158591468,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 12.908198387084365,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520955442112561,
+        "effective_count": 253872,
+        "dominant_modulation_hz_under_assumption": 52.68796874015252,
+        "dominant_bin_fraction": 0.0071848173702579905
+      },
+      "counterfactual_nominal_index_axis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 12.120430165612275,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 13.100813872760897,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520945512126142,
+        "effective_count": 253873,
+        "dominant_modulation_hz_under_assumption": 52.68776120343637,
+        "dominant_bin_fraction": 0.007191176487070974
+      },
+      "timebase_sensitivity": {
+        "status": "observed",
+        "dominant_frequency_difference_hz": 0.00020753671615381108,
+        "two_bin_threshold_hz": 0.5041910884225121,
+        "timebase_sensitive": false,
+        "interpretation": "Conditional sensitivity, not diagnostic confidence or source-time confirmation"
+      }
+    },
+    {
+      "record_id": "pu-N15_M07_F10-K001-2",
+      "split": "development",
+      "entity_group": "paderborn-bearing-K001",
+      "original_file_sha256": "9ed50c2cf9b280e65471ee9dde35b280b5deb43a6fc861fabd7935bd772f969a",
+      "label_for_inventory_only": "healthy_reference",
+      "physical_input_ready": false,
+      "diagnostic_evidence_eligible": false,
+      "prediction": null,
+      "matching_status": "unavailable",
+      "matching_reasons": [
+        "stored_unit_and_time_semantics_unverified",
+        "sourced_speed_and_bearing_uncertainty_required",
+        "diagnostic_profile_not_qualified"
+      ],
+      "adaptation_status": "ok",
+      "adaptation": {
+        "algorithm_version": "stored-axis-linear-shape-v1",
+        "time_axis_semantics_verified": false,
+        "physical_unit_established": false,
+        "diagnostic_evidence_eligible": false,
+        "prediction": null,
+        "input_count": 256001,
+        "original_samples_sha256": "5adde7839207be7c7f41de7579eb63ea22bea35b746c9361db99056a4123a349",
+        "original_axis_sha256": "df09e8b1b10bcdc4425563db643adc71c0dcd8d896d108de54a1050f982ad17e",
+        "first_stored_coordinate": 0.0,
+        "duration_s_under_assumption": 3.99999957227632,
+        "min_step_nominal": 0.9854753592435372,
+        "max_step_nominal": 1.0128496748222915,
+        "count_duration_relative_error": 1.0693093140349538e-07,
+        "time_ulp_nominal": 2.8421709430404007e-11,
+        "reason": null,
+        "output_count": 256000,
+        "grid_start_relative_s": 0.0,
+        "grid_last_relative_s": 3.999984375,
+        "uncovered_tail_s": 1.519727632004475e-05,
+        "normalization_divisor_in_original_numeric_scale": 4.678344723470746,
+        "output_proxy_sha256": "b4430d92f653c6e5f369f16e2bf4162a8e1ebd4d57e08b27756066ca01be9a78",
+        "output_axis_sha256": "cc029ff6aa01ce0a4a43ae5aa16caf2350607c75649329e71991248e7beb5fe8",
+        "proxy_unit": "1",
+        "operation": "explicit linear interpolation; no extrapolation; no anti-alias qualification"
+      },
+      "stored_axis_hypothesis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 11.73603029698856,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 13.881191607536369,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520955442112561,
+        "effective_count": 253872,
+        "dominant_modulation_hz_under_assumption": 52.68796874015252,
+        "dominant_bin_fraction": 0.005946077018254738
+      },
+      "counterfactual_nominal_index_axis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 11.811374431578267,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 14.035190443901728,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520945512126142,
+        "effective_count": 253873,
+        "dominant_modulation_hz_under_assumption": 52.68776120343637,
+        "dominant_bin_fraction": 0.005946959260111031
+      },
+      "timebase_sensitivity": {
+        "status": "observed",
+        "dominant_frequency_difference_hz": 0.00020753671615381108,
+        "two_bin_threshold_hz": 0.5041910884225121,
+        "timebase_sensitive": false,
+        "interpretation": "Conditional sensitivity, not diagnostic confidence or source-time confirmation"
+      }
+    },
+    {
+      "record_id": "pu-N09_M07_F10-K001-1",
+      "split": "development",
+      "entity_group": "paderborn-bearing-K001",
+      "original_file_sha256": "c55f4c6a5d6d9a83d18d24dce4f164ffc85721e4e358df1c1ac9886583c2269f",
+      "label_for_inventory_only": "healthy_reference",
+      "physical_input_ready": false,
+      "diagnostic_evidence_eligible": false,
+      "prediction": null,
+      "matching_status": "unavailable",
+      "matching_reasons": [
+        "stored_unit_and_time_semantics_unverified",
+        "sourced_speed_and_bearing_uncertainty_required",
+        "diagnostic_profile_not_qualified"
+      ],
+      "adaptation_status": "ok",
+      "adaptation": {
+        "algorithm_version": "stored-axis-linear-shape-v1",
+        "time_axis_semantics_verified": false,
+        "physical_unit_established": false,
+        "diagnostic_evidence_eligible": false,
+        "prediction": null,
+        "input_count": 256823,
+        "original_samples_sha256": "6683b38dcaf35fb7750b003f3a3d6358cd456197c8d17f6b10bbaccd9f7f7458",
+        "original_axis_sha256": "f3c0979d84d26bf24ada1112e27851eee3ad7ab5695baa428cedc98e6d96b032",
+        "first_stored_coordinate": -3.4217894419041883e-06,
+        "duration_s_under_assumption": 4.000003421789442,
+        "min_step_nominal": 0.27374315533279514,
+        "max_step_nominal": 1.0128496748507132,
+        "count_duration_relative_error": 0.00321007930658558,
+        "time_ulp_nominal": 5.6843418860808015e-11,
+        "reason": null,
+        "output_count": 256001,
+        "grid_start_relative_s": 0.0,
+        "grid_last_relative_s": 4.0,
+        "uncovered_tail_s": 3.4217894420152106e-06,
+        "normalization_divisor_in_original_numeric_scale": 4.879760738962637,
+        "output_proxy_sha256": "17ad01dea08d0e48659fd724ea78672c4f56910365af4c228e2d3d9c57347b77",
+        "output_axis_sha256": "9f38cc92425e4acffc11cd494209a8c2b42bb6710cec83d455f322f13c7d9d54",
+        "proxy_unit": "1",
+        "operation": "explicit linear interpolation; no extrapolation; no anti-alias qualification"
+      },
+      "stored_axis_hypothesis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 14.103780102945931,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 17.370037090652954,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520945512126142,
+        "effective_count": 253873,
+        "dominant_modulation_hz_under_assumption": 52.68776120343637,
+        "dominant_bin_fraction": 0.01444204271299062
+      },
+      "counterfactual_nominal_index_axis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 13.273924864773289,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 20.16506543534376,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2512809438740454,
+        "effective_count": 254695,
+        "dominant_modulation_hz_under_assumption": 52.517717269675494,
+        "dominant_bin_fraction": 0.015819111340408087
+      },
+      "timebase_sensitivity": {
+        "status": "observed",
+        "dominant_frequency_difference_hz": 0.1700439337608728,
+        "two_bin_threshold_hz": 0.5041891024252284,
+        "timebase_sensitive": false,
+        "interpretation": "Conditional sensitivity, not diagnostic confidence or source-time confirmation"
+      }
+    },
+    {
+      "record_id": "pu-N09_M07_F10-K001-2",
+      "split": "development",
+      "entity_group": "paderborn-bearing-K001",
+      "original_file_sha256": "353451b91afc757be1883b4af2ba36724d58534a24b310662be7cd93dba156bb",
+      "label_for_inventory_only": "healthy_reference",
+      "physical_input_ready": false,
+      "diagnostic_evidence_eligible": false,
+      "prediction": null,
+      "matching_status": "unavailable",
+      "matching_reasons": [
+        "stored_unit_and_time_semantics_unverified",
+        "sourced_speed_and_bearing_uncertainty_required",
+        "diagnostic_profile_not_qualified"
+      ],
+      "adaptation_status": "ok",
+      "adaptation": {
+        "algorithm_version": "stored-axis-linear-shape-v1",
+        "time_axis_semantics_verified": false,
+        "physical_unit_established": false,
+        "diagnostic_evidence_eligible": false,
+        "prediction": null,
+        "input_count": 256001,
+        "original_samples_sha256": "fa48003b220bfd3ebd3d7880e6e24734aed853b47aacf04b96bb352f6e8dbe6f",
+        "original_axis_sha256": "be157840cc8fbae2edcf56e0e89964ce667a08ddb65908c7178d26b81c713457",
+        "first_stored_coordinate": 0.0,
+        "duration_s_under_assumption": 3.9999995722763195,
+        "min_step_nominal": 0.9854753592435372,
+        "max_step_nominal": 1.0128496748222915,
+        "count_duration_relative_error": 1.0693093151718224e-07,
+        "time_ulp_nominal": 2.8421709430404007e-11,
+        "reason": null,
+        "output_count": 256000,
+        "grid_start_relative_s": 0.0,
+        "grid_last_relative_s": 3.999984375,
+        "uncovered_tail_s": 1.5197276319600661e-05,
+        "normalization_divisor_in_original_numeric_scale": 4.879760738962637,
+        "output_proxy_sha256": "2c498f62a7ab8c190b7db07b6d80dc0db25c2ae2d9f9a7faa65c49aacc9b2857",
+        "output_axis_sha256": "cc029ff6aa01ce0a4a43ae5aa16caf2350607c75649329e71991248e7beb5fe8",
+        "proxy_unit": "1",
+        "operation": "explicit linear interpolation; no extrapolation; no anti-alias qualification"
+      },
+      "stored_axis_hypothesis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 13.315618696173269,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 19.448932700127305,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520955442112561,
+        "effective_count": 253872,
+        "dominant_modulation_hz_under_assumption": 52.68796874015252,
+        "dominant_bin_fraction": 0.014706857072916522
+      },
+      "counterfactual_nominal_index_axis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 13.353072064908321,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 19.557674936797643,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520945512126142,
+        "effective_count": 253873,
+        "dominant_modulation_hz_under_assumption": 52.68776120343637,
+        "dominant_bin_fraction": 0.014706015991801198
+      },
+      "timebase_sensitivity": {
+        "status": "observed",
+        "dominant_frequency_difference_hz": 0.00020753671615381108,
+        "two_bin_threshold_hz": 0.5041910884225121,
+        "timebase_sensitive": false,
+        "interpretation": "Conditional sensitivity, not diagnostic confidence or source-time confirmation"
+      }
+    },
+    {
+      "record_id": "pu-N15_M01_F10-K001-1",
+      "split": "development",
+      "entity_group": "paderborn-bearing-K001",
+      "original_file_sha256": "84ff03769c3efa9cd2c3e0cbeefa60ed6bcec3436efa804637788a638b5f23f3",
+      "label_for_inventory_only": "healthy_reference",
+      "physical_input_ready": false,
+      "diagnostic_evidence_eligible": false,
+      "prediction": null,
+      "matching_status": "unavailable",
+      "matching_reasons": [
+        "stored_unit_and_time_semantics_unverified",
+        "sourced_speed_and_bearing_uncertainty_required",
+        "diagnostic_profile_not_qualified"
+      ],
+      "adaptation_status": "unavailable",
+      "adaptation": {
+        "algorithm_version": "stored-axis-linear-shape-v1",
+        "time_axis_semantics_verified": false,
+        "physical_unit_established": false,
+        "diagnostic_evidence_eligible": false,
+        "prediction": null,
+        "input_count": 256070,
+        "original_samples_sha256": "f800d3c32552f8d110d1dfb13676ac094c3f2e0da5e8ac0c370d383231dcf196",
+        "original_axis_sha256": "a3b1033020b8dc2a7eb7fa4418421499ae0cb3e32a0e1fe8869b0cd1a1ab2912",
+        "first_stored_coordinate": -1.4114881447757632e-05,
+        "duration_s_under_assumption": 4.0000021386184015,
+        "min_step_nominal": 0.9854753592435372,
+        "max_step_nominal": 4.516762063303759,
+        "count_duration_relative_error": 0.0002689964515793949,
+        "time_ulp_nominal": 2.8421709430404007e-11,
+        "reason": "GAP_EXCEEDS_RESEARCH_LIMIT"
+      }
+    },
+    {
+      "record_id": "pu-N15_M01_F10-K001-2",
+      "split": "development",
+      "entity_group": "paderborn-bearing-K001",
+      "original_file_sha256": "a47179a2266ebb83132ccd844cc6b685cdfd5355c9d6fd53a13f1744d9e05304",
+      "label_for_inventory_only": "healthy_reference",
+      "physical_input_ready": false,
+      "diagnostic_evidence_eligible": false,
+      "prediction": null,
+      "matching_status": "unavailable",
+      "matching_reasons": [
+        "stored_unit_and_time_semantics_unverified",
+        "sourced_speed_and_bearing_uncertainty_required",
+        "diagnostic_profile_not_qualified"
+      ],
+      "adaptation_status": "ok",
+      "adaptation": {
+        "algorithm_version": "stored-axis-linear-shape-v1",
+        "time_axis_semantics_verified": false,
+        "physical_unit_established": false,
+        "diagnostic_evidence_eligible": false,
+        "prediction": null,
+        "input_count": 256001,
+        "original_samples_sha256": "63b17501b6d59c30cfcb64f0a961152ad5542066debc41c0a84c69273509ba0d",
+        "original_axis_sha256": "d22b7ea9fc3d31b06380ff32da66e6e67d7c63c39efd986a6039b38c578a7283",
+        "first_stored_coordinate": 0.0,
+        "duration_s_under_assumption": 3.9999995722763195,
+        "min_step_nominal": 0.9854753592435372,
+        "max_step_nominal": 1.0128496748222915,
+        "count_duration_relative_error": 1.0693093151718224e-07,
+        "time_ulp_nominal": 2.8421709430404007e-11,
+        "reason": null,
+        "output_count": 256000,
+        "grid_start_relative_s": 0.0,
+        "grid_last_relative_s": 3.999984375,
+        "uncovered_tail_s": 1.5197276319600661e-05,
+        "normalization_divisor_in_original_numeric_scale": 4.669189450039296,
+        "output_proxy_sha256": "355ea794534fa5afd8c612705afc76bc4d428a88b0d902a2f4d4593127440a82",
+        "output_axis_sha256": "cc029ff6aa01ce0a4a43ae5aa16caf2350607c75649329e71991248e7beb5fe8",
+        "proxy_unit": "1",
+        "operation": "explicit linear interpolation; no extrapolation; no anti-alias qualification"
+      },
+      "stored_axis_hypothesis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 11.562036178389807,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 14.166064967471506,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520955442112561,
+        "effective_count": 253872,
+        "dominant_modulation_hz_under_assumption": 52.43587319594126,
+        "dominant_bin_fraction": 0.006391490386701455
+      },
+      "counterfactual_nominal_index_axis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 11.513915045878967,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 14.317990675169744,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520945512126142,
+        "effective_count": 253873,
+        "dominant_modulation_hz_under_assumption": 52.43566665222375,
+        "dominant_bin_fraction": 0.006391467185663541
+      },
+      "timebase_sensitivity": {
+        "status": "observed",
+        "dominant_frequency_difference_hz": 0.00020654371751049894,
+        "two_bin_threshold_hz": 0.5041910884225121,
+        "timebase_sensitive": false,
+        "interpretation": "Conditional sensitivity, not diagnostic confidence or source-time confirmation"
+      }
+    },
+    {
+      "record_id": "pu-N15_M07_F04-K001-1",
+      "split": "development",
+      "entity_group": "paderborn-bearing-K001",
+      "original_file_sha256": "4790406e566cd6ed93241bc0a1e51ea7b9603c38a712a93d2946140dfa581458",
+      "label_for_inventory_only": "healthy_reference",
+      "physical_input_ready": false,
+      "diagnostic_evidence_eligible": false,
+      "prediction": null,
+      "matching_status": "unavailable",
+      "matching_reasons": [
+        "stored_unit_and_time_semantics_unverified",
+        "sourced_speed_and_bearing_uncertainty_required",
+        "diagnostic_profile_not_qualified"
+      ],
+      "adaptation_status": "ok",
+      "adaptation": {
+        "algorithm_version": "stored-axis-linear-shape-v1",
+        "time_axis_semantics_verified": false,
+        "physical_unit_established": false,
+        "diagnostic_evidence_eligible": false,
+        "prediction": null,
+        "input_count": 258669,
+        "original_samples_sha256": "e047d35838f945cf346a047d3a2b501b51291cb424befe3d62b1d413e0cf382f",
+        "original_axis_sha256": "e766305797593d2d78bd61db228487ca2c9e7a96bf207697dde10ea66835e338",
+        "first_stored_coordinate": 0.0,
+        "duration_s_under_assumption": 3.999992300973756,
+        "min_step_nominal": 0.2463688398108843,
+        "max_step_nominal": 1.067598305880324,
+        "count_duration_relative_error": 0.010423819819876627,
+        "time_ulp_nominal": 2.8421709430404007e-11,
+        "reason": null,
+        "output_count": 256000,
+        "grid_start_relative_s": 0.0,
+        "grid_last_relative_s": 3.999984375,
+        "uncovered_tail_s": 7.925973755984472e-06,
+        "normalization_divisor_in_original_numeric_scale": 4.241943356571648,
+        "output_proxy_sha256": "7a585fe1f5c5373364c2efc46c40e1841bfc4f7b590bc7481b18759e7d44764f",
+        "output_axis_sha256": "cc029ff6aa01ce0a4a43ae5aa16caf2350607c75649329e71991248e7beb5fe8",
+        "proxy_unit": "1",
+        "operation": "explicit linear interpolation; no extrapolation; no anti-alias qualification"
+      },
+      "stored_axis_hypothesis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 10.829920349298423,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 14.245344754757275,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520955442112561,
+        "effective_count": 253872,
+        "dominant_modulation_hz_under_assumption": 52.68796874015252,
+        "dominant_bin_fraction": 0.005910079938407352
+      },
+      "counterfactual_nominal_index_axis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 10.597845499506082,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 14.694592722857118,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.24947279382242996,
+        "effective_count": 256541,
+        "dominant_modulation_hz_under_assumption": 52.63875949653272,
+        "dominant_bin_fraction": 0.006396637350317407
+      },
+      "timebase_sensitivity": {
+        "status": "observed",
+        "dominant_frequency_difference_hz": 0.04920924361979928,
+        "two_bin_threshold_hz": 0.5041910884225121,
+        "timebase_sensitive": false,
+        "interpretation": "Conditional sensitivity, not diagnostic confidence or source-time confirmation"
+      }
+    },
+    {
+      "record_id": "pu-N15_M07_F04-K001-2",
+      "split": "development",
+      "entity_group": "paderborn-bearing-K001",
+      "original_file_sha256": "b0eea67e384a64b4585273a81dc48fd6093c57a98e2e25966187b6c914e73b72",
+      "label_for_inventory_only": "healthy_reference",
+      "physical_input_ready": false,
+      "diagnostic_evidence_eligible": false,
+      "prediction": null,
+      "matching_status": "unavailable",
+      "matching_reasons": [
+        "stored_unit_and_time_semantics_unverified",
+        "sourced_speed_and_bearing_uncertainty_required",
+        "diagnostic_profile_not_qualified"
+      ],
+      "adaptation_status": "ok",
+      "adaptation": {
+        "algorithm_version": "stored-axis-linear-shape-v1",
+        "time_axis_semantics_verified": false,
+        "physical_unit_established": false,
+        "diagnostic_evidence_eligible": false,
+        "prediction": null,
+        "input_count": 260927,
+        "original_samples_sha256": "50e850de6b49c44e8d89b4093c4473b9748a1e70f3d842ea0e2d163c39171cbc",
+        "original_axis_sha256": "5d1433a95e20b84f930a300e9fb211cab9e1938a13688d1f9387d552b8d937fb",
+        "first_stored_coordinate": 0.0,
+        "duration_s_under_assumption": 3.9999970059342385,
+        "min_step_nominal": 0.27374315533279514,
+        "max_step_nominal": 1.0128496748222915,
+        "count_duration_relative_error": 0.019242950420105105,
+        "time_ulp_nominal": 2.8421709430404007e-11,
+        "reason": null,
+        "output_count": 256000,
+        "grid_start_relative_s": 0.0,
+        "grid_last_relative_s": 3.999984375,
+        "uncovered_tail_s": 1.2630934238533342e-05,
+        "normalization_divisor_in_original_numeric_scale": 4.904174801446502,
+        "output_proxy_sha256": "223f6936e73a851cb52a0a9262f9e139cc78afa5f2adcea07cee1b72898e1de9",
+        "output_axis_sha256": "cc029ff6aa01ce0a4a43ae5aa16caf2350607c75649329e71991248e7beb5fe8",
+        "proxy_unit": "1",
+        "operation": "explicit linear interpolation; no extrapolation; no anti-alias qualification"
+      },
+      "stored_axis_hypothesis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 13.05410513756572,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 12.510849072505096,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520955442112561,
+        "effective_count": 253872,
+        "dominant_modulation_hz_under_assumption": 52.43587319594126,
+        "dominant_bin_fraction": 0.006467313359238801
+      },
+      "counterfactual_nominal_index_axis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 12.617408321579594,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 15.803077511895088,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.24729616420465303,
+        "effective_count": 258799,
+        "dominant_modulation_hz_under_assumption": 52.6740829755911,
+        "dominant_bin_fraction": 0.006543930245254772
+      },
+      "timebase_sensitivity": {
+        "status": "observed",
+        "dominant_frequency_difference_hz": -0.2382097796498357,
+        "two_bin_threshold_hz": 0.5041910884225121,
+        "timebase_sensitive": false,
+        "interpretation": "Conditional sensitivity, not diagnostic confidence or source-time confirmation"
+      }
+    },
+    {
+      "record_id": "pu-N15_M07_F10-KA01-1",
+      "split": "development",
+      "entity_group": "paderborn-bearing-KA01",
+      "original_file_sha256": "9bcbe610566aa4476d012928b62aaff60b720cd4c42216104c52319ba958369d",
+      "label_for_inventory_only": "outer_race",
+      "physical_input_ready": false,
+      "diagnostic_evidence_eligible": false,
+      "prediction": null,
+      "matching_status": "unavailable",
+      "matching_reasons": [
+        "stored_unit_and_time_semantics_unverified",
+        "sourced_speed_and_bearing_uncertainty_required",
+        "diagnostic_profile_not_qualified"
+      ],
+      "adaptation_status": "ok",
+      "adaptation": {
+        "algorithm_version": "stored-axis-linear-shape-v1",
+        "time_axis_semantics_verified": false,
+        "physical_unit_established": false,
+        "diagnostic_evidence_eligible": false,
+        "prediction": null,
+        "input_count": 256000,
+        "original_samples_sha256": "a761805c9fd07ac16e30cc544527c836a5f03698fd84f11539a70ab30147af7b",
+        "original_axis_sha256": "3b5e1d8904e01d614b2ee088f7e99f953e6e6cfa2982df49cea5992edd2c7beb",
+        "first_stored_coordinate": 0.0,
+        "duration_s_under_assumption": 3.999991873218791,
+        "min_step_nominal": 0.9854791528596252,
+        "max_step_nominal": 1.5329675711370783,
+        "count_duration_relative_error": 1.8745585063242297e-06,
+        "time_ulp_nominal": 2.8421709430404007e-11,
+        "reason": null,
+        "output_count": 256000,
+        "grid_start_relative_s": 0.0,
+        "grid_last_relative_s": 3.999984375,
+        "uncovered_tail_s": 7.498218791202049e-06,
+        "normalization_divisor_in_original_numeric_scale": 4.11987304415232,
+        "output_proxy_sha256": "47158f5980a6a81320ed292963ea02f0117a9377c39fa963c7199f2d68b729e6",
+        "output_axis_sha256": "cc029ff6aa01ce0a4a43ae5aa16caf2350607c75649329e71991248e7beb5fe8",
+        "proxy_unit": "1",
+        "operation": "explicit linear interpolation; no extrapolation; no anti-alias qualification"
+      },
+      "stored_axis_hypothesis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 7.621374599745024,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 14.641014717389847,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520955442112561,
+        "effective_count": 253872,
+        "dominant_modulation_hz_under_assumption": 76.63704544022184,
+        "dominant_bin_fraction": 0.04217175573964231
+      },
+      "counterfactual_nominal_index_axis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 7.6430846222855635,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 14.580722844057316,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520955442112561,
+        "effective_count": 253872,
+        "dominant_modulation_hz_under_assumption": 76.63704544022184,
+        "dominant_bin_fraction": 0.04217211916458027
+      },
+      "timebase_sensitivity": {
+        "status": "observed",
+        "dominant_frequency_difference_hz": 0.0,
+        "two_bin_threshold_hz": 0.5041910884225121,
+        "timebase_sensitive": false,
+        "interpretation": "Conditional sensitivity, not diagnostic confidence or source-time confirmation"
+      }
+    },
+    {
+      "record_id": "pu-N15_M07_F10-KA01-2",
+      "split": "development",
+      "entity_group": "paderborn-bearing-KA01",
+      "original_file_sha256": "a842cbac0900059d69edaead6e38d2098a13a52910fc48f086852b6c52daf649",
+      "label_for_inventory_only": "outer_race",
+      "physical_input_ready": false,
+      "diagnostic_evidence_eligible": false,
+      "prediction": null,
+      "matching_status": "unavailable",
+      "matching_reasons": [
+        "stored_unit_and_time_semantics_unverified",
+        "sourced_speed_and_bearing_uncertainty_required",
+        "diagnostic_profile_not_qualified"
+      ],
+      "adaptation_status": "ok",
+      "adaptation": {
+        "algorithm_version": "stored-axis-linear-shape-v1",
+        "time_axis_semantics_verified": false,
+        "physical_unit_established": false,
+        "diagnostic_evidence_eligible": false,
+        "prediction": null,
+        "input_count": 256095,
+        "original_samples_sha256": "65ed705e54d9d78b1eade877ea7f0cac6c5744401ed7fa2d25500b71626c7d1a",
+        "original_axis_sha256": "a771355a13ba9537597a0cf44efed5ab5db442e561a8cf0b5acbe53536e3c53f",
+        "first_stored_coordinate": -1.2831759803599851e-06,
+        "duration_s_under_assumption": 3.9999965781973854,
+        "min_step_nominal": 0.9854791528596252,
+        "max_step_nominal": 1.0128535738047617,
+        "count_duration_relative_error": 0.0003680432654964549,
+        "time_ulp_nominal": 2.8421709430404007e-11,
+        "reason": null,
+        "output_count": 256000,
+        "grid_start_relative_s": 0.0,
+        "grid_last_relative_s": 3.999984375,
+        "uncovered_tail_s": 1.2203197385485254e-05,
+        "normalization_divisor_in_original_numeric_scale": 4.199218747224883,
+        "output_proxy_sha256": "1a0e50d9e06396f5d24dd272f520cb22d4c2ff54733e7d585a37aa0d55c8bff3",
+        "output_axis_sha256": "cc029ff6aa01ce0a4a43ae5aa16caf2350607c75649329e71991248e7beb5fe8",
+        "proxy_unit": "1",
+        "operation": "explicit linear interpolation; no extrapolation; no anti-alias qualification"
+      },
+      "stored_axis_hypothesis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 7.875882249011847,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 15.153812036021032,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520955442112561,
+        "effective_count": 253872,
+        "dominant_modulation_hz_under_assumption": 76.63704544022184,
+        "dominant_bin_fraction": 0.043845129286145916
+      },
+      "counterfactual_nominal_index_axis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 7.8534149440681675,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 14.885073235000473,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520012442561435,
+        "effective_count": 253967,
+        "dominant_modulation_hz_under_assumption": 76.60837825386763,
+        "dominant_bin_fraction": 0.043798140513071786
+      },
+      "timebase_sensitivity": {
+        "status": "observed",
+        "dominant_frequency_difference_hz": 0.028667186354212504,
+        "two_bin_threshold_hz": 0.5041910884225121,
+        "timebase_sensitive": false,
+        "interpretation": "Conditional sensitivity, not diagnostic confidence or source-time confirmation"
+      }
+    },
+    {
+      "record_id": "pu-N09_M07_F10-KA01-1",
+      "split": "development",
+      "entity_group": "paderborn-bearing-KA01",
+      "original_file_sha256": "e3e603da7d18332e548d0c8b4b3fdbfe116a259255c524b2f39265bc37c9d536",
+      "label_for_inventory_only": "outer_race",
+      "physical_input_ready": false,
+      "diagnostic_evidence_eligible": false,
+      "prediction": null,
+      "matching_status": "unavailable",
+      "matching_reasons": [
+        "stored_unit_and_time_semantics_unverified",
+        "sourced_speed_and_bearing_uncertainty_required",
+        "diagnostic_profile_not_qualified"
+      ],
+      "adaptation_status": "ok",
+      "adaptation": {
+        "algorithm_version": "stored-axis-linear-shape-v1",
+        "time_axis_semantics_verified": false,
+        "physical_unit_established": false,
+        "diagnostic_evidence_eligible": false,
+        "prediction": null,
+        "input_count": 256001,
+        "original_samples_sha256": "79700e1490957a397d7ef28bfdb832bdc77adb72ed2c854119fbc1cae281695d",
+        "original_axis_sha256": "6c1d8cd52c3f901be698251584eba63bd6837b7cbf522afde9e1b77fdf19bdcb",
+        "first_stored_coordinate": 0.0,
+        "duration_s_under_assumption": 3.9999991445493466,
+        "min_step_nominal": 0.9581047319784375,
+        "max_step_nominal": 1.0128535737976563,
+        "count_duration_relative_error": 2.138627091095592e-07,
+        "time_ulp_nominal": 2.8421709430404007e-11,
+        "reason": null,
+        "output_count": 256000,
+        "grid_start_relative_s": 0.0,
+        "grid_last_relative_s": 3.999984375,
+        "uncovered_tail_s": 1.4769549346649313e-05,
+        "normalization_divisor_in_original_numeric_scale": 2.4047851546607615,
+        "output_proxy_sha256": "dec8dbf2a8ae5f86ed8b3fad0e95cd3ab2980b1a708daaf4ee040a0d554b022a",
+        "output_axis_sha256": "cc029ff6aa01ce0a4a43ae5aa16caf2350607c75649329e71991248e7beb5fe8",
+        "proxy_unit": "1",
+        "operation": "explicit linear interpolation; no extrapolation; no anti-alias qualification"
+      },
+      "stored_axis_hypothesis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 10.501920074237212,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 15.966691558992387,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520955442112561,
+        "effective_count": 253872,
+        "dominant_modulation_hz_under_assumption": 45.881389046448604,
+        "dominant_bin_fraction": 0.01601075047920124
+      },
+      "counterfactual_nominal_index_axis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 10.540264312910297,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 15.74929899171105,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520945512126142,
+        "effective_count": 253873,
+        "dominant_modulation_hz_under_assumption": 45.881208320695784,
+        "dominant_bin_fraction": 0.016005675163415063
+      },
+      "timebase_sensitivity": {
+        "status": "observed",
+        "dominant_frequency_difference_hz": 0.0001807257528199102,
+        "two_bin_threshold_hz": 0.5041910884225121,
+        "timebase_sensitive": false,
+        "interpretation": "Conditional sensitivity, not diagnostic confidence or source-time confirmation"
+      }
+    },
+    {
+      "record_id": "pu-N09_M07_F10-KA01-2",
+      "split": "development",
+      "entity_group": "paderborn-bearing-KA01",
+      "original_file_sha256": "43c68b73658a8a9e25b2f6b0e88be8f97bc2c8c10587f038b0cfb4a0318ad53f",
+      "label_for_inventory_only": "outer_race",
+      "physical_input_ready": false,
+      "diagnostic_evidence_eligible": false,
+      "prediction": null,
+      "matching_status": "unavailable",
+      "matching_reasons": [
+        "stored_unit_and_time_semantics_unverified",
+        "sourced_speed_and_bearing_uncertainty_required",
+        "diagnostic_profile_not_qualified"
+      ],
+      "adaptation_status": "ok",
+      "adaptation": {
+        "algorithm_version": "stored-axis-linear-shape-v1",
+        "time_axis_semantics_verified": false,
+        "physical_unit_established": false,
+        "diagnostic_evidence_eligible": false,
+        "prediction": null,
+        "input_count": 256088,
+        "original_samples_sha256": "dc824e95729dd5d909ba05beb15413e9e3fc0f3fb87bec29650195fdf51fd003",
+        "original_axis_sha256": "5d477cb831eea62914ce2230d9b11e0e47b3858491d33f1dd20aee4c6189223c",
+        "first_stored_coordinate": 0.0,
+        "duration_s_under_assumption": 3.9999884514161774,
+        "min_step_nominal": 0.9854791528596252,
+        "max_step_nominal": 1.0128535737976563,
+        "count_duration_relative_error": 0.00034273188547267374,
+        "time_ulp_nominal": 2.8421709430404007e-11,
+        "reason": null,
+        "output_count": 256000,
+        "grid_start_relative_s": 0.0,
+        "grid_last_relative_s": 3.999984375,
+        "uncovered_tail_s": 4.0764161775008745e-06,
+        "normalization_divisor_in_original_numeric_scale": 2.3712158187454464,
+        "output_proxy_sha256": "5afa6e67a1fc5bbff6609e8fe3ec4e721ebc36656bdec5a8a08aba4fea142ff7",
+        "output_axis_sha256": "cc029ff6aa01ce0a4a43ae5aa16caf2350607c75649329e71991248e7beb5fe8",
+        "proxy_unit": "1",
+        "operation": "explicit linear interpolation; no extrapolation; no anti-alias qualification"
+      },
+      "stored_axis_hypothesis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 9.599046961207694,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 16.182050741360676,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520955442112561,
+        "effective_count": 253872,
+        "dominant_modulation_hz_under_assumption": 45.881389046448604,
+        "dominant_bin_fraction": 0.014086584282330106
+      },
+      "counterfactual_nominal_index_axis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 10.25509386633888,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 15.283160976121552,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.25200819026618365,
+        "effective_count": 253960,
+        "dominant_modulation_hz_under_assumption": 45.86549062844542,
+        "dominant_bin_fraction": 0.014069303139899644
+      },
+      "timebase_sensitivity": {
+        "status": "observed",
+        "dominant_frequency_difference_hz": 0.015898418003182258,
+        "two_bin_threshold_hz": 0.5041910884225121,
+        "timebase_sensitive": false,
+        "interpretation": "Conditional sensitivity, not diagnostic confidence or source-time confirmation"
+      }
+    },
+    {
+      "record_id": "pu-N15_M01_F10-KA01-1",
+      "split": "development",
+      "entity_group": "paderborn-bearing-KA01",
+      "original_file_sha256": "49176ea6dd58836a0fd1f51f09a04184d3c78a347f5b10a49f58662dbdbb5f19",
+      "label_for_inventory_only": "outer_race",
+      "physical_input_ready": false,
+      "diagnostic_evidence_eligible": false,
+      "prediction": null,
+      "matching_status": "unavailable",
+      "matching_reasons": [
+        "stored_unit_and_time_semantics_unverified",
+        "sourced_speed_and_bearing_uncertainty_required",
+        "diagnostic_profile_not_qualified"
+      ],
+      "adaptation_status": "ok",
+      "adaptation": {
+        "algorithm_version": "stored-axis-linear-shape-v1",
+        "time_axis_semantics_verified": false,
+        "physical_unit_established": false,
+        "diagnostic_evidence_eligible": false,
+        "prediction": null,
+        "input_count": 256077,
+        "original_samples_sha256": "a81f1652e0988717979dbb091656142052f1c2e623f43465b51e1d774f5e77b9",
+        "original_axis_sha256": "1adb90c024c80cbd8676284fb5d6b35d56c739262a656ba871c0eb6245210bc9",
+        "first_stored_coordinate": -7.271330555114197e-06,
+        "duration_s_under_assumption": 3.9999935841200984,
+        "min_step_nominal": 0.9854791528596252,
+        "max_step_nominal": 1.012853573826078,
+        "count_duration_relative_error": 0.0002984794487274232,
+        "time_ulp_nominal": 2.8421709430404007e-11,
+        "reason": null,
+        "output_count": 256000,
+        "grid_start_relative_s": 0.0,
+        "grid_last_relative_s": 3.999984375,
+        "uncovered_tail_s": 9.209120098496726e-06,
+        "normalization_divisor_in_original_numeric_scale": 4.306030270591795,
+        "output_proxy_sha256": "cab0db5f688befadf164ee68f0a214905dcb4fe82fedc289d01b01654e0153d5",
+        "output_axis_sha256": "cc029ff6aa01ce0a4a43ae5aa16caf2350607c75649329e71991248e7beb5fe8",
+        "proxy_unit": "1",
+        "operation": "explicit linear interpolation; no extrapolation; no anti-alias qualification"
+      },
+      "stored_axis_hypothesis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 7.503922900426553,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 14.280431747870592,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520955442112561,
+        "effective_count": 253872,
+        "dominant_modulation_hz_under_assumption": 76.63704544022184,
+        "dominant_bin_fraction": 0.037201343185276466
+      },
+      "counterfactual_nominal_index_axis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 8.19864338018421,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 14.090304436509253,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.25201910619848866,
+        "effective_count": 253949,
+        "dominant_modulation_hz_under_assumption": 76.61380828434055,
+        "dominant_bin_fraction": 0.03722217949550081
+      },
+      "timebase_sensitivity": {
+        "status": "observed",
+        "dominant_frequency_difference_hz": 0.02323715588129005,
+        "two_bin_threshold_hz": 0.5041910884225121,
+        "timebase_sensitive": false,
+        "interpretation": "Conditional sensitivity, not diagnostic confidence or source-time confirmation"
+      }
+    },
+    {
+      "record_id": "pu-N15_M01_F10-KA01-2",
+      "split": "development",
+      "entity_group": "paderborn-bearing-KA01",
+      "original_file_sha256": "be0ba8b94b211f38160131f955f3ef5c260abaeac748712e6b80754c036ffa6e",
+      "label_for_inventory_only": "outer_race",
+      "physical_input_ready": false,
+      "diagnostic_evidence_eligible": false,
+      "prediction": null,
+      "matching_status": "unavailable",
+      "matching_reasons": [
+        "stored_unit_and_time_semantics_unverified",
+        "sourced_speed_and_bearing_uncertainty_required",
+        "diagnostic_profile_not_qualified"
+      ],
+      "adaptation_status": "ok",
+      "adaptation": {
+        "algorithm_version": "stored-axis-linear-shape-v1",
+        "time_axis_semantics_verified": false,
+        "physical_unit_established": false,
+        "diagnostic_evidence_eligible": false,
+        "prediction": null,
+        "input_count": 256002,
+        "original_samples_sha256": "c4075aa746bb371c1ce99c7f7f195f997b5df346737513b794fa68cb83b64a65",
+        "original_axis_sha256": "69cf536cdb0f80348a8f6b518f7b5766ed890c16eca47c7f549987000155ecb8",
+        "first_stored_coordinate": 0.0,
+        "duration_s_under_assumption": 3.9999991445493466,
+        "min_step_nominal": 0.2737442091529374,
+        "max_step_nominal": 1.204474520179133,
+        "count_duration_relative_error": 4.1201135445107665e-06,
+        "time_ulp_nominal": 2.8421709430404007e-11,
+        "reason": null,
+        "output_count": 256000,
+        "grid_start_relative_s": 0.0,
+        "grid_last_relative_s": 3.999984375,
+        "uncovered_tail_s": 1.4769549346649313e-05,
+        "normalization_divisor_in_original_numeric_scale": 3.89099120836608,
+        "output_proxy_sha256": "982e35a22abad913c97deab2145edf98abfcb087cd49f22519bc1ecbabcebc94",
+        "output_axis_sha256": "cc029ff6aa01ce0a4a43ae5aa16caf2350607c75649329e71991248e7beb5fe8",
+        "proxy_unit": "1",
+        "operation": "explicit linear interpolation; no extrapolation; no anti-alias qualification"
+      },
+      "stored_axis_hypothesis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 7.457196372412101,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 14.266573149531393,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520955442112561,
+        "effective_count": 253872,
+        "dominant_modulation_hz_under_assumption": 76.63704544022184,
+        "dominant_bin_fraction": 0.03633927980558233
+      },
+      "counterfactual_nominal_index_axis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 7.42916335073096,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 14.170982420375442,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520935582217951,
+        "effective_count": 253874,
+        "dominant_modulation_hz_under_assumption": 76.6364416994257,
+        "dominant_bin_fraction": 0.03636646012964282
+      },
+      "timebase_sensitivity": {
+        "status": "observed",
+        "dominant_frequency_difference_hz": 0.000603740796137231,
+        "two_bin_threshold_hz": 0.5041910884225121,
+        "timebase_sensitive": false,
+        "interpretation": "Conditional sensitivity, not diagnostic confidence or source-time confirmation"
+      }
+    },
+    {
+      "record_id": "pu-N15_M07_F04-KA01-1",
+      "split": "development",
+      "entity_group": "paderborn-bearing-KA01",
+      "original_file_sha256": "fba77932339810cc4b70a719a5e1e142fda381f5cdd91b1e4acd42d0ddd49d65",
+      "label_for_inventory_only": "outer_race",
+      "physical_input_ready": false,
+      "diagnostic_evidence_eligible": false,
+      "prediction": null,
+      "matching_status": "unavailable",
+      "matching_reasons": [
+        "stored_unit_and_time_semantics_unverified",
+        "sourced_speed_and_bearing_uncertainty_required",
+        "diagnostic_profile_not_qualified"
+      ],
+      "adaptation_status": "ok",
+      "adaptation": {
+        "algorithm_version": "stored-axis-linear-shape-v1",
+        "time_axis_semantics_verified": false,
+        "physical_unit_established": false,
+        "diagnostic_evidence_eligible": false,
+        "prediction": null,
+        "input_count": 256088,
+        "original_samples_sha256": "83abe007a0bc57426acca296230d6c5f66f83dcb6b84b85dacd3657bb05a68a5",
+        "original_axis_sha256": "c1b009172a0c7b80504d956cb0fb399699e609efb7643cba21860e5c8f09ed54",
+        "first_stored_coordinate": -1.2831759803155762e-05,
+        "duration_s_under_assumption": 4.0,
+        "min_step_nominal": 0.9854791528596252,
+        "max_step_nominal": 1.0128535737976563,
+        "count_duration_relative_error": 0.00033984375,
+        "time_ulp_nominal": 2.8421709430404007e-11,
+        "reason": null,
+        "output_count": 256001,
+        "grid_start_relative_s": 0.0,
+        "grid_last_relative_s": 4.0,
+        "uncovered_tail_s": 0.0,
+        "normalization_divisor_in_original_numeric_scale": 6.140136714692199,
+        "output_proxy_sha256": "307d0bd3f6e493ef4f9b1d45b093b43bff0a9348b0f9afedc3e6cf9079892002",
+        "output_axis_sha256": "9f38cc92425e4acffc11cd494209a8c2b42bb6710cec83d455f322f13c7d9d54",
+        "proxy_unit": "1",
+        "operation": "explicit linear interpolation; no extrapolation; no anti-alias qualification"
+      },
+      "stored_axis_hypothesis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 11.883721826647477,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 23.579918254474777,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520945512126142,
+        "effective_count": 253873,
+        "dominant_modulation_hz_under_assumption": 76.63674356863471,
+        "dominant_bin_fraction": 0.036716229132066174
+      },
+      "counterfactual_nominal_index_axis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 11.93445959958533,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 23.248150167011786,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.25200819026618365,
+        "effective_count": 253960,
+        "dominant_modulation_hz_under_assumption": 76.61048984091983,
+        "dominant_bin_fraction": 0.0367059016922533
+      },
+      "timebase_sensitivity": {
+        "status": "observed",
+        "dominant_frequency_difference_hz": 0.026253727714887987,
+        "two_bin_threshold_hz": 0.5041891024252284,
+        "timebase_sensitive": false,
+        "interpretation": "Conditional sensitivity, not diagnostic confidence or source-time confirmation"
+      }
+    },
+    {
+      "record_id": "pu-N15_M07_F04-KA01-2",
+      "split": "development",
+      "entity_group": "paderborn-bearing-KA01",
+      "original_file_sha256": "1a348a8e10882ac8b478ddd14cc2b0a2242bff2656514b51924586bcbf13ac1a",
+      "label_for_inventory_only": "outer_race",
+      "physical_input_ready": false,
+      "diagnostic_evidence_eligible": false,
+      "prediction": null,
+      "matching_status": "unavailable",
+      "matching_reasons": [
+        "stored_unit_and_time_semantics_unverified",
+        "sourced_speed_and_bearing_uncertainty_required",
+        "diagnostic_profile_not_qualified"
+      ],
+      "adaptation_status": "ok",
+      "adaptation": {
+        "algorithm_version": "stored-axis-linear-shape-v1",
+        "time_axis_semantics_verified": false,
+        "physical_unit_established": false,
+        "diagnostic_evidence_eligible": false,
+        "prediction": null,
+        "input_count": 256000,
+        "original_samples_sha256": "2ef17b57614c623b6722a9f773d3d65d28ce51ce4dc600ba96cc8b3dfaa2ab66",
+        "original_axis_sha256": "69e1d544774818f67611a717417a75cbf4c6a5fc5dcd8ed484fa8f4d5a8a8888",
+        "first_stored_coordinate": 0.0,
+        "duration_s_under_assumption": 3.9999863127895434,
+        "min_step_nominal": 0.9581047319680569,
+        "max_step_nominal": 1.1223512574645156,
+        "count_duration_relative_error": 4.844490435046597e-07,
+        "time_ulp_nominal": 2.8421709430404007e-11,
+        "reason": null,
+        "output_count": 256000,
+        "grid_start_relative_s": 0.0,
+        "grid_last_relative_s": 3.999984375,
+        "uncovered_tail_s": 1.937789543493551e-06,
+        "normalization_divisor_in_original_numeric_scale": 5.88378905861161,
+        "output_proxy_sha256": "d4808ef2fff1d1699db91420f872941f8c759fa68ec299617acdb1d2076d1902",
+        "output_axis_sha256": "cc029ff6aa01ce0a4a43ae5aa16caf2350607c75649329e71991248e7beb5fe8",
+        "proxy_unit": "1",
+        "operation": "explicit linear interpolation; no extrapolation; no anti-alias qualification"
+      },
+      "stored_axis_hypothesis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 11.475054803981672,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 23.086214900890774,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520955442112561,
+        "effective_count": 253872,
+        "dominant_modulation_hz_under_assumption": 76.63704544022184,
+        "dominant_bin_fraction": 0.03625684379278245
+      },
+      "counterfactual_nominal_index_axis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 11.473580464834034,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 23.04091317763645,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520955442112561,
+        "effective_count": 253872,
+        "dominant_modulation_hz_under_assumption": 76.63704544022184,
+        "dominant_bin_fraction": 0.03625777293038998
+      },
+      "timebase_sensitivity": {
+        "status": "observed",
+        "dominant_frequency_difference_hz": 0.0,
+        "two_bin_threshold_hz": 0.5041910884225121,
+        "timebase_sensitive": false,
+        "interpretation": "Conditional sensitivity, not diagnostic confidence or source-time confirmation"
+      }
+    },
+    {
+      "record_id": "pu-N15_M07_F10-KI01-1",
+      "split": "development",
+      "entity_group": "paderborn-bearing-KI01",
+      "original_file_sha256": "2c416a31264ec26cabff14922cd204c62bf0ee95fa309289a94e4ddb6c66d8fd",
+      "label_for_inventory_only": "inner_race",
+      "physical_input_ready": false,
+      "diagnostic_evidence_eligible": false,
+      "prediction": null,
+      "matching_status": "unavailable",
+      "matching_reasons": [
+        "stored_unit_and_time_semantics_unverified",
+        "sourced_speed_and_bearing_uncertainty_required",
+        "diagnostic_profile_not_qualified"
+      ],
+      "adaptation_status": "ok",
+      "adaptation": {
+        "algorithm_version": "stored-axis-linear-shape-v1",
+        "time_axis_semantics_verified": false,
+        "physical_unit_established": false,
+        "diagnostic_evidence_eligible": false,
+        "prediction": null,
+        "input_count": 258008,
+        "original_samples_sha256": "919b342d5ae37c007f972376cc04a24ebd6ac1181fe4f37cdc84f5967f1594d5",
+        "original_axis_sha256": "521780705260b5fd39a74ad62cc40627eb7dbd0b683e41cdfb71b20557f586e6",
+        "first_stored_coordinate": 0.0,
+        "duration_s_under_assumption": 3.999986740622626,
+        "min_step_nominal": 0.24636778604048004,
+        "max_step_nominal": 1.0402195410676995,
+        "count_duration_relative_error": 0.007843184593279519,
+        "time_ulp_nominal": 2.8421709430404007e-11,
+        "reason": null,
+        "output_count": 256000,
+        "grid_start_relative_s": 0.0,
+        "grid_last_relative_s": 3.999984375,
+        "uncovered_tail_s": 2.365622626232522e-06,
+        "normalization_divisor_in_original_numeric_scale": 8.206176752389323,
+        "output_proxy_sha256": "cb5fb13954a4d66fe492dbd6be1ca6968c6941fe37abfd0a18ddee57dc6cf987",
+        "output_axis_sha256": "cc029ff6aa01ce0a4a43ae5aa16caf2350607c75649329e71991248e7beb5fe8",
+        "proxy_unit": "1",
+        "operation": "explicit linear interpolation; no extrapolation; no anti-alias qualification"
+      },
+      "stored_axis_hypothesis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 12.247921792463249,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 15.348515083088445,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520955442112561,
+        "effective_count": 253872,
+        "dominant_modulation_hz_under_assumption": 24.95745887691435,
+        "dominant_bin_fraction": 0.012408488336143447
+      },
+      "counterfactual_nominal_index_axis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 11.944747494600076,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 14.763471221492802,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2501172424574019,
+        "effective_count": 255880,
+        "dominant_modulation_hz_under_assumption": 25.01172424574019,
+        "dominant_bin_fraction": 0.012496945164050744
+      },
+      "timebase_sensitivity": {
+        "status": "observed",
+        "dominant_frequency_difference_hz": -0.05426536882583832,
+        "two_bin_threshold_hz": 0.5041910884225121,
+        "timebase_sensitive": false,
+        "interpretation": "Conditional sensitivity, not diagnostic confidence or source-time confirmation"
+      }
+    },
+    {
+      "record_id": "pu-N15_M07_F10-KI01-2",
+      "split": "development",
+      "entity_group": "paderborn-bearing-KI01",
+      "original_file_sha256": "902fe4136dc86d9c5e339e77fa0918de8f5e2cb87e3d3cf90a9aa28ec7cdbc88",
+      "label_for_inventory_only": "inner_race",
+      "physical_input_ready": false,
+      "diagnostic_evidence_eligible": false,
+      "prediction": null,
+      "matching_status": "unavailable",
+      "matching_reasons": [
+        "stored_unit_and_time_semantics_unverified",
+        "sourced_speed_and_bearing_uncertainty_required",
+        "diagnostic_profile_not_qualified"
+      ],
+      "adaptation_status": "ok",
+      "adaptation": {
+        "algorithm_version": "stored-axis-linear-shape-v1",
+        "time_axis_semantics_verified": false,
+        "physical_unit_established": false,
+        "diagnostic_evidence_eligible": false,
+        "prediction": null,
+        "input_count": 257037,
+        "original_samples_sha256": "97c7ddb992fd42ff82b0a0e4660f4c5471d27b64a918ad1d6550124eba8889a3",
+        "original_axis_sha256": "d2185e131f42aee68e327515893371a99cd214a82a15ae4616f1be032432446d",
+        "first_stored_coordinate": 0.0,
+        "duration_s_under_assumption": 4.0,
+        "min_step_nominal": 0.27374198447205345,
+        "max_step_nominal": 1.0128453426432316,
+        "count_duration_relative_error": 0.004046875,
+        "time_ulp_nominal": 5.6843418860808015e-11,
+        "reason": null,
+        "output_count": 256001,
+        "grid_start_relative_s": 0.0,
+        "grid_last_relative_s": 4.0,
+        "uncovered_tail_s": 0.0,
+        "normalization_divisor_in_original_numeric_scale": 8.569335931836825,
+        "output_proxy_sha256": "15030fdb9f75fd94e66b2c5224da80e17f7ea31981d24159e143d3cfcb243fa2",
+        "output_axis_sha256": "9f38cc92425e4acffc11cd494209a8c2b42bb6710cec83d455f322f13c7d9d54",
+        "proxy_unit": "1",
+        "operation": "explicit linear interpolation; no extrapolation; no anti-alias qualification"
+      },
+      "stored_axis_hypothesis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 13.313695797822387,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 16.38673546086152,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520945512126142,
+        "effective_count": 253873,
+        "dominant_modulation_hz_under_assumption": 24.957360570048806,
+        "dominant_bin_fraction": 0.011628222699555355
+      },
+      "counterfactual_nominal_index_axis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 12.752871954979573,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 15.456785833832035,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2510699896825926,
+        "effective_count": 254909,
+        "dominant_modulation_hz_under_assumption": 25.10699896825926,
+        "dominant_bin_fraction": 0.011302695178057981
+      },
+      "timebase_sensitivity": {
+        "status": "observed",
+        "dominant_frequency_difference_hz": -0.14963839821045255,
+        "two_bin_threshold_hz": 0.5041891024252284,
+        "timebase_sensitive": false,
+        "interpretation": "Conditional sensitivity, not diagnostic confidence or source-time confirmation"
+      }
+    },
+    {
+      "record_id": "pu-N09_M07_F10-KI01-1",
+      "split": "development",
+      "entity_group": "paderborn-bearing-KI01",
+      "original_file_sha256": "b8e3628db7ad70db6b8677d9011aeb75cf10ace259241ab18ba9b43e19bf3b2e",
+      "label_for_inventory_only": "inner_race",
+      "physical_input_ready": false,
+      "diagnostic_evidence_eligible": false,
+      "prediction": null,
+      "matching_status": "unavailable",
+      "matching_reasons": [
+        "stored_unit_and_time_semantics_unverified",
+        "sourced_speed_and_bearing_uncertainty_required",
+        "diagnostic_profile_not_qualified"
+      ],
+      "adaptation_status": "ok",
+      "adaptation": {
+        "algorithm_version": "stored-axis-linear-shape-v1",
+        "time_axis_semantics_verified": false,
+        "physical_unit_established": false,
+        "diagnostic_evidence_eligible": false,
+        "prediction": null,
+        "input_count": 256001,
+        "original_samples_sha256": "df476878160c4711d85543a6a1d2524044c19aeddd6d8c8b56f5aad0ded363cb",
+        "original_axis_sha256": "8f1b99636462924f3998080a6daace2fe372d446baba323fa7d0a17d1837182f",
+        "first_stored_coordinate": 0.0,
+        "duration_s_under_assumption": 3.9999931564503877,
+        "min_step_nominal": 0.5748581674254183,
+        "max_step_nominal": 1.0128453426432316,
+        "count_duration_relative_error": 1.7108903302189458e-06,
+        "time_ulp_nominal": 2.8421709430404007e-11,
+        "reason": null,
+        "output_count": 256000,
+        "grid_start_relative_s": 0.0,
+        "grid_last_relative_s": 3.999984375,
+        "uncovered_tail_s": 8.781450387740364e-06,
+        "normalization_divisor_in_original_numeric_scale": 5.633544918151987,
+        "output_proxy_sha256": "71b654b3bda993c4174a7c32ea524f8ac3519ed4f347fa769de823262f0e7db3",
+        "output_axis_sha256": "cc029ff6aa01ce0a4a43ae5aa16caf2350607c75649329e71991248e7beb5fe8",
+        "proxy_unit": "1",
+        "operation": "explicit linear interpolation; no extrapolation; no anti-alias qualification"
+      },
+      "stored_axis_hypothesis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 13.75133888023563,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 15.682517096972541,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520955442112561,
+        "effective_count": 253872,
+        "dominant_modulation_hz_under_assumption": 52.43587319594126,
+        "dominant_bin_fraction": 0.008684702682873814
+      },
+      "counterfactual_nominal_index_axis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 13.629724633713032,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 15.626306654666433,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520945512126142,
+        "effective_count": 253873,
+        "dominant_modulation_hz_under_assumption": 52.43566665222375,
+        "dominant_bin_fraction": 0.008677164813724141
+      },
+      "timebase_sensitivity": {
+        "status": "observed",
+        "dominant_frequency_difference_hz": 0.00020654371751049894,
+        "two_bin_threshold_hz": 0.5041910884225121,
+        "timebase_sensitive": false,
+        "interpretation": "Conditional sensitivity, not diagnostic confidence or source-time confirmation"
+      }
+    },
+    {
+      "record_id": "pu-N09_M07_F10-KI01-2",
+      "split": "development",
+      "entity_group": "paderborn-bearing-KI01",
+      "original_file_sha256": "98cc02d4f468d200b0230d76994453211a148ccec8ca4b80fb2cc9fc235d158a",
+      "label_for_inventory_only": "inner_race",
+      "physical_input_ready": false,
+      "diagnostic_evidence_eligible": false,
+      "prediction": null,
+      "matching_status": "unavailable",
+      "matching_reasons": [
+        "stored_unit_and_time_semantics_unverified",
+        "sourced_speed_and_bearing_uncertainty_required",
+        "diagnostic_profile_not_qualified"
+      ],
+      "adaptation_status": "ok",
+      "adaptation": {
+        "algorithm_version": "stored-axis-linear-shape-v1",
+        "time_axis_semantics_verified": false,
+        "physical_unit_established": false,
+        "diagnostic_evidence_eligible": false,
+        "prediction": null,
+        "input_count": 256001,
+        "original_samples_sha256": "e87ccc92dea6837bf70d453bdfdbca54c3f6f903bc53cf1ab4723cd3a856284e",
+        "original_axis_sha256": "8839f3ea00ed90aa7ddae3d12e4c531a3b01804799fc8eeec808c0d7429ccfa4",
+        "first_stored_coordinate": 0.0,
+        "duration_s_under_assumption": 3.999999572278149,
+        "min_step_nominal": 0.9580969457237964,
+        "max_step_nominal": 1.0128453426432316,
+        "count_duration_relative_error": 1.0693047415493627e-07,
+        "time_ulp_nominal": 2.8421709430404007e-11,
+        "reason": null,
+        "output_count": 256000,
+        "grid_start_relative_s": 0.0,
+        "grid_last_relative_s": 3.999984375,
+        "uncovered_tail_s": 1.5197278149248206e-05,
+        "normalization_divisor_in_original_numeric_scale": 5.172729488769024,
+        "output_proxy_sha256": "095296948b274d80fccea96b9424cd15df6dbd4c29d6348e5d71e5a42951d2b2",
+        "output_axis_sha256": "cc029ff6aa01ce0a4a43ae5aa16caf2350607c75649329e71991248e7beb5fe8",
+        "proxy_unit": "1",
+        "operation": "explicit linear interpolation; no extrapolation; no anti-alias qualification"
+      },
+      "stored_axis_hypothesis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 12.488813074733184,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 15.975280300260453,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520955442112561,
+        "effective_count": 253872,
+        "dominant_modulation_hz_under_assumption": 52.68796874015252,
+        "dominant_bin_fraction": 0.009374593729130049
+      },
+      "counterfactual_nominal_index_axis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 12.315770225970253,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 15.953473075276081,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520945512126142,
+        "effective_count": 253873,
+        "dominant_modulation_hz_under_assumption": 52.68776120343637,
+        "dominant_bin_fraction": 0.009375554209236968
+      },
+      "timebase_sensitivity": {
+        "status": "observed",
+        "dominant_frequency_difference_hz": 0.00020753671615381108,
+        "two_bin_threshold_hz": 0.5041910884225121,
+        "timebase_sensitive": false,
+        "interpretation": "Conditional sensitivity, not diagnostic confidence or source-time confirmation"
+      }
+    },
+    {
+      "record_id": "pu-N15_M01_F10-KI01-1",
+      "split": "development",
+      "entity_group": "paderborn-bearing-KI01",
+      "original_file_sha256": "a7b69399749e07b82648fd730613db60e639cbe55ea892447eda433ab459094d",
+      "label_for_inventory_only": "inner_race",
+      "physical_input_ready": false,
+      "diagnostic_evidence_eligible": false,
+      "prediction": null,
+      "matching_status": "unavailable",
+      "matching_reasons": [
+        "stored_unit_and_time_semantics_unverified",
+        "sourced_speed_and_bearing_uncertainty_required",
+        "diagnostic_profile_not_qualified"
+      ],
+      "adaptation_status": "unavailable",
+      "adaptation": {
+        "algorithm_version": "stored-axis-linear-shape-v1",
+        "time_axis_semantics_verified": false,
+        "physical_unit_established": false,
+        "diagnostic_evidence_eligible": false,
+        "prediction": null,
+        "input_count": 256803,
+        "original_samples_sha256": "b0b300a33cdbfc29d47f4e04ea9df13efd6fc1386e6003f38190c72245260821",
+        "original_axis_sha256": "160baf12f104316a5f78ff2531cfd1460a640df1ada832657b6c96643ca8a75a",
+        "first_stored_coordinate": 0.0,
+        "duration_s_under_assumption": 3.999987168344477,
+        "min_step_nominal": 0.7117291596898667,
+        "max_step_nominal": 181.43618732165123,
+        "count_duration_relative_error": 0.0031360304739964026,
+        "time_ulp_nominal": 2.8421709430404007e-11,
+        "reason": "GAP_EXCEEDS_RESEARCH_LIMIT"
+      }
+    },
+    {
+      "record_id": "pu-N15_M01_F10-KI01-2",
+      "split": "development",
+      "entity_group": "paderborn-bearing-KI01",
+      "original_file_sha256": "fdf8b10f5cb06fcda4c5913fa3f01e831c6abac4a1711f839662b58e9ad57835",
+      "label_for_inventory_only": "inner_race",
+      "physical_input_ready": false,
+      "diagnostic_evidence_eligible": false,
+      "prediction": null,
+      "matching_status": "unavailable",
+      "matching_reasons": [
+        "stored_unit_and_time_semantics_unverified",
+        "sourced_speed_and_bearing_uncertainty_required",
+        "diagnostic_profile_not_qualified"
+      ],
+      "adaptation_status": "ok",
+      "adaptation": {
+        "algorithm_version": "stored-axis-linear-shape-v1",
+        "time_axis_semantics_verified": false,
+        "physical_unit_established": false,
+        "diagnostic_evidence_eligible": false,
+        "prediction": null,
+        "input_count": 256001,
+        "original_samples_sha256": "4b0c26b69ec3387d60780bff2cff8da29653dd9eda5678d73c1ac74c6f492906",
+        "original_axis_sha256": "71aef94ff64702067c992b7f8bce5ad79a98d0cb7f8d2c372cf1b5ad6e9951ac",
+        "first_stored_coordinate": 0.0,
+        "duration_s_under_assumption": 4.0,
+        "min_step_nominal": 0.9580969457237964,
+        "max_step_nominal": 1.0128453426432316,
+        "count_duration_relative_error": 0.0,
+        "time_ulp_nominal": 5.6843418860808015e-11,
+        "reason": null,
+        "output_count": 256001,
+        "grid_start_relative_s": 0.0,
+        "grid_last_relative_s": 4.0,
+        "uncovered_tail_s": 0.0,
+        "normalization_divisor_in_original_numeric_scale": 9.552001946812416,
+        "output_proxy_sha256": "89f411ffb2f3f3a9f4a5d090f9c0f8de9fd4e8e66564fd47827dd7f6daa1a938",
+        "output_axis_sha256": "9f38cc92425e4acffc11cd494209a8c2b42bb6710cec83d455f322f13c7d9d54",
+        "proxy_unit": "1",
+        "operation": "explicit linear interpolation; no extrapolation; no anti-alias qualification"
+      },
+      "stored_axis_hypothesis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 14.275923427477158,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 18.247869713846086,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520945512126142,
+        "effective_count": 253873,
+        "dominant_modulation_hz_under_assumption": 24.957360570048806,
+        "dominant_bin_fraction": 0.014886771477339533
+      },
+      "counterfactual_nominal_index_axis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 14.301568756716076,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 18.13341907381447,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520945512126142,
+        "effective_count": 253873,
+        "dominant_modulation_hz_under_assumption": 24.957360570048806,
+        "dominant_bin_fraction": 0.014890547671558983
+      },
+      "timebase_sensitivity": {
+        "status": "observed",
+        "dominant_frequency_difference_hz": 0.0,
+        "two_bin_threshold_hz": 0.5041891024252284,
+        "timebase_sensitive": false,
+        "interpretation": "Conditional sensitivity, not diagnostic confidence or source-time confirmation"
+      }
+    },
+    {
+      "record_id": "pu-N15_M07_F04-KI01-1",
+      "split": "development",
+      "entity_group": "paderborn-bearing-KI01",
+      "original_file_sha256": "b29c7a7433fa7e6210b500eb2ed808bcfccd24d1c4761af07abb21538823ff7a",
+      "label_for_inventory_only": "inner_race",
+      "physical_input_ready": false,
+      "diagnostic_evidence_eligible": false,
+      "prediction": null,
+      "matching_status": "unavailable",
+      "matching_reasons": [
+        "stored_unit_and_time_semantics_unverified",
+        "sourced_speed_and_bearing_uncertainty_required",
+        "diagnostic_profile_not_qualified"
+      ],
+      "adaptation_status": "ok",
+      "adaptation": {
+        "algorithm_version": "stored-axis-linear-shape-v1",
+        "time_axis_semantics_verified": false,
+        "physical_unit_established": false,
+        "diagnostic_evidence_eligible": false,
+        "prediction": null,
+        "input_count": 257323,
+        "original_samples_sha256": "067b0f98fdaac2bb27cdfd78032d39a91ef45e3c41bf0f189760f57fff52b203",
+        "original_axis_sha256": "78cb379cc222e5ad9f174c7b4a4c5d988b59e4351c9cc77ba6914ea2eeded03a",
+        "first_stored_coordinate": 0.0,
+        "duration_s_under_assumption": 3.999989306953731,
+        "min_step_nominal": 0.2189935876231175,
+        "max_step_nominal": 1.7245745023046766,
+        "count_duration_relative_error": 0.005166749573640287,
+        "time_ulp_nominal": 2.8421709430404007e-11,
+        "reason": null,
+        "output_count": 256000,
+        "grid_start_relative_s": 0.0,
+        "grid_last_relative_s": 3.999984375,
+        "uncovered_tail_s": 4.93195373119093e-06,
+        "normalization_divisor_in_original_numeric_scale": 6.784057612704153,
+        "output_proxy_sha256": "a3fc47ae3dd3499f64fcf75a0abdfaa7cdc64af1df32c45d0e79d9b97547748c",
+        "output_axis_sha256": "cc029ff6aa01ce0a4a43ae5aa16caf2350607c75649329e71991248e7beb5fe8",
+        "proxy_unit": "1",
+        "operation": "explicit linear interpolation; no extrapolation; no anti-alias qualification"
+      },
+      "stored_axis_hypothesis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 12.686173650689435,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 14.660581905909874,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520955442112561,
+        "effective_count": 253872,
+        "dominant_modulation_hz_under_assumption": 24.95745887691435,
+        "dominant_bin_fraction": 0.013575084040486846
+      },
+      "counterfactual_nominal_index_axis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 12.05789583280382,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 13.70400113506863,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2507886126295578,
+        "effective_count": 255195,
+        "dominant_modulation_hz_under_assumption": 25.078861262955783,
+        "dominant_bin_fraction": 0.013359411600886639
+      },
+      "timebase_sensitivity": {
+        "status": "observed",
+        "dominant_frequency_difference_hz": -0.1214023860414315,
+        "two_bin_threshold_hz": 0.5041910884225121,
+        "timebase_sensitive": false,
+        "interpretation": "Conditional sensitivity, not diagnostic confidence or source-time confirmation"
+      }
+    },
+    {
+      "record_id": "pu-N15_M07_F04-KI01-2",
+      "split": "development",
+      "entity_group": "paderborn-bearing-KI01",
+      "original_file_sha256": "4317c1b7a873a15a45dbcc70a716af14307c45742c44f171cd6627bf616b0b84",
+      "label_for_inventory_only": "inner_race",
+      "physical_input_ready": false,
+      "diagnostic_evidence_eligible": false,
+      "prediction": null,
+      "matching_status": "unavailable",
+      "matching_reasons": [
+        "stored_unit_and_time_semantics_unverified",
+        "sourced_speed_and_bearing_uncertainty_required",
+        "diagnostic_profile_not_qualified"
+      ],
+      "adaptation_status": "ok",
+      "adaptation": {
+        "algorithm_version": "stored-axis-linear-shape-v1",
+        "time_axis_semantics_verified": false,
+        "physical_unit_established": false,
+        "diagnostic_evidence_eligible": false,
+        "prediction": null,
+        "input_count": 256942,
+        "original_samples_sha256": "994a48c5d628b8d2c6cf684ac605ef75548fdf66088f1c77790d17a8a9a48f8d",
+        "original_axis_sha256": "e6295d4814d163099a37e416ea0962acff9517836d773d00f0c4466ca86fc37b",
+        "first_stored_coordinate": 0.0,
+        "duration_s_under_assumption": 3.9999863129007758,
+        "min_step_nominal": 0.1916193891702278,
+        "max_step_nominal": 1.970942288352262,
+        "count_duration_relative_error": 0.0036792156142533374,
+        "time_ulp_nominal": 2.8421709430404007e-11,
+        "reason": null,
+        "output_count": 256000,
+        "grid_start_relative_s": 0.0,
+        "grid_last_relative_s": 3.999984375,
+        "uncovered_tail_s": 1.93790077585021e-06,
+        "normalization_divisor_in_original_numeric_scale": 6.842041011103335,
+        "output_proxy_sha256": "2736539a2c10ab47c2ec3d72c2bdb7a8e822bc2f42941b5d67e54c05da1a1f14",
+        "output_axis_sha256": "cc029ff6aa01ce0a4a43ae5aa16caf2350607c75649329e71991248e7beb5fe8",
+        "proxy_unit": "1",
+        "operation": "explicit linear interpolation; no extrapolation; no anti-alias qualification"
+      },
+      "stored_axis_hypothesis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 13.071041186874734,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 14.707627193427081,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520955442112561,
+        "effective_count": 253872,
+        "dominant_modulation_hz_under_assumption": 24.95745887691435,
+        "dominant_bin_fraction": 0.014197845583640241
+      },
+      "counterfactual_nominal_index_axis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 12.026196108858704,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 13.70845481958368,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2511635938370733,
+        "effective_count": 254814,
+        "dominant_modulation_hz_under_assumption": 25.116359383707334,
+        "dominant_bin_fraction": 0.013041447330645186
+      },
+      "timebase_sensitivity": {
+        "status": "observed",
+        "dominant_frequency_difference_hz": -0.15890050679298184,
+        "two_bin_threshold_hz": 0.5041910884225121,
+        "timebase_sensitive": false,
+        "interpretation": "Conditional sensitivity, not diagnostic confidence or source-time confirmation"
+      }
+    },
+    {
+      "record_id": "pu-N15-M07-F10-K002-1",
+      "split": "validation",
+      "entity_group": "paderborn-bearing-K002",
+      "original_file_sha256": "e2955b32c984c2e2557248ef2c7fbe213c180ade11dcfab8e4456712f785aabb",
+      "label_for_inventory_only": "healthy_reference",
+      "physical_input_ready": false,
+      "diagnostic_evidence_eligible": false,
+      "prediction": null,
+      "matching_status": "unavailable",
+      "matching_reasons": [
+        "stored_unit_and_time_semantics_unverified",
+        "sourced_speed_and_bearing_uncertainty_required",
+        "diagnostic_profile_not_qualified"
+      ],
+      "adaptation_status": "ok",
+      "adaptation": {
+        "algorithm_version": "stored-axis-linear-shape-v1",
+        "time_axis_semantics_verified": false,
+        "physical_unit_established": false,
+        "diagnostic_evidence_eligible": false,
+        "prediction": null,
+        "input_count": 256001,
+        "original_samples_sha256": "68a3285e2e945a930019461e4397e4377a5e8d919e06a606b26b400c4c0a306a",
+        "original_axis_sha256": "090881e4cb3667d74e095dd6e59bd100d703bb5fbe2e40774cb8ac7d2b3432aa",
+        "first_stored_coordinate": 0.0,
+        "duration_s_under_assumption": 3.9999987168344475,
+        "min_step_nominal": 0.9580969457232413,
+        "max_step_nominal": 1.0128453426432316,
+        "count_duration_relative_error": 3.2079149106958133e-07,
+        "time_ulp_nominal": 2.8421709430404007e-11,
+        "reason": null,
+        "output_count": 256000,
+        "grid_start_relative_s": 0.0,
+        "grid_last_relative_s": 3.999984375,
+        "uncovered_tail_s": 1.4341834447595403e-05,
+        "normalization_divisor_in_original_numeric_scale": 3.427124021172634,
+        "output_proxy_sha256": "0b3d5f88a503f61bda8e8f89dc4a187edcde66230c42c5f94b33d0225d6581fd",
+        "output_axis_sha256": "cc029ff6aa01ce0a4a43ae5aa16caf2350607c75649329e71991248e7beb5fe8",
+        "proxy_unit": "1",
+        "operation": "explicit linear interpolation; no extrapolation; no anti-alias qualification"
+      },
+      "stored_axis_hypothesis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 15.092352436413089,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 12.963447112916478,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520955442112561,
+        "effective_count": 253872,
+        "dominant_modulation_hz_under_assumption": 144.702842377261,
+        "dominant_bin_fraction": 0.0032012844391776352
+      },
+      "counterfactual_nominal_index_axis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 15.018051379872656,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 14.47948306446986,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520945512126142,
+        "effective_count": 253873,
+        "dominant_modulation_hz_under_assumption": 144.70227239604054,
+        "dominant_bin_fraction": 0.0032004903168751514
+      },
+      "timebase_sensitivity": {
+        "status": "observed",
+        "dominant_frequency_difference_hz": 0.0005699812204511545,
+        "two_bin_threshold_hz": 0.5041910884225121,
+        "timebase_sensitive": false,
+        "interpretation": "Conditional sensitivity, not diagnostic confidence or source-time confirmation"
+      }
+    },
+    {
+      "record_id": "pu-N15-M07-F10-K002-2",
+      "split": "validation",
+      "entity_group": "paderborn-bearing-K002",
+      "original_file_sha256": "c1f4ea201d157be12c0f7f4587281804e0f7af5c9a3ce6b75b6a34f90fbdf62d",
+      "label_for_inventory_only": "healthy_reference",
+      "physical_input_ready": false,
+      "diagnostic_evidence_eligible": false,
+      "prediction": null,
+      "matching_status": "unavailable",
+      "matching_reasons": [
+        "stored_unit_and_time_semantics_unverified",
+        "sourced_speed_and_bearing_uncertainty_required",
+        "diagnostic_profile_not_qualified"
+      ],
+      "adaptation_status": "ok",
+      "adaptation": {
+        "algorithm_version": "stored-axis-linear-shape-v1",
+        "time_axis_semantics_verified": false,
+        "physical_unit_established": false,
+        "diagnostic_evidence_eligible": false,
+        "prediction": null,
+        "input_count": 256001,
+        "original_samples_sha256": "fe08c25bb1c4ab6f1b6d2f3b793b829494db8035bfbe5a650e7b67949587b3f5",
+        "original_axis_sha256": "d4d37b0cfabf615def15991bd968825c875677c638de94edea0430d1bae58ade",
+        "first_stored_coordinate": 0.0,
+        "duration_s_under_assumption": 3.9999905901192827,
+        "min_step_nominal": 0.49273557206674923,
+        "max_step_nominal": 1.0128453426432316,
+        "count_duration_relative_error": 2.3524757134183752e-06,
+        "time_ulp_nominal": 2.8421709430404007e-11,
+        "reason": null,
+        "output_count": 256000,
+        "grid_start_relative_s": 0.0,
+        "grid_last_relative_s": 3.999984375,
+        "uncovered_tail_s": 6.215119282781956e-06,
+        "normalization_divisor_in_original_numeric_scale": 3.598022458559693,
+        "output_proxy_sha256": "1e53e00fda9d843f06428b925b6c010463c53534f2f52cd020f991bbcd5d5d71",
+        "output_axis_sha256": "cc029ff6aa01ce0a4a43ae5aa16caf2350607c75649329e71991248e7beb5fe8",
+        "proxy_unit": "1",
+        "operation": "explicit linear interpolation; no extrapolation; no anti-alias qualification"
+      },
+      "stored_axis_hypothesis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 16.00431991417955,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 14.325348465755303,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520955442112561,
+        "effective_count": 253872,
+        "dominant_modulation_hz_under_assumption": 144.702842377261,
+        "dominant_bin_fraction": 0.0037785505539783704
+      },
+      "counterfactual_nominal_index_axis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 15.685219812345506,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 15.132005570100597,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520945512126142,
+        "effective_count": 253873,
+        "dominant_modulation_hz_under_assumption": 144.70227239604054,
+        "dominant_bin_fraction": 0.003776284758503448
+      },
+      "timebase_sensitivity": {
+        "status": "observed",
+        "dominant_frequency_difference_hz": 0.0005699812204511545,
+        "two_bin_threshold_hz": 0.5041910884225121,
+        "timebase_sensitive": false,
+        "interpretation": "Conditional sensitivity, not diagnostic confidence or source-time confirmation"
+      }
+    },
+    {
+      "record_id": "pu-N09-M07-F10-K002-1",
+      "split": "validation",
+      "entity_group": "paderborn-bearing-K002",
+      "original_file_sha256": "b5707fd0384a6ca21c5bfb370f23345daa0678be2cb345279eccd2761b2aeace",
+      "label_for_inventory_only": "healthy_reference",
+      "physical_input_ready": false,
+      "diagnostic_evidence_eligible": false,
+      "prediction": null,
+      "matching_status": "unavailable",
+      "matching_reasons": [
+        "stored_unit_and_time_semantics_unverified",
+        "sourced_speed_and_bearing_uncertainty_required",
+        "diagnostic_profile_not_qualified"
+      ],
+      "adaptation_status": "ok",
+      "adaptation": {
+        "algorithm_version": "stored-axis-linear-shape-v1",
+        "time_axis_semantics_verified": false,
+        "physical_unit_established": false,
+        "diagnostic_evidence_eligible": false,
+        "prediction": null,
+        "input_count": 256001,
+        "original_samples_sha256": "dd0aec2f7c218a9fe7c925868db1f838cd894a71f1371a3abd719561544631cc",
+        "original_axis_sha256": "d3ab33859db921476a16c44a35a9ba67fe1d6fcb77d0a199d858bf1b9208640a",
+        "first_stored_coordinate": 0.0,
+        "duration_s_under_assumption": 3.999999572278149,
+        "min_step_nominal": 0.9580969457237964,
+        "max_step_nominal": 1.0128453426432316,
+        "count_duration_relative_error": 1.0693047415493627e-07,
+        "time_ulp_nominal": 2.8421709430404007e-11,
+        "reason": null,
+        "output_count": 256000,
+        "grid_start_relative_s": 0.0,
+        "grid_last_relative_s": 3.999984375,
+        "uncovered_tail_s": 1.5197278149248206e-05,
+        "normalization_divisor_in_original_numeric_scale": 4.855346676478771,
+        "output_proxy_sha256": "45d3f85c5f00abca635224897a9554808f5ddb4c6c960ec2d3411e345ea22439",
+        "output_axis_sha256": "cc029ff6aa01ce0a4a43ae5aa16caf2350607c75649329e71991248e7beb5fe8",
+        "proxy_unit": "1",
+        "operation": "explicit linear interpolation; no extrapolation; no anti-alias qualification"
+      },
+      "stored_axis_hypothesis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 26.927038979304317,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 46.51386918192405,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520955442112561,
+        "effective_count": 253872,
+        "dominant_modulation_hz_under_assumption": 105.12384193609378,
+        "dominant_bin_fraction": 0.010169447878525802
+      },
+      "counterfactual_nominal_index_axis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 27.168118253412032,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 46.93601689336285,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520945512126142,
+        "effective_count": 253873,
+        "dominant_modulation_hz_under_assumption": 105.12342785566013,
+        "dominant_bin_fraction": 0.010155197342482497
+      },
+      "timebase_sensitivity": {
+        "status": "observed",
+        "dominant_frequency_difference_hz": 0.0004140804336572046,
+        "two_bin_threshold_hz": 0.5041910884225121,
+        "timebase_sensitive": false,
+        "interpretation": "Conditional sensitivity, not diagnostic confidence or source-time confirmation"
+      }
+    },
+    {
+      "record_id": "pu-N09-M07-F10-K002-2",
+      "split": "validation",
+      "entity_group": "paderborn-bearing-K002",
+      "original_file_sha256": "38a19ddad1da41d320b43bf814708a750d54cfd071c45ac5498582912e4b933f",
+      "label_for_inventory_only": "healthy_reference",
+      "physical_input_ready": false,
+      "diagnostic_evidence_eligible": false,
+      "prediction": null,
+      "matching_status": "unavailable",
+      "matching_reasons": [
+        "stored_unit_and_time_semantics_unverified",
+        "sourced_speed_and_bearing_uncertainty_required",
+        "diagnostic_profile_not_qualified"
+      ],
+      "adaptation_status": "ok",
+      "adaptation": {
+        "algorithm_version": "stored-axis-linear-shape-v1",
+        "time_axis_semantics_verified": false,
+        "physical_unit_established": false,
+        "diagnostic_evidence_eligible": false,
+        "prediction": null,
+        "input_count": 256001,
+        "original_samples_sha256": "ae09cf514f55cba3c17bb254125167ca736b6203652774165bd4b6bc9a393699",
+        "original_axis_sha256": "0560b275db0c63ceeda43b7540d7364a59a2aa5d04d7ec2133f69f93d4d1a185",
+        "first_stored_coordinate": 0.0,
+        "duration_s_under_assumption": 3.999996578225194,
+        "min_step_nominal": 0.7938517550201141,
+        "max_step_nominal": 1.0128453426432316,
+        "count_duration_relative_error": 8.554444333236684e-07,
+        "time_ulp_nominal": 2.8421709430404007e-11,
+        "reason": null,
+        "output_count": 256000,
+        "grid_start_relative_s": 0.0,
+        "grid_last_relative_s": 3.999984375,
+        "uncovered_tail_s": 1.2203225193907485e-05,
+        "normalization_divisor_in_original_numeric_scale": 3.9154052708499454,
+        "output_proxy_sha256": "8f8a5c8bca608261781baa234287be512e37a4ce769e5ec1927283f996488ffc",
+        "output_axis_sha256": "cc029ff6aa01ce0a4a43ae5aa16caf2350607c75649329e71991248e7beb5fe8",
+        "proxy_unit": "1",
+        "operation": "explicit linear interpolation; no extrapolation; no anti-alias qualification"
+      },
+      "stored_axis_hypothesis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 22.229772107213677,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 42.20260090110063,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520955442112561,
+        "effective_count": 253872,
+        "dominant_modulation_hz_under_assumption": 105.12384193609378,
+        "dominant_bin_fraction": 0.009012825612940529
+      },
+      "counterfactual_nominal_index_axis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 22.17351465443999,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 42.663439540873846,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520945512126142,
+        "effective_count": 253873,
+        "dominant_modulation_hz_under_assumption": 105.12342785566013,
+        "dominant_bin_fraction": 0.009007164554219304
+      },
+      "timebase_sensitivity": {
+        "status": "observed",
+        "dominant_frequency_difference_hz": 0.0004140804336572046,
+        "two_bin_threshold_hz": 0.5041910884225121,
+        "timebase_sensitive": false,
+        "interpretation": "Conditional sensitivity, not diagnostic confidence or source-time confirmation"
+      }
+    },
+    {
+      "record_id": "pu-N15-M01-F10-K002-1",
+      "split": "validation",
+      "entity_group": "paderborn-bearing-K002",
+      "original_file_sha256": "f2797493d7bfcabd4f78a9137e7f97e08dfd1ef6aec72e482b007c69e900d2f4",
+      "label_for_inventory_only": "healthy_reference",
+      "physical_input_ready": false,
+      "diagnostic_evidence_eligible": false,
+      "prediction": null,
+      "matching_status": "unavailable",
+      "matching_reasons": [
+        "stored_unit_and_time_semantics_unverified",
+        "sourced_speed_and_bearing_uncertainty_required",
+        "diagnostic_profile_not_qualified"
+      ],
+      "adaptation_status": "unavailable",
+      "adaptation": {
+        "algorithm_version": "stored-axis-linear-shape-v1",
+        "time_axis_semantics_verified": false,
+        "physical_unit_established": false,
+        "diagnostic_evidence_eligible": false,
+        "prediction": null,
+        "input_count": 261265,
+        "original_samples_sha256": "c025d114968181d47bf9888731d348e19977abc5af45c054d4f0c9964eb72d5e",
+        "original_axis_sha256": "eac8a057f5a1145741acdf10e81c822034504e411539a4a2ce5b6c352f30e231",
+        "first_stored_coordinate": 0.0,
+        "duration_s_under_assumption": 3.9999987168344475,
+        "min_step_nominal": 0.10949679378313704,
+        "max_step_nominal": 1.094967937973479,
+        "count_duration_relative_error": 0.020562827387766106,
+        "time_ulp_nominal": 2.8421709430404007e-11,
+        "reason": "CADENCE_DIFFERS_FROM_RESEARCH_SCOPE"
+      }
+    },
+    {
+      "record_id": "pu-N15-M01-F10-K002-2",
+      "split": "validation",
+      "entity_group": "paderborn-bearing-K002",
+      "original_file_sha256": "51867f87e33af5c78d9f3321d413153490887aeb7a7edf23b18a614b1315bebb",
+      "label_for_inventory_only": "healthy_reference",
+      "physical_input_ready": false,
+      "diagnostic_evidence_eligible": false,
+      "prediction": null,
+      "matching_status": "unavailable",
+      "matching_reasons": [
+        "stored_unit_and_time_semantics_unverified",
+        "sourced_speed_and_bearing_uncertainty_required",
+        "diagnostic_profile_not_qualified"
+      ],
+      "adaptation_status": "ok",
+      "adaptation": {
+        "algorithm_version": "stored-axis-linear-shape-v1",
+        "time_axis_semantics_verified": false,
+        "physical_unit_established": false,
+        "diagnostic_evidence_eligible": false,
+        "prediction": null,
+        "input_count": 256001,
+        "original_samples_sha256": "57cdbb7dc83f25f66ed4057f4f24df41747a2267defbf1b6833f423c1b105add",
+        "original_axis_sha256": "1d1c9b71656381efca410fd0f0da7e8e0bd05f7f9cdea32408f1f804c57bc6c4",
+        "first_stored_coordinate": 0.0,
+        "duration_s_under_assumption": 3.999991873284835,
+        "min_step_nominal": 0.49273557209517094,
+        "max_step_nominal": 1.0128453426432316,
+        "count_duration_relative_error": 2.0316829189677623e-06,
+        "time_ulp_nominal": 2.8421709430404007e-11,
+        "reason": null,
+        "output_count": 256000,
+        "grid_start_relative_s": 0.0,
+        "grid_last_relative_s": 3.999984375,
+        "uncovered_tail_s": 7.49828483526116e-06,
+        "normalization_divisor_in_original_numeric_scale": 3.1311035135557628,
+        "output_proxy_sha256": "7aff6cba94413fd06b1fed0b71d1306cfb2a9ebb8d2b833fe61d8bd29ca118e7",
+        "output_axis_sha256": "cc029ff6aa01ce0a4a43ae5aa16caf2350607c75649329e71991248e7beb5fe8",
+        "proxy_unit": "1",
+        "operation": "explicit linear interpolation; no extrapolation; no anti-alias qualification"
+      },
+      "stored_axis_hypothesis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 13.575900846159682,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 15.032369073499977,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520955442112561,
+        "effective_count": 253872,
+        "dominant_modulation_hz_under_assumption": 144.702842377261,
+        "dominant_bin_fraction": 0.005326570831261492
+      },
+      "counterfactual_nominal_index_axis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 13.626031303049112,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 15.837651315206461,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520945512126142,
+        "effective_count": 253873,
+        "dominant_modulation_hz_under_assumption": 144.70227239604054,
+        "dominant_bin_fraction": 0.005324631863057062
+      },
+      "timebase_sensitivity": {
+        "status": "observed",
+        "dominant_frequency_difference_hz": 0.0005699812204511545,
+        "two_bin_threshold_hz": 0.5041910884225121,
+        "timebase_sensitive": false,
+        "interpretation": "Conditional sensitivity, not diagnostic confidence or source-time confirmation"
+      }
+    },
+    {
+      "record_id": "pu-N15-M07-F04-K002-1",
+      "split": "validation",
+      "entity_group": "paderborn-bearing-K002",
+      "original_file_sha256": "c882f239602508c7c4fd56e2134207d1fbdda9bff7aa223970b19e23056558ab",
+      "label_for_inventory_only": "healthy_reference",
+      "physical_input_ready": false,
+      "diagnostic_evidence_eligible": false,
+      "prediction": null,
+      "matching_status": "unavailable",
+      "matching_reasons": [
+        "stored_unit_and_time_semantics_unverified",
+        "sourced_speed_and_bearing_uncertainty_required",
+        "diagnostic_profile_not_qualified"
+      ],
+      "adaptation_status": "ok",
+      "adaptation": {
+        "algorithm_version": "stored-axis-linear-shape-v1",
+        "time_axis_semantics_verified": false,
+        "physical_unit_established": false,
+        "diagnostic_evidence_eligible": false,
+        "prediction": null,
+        "input_count": 256001,
+        "original_samples_sha256": "d559bd6a5077480f4d80f3dfe1252a6745eb2b946555f1d4806540103c37e984",
+        "original_axis_sha256": "01e77f53902ea7b49d5ba3a457e05e0094894ee7f3aa8c8c682de9f4387e67b1",
+        "first_stored_coordinate": 0.0,
+        "duration_s_under_assumption": 4.0,
+        "min_step_nominal": 0.9580969457237964,
+        "max_step_nominal": 1.0128453426432316,
+        "count_duration_relative_error": 0.0,
+        "time_ulp_nominal": 5.6843418860808015e-11,
+        "reason": null,
+        "output_count": 256001,
+        "grid_start_relative_s": 0.0,
+        "grid_last_relative_s": 4.0,
+        "uncovered_tail_s": 0.0,
+        "normalization_divisor_in_original_numeric_scale": 3.671264646011289,
+        "output_proxy_sha256": "00c20e2fd36b1ffdf5521afac91e6b85faae73ec7659501cd3bb61b8f35bffe7",
+        "output_axis_sha256": "9f38cc92425e4acffc11cd494209a8c2b42bb6710cec83d455f322f13c7d9d54",
+        "proxy_unit": "1",
+        "operation": "explicit linear interpolation; no extrapolation; no anti-alias qualification"
+      },
+      "stored_axis_hypothesis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 16.956109325612324,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 17.18931725098983,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520945512126142,
+        "effective_count": 253873,
+        "dominant_modulation_hz_under_assumption": 52.68776120343637,
+        "dominant_bin_fraction": 0.0028660240700728976
+      },
+      "counterfactual_nominal_index_axis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 16.970359039060963,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 17.79130553969267,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520945512126142,
+        "effective_count": 253873,
+        "dominant_modulation_hz_under_assumption": 52.68776120343637,
+        "dominant_bin_fraction": 0.002867968836851682
+      },
+      "timebase_sensitivity": {
+        "status": "observed",
+        "dominant_frequency_difference_hz": 0.0,
+        "two_bin_threshold_hz": 0.5041891024252284,
+        "timebase_sensitive": false,
+        "interpretation": "Conditional sensitivity, not diagnostic confidence or source-time confirmation"
+      }
+    },
+    {
+      "record_id": "pu-N15-M07-F04-K002-2",
+      "split": "validation",
+      "entity_group": "paderborn-bearing-K002",
+      "original_file_sha256": "e903a254d45bea6b040952ad3e5c3e86a0d5c96d0a50cf31a220627f6a9f746c",
+      "label_for_inventory_only": "healthy_reference",
+      "physical_input_ready": false,
+      "diagnostic_evidence_eligible": false,
+      "prediction": null,
+      "matching_status": "unavailable",
+      "matching_reasons": [
+        "stored_unit_and_time_semantics_unverified",
+        "sourced_speed_and_bearing_uncertainty_required",
+        "diagnostic_profile_not_qualified"
+      ],
+      "adaptation_status": "ok",
+      "adaptation": {
+        "algorithm_version": "stored-axis-linear-shape-v1",
+        "time_axis_semantics_verified": false,
+        "physical_unit_established": false,
+        "diagnostic_evidence_eligible": false,
+        "prediction": null,
+        "input_count": 256001,
+        "original_samples_sha256": "a2494c33b3dd54357781384622e4d355d77fb0a04ece312174bd3b2bdd85d722",
+        "original_axis_sha256": "086b27625a3b6ac7fdb22ae684f2571e0bd8cab4166208af8c9466f25df64690",
+        "first_stored_coordinate": 0.0,
+        "duration_s_under_assumption": 3.9999974336688955,
+        "min_step_nominal": 0.8759743503787831,
+        "max_step_nominal": 1.0128453426432316,
+        "count_duration_relative_error": 6.415831877262161e-07,
+        "time_ulp_nominal": 2.8421709430404007e-11,
+        "reason": null,
+        "output_count": 256000,
+        "grid_start_relative_s": 0.0,
+        "grid_last_relative_s": 3.999984375,
+        "uncovered_tail_s": 1.3058668895560288e-05,
+        "normalization_divisor_in_original_numeric_scale": 3.9245605442813956,
+        "output_proxy_sha256": "6a8931cfd12898c3ca3ccf2f7e1016cce6fc4f78a302c485b1d0510a9744c0a3",
+        "output_axis_sha256": "cc029ff6aa01ce0a4a43ae5aa16caf2350607c75649329e71991248e7beb5fe8",
+        "proxy_unit": "1",
+        "operation": "explicit linear interpolation; no extrapolation; no anti-alias qualification"
+      },
+      "stored_axis_hypothesis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 17.586147629907742,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 16.695480589167474,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520955442112561,
+        "effective_count": 253872,
+        "dominant_modulation_hz_under_assumption": 99.8298355076574,
+        "dominant_bin_fraction": 0.0033604052842671982
+      },
+      "counterfactual_nominal_index_axis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 17.9033046905312,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 19.96151459438574,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520945512126142,
+        "effective_count": 253873,
+        "dominant_modulation_hz_under_assumption": 99.82944228019522,
+        "dominant_bin_fraction": 0.0033525356049113123
+      },
+      "timebase_sensitivity": {
+        "status": "observed",
+        "dominant_frequency_difference_hz": 0.0003932274621831766,
+        "two_bin_threshold_hz": 0.5041910884225121,
+        "timebase_sensitive": false,
+        "interpretation": "Conditional sensitivity, not diagnostic confidence or source-time confirmation"
+      }
+    },
+    {
+      "record_id": "pu-N15-M07-F10-KA03-1",
+      "split": "validation",
+      "entity_group": "paderborn-bearing-KA03",
+      "original_file_sha256": "1ab2102e54b727381384f2f8def2880b979d214683bb317863cd413d48e471bd",
+      "label_for_inventory_only": "outer_race",
+      "physical_input_ready": false,
+      "diagnostic_evidence_eligible": false,
+      "prediction": null,
+      "matching_status": "unavailable",
+      "matching_reasons": [
+        "stored_unit_and_time_semantics_unverified",
+        "sourced_speed_and_bearing_uncertainty_required",
+        "diagnostic_profile_not_qualified"
+      ],
+      "adaptation_status": "ok",
+      "adaptation": {
+        "algorithm_version": "stored-axis-linear-shape-v1",
+        "time_axis_semantics_verified": false,
+        "physical_unit_established": false,
+        "diagnostic_evidence_eligible": false,
+        "prediction": null,
+        "input_count": 256004,
+        "original_samples_sha256": "bbc1787624d5c75cf108d7f680aa3865975a5a2dce3c385b663c0bc34fa94ff3",
+        "original_axis_sha256": "297f296e634ad7ff21b9b95476e5baf844fd9c3ef3fa7df8edadf5c710ab0385",
+        "first_stored_coordinate": 0.0,
+        "duration_s_under_assumption": 3.9999905899623127,
+        "min_step_nominal": 0.2737465509028425,
+        "max_step_nominal": 1.012862238354728,
+        "count_duration_relative_error": 1.4071292524673985e-05,
+        "time_ulp_nominal": 2.8421709430404007e-11,
+        "reason": null,
+        "output_count": 256000,
+        "grid_start_relative_s": 0.0,
+        "grid_last_relative_s": 3.999984375,
+        "uncovered_tail_s": 6.214962312789396e-06,
+        "normalization_divisor_in_original_numeric_scale": 1.8005371081850878,
+        "output_proxy_sha256": "0e75db6458fbae2eaa05452f02a4238bf7746780da365e273842be9caee2db8e",
+        "output_axis_sha256": "cc029ff6aa01ce0a4a43ae5aa16caf2350607c75649329e71991248e7beb5fe8",
+        "proxy_unit": "1",
+        "operation": "explicit linear interpolation; no extrapolation; no anti-alias qualification"
+      },
+      "stored_axis_hypothesis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 5.230402336552829,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 3.146326525548351,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520955442112561,
+        "effective_count": 253872,
+        "dominant_modulation_hz_under_assumption": 76.63704544022184,
+        "dominant_bin_fraction": 0.004864580379471105
+      },
+      "counterfactual_nominal_index_axis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 5.24986424929654,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 3.1503920889138732,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520915722636248,
+        "effective_count": 253876,
+        "dominant_modulation_hz_under_assumption": 76.63583796814193,
+        "dominant_bin_fraction": 0.004857641695494391
+      },
+      "timebase_sensitivity": {
+        "status": "observed",
+        "dominant_frequency_difference_hz": 0.0012074720799120087,
+        "two_bin_threshold_hz": 0.5041910884225121,
+        "timebase_sensitive": false,
+        "interpretation": "Conditional sensitivity, not diagnostic confidence or source-time confirmation"
+      }
+    },
+    {
+      "record_id": "pu-N15-M07-F10-KA03-2",
+      "split": "validation",
+      "entity_group": "paderborn-bearing-KA03",
+      "original_file_sha256": "218b02ccaf8500eab97700171311825c9b63dc0f82918e55e0e59abab6e035e5",
+      "label_for_inventory_only": "outer_race",
+      "physical_input_ready": false,
+      "diagnostic_evidence_eligible": false,
+      "prediction": null,
+      "matching_status": "unavailable",
+      "matching_reasons": [
+        "stored_unit_and_time_semantics_unverified",
+        "sourced_speed_and_bearing_uncertainty_required",
+        "diagnostic_profile_not_qualified"
+      ],
+      "adaptation_status": "unavailable",
+      "adaptation": {
+        "algorithm_version": "stored-axis-linear-shape-v1",
+        "time_axis_semantics_verified": false,
+        "physical_unit_established": false,
+        "diagnostic_evidence_eligible": false,
+        "prediction": null,
+        "input_count": 283668,
+        "original_samples_sha256": "1832c41a08ff69fc1a9ddf626c54217f1033d24b76329acb4235b0c59ee4060c",
+        "original_axis_sha256": "55480baf2f573630cbbff1d7c236c526a91b48a436b117910c58796c3640b801",
+        "first_stored_coordinate": 0.0,
+        "duration_s_under_assumption": 3.9999961504391277,
+        "min_step_nominal": 0.1642479305417055,
+        "max_step_nominal": 1.0402368934308015,
+        "count_duration_relative_error": 0.10807528515081534,
+        "time_ulp_nominal": 2.8421709430404007e-11,
+        "reason": "CADENCE_DIFFERS_FROM_RESEARCH_SCOPE"
+      }
+    },
+    {
+      "record_id": "pu-N09-M07-F10-KA03-1",
+      "split": "validation",
+      "entity_group": "paderborn-bearing-KA03",
+      "original_file_sha256": "051e73d8b7a6d0649010091b4b875bc1ee82741f18e373e4b82e6376157b028f",
+      "label_for_inventory_only": "outer_race",
+      "physical_input_ready": false,
+      "diagnostic_evidence_eligible": false,
+      "prediction": null,
+      "matching_status": "unavailable",
+      "matching_reasons": [
+        "stored_unit_and_time_semantics_unverified",
+        "sourced_speed_and_bearing_uncertainty_required",
+        "diagnostic_profile_not_qualified"
+      ],
+      "adaptation_status": "ok",
+      "adaptation": {
+        "algorithm_version": "stored-axis-linear-shape-v1",
+        "time_axis_semantics_verified": false,
+        "physical_unit_established": false,
+        "diagnostic_evidence_eligible": false,
+        "prediction": null,
+        "input_count": 256001,
+        "original_samples_sha256": "36ff77d1d99c0b1142a59b5a789108fb8312e589fb610b1f7ec3d64692a6013e",
+        "original_axis_sha256": "cbe14900adb32f6738b7cabe120e992b405c488151ca13b8b98c49f3c5649f64",
+        "first_stored_coordinate": 0.0,
+        "duration_s_under_assumption": 3.9999893067753556,
+        "min_step_nominal": 0.3011212060073376,
+        "max_step_nominal": 1.012862238354728,
+        "count_duration_relative_error": 2.673313307698878e-06,
+        "time_ulp_nominal": 2.8421709430404007e-11,
+        "reason": null,
+        "output_count": 256000,
+        "grid_start_relative_s": 0.0,
+        "grid_last_relative_s": 3.999984375,
+        "uncovered_tail_s": 4.931775355654366e-06,
+        "normalization_divisor_in_original_numeric_scale": 1.129150389878784,
+        "output_proxy_sha256": "4d9f5d2cfd4df6d87221568c30cf9211a854a29459036710b8f25940dd42bef9",
+        "output_axis_sha256": "cc029ff6aa01ce0a4a43ae5aa16caf2350607c75649329e71991248e7beb5fe8",
+        "proxy_unit": "1",
+        "operation": "explicit linear interpolation; no extrapolation; no anti-alias qualification"
+      },
+      "stored_axis_hypothesis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 7.560239135146827,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 4.152343939913795,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520955442112561,
+        "effective_count": 253872,
+        "dominant_modulation_hz_under_assumption": 46.13348459065986,
+        "dominant_bin_fraction": 0.002721958503920256
+      },
+      "counterfactual_nominal_index_axis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 7.553419552359893,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 4.5244459261957335,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520945512126142,
+        "effective_count": 253873,
+        "dominant_modulation_hz_under_assumption": 46.1333028719084,
+        "dominant_bin_fraction": 0.0027233104786121005
+      },
+      "timebase_sensitivity": {
+        "status": "observed",
+        "dominant_frequency_difference_hz": 0.00018171875146322236,
+        "two_bin_threshold_hz": 0.5041910884225121,
+        "timebase_sensitive": false,
+        "interpretation": "Conditional sensitivity, not diagnostic confidence or source-time confirmation"
+      }
+    },
+    {
+      "record_id": "pu-N09-M07-F10-KA03-2",
+      "split": "validation",
+      "entity_group": "paderborn-bearing-KA03",
+      "original_file_sha256": "4297df48ff2687f9487f291b968333bc13906e5309cc522bcf77052a568d292f",
+      "label_for_inventory_only": "outer_race",
+      "physical_input_ready": false,
+      "diagnostic_evidence_eligible": false,
+      "prediction": null,
+      "matching_status": "unavailable",
+      "matching_reasons": [
+        "stored_unit_and_time_semantics_unverified",
+        "sourced_speed_and_bearing_uncertainty_required",
+        "diagnostic_profile_not_qualified"
+      ],
+      "adaptation_status": "unavailable",
+      "adaptation": {
+        "algorithm_version": "stored-axis-linear-shape-v1",
+        "time_axis_semantics_verified": false,
+        "physical_unit_established": false,
+        "diagnostic_evidence_eligible": false,
+        "prediction": null,
+        "input_count": 255999,
+        "original_samples_sha256": "f849abb53ecea9b931951ad242e4dbe36f270ac4aadbed25e2ec66992ec6196c",
+        "original_axis_sha256": "72797c32f8a3fa94ca87d036b5b9a5a1266c194f8141706001c51f0a7975d857",
+        "first_stored_coordinate": 0.0,
+        "duration_s_under_assumption": 3.9999858849434693,
+        "min_step_nominal": 0.4927437916251165,
+        "max_step_nominal": 2.600592233562793,
+        "count_duration_relative_error": 4.283750983721896e-06,
+        "time_ulp_nominal": 2.8421709430404007e-11,
+        "reason": "GAP_EXCEEDS_RESEARCH_LIMIT"
+      }
+    },
+    {
+      "record_id": "pu-N15-M01-F10-KA03-1",
+      "split": "validation",
+      "entity_group": "paderborn-bearing-KA03",
+      "original_file_sha256": "820e2ebeb8769ccf39df03ec235e572b009680421323b03e06794c5128496f40",
+      "label_for_inventory_only": "outer_race",
+      "physical_input_ready": false,
+      "diagnostic_evidence_eligible": false,
+      "prediction": null,
+      "matching_status": "unavailable",
+      "matching_reasons": [
+        "stored_unit_and_time_semantics_unverified",
+        "sourced_speed_and_bearing_uncertainty_required",
+        "diagnostic_profile_not_qualified"
+      ],
+      "adaptation_status": "unavailable",
+      "adaptation": {
+        "algorithm_version": "stored-axis-linear-shape-v1",
+        "time_axis_semantics_verified": false,
+        "physical_unit_established": false,
+        "diagnostic_evidence_eligible": false,
+        "prediction": null,
+        "input_count": 256002,
+        "original_samples_sha256": "c20e3413550bbf86287d1184ae425f9674af5054a55ef30732eae723a07ff0d9",
+        "original_axis_sha256": "5608e5e93f85e8e1de23b1cb97af6e7705d790b6251cb8ebcbc494945afea27b",
+        "first_stored_coordinate": 0.0,
+        "duration_s_under_assumption": 3.9999850294854977,
+        "min_step_nominal": 0.0547493101805685,
+        "max_step_nominal": 1.423482064694781,
+        "count_duration_relative_error": 7.648907252578757e-06,
+        "time_ulp_nominal": 2.8421709430404007e-11,
+        "reason": "INTERVAL_BELOW_RESEARCH_LIMIT"
+      }
+    },
+    {
+      "record_id": "pu-N15-M01-F10-KA03-2",
+      "split": "validation",
+      "entity_group": "paderborn-bearing-KA03",
+      "original_file_sha256": "7ddd3372cd26cc6524f43bb174ada7093825b597539998580e5799fffa50413f",
+      "label_for_inventory_only": "outer_race",
+      "physical_input_ready": false,
+      "diagnostic_evidence_eligible": false,
+      "prediction": null,
+      "matching_status": "unavailable",
+      "matching_reasons": [
+        "stored_unit_and_time_semantics_unverified",
+        "sourced_speed_and_bearing_uncertainty_required",
+        "diagnostic_profile_not_qualified"
+      ],
+      "adaptation_status": "ok",
+      "adaptation": {
+        "algorithm_version": "stored-axis-linear-shape-v1",
+        "time_axis_semantics_verified": false,
+        "physical_unit_established": false,
+        "diagnostic_evidence_eligible": false,
+        "prediction": null,
+        "input_count": 256005,
+        "original_samples_sha256": "cd9800d02a2d3b85662752b86a92eaf21cb5361faee60ce6921851f9843462ed",
+        "original_axis_sha256": "513edc734f0f65a668fd81cc9e0326399b8f88f270af8e24be8f53be8658e915",
+        "first_stored_coordinate": 0.0,
+        "duration_s_under_assumption": 3.999996150439128,
+        "min_step_nominal": 0.2737465508744208,
+        "max_step_nominal": 1.012862238354728,
+        "count_duration_relative_error": 1.658740618153573e-05,
+        "time_ulp_nominal": 2.8421709430404007e-11,
+        "reason": null,
+        "output_count": 256000,
+        "grid_start_relative_s": 0.0,
+        "grid_last_relative_s": 3.999984375,
+        "uncovered_tail_s": 1.1775439128225429e-05,
+        "normalization_divisor_in_original_numeric_scale": 1.6235351551770625,
+        "output_proxy_sha256": "1ddd51e8ab72c3ade8670df265f208e25efbed43ac9de2a8a4b28456adb6ef64",
+        "output_axis_sha256": "cc029ff6aa01ce0a4a43ae5aa16caf2350607c75649329e71991248e7beb5fe8",
+        "proxy_unit": "1",
+        "operation": "explicit linear interpolation; no extrapolation; no anti-alias qualification"
+      },
+      "stored_axis_hypothesis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 4.701414782189097,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 3.1125791102969407,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520955442112561,
+        "effective_count": 253872,
+        "dominant_modulation_hz_under_assumption": 76.63704544022184,
+        "dominant_bin_fraction": 0.005101230927278958
+      },
+      "counterfactual_nominal_index_axis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 5.13146361946146,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 3.120203561993249,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520905792962734,
+        "effective_count": 253877,
+        "dominant_modulation_hz_under_assumption": 76.63553610606711,
+        "dominant_bin_fraction": 0.005106479709108757
+      },
+      "timebase_sensitivity": {
+        "status": "observed",
+        "dominant_frequency_difference_hz": 0.0015093341547327555,
+        "two_bin_threshold_hz": 0.5041910884225121,
+        "timebase_sensitive": false,
+        "interpretation": "Conditional sensitivity, not diagnostic confidence or source-time confirmation"
+      }
+    },
+    {
+      "record_id": "pu-N15-M07-F04-KA03-1",
+      "split": "validation",
+      "entity_group": "paderborn-bearing-KA03",
+      "original_file_sha256": "d0740302d82367e15643448a8f8360661950ffd688a64a425cb075ce521e5d4b",
+      "label_for_inventory_only": "outer_race",
+      "physical_input_ready": false,
+      "diagnostic_evidence_eligible": false,
+      "prediction": null,
+      "matching_status": "unavailable",
+      "matching_reasons": [
+        "stored_unit_and_time_semantics_unverified",
+        "sourced_speed_and_bearing_uncertainty_required",
+        "diagnostic_profile_not_qualified"
+      ],
+      "adaptation_status": "ok",
+      "adaptation": {
+        "algorithm_version": "stored-axis-linear-shape-v1",
+        "time_axis_semantics_verified": false,
+        "physical_unit_established": false,
+        "diagnostic_evidence_eligible": false,
+        "prediction": null,
+        "input_count": 256001,
+        "original_samples_sha256": "66053c24e798dbb5b7b78dcecfac42c78056d996c1cfab5e34800e125f02d137",
+        "original_axis_sha256": "8bb2003084102637244bb945585cb351e62a43ddf71638ab850a9df88de5fdc6",
+        "first_stored_coordinate": 0.0,
+        "duration_s_under_assumption": 3.9999995722710144,
+        "min_step_nominal": 0.9581129281513723,
+        "max_step_nominal": 1.012862238354728,
+        "count_duration_relative_error": 1.0693225778811474e-07,
+        "time_ulp_nominal": 2.8421709430404007e-11,
+        "reason": null,
+        "output_count": 256000,
+        "grid_start_relative_s": 0.0,
+        "grid_last_relative_s": 3.999984375,
+        "uncovered_tail_s": 1.519727101451096e-05,
+        "normalization_divisor_in_original_numeric_scale": 2.1545410142011394,
+        "output_proxy_sha256": "f77e32411f2d481af771e9a8ecb8cca67808f78330dea203521bff4287d4019f",
+        "output_axis_sha256": "cc029ff6aa01ce0a4a43ae5aa16caf2350607c75649329e71991248e7beb5fe8",
+        "proxy_unit": "1",
+        "operation": "explicit linear interpolation; no extrapolation; no anti-alias qualification"
+      },
+      "stored_axis_hypothesis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 5.682549621881565,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 3.4105534445362933,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520955442112561,
+        "effective_count": 253872,
+        "dominant_modulation_hz_under_assumption": 77.14123652864436,
+        "dominant_bin_fraction": 0.014712729653780348
+      },
+      "counterfactual_nominal_index_axis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 5.659811022524156,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 3.411376978312077,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520945512126142,
+        "effective_count": 253873,
+        "dominant_modulation_hz_under_assumption": 77.14093267105994,
+        "dominant_bin_fraction": 0.014716174456988904
+      },
+      "timebase_sensitivity": {
+        "status": "observed",
+        "dominant_frequency_difference_hz": 0.00030385758441298094,
+        "two_bin_threshold_hz": 0.5041910884225121,
+        "timebase_sensitive": false,
+        "interpretation": "Conditional sensitivity, not diagnostic confidence or source-time confirmation"
+      }
+    },
+    {
+      "record_id": "pu-N15-M07-F04-KA03-2",
+      "split": "validation",
+      "entity_group": "paderborn-bearing-KA03",
+      "original_file_sha256": "dc751c796d98f97a85efc89a1ab91197c519edafe304225dfb63a0379eca5ec1",
+      "label_for_inventory_only": "outer_race",
+      "physical_input_ready": false,
+      "diagnostic_evidence_eligible": false,
+      "prediction": null,
+      "matching_status": "unavailable",
+      "matching_reasons": [
+        "stored_unit_and_time_semantics_unverified",
+        "sourced_speed_and_bearing_uncertainty_required",
+        "diagnostic_profile_not_qualified"
+      ],
+      "adaptation_status": "unavailable",
+      "adaptation": {
+        "algorithm_version": "stored-axis-linear-shape-v1",
+        "time_axis_semantics_verified": false,
+        "physical_unit_established": false,
+        "diagnostic_evidence_eligible": false,
+        "prediction": null,
+        "input_count": 277114,
+        "original_samples_sha256": "709c2e0ab72a711b22b01397d6137bcc92722710a6ef4cff5a2d7fb52b88e8bc",
+        "original_axis_sha256": "36939c05c20e1f7beb48b2312e1446f25a125cb612dea34fe0dd24e477e926f8",
+        "first_stored_coordinate": 0.0,
+        "duration_s_under_assumption": 3.9999970058970997,
+        "min_step_nominal": 0.2737465508744208,
+        "max_step_nominal": 1.012862238354728,
+        "count_duration_relative_error": 0.08247346650923636,
+        "time_ulp_nominal": 2.8421709430404007e-11,
+        "reason": "CADENCE_DIFFERS_FROM_RESEARCH_SCOPE"
+      }
+    },
+    {
+      "record_id": "pu-N15-M07-F10-KI03-1",
+      "split": "validation",
+      "entity_group": "paderborn-bearing-KI03",
+      "original_file_sha256": "33c2a580de1a1517dcd6c9ad7b70d0c2a237ae87781870a67bd7222fcb7452f7",
+      "label_for_inventory_only": "inner_race",
+      "physical_input_ready": false,
+      "diagnostic_evidence_eligible": false,
+      "prediction": null,
+      "matching_status": "unavailable",
+      "matching_reasons": [
+        "stored_unit_and_time_semantics_unverified",
+        "sourced_speed_and_bearing_uncertainty_required",
+        "diagnostic_profile_not_qualified"
+      ],
+      "adaptation_status": "ok",
+      "adaptation": {
+        "algorithm_version": "stored-axis-linear-shape-v1",
+        "time_axis_semantics_verified": false,
+        "physical_unit_established": false,
+        "diagnostic_evidence_eligible": false,
+        "prediction": null,
+        "input_count": 256091,
+        "original_samples_sha256": "001c3feaa2c298042dad3d52e6b0c5977bfaca3dbd193e508c79f6bf671d69e4",
+        "original_axis_sha256": "9e62a31cc74ca4924782acd14c1d0c57b80e39029014f75a5fade05499f7853a",
+        "first_stored_coordinate": 0.0,
+        "duration_s_under_assumption": 3.999986740565913,
+        "min_step_nominal": 0.27374315533279514,
+        "max_step_nominal": 1.0128496748507132,
+        "count_duration_relative_error": 0.00035487853489391154,
+        "time_ulp_nominal": 2.8421709430404007e-11,
+        "reason": null,
+        "output_count": 256000,
+        "grid_start_relative_s": 0.0,
+        "grid_last_relative_s": 3.999984375,
+        "uncovered_tail_s": 2.3655659129317996e-06,
+        "normalization_divisor_in_original_numeric_scale": 1.5136718739996673,
+        "output_proxy_sha256": "241aa62cde814353a111b2934079900a6437656d818d4d1616dd90a600554a77",
+        "output_axis_sha256": "cc029ff6aa01ce0a4a43ae5aa16caf2350607c75649329e71991248e7beb5fe8",
+        "proxy_unit": "1",
+        "operation": "explicit linear interpolation; no extrapolation; no anti-alias qualification"
+      },
+      "stored_axis_hypothesis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 5.287885223783853,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 3.233761727774662,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520955442112561,
+        "effective_count": 253872,
+        "dominant_modulation_hz_under_assumption": 123.77891220772673,
+        "dominant_bin_fraction": 0.0027033228637233318
+      },
+      "counterfactual_nominal_index_axis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 6.392968841450621,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 3.3286023729471284,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.25200521335785137,
+        "effective_count": 253963,
+        "dominant_modulation_hz_under_assumption": 123.73455975870502,
+        "dominant_bin_fraction": 0.002685904769740109
+      },
+      "timebase_sensitivity": {
+        "status": "observed",
+        "dominant_frequency_difference_hz": 0.044352449021715756,
+        "two_bin_threshold_hz": 0.5041910884225121,
+        "timebase_sensitive": false,
+        "interpretation": "Conditional sensitivity, not diagnostic confidence or source-time confirmation"
+      }
+    },
+    {
+      "record_id": "pu-N15-M07-F10-KI03-2",
+      "split": "validation",
+      "entity_group": "paderborn-bearing-KI03",
+      "original_file_sha256": "ff1b6e9ba608e637420d82080ba532a6d545bfabb5b44325328be250ef4c0927",
+      "label_for_inventory_only": "inner_race",
+      "physical_input_ready": false,
+      "diagnostic_evidence_eligible": false,
+      "prediction": null,
+      "matching_status": "unavailable",
+      "matching_reasons": [
+        "stored_unit_and_time_semantics_unverified",
+        "sourced_speed_and_bearing_uncertainty_required",
+        "diagnostic_profile_not_qualified"
+      ],
+      "adaptation_status": "ok",
+      "adaptation": {
+        "algorithm_version": "stored-axis-linear-shape-v1",
+        "time_axis_semantics_verified": false,
+        "physical_unit_established": false,
+        "diagnostic_evidence_eligible": false,
+        "prediction": null,
+        "input_count": 256001,
+        "original_samples_sha256": "7d431b1dcbbd3a347e1ab967e596fcda80233dec6be39cd84fb4d07fc7dbec52",
+        "original_axis_sha256": "4c9a9e27a2fd4077fec3917f8bf0bc1cb63653080957de6f8ddfeb5d375da04b",
+        "first_stored_coordinate": 0.0,
+        "duration_s_under_assumption": 3.999997861381599,
+        "min_step_nominal": 0.547486310694012,
+        "max_step_nominal": 1.3687157767634517,
+        "count_duration_relative_error": 5.346548861568043e-07,
+        "time_ulp_nominal": 2.8421709430404007e-11,
+        "reason": null,
+        "output_count": 256000,
+        "grid_start_relative_s": 0.0,
+        "grid_last_relative_s": 3.999984375,
+        "uncovered_tail_s": 1.3486381599037145e-05,
+        "normalization_divisor_in_original_numeric_scale": 1.3763427725279231,
+        "output_proxy_sha256": "4a860a3172012c00b45179211027868a07562d2d9c520b04bccf69116ef75957",
+        "output_axis_sha256": "cc029ff6aa01ce0a4a43ae5aa16caf2350607c75649329e71991248e7beb5fe8",
+        "proxy_unit": "1",
+        "operation": "explicit linear interpolation; no extrapolation; no anti-alias qualification"
+      },
+      "stored_axis_hypothesis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 5.306896951087765,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 3.1881375703138075,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520955442112561,
+        "effective_count": 253872,
+        "dominant_modulation_hz_under_assumption": 144.702842377261,
+        "dominant_bin_fraction": 0.0025829707059939013
+      },
+      "counterfactual_nominal_index_axis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 5.773831177006653,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 3.2510746710550724,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520945512126142,
+        "effective_count": 253873,
+        "dominant_modulation_hz_under_assumption": 144.70227239604054,
+        "dominant_bin_fraction": 0.0025778613516118857
+      },
+      "timebase_sensitivity": {
+        "status": "observed",
+        "dominant_frequency_difference_hz": 0.0005699812204511545,
+        "two_bin_threshold_hz": 0.5041910884225121,
+        "timebase_sensitive": false,
+        "interpretation": "Conditional sensitivity, not diagnostic confidence or source-time confirmation"
+      }
+    },
+    {
+      "record_id": "pu-N09-M07-F10-KI03-1",
+      "split": "validation",
+      "entity_group": "paderborn-bearing-KI03",
+      "original_file_sha256": "9fc7bf258f1593250898c1b4b66d3687cdfa4475070e2fa4049c61b01a6af90d",
+      "label_for_inventory_only": "inner_race",
+      "physical_input_ready": false,
+      "diagnostic_evidence_eligible": false,
+      "prediction": null,
+      "matching_status": "unavailable",
+      "matching_reasons": [
+        "stored_unit_and_time_semantics_unverified",
+        "sourced_speed_and_bearing_uncertainty_required",
+        "diagnostic_profile_not_qualified"
+      ],
+      "adaptation_status": "ok",
+      "adaptation": {
+        "algorithm_version": "stored-axis-linear-shape-v1",
+        "time_axis_semantics_verified": false,
+        "physical_unit_established": false,
+        "diagnostic_evidence_eligible": false,
+        "prediction": null,
+        "input_count": 256080,
+        "original_samples_sha256": "658fbb9b79a144b3a2f2ed7c01d84e76cf79461be18a72e746cb856670b04fdd",
+        "original_axis_sha256": "8f481001d20d2e11a32355230a254b67e7d35ccbba509590865d885a9e7fbba4",
+        "first_stored_coordinate": 0.0,
+        "duration_s_under_assumption": 3.999987168289593,
+        "min_step_nominal": 0.9854753592435372,
+        "max_step_nominal": 1.0128496748507132,
+        "count_duration_relative_error": 0.00031180267784222324,
+        "time_ulp_nominal": 2.8421709430404007e-11,
+        "reason": null,
+        "output_count": 256000,
+        "grid_start_relative_s": 0.0,
+        "grid_last_relative_s": 3.999984375,
+        "uncovered_tail_s": 2.7932895929616564e-06,
+        "normalization_divisor_in_original_numeric_scale": 1.0894775383425024,
+        "output_proxy_sha256": "da767339993c02192ad3c4d4cfdcd230e90657fc4d5a2d760a731a9f5bc8549e",
+        "output_axis_sha256": "cc029ff6aa01ce0a4a43ae5aa16caf2350607c75649329e71991248e7beb5fe8",
+        "proxy_unit": "1",
+        "operation": "explicit linear interpolation; no extrapolation; no anti-alias qualification"
+      },
+      "stored_axis_hypothesis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 8.943772706491142,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 5.258699369647215,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520955442112561,
+        "effective_count": 253872,
+        "dominant_modulation_hz_under_assumption": 45.881389046448604,
+        "dominant_bin_fraction": 0.0030151588841929467
+      },
+      "counterfactual_nominal_index_axis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 9.255222669925375,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 7.258569390525982,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.25201612903225806,
+        "effective_count": 253952,
+        "dominant_modulation_hz_under_assumption": 45.86693548387097,
+        "dominant_bin_fraction": 0.0030082144979689794
+      },
+      "timebase_sensitivity": {
+        "status": "observed",
+        "dominant_frequency_difference_hz": 0.014453562577635637,
+        "two_bin_threshold_hz": 0.5041910884225121,
+        "timebase_sensitive": false,
+        "interpretation": "Conditional sensitivity, not diagnostic confidence or source-time confirmation"
+      }
+    },
+    {
+      "record_id": "pu-N09-M07-F10-KI03-2",
+      "split": "validation",
+      "entity_group": "paderborn-bearing-KI03",
+      "original_file_sha256": "d507c8d822d50aa25887b20b70e6fd58af5a3692cdf4d7e3044722cb3f26c573",
+      "label_for_inventory_only": "inner_race",
+      "physical_input_ready": false,
+      "diagnostic_evidence_eligible": false,
+      "prediction": null,
+      "matching_status": "unavailable",
+      "matching_reasons": [
+        "stored_unit_and_time_semantics_unverified",
+        "sourced_speed_and_bearing_uncertainty_required",
+        "diagnostic_profile_not_qualified"
+      ],
+      "adaptation_status": "unavailable",
+      "adaptation": {
+        "algorithm_version": "stored-axis-linear-shape-v1",
+        "time_axis_semantics_verified": false,
+        "physical_unit_established": false,
+        "diagnostic_evidence_eligible": false,
+        "prediction": null,
+        "input_count": 256324,
+        "original_samples_sha256": "a529c7f06112a2d6f028fafc81910f536fc52f7ab42652c1a24e58cac6da5231",
+        "original_axis_sha256": "7b35e89bed4ce2b91cb5c8994866e54c65929c3898a996c65c70fe45c6656992",
+        "first_stored_coordinate": 0.0,
+        "duration_s_under_assumption": 3.9999974336579185,
+        "min_step_nominal": 0.02737431555033254,
+        "max_step_nominal": 1.0128496748222915,
+        "count_duration_relative_error": 0.0012623611454330166,
+        "time_ulp_nominal": 2.8421709430404007e-11,
+        "reason": "INTERVAL_BELOW_RESEARCH_LIMIT"
+      }
+    },
+    {
+      "record_id": "pu-N15-M01-F10-KI03-1",
+      "split": "validation",
+      "entity_group": "paderborn-bearing-KI03",
+      "original_file_sha256": "fa78d1c3ab352c44ec0c77f88a60729f880b4b7ec4f8349f8085251b2affe06e",
+      "label_for_inventory_only": "inner_race",
+      "physical_input_ready": false,
+      "diagnostic_evidence_eligible": false,
+      "prediction": null,
+      "matching_status": "unavailable",
+      "matching_reasons": [
+        "stored_unit_and_time_semantics_unverified",
+        "sourced_speed_and_bearing_uncertainty_required",
+        "diagnostic_profile_not_qualified"
+      ],
+      "adaptation_status": "ok",
+      "adaptation": {
+        "algorithm_version": "stored-axis-linear-shape-v1",
+        "time_axis_semantics_verified": false,
+        "physical_unit_established": false,
+        "diagnostic_evidence_eligible": false,
+        "prediction": null,
+        "input_count": 256086,
+        "original_samples_sha256": "25c18b8ca2cb942d35b172d89f09919bed364aba9b774ae07d5aac2b889a12f9",
+        "original_axis_sha256": "e9995da9e15331979bbda60edb090689e18df6b5492d03c72038d131b0bf5259",
+        "first_stored_coordinate": 0.0,
+        "duration_s_under_assumption": 3.999989306907994,
+        "min_step_nominal": 0.2737431553505587,
+        "max_step_nominal": 1.0128496748222915,
+        "count_duration_relative_error": 0.0003347054177604623,
+        "time_ulp_nominal": 2.8421709430404007e-11,
+        "reason": null,
+        "output_count": 256000,
+        "grid_start_relative_s": 0.0,
+        "grid_last_relative_s": 3.999984375,
+        "uncovered_tail_s": 4.931907993999118e-06,
+        "normalization_divisor_in_original_numeric_scale": 1.5411376942940158,
+        "output_proxy_sha256": "4e62be75ba5bf30db3b49bc5221e5b4fb736ad29c1a7e2674d66a98fe9db8f4f",
+        "output_axis_sha256": "cc029ff6aa01ce0a4a43ae5aa16caf2350607c75649329e71991248e7beb5fe8",
+        "proxy_unit": "1",
+        "operation": "explicit linear interpolation; no extrapolation; no anti-alias qualification"
+      },
+      "stored_axis_hypothesis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 5.942059344971978,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 3.246162106595128,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520955442112561,
+        "effective_count": 253872,
+        "dominant_modulation_hz_under_assumption": 144.702842377261,
+        "dominant_bin_fraction": 0.0025219086032003354
+      },
+      "counterfactual_nominal_index_axis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 6.958860942501321,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 3.3558825016005756,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.252010174910812,
+        "effective_count": 253958,
+        "dominant_modulation_hz_under_assumption": 144.6538403988061,
+        "dominant_bin_fraction": 0.0025228131724127027
+      },
+      "timebase_sensitivity": {
+        "status": "observed",
+        "dominant_frequency_difference_hz": 0.04900197845489629,
+        "two_bin_threshold_hz": 0.5041910884225121,
+        "timebase_sensitive": false,
+        "interpretation": "Conditional sensitivity, not diagnostic confidence or source-time confirmation"
+      }
+    },
+    {
+      "record_id": "pu-N15-M01-F10-KI03-2",
+      "split": "validation",
+      "entity_group": "paderborn-bearing-KI03",
+      "original_file_sha256": "52d3460537b5c760d344c217c8a6367fa44c9e02d015287ade11c196651eeb34",
+      "label_for_inventory_only": "inner_race",
+      "physical_input_ready": false,
+      "diagnostic_evidence_eligible": false,
+      "prediction": null,
+      "matching_status": "unavailable",
+      "matching_reasons": [
+        "stored_unit_and_time_semantics_unverified",
+        "sourced_speed_and_bearing_uncertainty_required",
+        "diagnostic_profile_not_qualified"
+      ],
+      "adaptation_status": "ok",
+      "adaptation": {
+        "algorithm_version": "stored-axis-linear-shape-v1",
+        "time_axis_semantics_verified": false,
+        "physical_unit_established": false,
+        "diagnostic_evidence_eligible": false,
+        "prediction": null,
+        "input_count": 256001,
+        "original_samples_sha256": "d56b9ee0e811152f1833db4f02abf0dbbf27ae0623739b418b5edbbad7d0e7de",
+        "original_axis_sha256": "f96609d0edd8f1e87c21913b2ddfcb2723d778ce6d928149d383a040c94dd2d9",
+        "first_stored_coordinate": 0.0,
+        "duration_s_under_assumption": 3.9999995722763195,
+        "min_step_nominal": 0.9581010437313131,
+        "max_step_nominal": 1.0128496748222915,
+        "count_duration_relative_error": 1.0693093151718224e-07,
+        "time_ulp_nominal": 2.8421709430404007e-11,
+        "reason": null,
+        "output_count": 256000,
+        "grid_start_relative_s": 0.0,
+        "grid_last_relative_s": 3.999984375,
+        "uncovered_tail_s": 1.5197276319600661e-05,
+        "normalization_divisor_in_original_numeric_scale": 1.3549804678545407,
+        "output_proxy_sha256": "3676494074d7e8cb226c64fd85af279ec79ea56d8fdc99f2f622d31f0fccc9a3",
+        "output_axis_sha256": "cc029ff6aa01ce0a4a43ae5aa16caf2350607c75649329e71991248e7beb5fe8",
+        "proxy_unit": "1",
+        "operation": "explicit linear interpolation; no extrapolation; no anti-alias qualification"
+      },
+      "stored_axis_hypothesis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 6.061872834004429,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 3.3505034063752372,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520955442112561,
+        "effective_count": 253872,
+        "dominant_modulation_hz_under_assumption": 24.95745887691435,
+        "dominant_bin_fraction": 0.002884051963994604
+      },
+      "counterfactual_nominal_index_axis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 6.086327011966931,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 3.3630105980295286,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520945512126142,
+        "effective_count": 253873,
+        "dominant_modulation_hz_under_assumption": 24.957360570048806,
+        "dominant_bin_fraction": 0.002883076718327968
+      },
+      "timebase_sensitivity": {
+        "status": "observed",
+        "dominant_frequency_difference_hz": 9.830686554579415e-05,
+        "two_bin_threshold_hz": 0.5041910884225121,
+        "timebase_sensitive": false,
+        "interpretation": "Conditional sensitivity, not diagnostic confidence or source-time confirmation"
+      }
+    },
+    {
+      "record_id": "pu-N15-M07-F04-KI03-1",
+      "split": "validation",
+      "entity_group": "paderborn-bearing-KI03",
+      "original_file_sha256": "83dba7e266329746c94cda3b06c28f671e600186ab2aceba531251f9892da0cf",
+      "label_for_inventory_only": "inner_race",
+      "physical_input_ready": false,
+      "diagnostic_evidence_eligible": false,
+      "prediction": null,
+      "matching_status": "unavailable",
+      "matching_reasons": [
+        "stored_unit_and_time_semantics_unverified",
+        "sourced_speed_and_bearing_uncertainty_required",
+        "diagnostic_profile_not_qualified"
+      ],
+      "adaptation_status": "ok",
+      "adaptation": {
+        "algorithm_version": "stored-axis-linear-shape-v1",
+        "time_axis_semantics_verified": false,
+        "physical_unit_established": false,
+        "diagnostic_evidence_eligible": false,
+        "prediction": null,
+        "input_count": 256001,
+        "original_samples_sha256": "ee363e548a5fa6f3b846dd6fc779b6c4ba6eb5d44566284d50c4e36a3b1b1eb4",
+        "original_axis_sha256": "ca071799dd0f8d90cdf613e3ffc5a83db1779ebb442bff8b2337606a55ea6b25",
+        "first_stored_coordinate": 0.0,
+        "duration_s_under_assumption": 3.999998289105279,
+        "min_step_nominal": 0.9307267281712939,
+        "max_step_nominal": 1.0128496748222915,
+        "count_duration_relative_error": 4.277238631657754e-07,
+        "time_ulp_nominal": 2.8421709430404007e-11,
+        "reason": null,
+        "output_count": 256000,
+        "grid_start_relative_s": 0.0,
+        "grid_last_relative_s": 3.999984375,
+        "uncovered_tail_s": 1.3914105279067002e-05,
+        "normalization_divisor_in_original_numeric_scale": 1.358032225665024,
+        "output_proxy_sha256": "d848604253c35e0522f18a4db91dc51425712ff151af04d4cf570559d267b4f2",
+        "output_axis_sha256": "cc029ff6aa01ce0a4a43ae5aa16caf2350607c75649329e71991248e7beb5fe8",
+        "proxy_unit": "1",
+        "operation": "explicit linear interpolation; no extrapolation; no anti-alias qualification"
+      },
+      "stored_axis_hypothesis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 7.060525585304276,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 3.594182738475577,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520955442112561,
+        "effective_count": 253872,
+        "dominant_modulation_hz_under_assumption": 49.9149177538287,
+        "dominant_bin_fraction": 0.002761106007226193
+      },
+      "counterfactual_nominal_index_axis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 7.193942156436496,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 3.6554099772301525,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520945512126142,
+        "effective_count": 253873,
+        "dominant_modulation_hz_under_assumption": 49.91472114009761,
+        "dominant_bin_fraction": 0.002762691209788699
+      },
+      "timebase_sensitivity": {
+        "status": "observed",
+        "dominant_frequency_difference_hz": 0.0001966137310915883,
+        "two_bin_threshold_hz": 0.5041910884225121,
+        "timebase_sensitive": false,
+        "interpretation": "Conditional sensitivity, not diagnostic confidence or source-time confirmation"
+      }
+    },
+    {
+      "record_id": "pu-N15-M07-F04-KI03-2",
+      "split": "validation",
+      "entity_group": "paderborn-bearing-KI03",
+      "original_file_sha256": "b81379537cc20179d7feeb5ae02c46e838c6ce3d85fe46808adf28b558493dd4",
+      "label_for_inventory_only": "inner_race",
+      "physical_input_ready": false,
+      "diagnostic_evidence_eligible": false,
+      "prediction": null,
+      "matching_status": "unavailable",
+      "matching_reasons": [
+        "stored_unit_and_time_semantics_unverified",
+        "sourced_speed_and_bearing_uncertainty_required",
+        "diagnostic_profile_not_qualified"
+      ],
+      "adaptation_status": "ok",
+      "adaptation": {
+        "algorithm_version": "stored-axis-linear-shape-v1",
+        "time_axis_semantics_verified": false,
+        "physical_unit_established": false,
+        "diagnostic_evidence_eligible": false,
+        "prediction": null,
+        "input_count": 256001,
+        "original_samples_sha256": "4117343fcda4a7b6a253eb6b4569654d9065999e332aef854de3d94d053201d2",
+        "original_axis_sha256": "f3e167fe7fbc78345a486b70fe2a1aadc43cf09bf44ffa9c849fd07ebd437982",
+        "first_stored_coordinate": 0.0,
+        "duration_s_under_assumption": 3.99999957227632,
+        "min_step_nominal": 0.9581010437313131,
+        "max_step_nominal": 1.0128496748222915,
+        "count_duration_relative_error": 1.0693093140349538e-07,
+        "time_ulp_nominal": 2.8421709430404007e-11,
+        "reason": null,
+        "output_count": 256000,
+        "grid_start_relative_s": 0.0,
+        "grid_last_relative_s": 3.999984375,
+        "uncovered_tail_s": 1.519727632004475e-05,
+        "normalization_divisor_in_original_numeric_scale": 1.2451171866771455,
+        "output_proxy_sha256": "ba3c87d2138e4987a035a256a714d086603bfa669abbbca4a103e77b58948335",
+        "output_axis_sha256": "cc029ff6aa01ce0a4a43ae5aa16caf2350607c75649329e71991248e7beb5fe8",
+        "proxy_unit": "1",
+        "operation": "explicit linear interpolation; no extrapolation; no anti-alias qualification"
+      },
+      "stored_axis_hypothesis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 6.606210687125493,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 3.6203404394847833,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520955442112561,
+        "effective_count": 253872,
+        "dominant_modulation_hz_under_assumption": 24.95745887691435,
+        "dominant_bin_fraction": 0.002463888357780076
+      },
+      "counterfactual_nominal_index_axis": {
+        "status": "ok",
+        "reason": null,
+        "proxy_unit": "1",
+        "physical_metrics": null,
+        "crest_factor": {
+          "value": 6.643247369727834,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "pearson_kurtosis": {
+          "value": 3.642769674202286,
+          "unit": "1",
+          "status": "available",
+          "reason": null
+        },
+        "numeric_configuration_sha256": "a0f79f156f49630c88053d920d0692d8bc62e4ab1f66618914528d748711f0c8",
+        "prediction": null,
+        "diagnostic_evidence_eligible": false,
+        "bin_spacing_hz": 0.2520945512126142,
+        "effective_count": 253873,
+        "dominant_modulation_hz_under_assumption": 24.957360570048806,
+        "dominant_bin_fraction": 0.0024629143498775875
+      },
+      "timebase_sensitivity": {
+        "status": "observed",
+        "dominant_frequency_difference_hz": 9.830686554579415e-05,
+        "two_bin_threshold_hz": 0.5041910884225121,
+        "timebase_sensitive": false,
+        "interpretation": "Conditional sensitivity, not diagnostic confidence or source-time confirmation"
+      }
+    }
+  ],
+  "deterministic_replay_verified": true,
+  "sealed_test": {
+    "bearing_ids": [
+      "K003",
+      "KA04",
+      "KI04"
+    ],
+    "signals_read": 0,
+    "members_extracted": 0,
+    "released_for_evaluation": false
+  },
+  "physical_input_readiness_changed": false,
+  "diagnostic_profiles_qualified": 0,
+  "accuracy": null,
+  "matching_runs_qualified": 0,
+  "factory_data_used": false,
+  "model_called": false
+}

@@ -1,0 +1,72 @@
+{
+  "version": "paderborn-primary-metadata-review-v1",
+  "reviewed_on": "2026-10-30",
+  "scope": "Development bearings only; validation/test signals did not determine these conclusions",
+  "reviewed_documents": [
+    {
+      "archive": "paderborn/K001.rar",
+      "archive_sha256": "0f119ebdb28fb2f4d9fac1beb1319429f63f7ae1256c23c872f280f3560918e5",
+      "member": "K001/K001.pdf",
+      "pdf_sha256": "b6ef87e2fc60c7fdd50b6a8762c8a099d16d5242f897c60d5425c0e69478348a"
+    },
+    {
+      "archive": "paderborn/K001.rar",
+      "archive_sha256": "0f119ebdb28fb2f4d9fac1beb1319429f63f7ae1256c23c872f280f3560918e5",
+      "member": "K001/measuring_log_K001.pdf",
+      "pdf_sha256": "827f5ae9eec40ed96b2078fc4529bf0f07f4ffe063fceeb2a5a569d1ac809cb2"
+    },
+    {
+      "archive": "paderborn/KA01.rar",
+      "archive_sha256": "6a6be1e11132730cc6f560d51eacedcbfd5fd74b829e9d8d3728c6c8a7cd4c0e",
+      "member": "KA01/KA01.pdf",
+      "pdf_sha256": "f21f0ffbda26a1c54a32c338e298dca834be367f9bc3b26f7295eeb75d417111"
+    },
+    {
+      "archive": "paderborn/KA01.rar",
+      "archive_sha256": "6a6be1e11132730cc6f560d51eacedcbfd5fd74b829e9d8d3728c6c8a7cd4c0e",
+      "member": "KA01/measuring_log_KA01.pdf",
+      "pdf_sha256": "942aa35cd3c6bb3069046c2d5e6cadbd1b91c1768f44c5d1cef8a072cf4fdf7a"
+    },
+    {
+      "archive": "paderborn/KI01.rar",
+      "archive_sha256": "b1dd6d99bb64d556f889fefaedb7e6e672900f5f015125615feaae776f055348",
+      "member": "KI01/KI01.pdf",
+      "pdf_sha256": "ccc94de46dc35de11f3ede602a68b41f1a692900a05a80cbde609a98482f5905"
+    },
+    {
+      "archive": "paderborn/KI01.rar",
+      "archive_sha256": "b1dd6d99bb64d556f889fefaedb7e6e672900f5f015125615feaae776f055348",
+      "member": "KI01/measuring_log_KI01.pdf",
+      "pdf_sha256": "c0036ff0a77ce0886ec2675b95577e0f2a18c15d7c613af20d3d5c2210e615a0"
+    }
+  ],
+  "findings": {
+    "nominal_vibration_sampling_rate_hz": 64000,
+    "nominal_rate_source": "Original measuring logs of K001, KA01, KI01",
+    "sensor_sensitivity": "100 mV/g stated for sensor, not a verified conversion of stored MATLAB values",
+    "stored_signal_unit_established": false,
+    "time_axis_semantics_established": false,
+    "reason": "Logs establish nominal equipment settings but provide no stored-value unit conversion or explanation for nonuniform HostService X coordinates",
+    "geometry_seen_but_not_qualified": {
+      "bearing_type": "6203",
+      "rolling_elements": 8,
+      "pitch_diameter_mm": 29.05,
+      "rolling_element_diameter_mm": 6.75,
+      "contact_angle_deg": 0,
+      "uncertainty_source": null,
+      "used_for_matching": false
+    },
+    "label_conflict": "Official paper section 5 prose reverses KA04/KI18 wording relative to Table 5/Table 10. Frozen test labels follow those tables; test signal/member review is deferred."
+  },
+  "decision": {
+    "original_data_unchanged": true,
+    "resampling_authorized_as_qualified_profile": false,
+    "unit_filled_from_sensor_sensitivity": false,
+    "diagnostic_profile_qualified": false
+  },
+  "follow_up": [
+    "Resolve export-time-axis semantics from primary documentation before choosing a resampling policy",
+    "Establish stored channel scaling and uncertainty; sensor sensitivity alone is insufficient",
+    "Check test bearing fact sheets and full signal-level duplication only under eventual frozen-test release protocol"
+  ]
+}

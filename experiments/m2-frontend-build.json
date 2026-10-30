@@ -1,0 +1,54 @@
+{
+  "passed": true,
+  "commands": [
+    {
+      "command": [
+        "node",
+        "frontend\\node_modules\\vue-tsc\\bin\\vue-tsc.js",
+        "--noEmit"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "node",
+        "frontend\\node_modules\\vite\\bin\\vite.js",
+        "build"
+      ],
+      "exit_code": 0,
+      "stdout": "vite v8.3.5 building client environment for production...\ntransforming...\n✓ 38 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/index.html                   0.41 kB │ gzip:  0.30 kB\ndist/assets/index-DsNCg6MG.css    5.13 kB │ gzip:  1.69 kB\ndist/assets/index-BNaA6cl-.js   141.50 kB │ gzip: 50.15 kB\n\n✓ built in 458ms\n",
+      "stderr": ""
+    }
+  ],
+  "source_sha256": {
+    "frontend/index.html": "e975739ae67f9cc03471fa90cf5460302c517245c442e1e36dc2bea6afec1a74",
+    "frontend/package-lock.json": "f039ffb3aa0213284fbbfcb417662237d06b691745701a6fef0473972e37562b",
+    "frontend/package.json": "d6aa1739fd37e1ad445ff89b9e65fb0061dcaaf61eca9da24da13663b84eb773",
+    "frontend/src/api/client.ts": "b7ad0928adf66c762a6bdf6270bc97184331f6625472a66a76ea3e250cfbc7f4",
+    "frontend/src/api/formal.ts": "399e083ff33bc3ac7458d19800f94669879c580e158136ae63d305d1a818bfab",
+    "frontend/src/App.vue": "5270b676bd000a3d40a1df4e579aaab58fe5e286404f187b34055f5cfd5eb4d2",
+    "frontend/src/components/AgentPanel.vue": "511f628cd2808e8161e41314a7c4f350e52a323488554eb4e0f06e5129e596a5",
+    "frontend/src/components/AgentResult.vue": "d24461092d40ba2c94065832b528ed26d687ced63da2abfd69fffb0b94f2fbc8",
+    "frontend/src/components/AnalysisResults.vue": "ff4f8d79653fcbb178d947ff8ff2bf603d02242c2e117934c298f4bfd48afd2b",
+    "frontend/src/components/ComparisonWorkbench.vue": "c0c2d2cd9bc1108a6f090ea50aff05af2d94d6c5d69ed1e9094a2e2c5d8a0a1c",
+    "frontend/src/components/DataImportPanel.vue": "308a3b405206a8167cb1c39c9ccef57efce173a07e1a93a916025380f43b43da",
+    "frontend/src/components/FormalWorkbench.vue": "68d03192ebc05c63041619bc436d39cd644e3f8f08d267f925a0edb847e0bed5",
+    "frontend/src/components/KnowledgeSearchPanel.vue": "fe09d566d0908a6cd09ce09818b94aa99223cdb942806e532087c8a273917274",
+    "frontend/src/components/MetadataForm.vue": "19829b95c5242ab5db673c29fa652b78e3f2966d101b604e909f22b241f7a558",
+    "frontend/src/components/SignalChart.vue": "664e5d16d41a83ec1fb42c38ef71f00ade83e2dcf055b2200f6a92850186cc9f",
+    "frontend/src/components/ToolWorkbench.vue": "8ba397e8f2e7c0342db10ba21a791c872e1fbc7d150107dd1ae59a03b826a3d9",
+    "frontend/src/composables/useFormalWorkbench.ts": "e84429add22d8fa8cbb1cfe3f6bd89b64c807e825d4f02b66b9f43887966086e",
+    "frontend/src/composables/useWorkbench.ts": "96fc211aa37a608d77c519641431dcad032a508607697c057bc0ea382a87d688",
+    "frontend/src/main.ts": "5a0a0696a077583bd158e44acd55eec7442ebcec6d4b5886a9f7f165d853f6fc",
+    "frontend/src/PrototypeWorkbench.vue": "12395f8551a931c1bd4b783c11aa0edb3ae485bcc91eadb1d7d514b1ac00ce78",
+    "frontend/src/styles/main.css": "a8d8b8e656defae29c55a34b88e3d637d73169cdcb8fd525a5738558c59043b6",
+    "frontend/src/types/api.ts": "55a5fecffc4a0bf73005d51640fc8bdac42341007443896d5ef2927b7450aad9",
+    "frontend/src/types/comparison.ts": "637479a6d8c723133be4302d9183eb95673b9f54a5891cd73bf2935732f6454d",
+    "frontend/src/types/formal.ts": "d02f54af58e3afdfe79f92edf4aef2f68d6376c78e2862663d82fc0dc4656686",
+    "frontend/src/types/tools.ts": "af8a570e0834727d952dc730f727f3e52fd444a402df89de3b8415b2420c53bf",
+    "frontend/tsconfig.json": "8a7cb825bd3006939fcf4a289e3aef943806385020d670634f2377d56a42d07e",
+    "frontend/vite.config.ts": "8fd088da49d47efc8529569913af93557f9af30433d5187f07eb7000d0194e49"
+  }
+}

@@ -1,0 +1,1046 @@
+{
+  "execution_completed": true,
+  "purpose": "Development data integrity and shape baseline, not diagnostic accuracy",
+  "protocol": {
+    "version": "public-shape-development-v1",
+    "selection": "full original drive-end/vibration_1 channel; no resampling or window splitting",
+    "carrier_band_hz": [
+      2000.0,
+      4000.0
+    ],
+    "modulation_range_hz": [
+      10.0,
+      500.0
+    ],
+    "band_reason": "Fixed before this public-data run from existing T02a synthetic baseline; not label optimized",
+    "scale": "divide by original absolute peak; report dimensionless shape only",
+    "time_axis_relative_tolerance": 0.001,
+    "prediction": null,
+    "diagnostic_evidence_eligible": false
+  },
+  "protocol_sha256": "02b498bdb1fc0490094f93db4a901248764cf3604afcc5e1ae75ba5851aebe32",
+  "environment": {
+    "python": "3.11.15",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1"
+  },
+  "source_sha256": {
+    "datasets/public-data-v1/catalog.json": "32dc18ab082c60742c82813fbd63bed5c0516a76a6d5e4713b6fa31ea80c625b",
+    "datasets/public-data-v1/manifest.json": "1dca73047ba4b589ffa946926a6246fd3e31eb12ed2b83c2a7a29e8029f491d8",
+    "backend/scripts/prepare_public_data.py": "0f9ab70e052adb87406328698c51062e6d327b18191f6b925f94c2f4adaa61cc",
+    "backend/scripts/benchmark_public_data.py": "4c2ea98c0b17d326949edaca28a74ff0ea1b397076be810ca8a2df87ab0bbc9d",
+    "backend/scripts/verify_public_data_reproduction.py": "1750a5688bf5ebc29a8f24c9162af3d41f74b06f0cdc7cca299591219c0d2172",
+    "backend/src/vibradiag/evaluation/datasets.py": "1bb74f5d6864c8a3be56ba26942e56f0d64cc9cc8822a8456916f153bb314847",
+    "backend/src/vibradiag/evaluation/baseline.py": "1951312b5f6169005f73a4ab82fafb7f17fcfe557a275e5e17a84f58d554f5dd",
+    "backend/src/vibradiag/analysis/envelope.py": "dd769a9d8f1fe2ab010ed2ed8372d40af5bc50e72e07fbe447e89ec708b83d87",
+    "backend/src/vibradiag/analysis/basic.py": "5378fef761cd169a8ff70c851e0a8794aa0ebdf3ffa7c6071652bf82a373670e",
+    "backend/src/vibradiag/analysis/csv_input.py": "89fd5eb2a62528ea7193641fb6597c87fe8cbd5a801e66e7f431366a9af13f79",
+    "backend/src/vibradiag/schemas/tools.py": "1baf54398e28a032f28e39346d311e47f055b5d5dad2c61a5d9133aa2f85d9de",
+    "backend/src/vibradiag/domain/tool_results.py": "014a18c8803214b3b5a981fb9f2f746d9d70493a1bd4a74f38d3ca8e749ee7c8",
+    "backend/requirements.lock.txt": "db7bca83a22a77ed4e06f2c15ebfadf31947b268acebe406d8cccdfda889e88f",
+    "backend/tests/unit/test_public_datasets.py": "6d1442fb43e152d95f68f025bd03ab27cf8d841aef42bd7e68c9c2fe9cb660cb"
+  },
+  "split_audit": {
+    "cross_split_leakage": false,
+    "record_count": 28,
+    "entity_group_count": 7,
+    "split_counts": {
+      "development": 28,
+      "validation": 0,
+      "sealed_test": 0
+    },
+    "label_coverage": {
+      "development": [
+        "healthy_reference",
+        "inner_race",
+        "outer_race",
+        "rolling_element"
+      ],
+      "validation": [],
+      "sealed_test": []
+    },
+    "missing_four_class_labels": {
+      "development": [],
+      "validation": [
+        "healthy_reference",
+        "inner_race",
+        "outer_race",
+        "rolling_element"
+      ],
+      "sealed_test": [
+        "healthy_reference",
+        "inner_race",
+        "outer_race",
+        "rolling_element"
+      ]
+    },
+    "four_class_evaluation_ready": false,
+    "statistical_independence_established": false
+  },
+  "development_records": [
+    {
+      "record_id": "cwru-97-DE",
+      "label_for_inventory_only": "healthy_reference",
+      "input_count": 243938,
+      "crest_factor": {
+        "value": 4.21959612587663,
+        "unit": "1",
+        "status": "available",
+        "reason": null
+      },
+      "pearson_kurtosis": {
+        "value": 2.7642427904394915,
+        "unit": "1",
+        "status": "available",
+        "reason": null
+      },
+      "physical_metrics": null,
+      "physical_metrics_reason": "SHAPE_ONLY_PROTOCOL",
+      "unit_verified": false,
+      "prediction": null,
+      "diagnostic_evidence_eligible": false,
+      "envelope": {
+        "status": "unavailable",
+        "reason": "SAMPLING_RATE_NOT_VERIFIED"
+      },
+      "seconds_including_verified_read": 0.09198920000017097
+    },
+    {
+      "record_id": "cwru-105-DE",
+      "label_for_inventory_only": "inner_race",
+      "input_count": 121265,
+      "crest_factor": {
+        "value": 5.965266316707953,
+        "unit": "1",
+        "status": "available",
+        "reason": null
+      },
+      "pearson_kurtosis": {
+        "value": 5.395863773038576,
+        "unit": "1",
+        "status": "available",
+        "reason": null
+      },
+      "physical_metrics": null,
+      "physical_metrics_reason": "SHAPE_ONLY_PROTOCOL",
+      "unit_verified": false,
+      "prediction": null,
+      "diagnostic_evidence_eligible": false,
+      "envelope": {
+        "status": "ok",
+        "configuration_sha256": "c120af93047e0ac04a0bf2ceb64a6ebbc3ac17260213daef0be6aa845567b637",
+        "reason": null,
+        "numeric_input": "unit-peak proxy; not SI acceleration",
+        "evidence_preconditions_satisfied": false,
+        "dominant_modulation_hz": 161.72907898762227,
+        "dominant_bin_fraction": 0.02690477812829906,
+        "bin_spacing_hz": 0.09922029385743697,
+        "effective_count": 120943
+      },
+      "seconds_including_verified_read": 0.10846490000039921
+    },
+    {
+      "record_id": "cwru-118-DE",
+      "label_for_inventory_only": "rolling_element",
+      "input_count": 122571,
+      "crest_factor": {
+        "value": 4.3597254173859765,
+        "unit": "1",
+        "status": "available",
+        "reason": null
+      },
+      "pearson_kurtosis": {
+        "value": 2.984716022726586,
+        "unit": "1",
+        "status": "available",
+        "reason": null
+      },
+      "physical_metrics": null,
+      "physical_metrics_reason": "SHAPE_ONLY_PROTOCOL",
+      "unit_verified": false,
+      "prediction": null,
+      "diagnostic_evidence_eligible": false,
+      "envelope": {
+        "status": "ok",
+        "configuration_sha256": "c120af93047e0ac04a0bf2ceb64a6ebbc3ac17260213daef0be6aa845567b637",
+        "reason": null,
+        "numeric_input": "unit-peak proxy; not SI acceleration",
+        "evidence_preconditions_satisfied": false,
+        "dominant_modulation_hz": 29.938895205686755,
+        "dominant_bin_fraction": 0.0029695296702602738,
+        "bin_spacing_hz": 0.09816031214979264,
+        "effective_count": 122249
+      },
+      "seconds_including_verified_read": 0.13417740000113554
+    },
+    {
+      "record_id": "cwru-130-DE",
+      "label_for_inventory_only": "outer_race",
+      "input_count": 121991,
+      "crest_factor": {
+        "value": 5.4225464522273175,
+        "unit": "1",
+        "status": "available",
+        "reason": null
+      },
+      "pearson_kurtosis": {
+        "value": 7.649434671317989,
+        "unit": "1",
+        "status": "available",
+        "reason": null
+      },
+      "physical_metrics": null,
+      "physical_metrics_reason": "SHAPE_ONLY_PROTOCOL",
+      "unit_verified": false,
+      "prediction": null,
+      "diagnostic_evidence_eligible": false,
+      "envelope": {
+        "status": "ok",
+        "configuration_sha256": "c120af93047e0ac04a0bf2ceb64a6ebbc3ac17260213daef0be6aa845567b637",
+        "reason": null,
+        "numeric_input": "unit-peak proxy; not SI acceleration",
+        "evidence_preconditions_satisfied": false,
+        "dominant_modulation_hz": 107.60341582490199,
+        "dominant_bin_fraction": 0.05379123106200998,
+        "bin_spacing_hz": 0.09862824548570301,
+        "effective_count": 121669
+      },
+      "seconds_including_verified_read": 0.11517989999993006
+    },
+    {
+      "record_id": "pu-N15_M07_F10-K001-1",
+      "label_for_inventory_only": "healthy_reference",
+      "input_count": 256001,
+      "crest_factor": {
+        "value": 12.120430165612275,
+        "unit": "1",
+        "status": "available",
+        "reason": null
+      },
+      "pearson_kurtosis": {
+        "value": 13.100813872760897,
+        "unit": "1",
+        "status": "available",
+        "reason": null
+      },
+      "physical_metrics": null,
+      "physical_metrics_reason": "SHAPE_ONLY_PROTOCOL",
+      "unit_verified": false,
+      "prediction": null,
+      "diagnostic_evidence_eligible": false,
+      "time_axis_check": {
+        "record_duration_s": 3.999998716828959,
+        "nominal_duration_s": 4.0,
+        "duration_relative_error": 3.2079276024443715e-07,
+        "max_step_relative_error": 0.06927327180028445,
+        "tolerance": 0.001
+      },
+      "envelope": {
+        "status": "unavailable",
+        "reason": "TIME_AXIS_DIFFERS_FROM_NOMINAL_RATE"
+      },
+      "seconds_including_verified_read": 0.11258009999983187
+    },
+    {
+      "record_id": "pu-N15_M07_F10-K001-2",
+      "label_for_inventory_only": "healthy_reference",
+      "input_count": 256001,
+      "crest_factor": {
+        "value": 11.811374431578267,
+        "unit": "1",
+        "status": "available",
+        "reason": null
+      },
+      "pearson_kurtosis": {
+        "value": 14.035190443901728,
+        "unit": "1",
+        "status": "available",
+        "reason": null
+      },
+      "physical_metrics": null,
+      "physical_metrics_reason": "SHAPE_ONLY_PROTOCOL",
+      "unit_verified": false,
+      "prediction": null,
+      "diagnostic_evidence_eligible": false,
+      "time_axis_check": {
+        "record_duration_s": 3.99999957227632,
+        "nominal_duration_s": 4.0,
+        "duration_relative_error": 1.0693092000746418e-07,
+        "max_step_relative_error": 0.01452464075646278,
+        "tolerance": 0.001
+      },
+      "envelope": {
+        "status": "unavailable",
+        "reason": "TIME_AXIS_DIFFERS_FROM_NOMINAL_RATE"
+      },
+      "seconds_including_verified_read": 0.12148590000106196
+    },
+    {
+      "record_id": "pu-N09_M07_F10-K001-1",
+      "label_for_inventory_only": "healthy_reference",
+      "input_count": 256823,
+      "crest_factor": {
+        "value": 13.273924864773289,
+        "unit": "1",
+        "status": "available",
+        "reason": null
+      },
+      "pearson_kurtosis": {
+        "value": 20.16506543534376,
+        "unit": "1",
+        "status": "available",
+        "reason": null
+      },
+      "physical_metrics": null,
+      "physical_metrics_reason": "SHAPE_ONLY_PROTOCOL",
+      "unit_verified": false,
+      "prediction": null,
+      "diagnostic_evidence_eligible": false,
+      "time_axis_check": {
+        "record_duration_s": 4.000003421789442,
+        "nominal_duration_s": 4.01284375,
+        "duration_relative_error": 0.003199807670198479,
+        "max_step_relative_error": 0.7262568446672049,
+        "tolerance": 0.001
+      },
+      "envelope": {
+        "status": "unavailable",
+        "reason": "TIME_AXIS_DIFFERS_FROM_NOMINAL_RATE"
+      },
+      "seconds_including_verified_read": 0.09769580000101996
+    },
+    {
+      "record_id": "pu-N09_M07_F10-K001-2",
+      "label_for_inventory_only": "healthy_reference",
+      "input_count": 256001,
+      "crest_factor": {
+        "value": 13.353072064908321,
+        "unit": "1",
+        "status": "available",
+        "reason": null
+      },
+      "pearson_kurtosis": {
+        "value": 19.557674936797643,
+        "unit": "1",
+        "status": "available",
+        "reason": null
+      },
+      "physical_metrics": null,
+      "physical_metrics_reason": "SHAPE_ONLY_PROTOCOL",
+      "unit_verified": false,
+      "prediction": null,
+      "diagnostic_evidence_eligible": false,
+      "time_axis_check": {
+        "record_duration_s": 3.9999995722763195,
+        "nominal_duration_s": 4.0,
+        "duration_relative_error": 1.0693092011848648e-07,
+        "max_step_relative_error": 0.01452464075646278,
+        "tolerance": 0.001
+      },
+      "envelope": {
+        "status": "unavailable",
+        "reason": "TIME_AXIS_DIFFERS_FROM_NOMINAL_RATE"
+      },
+      "seconds_including_verified_read": 0.09528519999912533
+    },
+    {
+      "record_id": "pu-N15_M01_F10-K001-1",
+      "label_for_inventory_only": "healthy_reference",
+      "input_count": 256070,
+      "crest_factor": {
+        "value": 12.538160585845953,
+        "unit": "1",
+        "status": "available",
+        "reason": null
+      },
+      "pearson_kurtosis": {
+        "value": 14.915306370340952,
+        "unit": "1",
+        "status": "available",
+        "reason": null
+      },
+      "physical_metrics": null,
+      "physical_metrics_reason": "SHAPE_ONLY_PROTOCOL",
+      "unit_verified": false,
+      "prediction": null,
+      "diagnostic_evidence_eligible": false,
+      "time_axis_check": {
+        "record_duration_s": 4.0000021386184015,
+        "nominal_duration_s": 4.001078125,
+        "duration_relative_error": 0.00026892411194764693,
+        "max_step_relative_error": 3.5167620633037586,
+        "tolerance": 0.001
+      },
+      "envelope": {
+        "status": "unavailable",
+        "reason": "TIME_AXIS_DIFFERS_FROM_NOMINAL_RATE"
+      },
+      "seconds_including_verified_read": 0.11195309999857272
+    },
+    {
+      "record_id": "pu-N15_M01_F10-K001-2",
+      "label_for_inventory_only": "healthy_reference",
+      "input_count": 256001,
+      "crest_factor": {
+        "value": 11.513915045878967,
+        "unit": "1",
+        "status": "available",
+        "reason": null
+      },
+      "pearson_kurtosis": {
+        "value": 14.317990675169744,
+        "unit": "1",
+        "status": "available",
+        "reason": null
+      },
+      "physical_metrics": null,
+      "physical_metrics_reason": "SHAPE_ONLY_PROTOCOL",
+      "unit_verified": false,
+      "prediction": null,
+      "diagnostic_evidence_eligible": false,
+      "time_axis_check": {
+        "record_duration_s": 3.9999995722763195,
+        "nominal_duration_s": 4.0,
+        "duration_relative_error": 1.0693092011848648e-07,
+        "max_step_relative_error": 0.01452464075646278,
+        "tolerance": 0.001
+      },
+      "envelope": {
+        "status": "unavailable",
+        "reason": "TIME_AXIS_DIFFERS_FROM_NOMINAL_RATE"
+      },
+      "seconds_including_verified_read": 0.10638149999977031
+    },
+    {
+      "record_id": "pu-N15_M07_F04-K001-1",
+      "label_for_inventory_only": "healthy_reference",
+      "input_count": 258669,
+      "crest_factor": {
+        "value": 10.597845499506082,
+        "unit": "1",
+        "status": "available",
+        "reason": null
+      },
+      "pearson_kurtosis": {
+        "value": 14.694592722857118,
+        "unit": "1",
+        "status": "available",
+        "reason": null
+      },
+      "physical_metrics": null,
+      "physical_metrics_reason": "SHAPE_ONLY_PROTOCOL",
+      "unit_verified": false,
+      "prediction": null,
+      "diagnostic_evidence_eligible": false,
+      "time_axis_check": {
+        "record_duration_s": 3.999992300973756,
+        "nominal_duration_s": 4.0416875,
+        "duration_relative_error": 0.010316284726675229,
+        "max_step_relative_error": 0.7536311601891157,
+        "tolerance": 0.001
+      },
+      "envelope": {
+        "status": "unavailable",
+        "reason": "TIME_AXIS_DIFFERS_FROM_NOMINAL_RATE"
+      },
+      "seconds_including_verified_read": 0.09927860000061628
+    },
+    {
+      "record_id": "pu-N15_M07_F04-K001-2",
+      "label_for_inventory_only": "healthy_reference",
+      "input_count": 260927,
+      "crest_factor": {
+        "value": 12.617408321579594,
+        "unit": "1",
+        "status": "available",
+        "reason": null
+      },
+      "pearson_kurtosis": {
+        "value": 15.803077511895088,
+        "unit": "1",
+        "status": "available",
+        "reason": null
+      },
+      "physical_metrics": null,
+      "physical_metrics_reason": "SHAPE_ONLY_PROTOCOL",
+      "unit_verified": false,
+      "prediction": null,
+      "diagnostic_evidence_eligible": false,
+      "time_axis_check": {
+        "record_duration_s": 3.9999970059342385,
+        "nominal_duration_s": 4.07696875,
+        "duration_relative_error": 0.018879650246463466,
+        "max_step_relative_error": 0.7262568446672049,
+        "tolerance": 0.001
+      },
+      "envelope": {
+        "status": "unavailable",
+        "reason": "TIME_AXIS_DIFFERS_FROM_NOMINAL_RATE"
+      },
+      "seconds_including_verified_read": 0.08251209999980347
+    },
+    {
+      "record_id": "pu-N15_M07_F10-KA01-1",
+      "label_for_inventory_only": "outer_race",
+      "input_count": 256000,
+      "crest_factor": {
+        "value": 7.6430846222855635,
+        "unit": "1",
+        "status": "available",
+        "reason": null
+      },
+      "pearson_kurtosis": {
+        "value": 14.580722844057316,
+        "unit": "1",
+        "status": "available",
+        "reason": null
+      },
+      "physical_metrics": null,
+      "physical_metrics_reason": "SHAPE_ONLY_PROTOCOL",
+      "unit_verified": false,
+      "prediction": null,
+      "diagnostic_evidence_eligible": false,
+      "time_axis_check": {
+        "record_duration_s": 3.999991873218791,
+        "nominal_duration_s": 3.999984375,
+        "duration_relative_error": 1.8745620203084042e-06,
+        "max_step_relative_error": 0.5329675711370783,
+        "tolerance": 0.001
+      },
+      "envelope": {
+        "status": "unavailable",
+        "reason": "TIME_AXIS_DIFFERS_FROM_NOMINAL_RATE"
+      },
+      "seconds_including_verified_read": 0.0627678000000742
+    },
+    {
+      "record_id": "pu-N15_M07_F10-KA01-2",
+      "label_for_inventory_only": "outer_race",
+      "input_count": 256095,
+      "crest_factor": {
+        "value": 7.8534149440681675,
+        "unit": "1",
+        "status": "available",
+        "reason": null
+      },
+      "pearson_kurtosis": {
+        "value": 14.885073235000473,
+        "unit": "1",
+        "status": "available",
+        "reason": null
+      },
+      "physical_metrics": null,
+      "physical_metrics_reason": "SHAPE_ONLY_PROTOCOL",
+      "unit_verified": false,
+      "prediction": null,
+      "diagnostic_evidence_eligible": false,
+      "time_axis_check": {
+        "record_duration_s": 3.9999965781973854,
+        "nominal_duration_s": 4.00146875,
+        "duration_relative_error": 0.0003679078594864691,
+        "max_step_relative_error": 0.014520847140374847,
+        "tolerance": 0.001
+      },
+      "envelope": {
+        "status": "unavailable",
+        "reason": "TIME_AXIS_DIFFERS_FROM_NOMINAL_RATE"
+      },
+      "seconds_including_verified_read": 0.06966719999945781
+    },
+    {
+      "record_id": "pu-N09_M07_F10-KA01-1",
+      "label_for_inventory_only": "outer_race",
+      "input_count": 256001,
+      "crest_factor": {
+        "value": 10.540264312910297,
+        "unit": "1",
+        "status": "available",
+        "reason": null
+      },
+      "pearson_kurtosis": {
+        "value": 15.74929899171105,
+        "unit": "1",
+        "status": "available",
+        "reason": null
+      },
+      "physical_metrics": null,
+      "physical_metrics_reason": "SHAPE_ONLY_PROTOCOL",
+      "unit_verified": false,
+      "prediction": null,
+      "diagnostic_evidence_eligible": false,
+      "time_axis_check": {
+        "record_duration_s": 3.9999991445493466,
+        "nominal_duration_s": 4.0,
+        "duration_relative_error": 2.1386266335632342e-07,
+        "max_step_relative_error": 0.041895268021562536,
+        "tolerance": 0.001
+      },
+      "envelope": {
+        "status": "unavailable",
+        "reason": "TIME_AXIS_DIFFERS_FROM_NOMINAL_RATE"
+      },
+      "seconds_including_verified_read": 0.12039369999911287
+    },
+    {
+      "record_id": "pu-N09_M07_F10-KA01-2",
+      "label_for_inventory_only": "outer_race",
+      "input_count": 256088,
+      "crest_factor": {
+        "value": 10.25509386633888,
+        "unit": "1",
+        "status": "available",
+        "reason": null
+      },
+      "pearson_kurtosis": {
+        "value": 15.283160976121552,
+        "unit": "1",
+        "status": "available",
+        "reason": null
+      },
+      "physical_metrics": null,
+      "physical_metrics_reason": "SHAPE_ONLY_PROTOCOL",
+      "unit_verified": false,
+      "prediction": null,
+      "diagnostic_evidence_eligible": false,
+      "time_axis_check": {
+        "record_duration_s": 3.9999884514161774,
+        "nominal_duration_s": 4.001359375,
+        "duration_relative_error": 0.0003426144605725156,
+        "max_step_relative_error": 0.014520847140374847,
+        "tolerance": 0.001
+      },
+      "envelope": {
+        "status": "unavailable",
+        "reason": "TIME_AXIS_DIFFERS_FROM_NOMINAL_RATE"
+      },
+      "seconds_including_verified_read": 0.06412060000002384
+    },
+    {
+      "record_id": "pu-N15_M01_F10-KA01-1",
+      "label_for_inventory_only": "outer_race",
+      "input_count": 256077,
+      "crest_factor": {
+        "value": 8.19864338018421,
+        "unit": "1",
+        "status": "available",
+        "reason": null
+      },
+      "pearson_kurtosis": {
+        "value": 14.090304436509253,
+        "unit": "1",
+        "status": "available",
+        "reason": null
+      },
+      "physical_metrics": null,
+      "physical_metrics_reason": "SHAPE_ONLY_PROTOCOL",
+      "unit_verified": false,
+      "prediction": null,
+      "diagnostic_evidence_eligible": false,
+      "time_axis_check": {
+        "record_duration_s": 3.9999935841200984,
+        "nominal_duration_s": 4.0011875,
+        "duration_relative_error": 0.00029839038532983493,
+        "max_step_relative_error": 0.014520847140374847,
+        "tolerance": 0.001
+      },
+      "envelope": {
+        "status": "unavailable",
+        "reason": "TIME_AXIS_DIFFERS_FROM_NOMINAL_RATE"
+      },
+      "seconds_including_verified_read": 0.09553369999957795
+    },
+    {
+      "record_id": "pu-N15_M01_F10-KA01-2",
+      "label_for_inventory_only": "outer_race",
+      "input_count": 256002,
+      "crest_factor": {
+        "value": 7.42916335073096,
+        "unit": "1",
+        "status": "available",
+        "reason": null
+      },
+      "pearson_kurtosis": {
+        "value": 14.170982420375442,
+        "unit": "1",
+        "status": "available",
+        "reason": null
+      },
+      "physical_metrics": null,
+      "physical_metrics_reason": "SHAPE_ONLY_PROTOCOL",
+      "unit_verified": false,
+      "prediction": null,
+      "diagnostic_evidence_eligible": false,
+      "time_axis_check": {
+        "record_duration_s": 3.9999991445493466,
+        "nominal_duration_s": 4.000015625,
+        "duration_relative_error": 4.12009656913673e-06,
+        "max_step_relative_error": 0.7262557908470626,
+        "tolerance": 0.001
+      },
+      "envelope": {
+        "status": "unavailable",
+        "reason": "TIME_AXIS_DIFFERS_FROM_NOMINAL_RATE"
+      },
+      "seconds_including_verified_read": 0.09177089999866439
+    },
+    {
+      "record_id": "pu-N15_M07_F04-KA01-1",
+      "label_for_inventory_only": "outer_race",
+      "input_count": 256088,
+      "crest_factor": {
+        "value": 11.93445959958533,
+        "unit": "1",
+        "status": "available",
+        "reason": null
+      },
+      "pearson_kurtosis": {
+        "value": 23.248150167011786,
+        "unit": "1",
+        "status": "available",
+        "reason": null
+      },
+      "physical_metrics": null,
+      "physical_metrics_reason": "SHAPE_ONLY_PROTOCOL",
+      "unit_verified": false,
+      "prediction": null,
+      "diagnostic_evidence_eligible": false,
+      "time_axis_check": {
+        "record_duration_s": 4.0,
+        "nominal_duration_s": 4.001359375,
+        "duration_relative_error": 0.00033972829546204645,
+        "max_step_relative_error": 0.014520847140374847,
+        "tolerance": 0.001
+      },
+      "envelope": {
+        "status": "unavailable",
+        "reason": "TIME_AXIS_DIFFERS_FROM_NOMINAL_RATE"
+      },
+      "seconds_including_verified_read": 0.06791589999920689
+    },
+    {
+      "record_id": "pu-N15_M07_F04-KA01-2",
+      "label_for_inventory_only": "outer_race",
+      "input_count": 256000,
+      "crest_factor": {
+        "value": 11.473580464834034,
+        "unit": "1",
+        "status": "available",
+        "reason": null
+      },
+      "pearson_kurtosis": {
+        "value": 23.04091317763645,
+        "unit": "1",
+        "status": "available",
+        "reason": null
+      },
+      "physical_metrics": null,
+      "physical_metrics_reason": "SHAPE_ONLY_PROTOCOL",
+      "unit_verified": false,
+      "prediction": null,
+      "diagnostic_evidence_eligible": false,
+      "time_axis_check": {
+        "record_duration_s": 3.9999863127895434,
+        "nominal_duration_s": 3.999984375,
+        "duration_relative_error": 4.844492782533809e-07,
+        "max_step_relative_error": 0.12235125746451556,
+        "tolerance": 0.001
+      },
+      "envelope": {
+        "status": "unavailable",
+        "reason": "TIME_AXIS_DIFFERS_FROM_NOMINAL_RATE"
+      },
+      "seconds_including_verified_read": 0.06602050000037707
+    },
+    {
+      "record_id": "pu-N15_M07_F10-KI01-1",
+      "label_for_inventory_only": "inner_race",
+      "input_count": 258008,
+      "crest_factor": {
+        "value": 11.944747494600076,
+        "unit": "1",
+        "status": "available",
+        "reason": null
+      },
+      "pearson_kurtosis": {
+        "value": 14.763471221492802,
+        "unit": "1",
+        "status": "available",
+        "reason": null
+      },
+      "physical_metrics": null,
+      "physical_metrics_reason": "SHAPE_ONLY_PROTOCOL",
+      "unit_verified": false,
+      "prediction": null,
+      "diagnostic_evidence_eligible": false,
+      "time_axis_check": {
+        "record_duration_s": 3.999986740622626,
+        "nominal_duration_s": 4.031359375,
+        "duration_relative_error": 0.007782147771773366,
+        "max_step_relative_error": 0.75363221395952,
+        "tolerance": 0.001
+      },
+      "envelope": {
+        "status": "unavailable",
+        "reason": "TIME_AXIS_DIFFERS_FROM_NOMINAL_RATE"
+      },
+      "seconds_including_verified_read": 0.09304299999894283
+    },
+    {
+      "record_id": "pu-N15_M07_F10-KI01-2",
+      "label_for_inventory_only": "inner_race",
+      "input_count": 257037,
+      "crest_factor": {
+        "value": 12.752871954979573,
+        "unit": "1",
+        "status": "available",
+        "reason": null
+      },
+      "pearson_kurtosis": {
+        "value": 15.456785833832035,
+        "unit": "1",
+        "status": "available",
+        "reason": null
+      },
+      "physical_metrics": null,
+      "physical_metrics_reason": "SHAPE_ONLY_PROTOCOL",
+      "unit_verified": false,
+      "prediction": null,
+      "diagnostic_evidence_eligible": false,
+      "time_axis_check": {
+        "record_duration_s": 4.0,
+        "nominal_duration_s": 4.0161875,
+        "duration_relative_error": 0.004030563812073023,
+        "max_step_relative_error": 0.7262580155279466,
+        "tolerance": 0.001
+      },
+      "envelope": {
+        "status": "unavailable",
+        "reason": "TIME_AXIS_DIFFERS_FROM_NOMINAL_RATE"
+      },
+      "seconds_including_verified_read": 0.08901390000028186
+    },
+    {
+      "record_id": "pu-N09_M07_F10-KI01-1",
+      "label_for_inventory_only": "inner_race",
+      "input_count": 256001,
+      "crest_factor": {
+        "value": 13.629724633713032,
+        "unit": "1",
+        "status": "available",
+        "reason": null
+      },
+      "pearson_kurtosis": {
+        "value": 15.626306654666433,
+        "unit": "1",
+        "status": "available",
+        "reason": null
+      },
+      "physical_metrics": null,
+      "physical_metrics_reason": "SHAPE_ONLY_PROTOCOL",
+      "unit_verified": false,
+      "prediction": null,
+      "diagnostic_evidence_eligible": false,
+      "time_axis_check": {
+        "record_duration_s": 3.9999931564503877,
+        "nominal_duration_s": 4.0,
+        "duration_relative_error": 1.7108874030835608e-06,
+        "max_step_relative_error": 0.4251418325745817,
+        "tolerance": 0.001
+      },
+      "envelope": {
+        "status": "unavailable",
+        "reason": "TIME_AXIS_DIFFERS_FROM_NOMINAL_RATE"
+      },
+      "seconds_including_verified_read": 0.0941367999985232
+    },
+    {
+      "record_id": "pu-N09_M07_F10-KI01-2",
+      "label_for_inventory_only": "inner_race",
+      "input_count": 256001,
+      "crest_factor": {
+        "value": 12.315770225970253,
+        "unit": "1",
+        "status": "available",
+        "reason": null
+      },
+      "pearson_kurtosis": {
+        "value": 15.953473075276081,
+        "unit": "1",
+        "status": "available",
+        "reason": null
+      },
+      "physical_metrics": null,
+      "physical_metrics_reason": "SHAPE_ONLY_PROTOCOL",
+      "unit_verified": false,
+      "prediction": null,
+      "diagnostic_evidence_eligible": false,
+      "time_axis_check": {
+        "record_duration_s": 3.999999572278149,
+        "nominal_duration_s": 4.0,
+        "duration_relative_error": 1.0693046270660034e-07,
+        "max_step_relative_error": 0.041903054276203576,
+        "tolerance": 0.001
+      },
+      "envelope": {
+        "status": "unavailable",
+        "reason": "TIME_AXIS_DIFFERS_FROM_NOMINAL_RATE"
+      },
+      "seconds_including_verified_read": 0.09453920000123617
+    },
+    {
+      "record_id": "pu-N15_M01_F10-KI01-1",
+      "label_for_inventory_only": "inner_race",
+      "input_count": 256803,
+      "crest_factor": {
+        "value": 13.851127819846726,
+        "unit": "1",
+        "status": "available",
+        "reason": null
+      },
+      "pearson_kurtosis": {
+        "value": 16.560247947407298,
+        "unit": "1",
+        "status": "available",
+        "reason": null
+      },
+      "physical_metrics": null,
+      "physical_metrics_reason": "SHAPE_ONLY_PROTOCOL",
+      "unit_verified": false,
+      "prediction": null,
+      "diagnostic_evidence_eligible": false,
+      "time_axis_check": {
+        "record_duration_s": 3.999987168344477,
+        "nominal_duration_s": 4.01253125,
+        "duration_relative_error": 0.003126226532322544,
+        "max_step_relative_error": 180.43618732165123,
+        "tolerance": 0.001
+      },
+      "envelope": {
+        "status": "unavailable",
+        "reason": "TIME_AXIS_DIFFERS_FROM_NOMINAL_RATE"
+      },
+      "seconds_including_verified_read": 0.09872080000059213
+    },
+    {
+      "record_id": "pu-N15_M01_F10-KI01-2",
+      "label_for_inventory_only": "inner_race",
+      "input_count": 256001,
+      "crest_factor": {
+        "value": 14.301568756716076,
+        "unit": "1",
+        "status": "available",
+        "reason": null
+      },
+      "pearson_kurtosis": {
+        "value": 18.13341907381447,
+        "unit": "1",
+        "status": "available",
+        "reason": null
+      },
+      "physical_metrics": null,
+      "physical_metrics_reason": "SHAPE_ONLY_PROTOCOL",
+      "unit_verified": false,
+      "prediction": null,
+      "diagnostic_evidence_eligible": false,
+      "time_axis_check": {
+        "record_duration_s": 4.0,
+        "nominal_duration_s": 4.0,
+        "duration_relative_error": 0.0,
+        "max_step_relative_error": 0.041903054276203576,
+        "tolerance": 0.001
+      },
+      "envelope": {
+        "status": "unavailable",
+        "reason": "TIME_AXIS_DIFFERS_FROM_NOMINAL_RATE"
+      },
+      "seconds_including_verified_read": 0.11161549999997078
+    },
+    {
+      "record_id": "pu-N15_M07_F04-KI01-1",
+      "label_for_inventory_only": "inner_race",
+      "input_count": 257323,
+      "crest_factor": {
+        "value": 12.05789583280382,
+        "unit": "1",
+        "status": "available",
+        "reason": null
+      },
+      "pearson_kurtosis": {
+        "value": 13.70400113506863,
+        "unit": "1",
+        "status": "available",
+        "reason": null
+      },
+      "physical_metrics": null,
+      "physical_metrics_reason": "SHAPE_ONLY_PROTOCOL",
+      "unit_verified": false,
+      "prediction": null,
+      "diagnostic_evidence_eligible": false,
+      "time_axis_check": {
+        "record_duration_s": 3.999989306953731,
+        "nominal_duration_s": 4.02065625,
+        "duration_relative_error": 0.005140191491443449,
+        "max_step_relative_error": 0.7810064123768825,
+        "tolerance": 0.001
+      },
+      "envelope": {
+        "status": "unavailable",
+        "reason": "TIME_AXIS_DIFFERS_FROM_NOMINAL_RATE"
+      },
+      "seconds_including_verified_read": 0.06789869999920484
+    },
+    {
+      "record_id": "pu-N15_M07_F04-KI01-2",
+      "label_for_inventory_only": "inner_race",
+      "input_count": 256942,
+      "crest_factor": {
+        "value": 12.026196108858704,
+        "unit": "1",
+        "status": "available",
+        "reason": null
+      },
+      "pearson_kurtosis": {
+        "value": 13.70845481958368,
+        "unit": "1",
+        "status": "available",
+        "reason": null
+      },
+      "physical_metrics": null,
+      "physical_metrics_reason": "SHAPE_ONLY_PROTOCOL",
+      "unit_verified": false,
+      "prediction": null,
+      "diagnostic_evidence_eligible": false,
+      "time_axis_check": {
+        "record_duration_s": 3.9999863129007758,
+        "nominal_duration_s": 4.014703125,
+        "duration_relative_error": 0.0036657286083199045,
+        "max_step_relative_error": 0.970942288352262,
+        "tolerance": 0.001
+      },
+      "envelope": {
+        "status": "unavailable",
+        "reason": "TIME_AXIS_DIFFERS_FROM_NOMINAL_RATE"
+      },
+      "seconds_including_verified_read": 0.10105030000158877
+    }
+  ],
+  "envelope_counts": {
+    "unavailable": 25,
+    "ok": 3
+  },
+  "unavailable_reasons": {
+    "SAMPLING_RATE_NOT_VERIFIED": 1,
+    "TIME_AXIS_DIFFERS_FROM_NOMINAL_RATE": 24
+  },
+  "accuracy": null,
+  "diagnostic_profiles_qualified": 0,
+  "factory_data_used": false,
+  "model_called": false,
+  "limitations": [
+    "No classifier, thresholds, label-based profile tuning or held-out performance claims",
+    "All inspected records remain development; validation/test are empty",
+    "Original units unverified: no physical RMS/amplitude or severity claim",
+    "Strict time-axis gate may reject export timing jitter; no silent resampling",
+    "Shape-only numerical proxies never become diagnostic evidence or business records"
+  ]
+}

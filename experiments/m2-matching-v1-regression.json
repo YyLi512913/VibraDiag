@@ -1,0 +1,746 @@
+{
+  "scope": "Pre-fix M2 closing baseline; retained regression evidence",
+  "algorithm_version": "frequency-matching-v1",
+  "issue": "Multiple below-threshold local peaks were marked ambiguous even with no significant support",
+  "cases": [
+    {
+      "case": "AM",
+      "band_hz": [
+        2000.0,
+        4000.0
+      ],
+      "numeric_configuration_sha256": "c120af93047e0ac04a0bf2ceb64a6ebbc3ac17260213daef0be6aa845567b637",
+      "original_sha256": "aa950719df371984ed64f5dfb3e4d6fcc8fc5bf5278b10dd04720b4e9a68ceb4",
+      "original_unchanged": true,
+      "target_id": "BPFO:1",
+      "target_status": "ambiguous",
+      "target_reasons": [
+        "alternative_explanations"
+      ],
+      "confounders": [
+        "possible_carrier_beating"
+      ],
+      "candidate_count": 1,
+      "row_count": 63,
+      "observation_status_counts": {
+        "observed_support": 0,
+        "no_observed_support": 10,
+        "ambiguous": 28,
+        "not_evaluable": 25
+      },
+      "guard_samples_each_side": 161,
+      "effective_segment": {
+        "start_index": 161,
+        "stop_index_exclusive": 48161,
+        "sample_count": 48000,
+        "start_time_s": 0.013416666666666667,
+        "last_sample_time_s": 4.013333333333334,
+        "duration_s": 4.0
+      },
+      "maximum_modulation_amplitude_m_s2": 0.49999999842948306,
+      "maximum_modulation_frequency_hz": 95.0,
+      "original_absolute_peak_m_s2": 2.5,
+      "diagnosis": null,
+      "evidence_eligible": false,
+      "independent_acquisition_count": 1,
+      "filter_sensitivity_in_registered_result": "not_checked"
+    },
+    {
+      "case": "AM",
+      "band_hz": [
+        1800.0,
+        4200.0
+      ],
+      "numeric_configuration_sha256": "b324653b87de115e8e3bfc4b3aa5a21ebe56b57b836044f047e437ffc5f32b6c",
+      "original_sha256": "aa950719df371984ed64f5dfb3e4d6fcc8fc5bf5278b10dd04720b4e9a68ceb4",
+      "original_unchanged": true,
+      "target_id": "BPFO:1",
+      "target_status": "ambiguous",
+      "target_reasons": [
+        "alternative_explanations"
+      ],
+      "confounders": [
+        "possible_carrier_beating"
+      ],
+      "candidate_count": 1,
+      "row_count": 63,
+      "observation_status_counts": {
+        "observed_support": 0,
+        "no_observed_support": 37,
+        "ambiguous": 1,
+        "not_evaluable": 25
+      },
+      "guard_samples_each_side": 145,
+      "effective_segment": {
+        "start_index": 145,
+        "stop_index_exclusive": 48177,
+        "sample_count": 48032,
+        "start_time_s": 0.012083333333333333,
+        "last_sample_time_s": 4.014666666666667,
+        "duration_s": 4.002666666666666
+      },
+      "maximum_modulation_amplitude_m_s2": 0.4796451604849399,
+      "maximum_modulation_frequency_hz": 94.9367088607595,
+      "original_absolute_peak_m_s2": 2.5,
+      "diagnosis": null,
+      "evidence_eligible": false,
+      "independent_acquisition_count": 1,
+      "filter_sensitivity_in_registered_result": "not_checked"
+    },
+    {
+      "case": "AM",
+      "band_hz": [
+        2200.0,
+        3800.0
+      ],
+      "numeric_configuration_sha256": "9197308705c2d3581dbb8a007260312d1eaba4346c4fc07d4fd1ea0f6884d148",
+      "original_sha256": "aa950719df371984ed64f5dfb3e4d6fcc8fc5bf5278b10dd04720b4e9a68ceb4",
+      "original_unchanged": true,
+      "target_id": "BPFO:1",
+      "target_status": "ambiguous",
+      "target_reasons": [
+        "alternative_explanations"
+      ],
+      "confounders": [
+        "possible_carrier_beating"
+      ],
+      "candidate_count": 1,
+      "row_count": 63,
+      "observation_status_counts": {
+        "observed_support": 0,
+        "no_observed_support": 37,
+        "ambiguous": 1,
+        "not_evaluable": 25
+      },
+      "guard_samples_each_side": 189,
+      "effective_segment": {
+        "start_index": 189,
+        "stop_index_exclusive": 48133,
+        "sample_count": 47944,
+        "start_time_s": 0.01575,
+        "last_sample_time_s": 4.011,
+        "duration_s": 3.9953333333333334
+      },
+      "maximum_modulation_amplitude_m_s2": 0.4397534942431115,
+      "maximum_modulation_frequency_hz": 95.11096278992157,
+      "original_absolute_peak_m_s2": 2.5,
+      "diagnosis": null,
+      "evidence_eligible": false,
+      "independent_acquisition_count": 1,
+      "filter_sensitivity_in_registered_result": "not_checked"
+    },
+    {
+      "case": "unmodulated",
+      "band_hz": [
+        2000.0,
+        4000.0
+      ],
+      "numeric_configuration_sha256": "c120af93047e0ac04a0bf2ceb64a6ebbc3ac17260213daef0be6aa845567b637",
+      "original_sha256": "840c991f437d2102ffe85be16b7dbf8683175cfc6b767fcd7a12631ec1cad584",
+      "original_unchanged": true,
+      "target_id": "BPFO:1",
+      "target_status": "no_observed_support",
+      "target_reasons": [],
+      "confounders": [],
+      "candidate_count": 1,
+      "row_count": 63,
+      "observation_status_counts": {
+        "observed_support": 0,
+        "no_observed_support": 6,
+        "ambiguous": 32,
+        "not_evaluable": 25
+      },
+      "guard_samples_each_side": 161,
+      "effective_segment": {
+        "start_index": 161,
+        "stop_index_exclusive": 48161,
+        "sample_count": 48000,
+        "start_time_s": 0.013416666666666667,
+        "last_sample_time_s": 4.013333333333334,
+        "duration_s": 4.0
+      },
+      "maximum_modulation_amplitude_m_s2": 9.921687147079226e-13,
+      "maximum_modulation_frequency_hz": 10.0,
+      "original_absolute_peak_m_s2": 2.0,
+      "diagnosis": null,
+      "evidence_eligible": false,
+      "independent_acquisition_count": 1,
+      "filter_sensitivity_in_registered_result": "not_checked"
+    },
+    {
+      "case": "unmodulated",
+      "band_hz": [
+        1800.0,
+        4200.0
+      ],
+      "numeric_configuration_sha256": "b324653b87de115e8e3bfc4b3aa5a21ebe56b57b836044f047e437ffc5f32b6c",
+      "original_sha256": "840c991f437d2102ffe85be16b7dbf8683175cfc6b767fcd7a12631ec1cad584",
+      "original_unchanged": true,
+      "target_id": "BPFO:1",
+      "target_status": "no_observed_support",
+      "target_reasons": [],
+      "confounders": [],
+      "candidate_count": 1,
+      "row_count": 63,
+      "observation_status_counts": {
+        "observed_support": 0,
+        "no_observed_support": 8,
+        "ambiguous": 30,
+        "not_evaluable": 25
+      },
+      "guard_samples_each_side": 145,
+      "effective_segment": {
+        "start_index": 145,
+        "stop_index_exclusive": 48177,
+        "sample_count": 48032,
+        "start_time_s": 0.012083333333333333,
+        "last_sample_time_s": 4.014666666666667,
+        "duration_s": 4.002666666666666
+      },
+      "maximum_modulation_amplitude_m_s2": 1.598327415385474e-12,
+      "maximum_modulation_frequency_hz": 10.243171219187207,
+      "original_absolute_peak_m_s2": 2.0,
+      "diagnosis": null,
+      "evidence_eligible": false,
+      "independent_acquisition_count": 1,
+      "filter_sensitivity_in_registered_result": "not_checked"
+    },
+    {
+      "case": "unmodulated",
+      "band_hz": [
+        2200.0,
+        3800.0
+      ],
+      "numeric_configuration_sha256": "9197308705c2d3581dbb8a007260312d1eaba4346c4fc07d4fd1ea0f6884d148",
+      "original_sha256": "840c991f437d2102ffe85be16b7dbf8683175cfc6b767fcd7a12631ec1cad584",
+      "original_unchanged": true,
+      "target_id": "BPFO:1",
+      "target_status": "ambiguous",
+      "target_reasons": [
+        "multiple_peaks"
+      ],
+      "confounders": [],
+      "candidate_count": 3,
+      "row_count": 63,
+      "observation_status_counts": {
+        "observed_support": 0,
+        "no_observed_support": 5,
+        "ambiguous": 33,
+        "not_evaluable": 25
+      },
+      "guard_samples_each_side": 189,
+      "effective_segment": {
+        "start_index": 189,
+        "stop_index_exclusive": 48133,
+        "sample_count": 47944,
+        "start_time_s": 0.01575,
+        "last_sample_time_s": 4.011,
+        "duration_s": 3.9953333333333334
+      },
+      "maximum_modulation_amplitude_m_s2": 5.031339603952314e-13,
+      "maximum_modulation_frequency_hz": 10.011680293675955,
+      "original_absolute_peak_m_s2": 2.0,
+      "diagnosis": null,
+      "evidence_eligible": false,
+      "independent_acquisition_count": 1,
+      "filter_sensitivity_in_registered_result": "not_checked"
+    },
+    {
+      "case": "beating",
+      "band_hz": [
+        2000.0,
+        4000.0
+      ],
+      "numeric_configuration_sha256": "c120af93047e0ac04a0bf2ceb64a6ebbc3ac17260213daef0be6aa845567b637",
+      "original_sha256": "847b5f6fffb5d21ee6f58c84368fb32cd8a8c3eab4cc0676c64273c648a8e409",
+      "original_unchanged": true,
+      "target_id": "BPFO:1",
+      "target_status": "ambiguous",
+      "target_reasons": [
+        "alternative_explanations"
+      ],
+      "confounders": [
+        "possible_carrier_beating"
+      ],
+      "candidate_count": 1,
+      "row_count": 63,
+      "observation_status_counts": {
+        "observed_support": 1,
+        "no_observed_support": 1,
+        "ambiguous": 36,
+        "not_evaluable": 25
+      },
+      "guard_samples_each_side": 161,
+      "effective_segment": {
+        "start_index": 161,
+        "stop_index_exclusive": 48161,
+        "sample_count": 48000,
+        "start_time_s": 0.013416666666666667,
+        "last_sample_time_s": 4.013333333333334,
+        "duration_s": 4.0
+      },
+      "maximum_modulation_amplitude_m_s2": 0.19974968588918726,
+      "maximum_modulation_frequency_hz": 95.0,
+      "original_absolute_peak_m_s2": 2.2,
+      "diagnosis": null,
+      "evidence_eligible": false,
+      "independent_acquisition_count": 1,
+      "filter_sensitivity_in_registered_result": "not_checked"
+    },
+    {
+      "case": "beating",
+      "band_hz": [
+        1800.0,
+        4200.0
+      ],
+      "numeric_configuration_sha256": "b324653b87de115e8e3bfc4b3aa5a21ebe56b57b836044f047e437ffc5f32b6c",
+      "original_sha256": "847b5f6fffb5d21ee6f58c84368fb32cd8a8c3eab4cc0676c64273c648a8e409",
+      "original_unchanged": true,
+      "target_id": "BPFO:1",
+      "target_status": "ambiguous",
+      "target_reasons": [
+        "alternative_explanations"
+      ],
+      "confounders": [
+        "possible_carrier_beating"
+      ],
+      "candidate_count": 1,
+      "row_count": 63,
+      "observation_status_counts": {
+        "observed_support": 2,
+        "no_observed_support": 32,
+        "ambiguous": 4,
+        "not_evaluable": 25
+      },
+      "guard_samples_each_side": 145,
+      "effective_segment": {
+        "start_index": 145,
+        "stop_index_exclusive": 48177,
+        "sample_count": 48032,
+        "start_time_s": 0.012083333333333333,
+        "last_sample_time_s": 4.014666666666667,
+        "duration_s": 4.002666666666666
+      },
+      "maximum_modulation_amplitude_m_s2": 0.19161794089022943,
+      "maximum_modulation_frequency_hz": 94.9367088607595,
+      "original_absolute_peak_m_s2": 2.2,
+      "diagnosis": null,
+      "evidence_eligible": false,
+      "independent_acquisition_count": 1,
+      "filter_sensitivity_in_registered_result": "not_checked"
+    },
+    {
+      "case": "beating",
+      "band_hz": [
+        2200.0,
+        3800.0
+      ],
+      "numeric_configuration_sha256": "9197308705c2d3581dbb8a007260312d1eaba4346c4fc07d4fd1ea0f6884d148",
+      "original_sha256": "847b5f6fffb5d21ee6f58c84368fb32cd8a8c3eab4cc0676c64273c648a8e409",
+      "original_unchanged": true,
+      "target_id": "BPFO:1",
+      "target_status": "ambiguous",
+      "target_reasons": [
+        "alternative_explanations"
+      ],
+      "confounders": [
+        "possible_carrier_beating"
+      ],
+      "candidate_count": 1,
+      "row_count": 63,
+      "observation_status_counts": {
+        "observed_support": 2,
+        "no_observed_support": 32,
+        "ambiguous": 4,
+        "not_evaluable": 25
+      },
+      "guard_samples_each_side": 189,
+      "effective_segment": {
+        "start_index": 189,
+        "stop_index_exclusive": 48133,
+        "sample_count": 47944,
+        "start_time_s": 0.01575,
+        "last_sample_time_s": 4.011,
+        "duration_s": 3.9953333333333334
+      },
+      "maximum_modulation_amplitude_m_s2": 0.17568124525398665,
+      "maximum_modulation_frequency_hz": 95.11096278992157,
+      "original_absolute_peak_m_s2": 2.2,
+      "diagnosis": null,
+      "evidence_eligible": false,
+      "independent_acquisition_count": 1,
+      "filter_sensitivity_in_registered_result": "not_checked"
+    },
+    {
+      "case": "out_of_band",
+      "band_hz": [
+        2000.0,
+        4000.0
+      ],
+      "numeric_configuration_sha256": "c120af93047e0ac04a0bf2ceb64a6ebbc3ac17260213daef0be6aa845567b637",
+      "original_sha256": "51aa9afbacaab36e5b74edde34eb17c04c2fac053f35d4be7831914ce4aa6584",
+      "original_unchanged": true,
+      "target_id": "BPFO:1",
+      "target_status": "ambiguous",
+      "target_reasons": [
+        "multiple_peaks"
+      ],
+      "confounders": [],
+      "candidate_count": 4,
+      "row_count": 63,
+      "observation_status_counts": {
+        "observed_support": 0,
+        "no_observed_support": 0,
+        "ambiguous": 38,
+        "not_evaluable": 25
+      },
+      "guard_samples_each_side": 161,
+      "effective_segment": {
+        "start_index": 161,
+        "stop_index_exclusive": 48161,
+        "sample_count": 48000,
+        "start_time_s": 0.013416666666666667,
+        "last_sample_time_s": 4.013333333333334,
+        "duration_s": 4.0
+      },
+      "maximum_modulation_amplitude_m_s2": 2.3903526109410478e-12,
+      "maximum_modulation_frequency_hz": 10.0,
+      "original_absolute_peak_m_s2": 2.5,
+      "diagnosis": null,
+      "evidence_eligible": false,
+      "independent_acquisition_count": 1,
+      "filter_sensitivity_in_registered_result": "not_checked"
+    },
+    {
+      "case": "out_of_band",
+      "band_hz": [
+        1800.0,
+        4200.0
+      ],
+      "numeric_configuration_sha256": "b324653b87de115e8e3bfc4b3aa5a21ebe56b57b836044f047e437ffc5f32b6c",
+      "original_sha256": "51aa9afbacaab36e5b74edde34eb17c04c2fac053f35d4be7831914ce4aa6584",
+      "original_unchanged": true,
+      "target_id": "BPFO:1",
+      "target_status": "ambiguous",
+      "target_reasons": [
+        "multiple_peaks"
+      ],
+      "confounders": [],
+      "candidate_count": 5,
+      "row_count": 63,
+      "observation_status_counts": {
+        "observed_support": 0,
+        "no_observed_support": 2,
+        "ambiguous": 36,
+        "not_evaluable": 25
+      },
+      "guard_samples_each_side": 145,
+      "effective_segment": {
+        "start_index": 145,
+        "stop_index_exclusive": 48177,
+        "sample_count": 48032,
+        "start_time_s": 0.012083333333333333,
+        "last_sample_time_s": 4.014666666666667,
+        "duration_s": 4.002666666666666
+      },
+      "maximum_modulation_amplitude_m_s2": 3.9183542436785446e-12,
+      "maximum_modulation_frequency_hz": 10.243171219187207,
+      "original_absolute_peak_m_s2": 2.5,
+      "diagnosis": null,
+      "evidence_eligible": false,
+      "independent_acquisition_count": 1,
+      "filter_sensitivity_in_registered_result": "not_checked"
+    },
+    {
+      "case": "out_of_band",
+      "band_hz": [
+        2200.0,
+        3800.0
+      ],
+      "numeric_configuration_sha256": "9197308705c2d3581dbb8a007260312d1eaba4346c4fc07d4fd1ea0f6884d148",
+      "original_sha256": "51aa9afbacaab36e5b74edde34eb17c04c2fac053f35d4be7831914ce4aa6584",
+      "original_unchanged": true,
+      "target_id": "BPFO:1",
+      "target_status": "ambiguous",
+      "target_reasons": [
+        "multiple_peaks"
+      ],
+      "confounders": [],
+      "candidate_count": 4,
+      "row_count": 63,
+      "observation_status_counts": {
+        "observed_support": 0,
+        "no_observed_support": 0,
+        "ambiguous": 38,
+        "not_evaluable": 25
+      },
+      "guard_samples_each_side": 189,
+      "effective_segment": {
+        "start_index": 189,
+        "stop_index_exclusive": 48133,
+        "sample_count": 47944,
+        "start_time_s": 0.01575,
+        "last_sample_time_s": 4.011,
+        "duration_s": 3.9953333333333334
+      },
+      "maximum_modulation_amplitude_m_s2": 1.212981159157299e-12,
+      "maximum_modulation_frequency_hz": 10.011680293675955,
+      "original_absolute_peak_m_s2": 2.5,
+      "diagnosis": null,
+      "evidence_eligible": false,
+      "independent_acquisition_count": 1,
+      "filter_sensitivity_in_registered_result": "not_checked"
+    },
+    {
+      "case": "weak_in_noise",
+      "band_hz": [
+        2000.0,
+        4000.0
+      ],
+      "numeric_configuration_sha256": "c120af93047e0ac04a0bf2ceb64a6ebbc3ac17260213daef0be6aa845567b637",
+      "original_sha256": "437002242bd6c2f9e684c584bc57a8ff04226abade3e3fcdf3a3893f5aa281b1",
+      "original_unchanged": true,
+      "target_id": "BPFO:1",
+      "target_status": "ambiguous",
+      "target_reasons": [
+        "multiple_peaks"
+      ],
+      "confounders": [],
+      "candidate_count": 4,
+      "row_count": 63,
+      "observation_status_counts": {
+        "observed_support": 0,
+        "no_observed_support": 0,
+        "ambiguous": 38,
+        "not_evaluable": 25
+      },
+      "guard_samples_each_side": 161,
+      "effective_segment": {
+        "start_index": 161,
+        "stop_index_exclusive": 48161,
+        "sample_count": 48000,
+        "start_time_s": 0.013416666666666667,
+        "last_sample_time_s": 4.013333333333334,
+        "duration_s": 4.0
+      },
+      "maximum_modulation_amplitude_m_s2": 0.004945069713650894,
+      "maximum_modulation_frequency_hz": 321.75,
+      "original_absolute_peak_m_s2": 2.343846184665495,
+      "diagnosis": null,
+      "evidence_eligible": false,
+      "independent_acquisition_count": 1,
+      "filter_sensitivity_in_registered_result": "not_checked"
+    },
+    {
+      "case": "weak_in_noise",
+      "band_hz": [
+        1800.0,
+        4200.0
+      ],
+      "numeric_configuration_sha256": "b324653b87de115e8e3bfc4b3aa5a21ebe56b57b836044f047e437ffc5f32b6c",
+      "original_sha256": "437002242bd6c2f9e684c584bc57a8ff04226abade3e3fcdf3a3893f5aa281b1",
+      "original_unchanged": true,
+      "target_id": "BPFO:1",
+      "target_status": "ambiguous",
+      "target_reasons": [
+        "multiple_peaks"
+      ],
+      "confounders": [],
+      "candidate_count": 3,
+      "row_count": 63,
+      "observation_status_counts": {
+        "observed_support": 0,
+        "no_observed_support": 1,
+        "ambiguous": 37,
+        "not_evaluable": 25
+      },
+      "guard_samples_each_side": 145,
+      "effective_segment": {
+        "start_index": 145,
+        "stop_index_exclusive": 48177,
+        "sample_count": 48032,
+        "start_time_s": 0.012083333333333333,
+        "last_sample_time_s": 4.014666666666667,
+        "duration_s": 4.002666666666666
+      },
+      "maximum_modulation_amplitude_m_s2": 0.0048850767831157054,
+      "maximum_modulation_frequency_hz": 321.7854763491006,
+      "original_absolute_peak_m_s2": 2.343846184665495,
+      "diagnosis": null,
+      "evidence_eligible": false,
+      "independent_acquisition_count": 1,
+      "filter_sensitivity_in_registered_result": "not_checked"
+    },
+    {
+      "case": "weak_in_noise",
+      "band_hz": [
+        2200.0,
+        3800.0
+      ],
+      "numeric_configuration_sha256": "9197308705c2d3581dbb8a007260312d1eaba4346c4fc07d4fd1ea0f6884d148",
+      "original_sha256": "437002242bd6c2f9e684c584bc57a8ff04226abade3e3fcdf3a3893f5aa281b1",
+      "original_unchanged": true,
+      "target_id": "BPFO:1",
+      "target_status": "ambiguous",
+      "target_reasons": [
+        "multiple_peaks"
+      ],
+      "confounders": [],
+      "candidate_count": 3,
+      "row_count": 63,
+      "observation_status_counts": {
+        "observed_support": 0,
+        "no_observed_support": 0,
+        "ambiguous": 38,
+        "not_evaluable": 25
+      },
+      "guard_samples_each_side": 189,
+      "effective_segment": {
+        "start_index": 189,
+        "stop_index_exclusive": 48133,
+        "sample_count": 47944,
+        "start_time_s": 0.01575,
+        "last_sample_time_s": 4.011,
+        "duration_s": 3.9953333333333334
+      },
+      "maximum_modulation_amplitude_m_s2": 0.004453479691607656,
+      "maximum_modulation_frequency_hz": 321.62522943434004,
+      "original_absolute_peak_m_s2": 2.343846184665495,
+      "diagnosis": null,
+      "evidence_eligible": false,
+      "independent_acquisition_count": 1,
+      "filter_sensitivity_in_registered_result": "not_checked"
+    },
+    {
+      "case": "boundary_impulse",
+      "band_hz": [
+        2000.0,
+        4000.0
+      ],
+      "numeric_configuration_sha256": "c120af93047e0ac04a0bf2ceb64a6ebbc3ac17260213daef0be6aa845567b637",
+      "original_sha256": "3e390c5c3103e41b206c86fa5bbb2c51ab1ccf1118b19baa96ec30c103c329cd",
+      "original_unchanged": true,
+      "target_id": "BPFO:1",
+      "target_status": "ambiguous",
+      "target_reasons": [
+        "alternative_explanations"
+      ],
+      "confounders": [
+        "possible_carrier_beating"
+      ],
+      "candidate_count": 1,
+      "row_count": 63,
+      "observation_status_counts": {
+        "observed_support": 1,
+        "no_observed_support": 25,
+        "ambiguous": 12,
+        "not_evaluable": 25
+      },
+      "guard_samples_each_side": 161,
+      "effective_segment": {
+        "start_index": 161,
+        "stop_index_exclusive": 48161,
+        "sample_count": 48000,
+        "start_time_s": 0.013416666666666667,
+        "last_sample_time_s": 4.013333333333334,
+        "duration_s": 4.0
+      },
+      "maximum_modulation_amplitude_m_s2": 0.49999994146590276,
+      "maximum_modulation_frequency_hz": 95.0,
+      "original_absolute_peak_m_s2": 102.5,
+      "diagnosis": null,
+      "evidence_eligible": false,
+      "independent_acquisition_count": 1,
+      "filter_sensitivity_in_registered_result": "not_checked"
+    },
+    {
+      "case": "boundary_impulse",
+      "band_hz": [
+        1800.0,
+        4200.0
+      ],
+      "numeric_configuration_sha256": "b324653b87de115e8e3bfc4b3aa5a21ebe56b57b836044f047e437ffc5f32b6c",
+      "original_sha256": "3e390c5c3103e41b206c86fa5bbb2c51ab1ccf1118b19baa96ec30c103c329cd",
+      "original_unchanged": true,
+      "target_id": "BPFO:1",
+      "target_status": "ambiguous",
+      "target_reasons": [
+        "alternative_explanations"
+      ],
+      "confounders": [
+        "possible_carrier_beating"
+      ],
+      "candidate_count": 1,
+      "row_count": 63,
+      "observation_status_counts": {
+        "observed_support": 0,
+        "no_observed_support": 32,
+        "ambiguous": 6,
+        "not_evaluable": 25
+      },
+      "guard_samples_each_side": 145,
+      "effective_segment": {
+        "start_index": 145,
+        "stop_index_exclusive": 48177,
+        "sample_count": 48032,
+        "start_time_s": 0.012083333333333333,
+        "last_sample_time_s": 4.014666666666667,
+        "duration_s": 4.002666666666666
+      },
+      "maximum_modulation_amplitude_m_s2": 0.47964509053976745,
+      "maximum_modulation_frequency_hz": 94.9367088607595,
+      "original_absolute_peak_m_s2": 102.5,
+      "diagnosis": null,
+      "evidence_eligible": false,
+      "independent_acquisition_count": 1,
+      "filter_sensitivity_in_registered_result": "not_checked"
+    },
+    {
+      "case": "boundary_impulse",
+      "band_hz": [
+        2200.0,
+        3800.0
+      ],
+      "numeric_configuration_sha256": "9197308705c2d3581dbb8a007260312d1eaba4346c4fc07d4fd1ea0f6884d148",
+      "original_sha256": "3e390c5c3103e41b206c86fa5bbb2c51ab1ccf1118b19baa96ec30c103c329cd",
+      "original_unchanged": true,
+      "target_id": "BPFO:1",
+      "target_status": "ambiguous",
+      "target_reasons": [
+        "alternative_explanations"
+      ],
+      "confounders": [
+        "possible_carrier_beating"
+      ],
+      "candidate_count": 1,
+      "row_count": 63,
+      "observation_status_counts": {
+        "observed_support": 0,
+        "no_observed_support": 36,
+        "ambiguous": 2,
+        "not_evaluable": 25
+      },
+      "guard_samples_each_side": 189,
+      "effective_segment": {
+        "start_index": 189,
+        "stop_index_exclusive": 48133,
+        "sample_count": 47944,
+        "start_time_s": 0.01575,
+        "last_sample_time_s": 4.011,
+        "duration_s": 3.9953333333333334
+      },
+      "maximum_modulation_amplitude_m_s2": 0.43975347385051894,
+      "maximum_modulation_frequency_hz": 95.11096278992157,
+      "original_absolute_peak_m_s2": 102.5,
+      "diagnosis": null,
+      "evidence_eligible": false,
+      "independent_acquisition_count": 1,
+      "filter_sensitivity_in_registered_result": "not_checked"
+    }
+  ],
+  "source_sha256": {
+    "backend/src/vibradiag/analysis/matching.py": "25994b95db2204d91a6d81512849d25d8059830c3ac917cf04ceda02a7ed0fb7",
+    "backend/src/vibradiag/evaluation/m2_acceptance.py": "dbb7e75f9f7a271ecdd8c0d26b2c990fc9ee104b82f0eeee94c129205b39d5e3"
+  },
+  "factory_data_used": false
+}

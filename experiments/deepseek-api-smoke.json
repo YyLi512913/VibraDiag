@@ -1,0 +1,527 @@
+{
+  "created_at": "2026-10-29T07:40:11.094134+00:00",
+  "model": "deepseek/deepseek-flash",
+  "available_models": [
+    {
+      "id": "deepseek-flash",
+      "name": "DeepSeek-V4.1-Flash",
+      "owned_by": "deepseek"
+    },
+    {
+      "id": "deepseek-v4-pro",
+      "name": "DeepSeek-V4-Pro",
+      "owned_by": "deepseek"
+    }
+  ],
+  "purpose": "real API connectivity, tool IDs, evidence and JSON validation smoke tests; not fault accuracy",
+  "external_data": "synthetic signal features, user test question, metadata and authored development knowledge; no raw waveform",
+  "protocol": {
+    "thinking": false,
+    "temperature": 0,
+    "max_tokens": 1024,
+    "max_tool_decisions": 2,
+    "max_output_repairs": 1,
+    "schema_enforcement": "JSON object mode plus local Pydantic validation, unlike Ollama native schema decoding",
+    "comparability": "not a controlled quality/latency comparison with the 512-token local runs"
+  },
+  "source_sha256": {
+    "agent.py": "c9d35de7333fe5ffbf4a369fc471dfe58f2a0dfa2f91903c20a364750dea52dd",
+    "deepseek.py": "65602c0446788ddcf5d28b368febb303f42b38f21e6fc71138b7116a0b187ab8",
+    "llm.py": "75ace05bc51d11c358ce7a36332e1ad9fb4b697d17408978067a961da9fb5582"
+  },
+  "cases": [
+    {
+      "id": "DS01",
+      "description": "只查看这份信号的RMS和主频，不讨论轴承故障类型。",
+      "rpm": 1480,
+      "expected_tool": "inspect_spectrum",
+      "passed": true,
+      "result": {
+        "model": "deepseek/deepseek-flash",
+        "embedding_model": "bge-m3:567m",
+        "wall_seconds": 4.35038859999986,
+        "draft": {
+          "status": "analysis_only",
+          "summary": "仅依据普通频谱给出RMS与主频，不涉及轴承故障判断。",
+          "observations": [
+            {
+              "text": "该信号RMS约为0.707 m/s²，AC RMS与总RMS相同。",
+              "evidence_ids": [
+                "EV-001"
+              ]
+            },
+            {
+              "text": "主频为128 Hz，幅值约1.0，其余峰值幅值极小。",
+              "evidence_ids": [
+                "EV-001"
+              ]
+            }
+          ],
+          "missing_information": [],
+          "next_steps": [
+            "如需进一步分析，可结合采样参数与频谱分辨率解读主频。"
+          ]
+        },
+        "error": null,
+        "trace": [
+          {
+            "stage": "model_decision",
+            "tool_names": [
+              "inspect_spectrum"
+            ]
+          },
+          {
+            "stage": "tool",
+            "name": "inspect_spectrum",
+            "arguments": {},
+            "result": {
+              "id": "EV-001",
+              "kind": "signal",
+              "features": {
+                "mean": -2.38727765854152e-17,
+                "rms": 0.7071067811865476,
+                "ac_rms": 0.7071067811865476,
+                "peak": 1.0,
+                "peak_to_peak": 2.0,
+                "crest_factor": 1.414213562373095,
+                "pearson_kurtosis": 1.4999999999999996
+              },
+              "peaks": [
+                {
+                  "hz": 128.0,
+                  "amplitude": 0.9999999999999999
+                },
+                {
+                  "hz": 1615.0,
+                  "amplitude": 5.057116242879235e-15
+                },
+                {
+                  "hz": 1359.0,
+                  "amplitude": 5.023439055431999e-15
+                },
+                {
+                  "hz": 1617.0,
+                  "amplitude": 4.915733493351069e-15
+                },
+                {
+                  "hz": 1361.0,
+                  "amplitude": 4.808358771421281e-15
+                }
+              ],
+              "unit": "m/s2",
+              "limitation": "普通频谱不是包络证据，不能据此确诊"
+            }
+          },
+          {
+            "stage": "model_decision",
+            "tool_names": []
+          },
+          {
+            "stage": "draft_validation",
+            "passed": true,
+            "attempts": [
+              {
+                "attempt": 1,
+                "passed": true,
+                "error": null,
+                "raw_model_output": "{\"status\": \"analysis_only\", \"summary\": \"仅依据普通频谱给出RMS与主频，不涉及轴承故障判断。\", \"observations\": [{\"text\": \"该信号RMS约为0.707 m/s²，AC RMS与总RMS相同。\", \"evidence_ids\": [\"EV-001\"]}, {\"text\": \"主频为128 Hz，幅值约1.0，其余峰值幅值极小。\", \"evidence_ids\": [\"EV-001\"]}], \"missing_information\": [], \"next_steps\": [\"如需进一步分析，可结合采样参数与频谱分辨率解读主频。\"]}"
+              }
+            ]
+          }
+        ],
+        "metrics": [
+          {
+            "provider": "deepseek",
+            "requested_model": "deepseek-flash",
+            "served_model": "deepseek-flash",
+            "response_id": "c1ec7154-2167-4ee4-9fbe-6e8b537a7f38",
+            "wall_seconds": 0.7725999999966007,
+            "input_tokens": 537,
+            "output_tokens": 24,
+            "total_tokens": 561,
+            "done_reason": "tool_calls",
+            "structured_output": null
+          },
+          {
+            "provider": "deepseek",
+            "requested_model": "deepseek-flash",
+            "served_model": "deepseek-flash",
+            "response_id": "439a6f67-d426-454c-81ba-33274b0d44b0",
+            "wall_seconds": 2.191679600000498,
+            "input_tokens": 836,
+            "output_tokens": 199,
+            "total_tokens": 1035,
+            "done_reason": "stop",
+            "structured_output": null
+          },
+          {
+            "provider": "deepseek",
+            "requested_model": "deepseek-flash",
+            "served_model": "deepseek-flash",
+            "response_id": "76c8529c-2a3c-4505-9c48-f427ee04dc16",
+            "wall_seconds": 1.376752399999532,
+            "input_tokens": 887,
+            "output_tokens": 130,
+            "total_tokens": 1017,
+            "done_reason": "stop",
+            "structured_output": "json_object_with_local_schema_validation"
+          }
+        ],
+        "evidence": {
+          "EV-001": {
+            "id": "EV-001",
+            "kind": "signal",
+            "features": {
+              "mean": -2.38727765854152e-17,
+              "rms": 0.7071067811865476,
+              "ac_rms": 0.7071067811865476,
+              "peak": 1.0,
+              "peak_to_peak": 2.0,
+              "crest_factor": 1.414213562373095,
+              "pearson_kurtosis": 1.4999999999999996
+            },
+            "peaks": [
+              {
+                "hz": 128.0,
+                "amplitude": 0.9999999999999999
+              },
+              {
+                "hz": 1615.0,
+                "amplitude": 5.057116242879235e-15
+              },
+              {
+                "hz": 1359.0,
+                "amplitude": 5.023439055431999e-15
+              },
+              {
+                "hz": 1617.0,
+                "amplitude": 4.915733493351069e-15
+              },
+              {
+                "hz": 1361.0,
+                "amplitude": 4.808358771421281e-15
+              }
+            ],
+            "unit": "m/s2",
+            "limitation": "普通频谱不是包络证据，不能据此确诊"
+          }
+        },
+        "prototype_limitations": [
+          "本机开发原型，无账号授权和工单写入",
+          "包络及轴承故障定类尚未实现",
+          "结构与引用校验不等于语义诊断已正确"
+        ]
+      }
+    },
+    {
+      "id": "DS02",
+      "description": "我怀疑内圈或外圈故障，但不知道本次采集转速，请先检查诊断必要条件。",
+      "rpm": null,
+      "expected_tool": "check_bearing_preconditions",
+      "passed": true,
+      "result": {
+        "model": "deepseek/deepseek-flash",
+        "embedding_model": "bge-m3:567m",
+        "wall_seconds": 4.1280221000015445,
+        "draft": {
+          "status": "needs_information",
+          "summary": "诊断必要条件不完整：缺少本次采集的可靠转速及经核对的目标轴承几何参数，暂不能进行内圈或外圈故障定类。",
+          "observations": [
+            {
+              "text": "本次采集的可靠转速缺失，无法建立轴承故障频率与转频的对应关系。",
+              "evidence_ids": [
+                "EV-001"
+              ]
+            },
+            {
+              "text": "目标轴承型号及几何参数/频率系数尚未核对，包络与轴承频率匹配未实现。",
+              "evidence_ids": [
+                "EV-001"
+              ]
+            }
+          ],
+          "missing_information": [
+            "本次采集的可靠转速",
+            "经核对的目标轴承及几何参数/频率系数"
+          ],
+          "next_steps": [
+            "补充本次采集的可靠转速（如通过独立测速或同步转速记录获取）",
+            "核对目标轴承型号及几何参数/频率系数",
+            "条件齐备后再进行包络分析与轴承频率匹配"
+          ]
+        },
+        "error": null,
+        "trace": [
+          {
+            "stage": "model_decision",
+            "tool_names": [
+              "check_bearing_preconditions"
+            ]
+          },
+          {
+            "stage": "tool",
+            "name": "check_bearing_preconditions",
+            "arguments": {},
+            "result": {
+              "id": "EV-001",
+              "kind": "preconditions",
+              "missing": [
+                "本次采集的可靠转速",
+                "经核对的目标轴承及几何参数/频率系数"
+              ],
+              "available": false,
+              "limitation": "本原型尚未实现包络及轴承频率匹配，不能输出故障定类"
+            }
+          },
+          {
+            "stage": "model_decision",
+            "tool_names": []
+          },
+          {
+            "stage": "draft_validation",
+            "passed": true,
+            "attempts": [
+              {
+                "attempt": 1,
+                "passed": true,
+                "error": null,
+                "raw_model_output": "{\"status\": \"needs_information\", \"summary\": \"诊断必要条件不完整：缺少本次采集的可靠转速及经核对的目标轴承几何参数，暂不能进行内圈或外圈故障定类。\", \"observations\": [{\"text\": \"本次采集的可靠转速缺失，无法建立轴承故障频率与转频的对应关系。\", \"evidence_ids\": [\"EV-001\"]}, {\"text\": \"目标轴承型号及几何参数/频率系数尚未核对，包络与轴承频率匹配未实现。\", \"evidence_ids\": [\"EV-001\"]}], \"missing_information\": [\"本次采集的可靠转速\", \"经核对的目标轴承及几何参数/频率系数\"], \"next_steps\": [\"补充本次采集的可靠转速（如通过独立测速或同步转速记录获取）\", \"核对目标轴承型号及几何参数/频率系数\", \"条件齐备后再进行包络分析与轴承频率匹配\"]}"
+              }
+            ]
+          }
+        ],
+        "metrics": [
+          {
+            "provider": "deepseek",
+            "requested_model": "deepseek-flash",
+            "served_model": "deepseek-flash",
+            "response_id": "1e429871-a558-425a-aab5-09bb0dbf063a",
+            "wall_seconds": 0.5853521999997611,
+            "input_tokens": 541,
+            "output_tokens": 24,
+            "total_tokens": 565,
+            "done_reason": "tool_calls",
+            "structured_output": null
+          },
+          {
+            "provider": "deepseek",
+            "requested_model": "deepseek-flash",
+            "served_model": "deepseek-flash",
+            "response_id": "71a8f556-b5a2-4556-be2a-58a5c0de036c",
+            "wall_seconds": 1.8502760999981547,
+            "input_tokens": 641,
+            "output_tokens": 104,
+            "total_tokens": 745,
+            "done_reason": "stop",
+            "structured_output": null
+          },
+          {
+            "provider": "deepseek",
+            "requested_model": "deepseek-flash",
+            "served_model": "deepseek-flash",
+            "response_id": "33e6812f-c815-4b16-b146-2516e730b671",
+            "wall_seconds": 1.689449000001332,
+            "input_tokens": 690,
+            "output_tokens": 196,
+            "total_tokens": 886,
+            "done_reason": "stop",
+            "structured_output": "json_object_with_local_schema_validation"
+          }
+        ],
+        "evidence": {
+          "EV-001": {
+            "id": "EV-001",
+            "kind": "preconditions",
+            "missing": [
+              "本次采集的可靠转速",
+              "经核对的目标轴承及几何参数/频率系数"
+            ],
+            "available": false,
+            "limitation": "本原型尚未实现包络及轴承频率匹配，不能输出故障定类"
+          }
+        },
+        "prototype_limitations": [
+          "本机开发原型，无账号授权和工单写入",
+          "包络及轴承故障定类尚未实现",
+          "结构与引用校验不等于语义诊断已正确"
+        ]
+      }
+    },
+    {
+      "id": "DS03",
+      "description": "先检索知识资料：为什么需要做包络分析？我想了解分析方法，不要先算故障频率。",
+      "rpm": 1480,
+      "expected_tool": "search_knowledge",
+      "passed": true,
+      "result": {
+        "model": "deepseek/deepseek-flash",
+        "embedding_model": "bge-m3:567m",
+        "wall_seconds": 7.7441570999981195,
+        "draft": {
+          "status": "analysis_only",
+          "summary": "包络分析用于观察高频振动的低频幅值调制与重复冲击，属于方法层面的知识说明，不涉及本信号故障频率计算。",
+          "observations": [
+            {
+              "text": "包络分析用于观察高频振动的低频幅值调制和重复冲击，需记录带通频段、滤波器、边界处理和幅值标定。",
+              "evidence_ids": [
+                "EV-001"
+              ]
+            },
+            {
+              "text": "非法频段、带宽未知或记录太短时，不能声称取得可靠轴承证据。",
+              "evidence_ids": [
+                "EV-001"
+              ]
+            }
+          ],
+          "missing_information": [],
+          "next_steps": [
+            "明确分析目的与关注的调制/冲击现象，再确定带通频段与滤波参数。",
+            "记录带通频段、滤波器类型、边界处理和包络谱幅值标定，保证结果可复现。"
+          ]
+        },
+        "error": null,
+        "trace": [
+          {
+            "stage": "model_decision",
+            "tool_names": [
+              "search_knowledge"
+            ]
+          },
+          {
+            "stage": "tool",
+            "name": "search_knowledge",
+            "arguments": {
+              "query": "包络分析 原理 为什么需要 解调 高频共振 轴承早期故障"
+            },
+            "result": {
+              "id": "EV-001",
+              "kind": "knowledge",
+              "hits": [
+                {
+                  "id": "KB-03",
+                  "title": "包络谱的用途与滤波记录",
+                  "text": "包络分析用于观察高频振动的低频幅值调制和重复冲击。需要记录带通频段、滤波器、边界处理和包络谱幅值标定。非法频段、带宽未知或记录太短时不能声称取得可靠轴承证据。",
+                  "score": 0.7321312781342257,
+                  "source": "开发自编知识卡片，未经现场专家审核",
+                  "corpus_sha256": "f925f09f0cf2c13944f8b1f44396855d37fb6836da8fd72b18ee7b68ec22350d"
+                },
+                {
+                  "id": "KB-04",
+                  "title": "内圈故障候选与BPFI证据",
+                  "text": "轴承内圈故障候选通常检查BPFI附近的包络谱成分、谐波与转频调制。频率匹配需要可靠转速及轴承参数。一个匹配峰不能单独证明内圈故障，还应检查干扰和其他候选。",
+                  "score": 0.6549958623726798,
+                  "source": "开发自编知识卡片，未经现场专家审核",
+                  "corpus_sha256": "f925f09f0cf2c13944f8b1f44396855d37fb6836da8fd72b18ee7b68ec22350d"
+                },
+                {
+                  "id": "KB-05",
+                  "title": "外圈故障候选与BPFO证据",
+                  "text": "轴承外圈故障候选可检查BPFO附近的包络谱重复成分及其谐波。峰的表现受载荷区和传感器位置影响。没有显著BPFO峰不能完全排除外圈问题，存在峰也不能直接确诊。",
+                  "score": 0.6417870223101866,
+                  "source": "开发自编知识卡片，未经现场专家审核",
+                  "corpus_sha256": "f925f09f0cf2c13944f8b1f44396855d37fb6836da8fd72b18ee7b68ec22350d"
+                }
+              ],
+              "limitation": "开发自编资料，不是当前设备测量或专家审核意见"
+            }
+          },
+          {
+            "stage": "model_decision",
+            "tool_names": []
+          },
+          {
+            "stage": "draft_validation",
+            "passed": true,
+            "attempts": [
+              {
+                "attempt": 1,
+                "passed": true,
+                "error": null,
+                "raw_model_output": "{\"status\": \"analysis_only\", \"summary\": \"包络分析用于观察高频振动的低频幅值调制与重复冲击，属于方法层面的知识说明，不涉及本信号故障频率计算。\", \"observations\": [{\"text\": \"包络分析用于观察高频振动的低频幅值调制和重复冲击，需记录带通频段、滤波器、边界处理和幅值标定。\", \"evidence_ids\": [\"EV-001\"]}, {\"text\": \"非法频段、带宽未知或记录太短时，不能声称取得可靠轴承证据。\", \"evidence_ids\": [\"EV-001\"]}], \"missing_information\": [], \"next_steps\": [\"明确分析目的与关注的调制/冲击现象，再确定带通频段与滤波参数。\", \"记录带通频段、滤波器类型、边界处理和包络谱幅值标定，保证结果可复现。\"]}"
+              }
+            ]
+          }
+        ],
+        "metrics": [
+          {
+            "provider": "deepseek",
+            "requested_model": "deepseek-flash",
+            "served_model": "deepseek-flash",
+            "response_id": "5aab218a-dbd1-4114-a62b-89fb9d937e35",
+            "wall_seconds": 0.777633000001515,
+            "input_tokens": 544,
+            "output_tokens": 56,
+            "total_tokens": 600,
+            "done_reason": "tool_calls",
+            "structured_output": null
+          },
+          {
+            "provider": "deepseek",
+            "requested_model": "deepseek-flash",
+            "served_model": "deepseek-flash",
+            "response_id": "26b8a8c5-aa83-4056-93ee-3d041d643272",
+            "wall_seconds": 2.9180672999973467,
+            "input_tokens": 1100,
+            "output_tokens": 313,
+            "total_tokens": 1413,
+            "done_reason": "stop",
+            "structured_output": null
+          },
+          {
+            "provider": "deepseek",
+            "requested_model": "deepseek-flash",
+            "served_model": "deepseek-flash",
+            "response_id": "fb8e4594-6749-40a7-b040-d2a222f71859",
+            "wall_seconds": 1.7808771999989403,
+            "input_tokens": 1119,
+            "output_tokens": 190,
+            "total_tokens": 1309,
+            "done_reason": "stop",
+            "structured_output": "json_object_with_local_schema_validation"
+          }
+        ],
+        "evidence": {
+          "EV-001": {
+            "id": "EV-001",
+            "kind": "knowledge",
+            "hits": [
+              {
+                "id": "KB-03",
+                "title": "包络谱的用途与滤波记录",
+                "text": "包络分析用于观察高频振动的低频幅值调制和重复冲击。需要记录带通频段、滤波器、边界处理和包络谱幅值标定。非法频段、带宽未知或记录太短时不能声称取得可靠轴承证据。",
+                "score": 0.7321312781342257,
+                "source": "开发自编知识卡片，未经现场专家审核",
+                "corpus_sha256": "f925f09f0cf2c13944f8b1f44396855d37fb6836da8fd72b18ee7b68ec22350d"
+              },
+              {
+                "id": "KB-04",
+                "title": "内圈故障候选与BPFI证据",
+                "text": "轴承内圈故障候选通常检查BPFI附近的包络谱成分、谐波与转频调制。频率匹配需要可靠转速及轴承参数。一个匹配峰不能单独证明内圈故障，还应检查干扰和其他候选。",
+                "score": 0.6549958623726798,
+                "source": "开发自编知识卡片，未经现场专家审核",
+                "corpus_sha256": "f925f09f0cf2c13944f8b1f44396855d37fb6836da8fd72b18ee7b68ec22350d"
+              },
+              {
+                "id": "KB-05",
+                "title": "外圈故障候选与BPFO证据",
+                "text": "轴承外圈故障候选可检查BPFO附近的包络谱重复成分及其谐波。峰的表现受载荷区和传感器位置影响。没有显著BPFO峰不能完全排除外圈问题，存在峰也不能直接确诊。",
+                "score": 0.6417870223101866,
+                "source": "开发自编知识卡片，未经现场专家审核",
+                "corpus_sha256": "f925f09f0cf2c13944f8b1f44396855d37fb6836da8fd72b18ee7b68ec22350d"
+              }
+            ],
+            "limitation": "开发自编资料，不是当前设备测量或专家审核意见"
+          }
+        },
+        "prototype_limitations": [
+          "本机开发原型，无账号授权和工单写入",
+          "包络及轴承故障定类尚未实现",
+          "结构与引用校验不等于语义诊断已正确"
+        ]
+      }
+    }
+  ],
+  "passed_count": 3,
+  "total_tokens": 8131
+}

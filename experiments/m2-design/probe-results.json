@@ -1,0 +1,82 @@
+{
+  "purpose": "M2-T01 design probe; not formal acceptance",
+  "python": "3.11.15",
+  "numpy": "2.4.6",
+  "scipy": "1.17.1",
+  "config": {
+    "fs": 12000,
+    "band_hz": [
+      2000,
+      4000
+    ],
+    "prototype_order": 4,
+    "sos_sections": 4,
+    "single_pass_order": 8,
+    "forward_backward_response": "abs(H)**2",
+    "padtype": "odd",
+    "padlen": 27,
+    "guard_samples_each_side": 161,
+    "max_pole_radius": 0.8418043074513174,
+    "hilbert_extension": "reflect each side by guard; no zero padding"
+  },
+  "cases": [
+    {
+      "effective_count": 48000,
+      "modulation_depth": 0.25,
+      "modulation_hz": 120.0,
+      "expected_peak_amplitude_m_s2": 0.5,
+      "measured_bin_amplitude_m_s2": 0.49999999004088796,
+      "amplitude_absolute_error": 9.959112035051731e-09,
+      "interior_envelope_max_error_m_s2": 0.010381108873831035,
+      "max_10_to_500_hz_amplitude_m_s2": 0.49999999004088796,
+      "float64_samples_sha256": "58ff15262658a4b2a07f68777515ebf9749067671180d2d1b033e0b0c350cb06"
+    },
+    {
+      "effective_count": 48000,
+      "modulation_depth": 0.0,
+      "modulation_hz": 120.0,
+      "expected_peak_amplitude_m_s2": 0.0,
+      "measured_bin_amplitude_m_s2": 4.5991905423887785e-15,
+      "amplitude_absolute_error": 4.5991905423887785e-15,
+      "interior_envelope_max_error_m_s2": 0.01078003808662098,
+      "max_10_to_500_hz_amplitude_m_s2": 9.856898456151827e-13,
+      "float64_samples_sha256": "a2ec9c10b9142c0850ce87248aac9845765dc1165cb64032d3723f79ff508004"
+    },
+    {
+      "effective_count": 48001,
+      "modulation_depth": 0.25,
+      "modulation_hz": 119.99750005208224,
+      "expected_peak_amplitude_m_s2": 0.5,
+      "measured_bin_amplitude_m_s2": 0.4999999896969417,
+      "amplitude_absolute_error": 1.0303058295413337e-08,
+      "interior_envelope_max_error_m_s2": 0.008695890396402284,
+      "max_10_to_500_hz_amplitude_m_s2": 0.4999999896969417,
+      "float64_samples_sha256": "7d90c5957f314a9108da5ae5f10975e28f413c9f7765d79414bc984f73b42a03"
+    },
+    {
+      "effective_count": 48001,
+      "modulation_depth": 0.0,
+      "modulation_hz": 119.99750005208224,
+      "expected_peak_amplitude_m_s2": 0.0,
+      "measured_bin_amplitude_m_s2": 5.167912248299066e-15,
+      "amplitude_absolute_error": 5.167912248299066e-15,
+      "interior_envelope_max_error_m_s2": 0.00980899304185856,
+      "max_10_to_500_hz_amplitude_m_s2": 9.085585042895104e-12,
+      "float64_samples_sha256": "76505738b7f8052e8378d4eb5adf8a2414e6e5273d84acd3481ee3197dfabba0"
+    }
+  ],
+  "bearing_formula_fixture_hz": {
+    "rpm": 1800,
+    "rolling_elements": 8,
+    "d_mm": 10,
+    "D_mm": 40,
+    "contact_angle_deg": 0,
+    "BPFO": 90,
+    "BPFI": 150,
+    "BSF": 56.25,
+    "two_BSF": 112.5,
+    "FTF": 11.25
+  },
+  "profile_qualified": false,
+  "factory_data_used": false
+}

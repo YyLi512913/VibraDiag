@@ -1,0 +1,40 @@
+{
+  "version": "stored-axis-shape-research-v1",
+  "purpose": "Conditional time-axis sensitivity research, not a repair of source metadata or qualified diagnostic evidence",
+  "time_axis_assumption": "Treat stored vibration_1 X coordinates as seconds for this research hypothesis; source semantics remain unverified",
+  "sampling_rate_hz": 64000.0,
+  "interpolation": "piecewise_linear_on_stored_coordinates",
+  "grid": "start at first stored coordinate; stop inside last coordinate; no extrapolation",
+  "min_step_nominal": 0.1,
+  "max_step_nominal": 2.0,
+  "max_count_duration_relative_error": 0.02,
+  "max_time_ulp_nominal": 0.000001,
+  "min_points": 1024,
+  "max_points": 1000000,
+  "carrier_band_hz": [2000.0, 4000.0],
+  "modulation_range_hz": [10.0, 500.0],
+  "scale": "Normalize by original absolute peak; export shape features only, never physical amplitude",
+  "counterfactual": "Also compute shape features under an explicitly hypothetical nominal-rate index axis; never overwrite the stored axis",
+  "sensitivity_rule": "Flag dominant-frequency difference greater than twice the larger FFT bin spacing; this is not diagnostic confidence",
+  "synthetic_acceptance": {
+    "carriers_hz": [2200.0, 3000.0, 3800.0],
+    "modulation_hz": [60.0, 120.0, 240.0],
+    "modulation_depth": 0.3,
+    "duration_s": 2.0,
+    "timing_patterns": ["bounded_jitter", "short_intervals"],
+    "max_waveform_relative_rms_error": 0.03,
+    "max_envelope_relative_rms_error": 0.05,
+    "max_dominant_frequency_error_bins": 2.0
+  },
+  "development_basis": "Bounds chosen from prior development timing inspection and numerical scope, not validation signal features or class performance",
+  "validation_disclosure": "Validation readiness and timing blockers were already inspected in T05b1; this is a frozen feature protocol, not a fully blind validation study",
+  "sealed_test": "No archive member listing/extraction, signal reads or evaluation",
+  "prediction": null,
+  "diagnostic_evidence_eligible": false,
+  "limitations": [
+    "Linear interpolation is not an anti-alias filter or a full-band waveform reconstruction guarantee",
+    "Source timing semantics and physical channel scaling remain unresolved",
+    "Only narrow-band shape observations under stated assumptions; no severity, maintenance effectiveness or classification accuracy",
+    "Original data and T05a/T05b1 strict readiness decisions remain intact"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "passed": true,
+  "source_entries_checked": 13,
+  "source_mismatches": [],
+  "original_files_checked": 48,
+  "changed_original_files": [],
+  "sealed_test": [
+    {
+      "bearing_id": "K003",
+      "signal_directory_exists": false
+    },
+    {
+      "bearing_id": "KA04",
+      "signal_directory_exists": false
+    },
+    {
+      "bearing_id": "KI04",
+      "signal_directory_exists": false
+    }
+  ],
+  "scope": "Post-replay original file hash verification; no sealed archive contents read"
+}

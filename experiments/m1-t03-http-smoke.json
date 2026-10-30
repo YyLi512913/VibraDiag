@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "transport": "loopback HTTP",
+  "input_source": "synthetic",
+  "measurement_id": "ac093439-e8c5-417e-98c8-2f4da4b76e29",
+  "sample_count": 1024,
+  "sha256": "d533f5e797e5762f64a8ae97a1024e2bda3ace3d66d341a19879be4d8c763115",
+  "checks": [
+    "login",
+    "upload",
+    "input_confirmation",
+    "parameter_revision",
+    "stale_confirmation_409",
+    "original_bytes_unchanged",
+    "API_process_restart",
+    "persistent_revision_history"
+  ],
+  "factory_data_used": false
+}

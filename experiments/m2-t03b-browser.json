@@ -1,0 +1,32 @@
+{
+  "chart_artifact": "experiments/m2-t03b-envelope-chart.png",
+  "chart_kind": "Rendered canvas export; inspected by image viewer",
+  "checks": {
+    "calculation_frequency_hz": 90,
+    "calculation_frequency_unit": "Hz",
+    "canvas_count": 1,
+    "confirmation_and_basic_via_ui": true,
+    "envelope_and_frequency_via_ui": true,
+    "evidence_to_relation_to_calculation_fact": true,
+    "history_run_count_after_replay": 4,
+    "matching_table_rows": 63,
+    "matching_via_ui": true,
+    "page_horizontal_overflow": false,
+    "reload_preserved_pending": true,
+    "response_lost_after_server_completed": true,
+    "same_key_replay_http_status": 200,
+    "same_resource_id": true
+  },
+  "date": "2026-10-30",
+  "evidence_count": 63,
+  "fact_count": 214,
+  "factory_data_used": false,
+  "input_source": "synthetic",
+  "limitations": [
+    "No full-page screenshot QA; browser viewport capture timed out, locator capture was misaligned",
+    "No field data or qualified diagnostic evidence",
+    "No mobile viewport acceptance in this step"
+  ],
+  "matching_run_id": "53ddab3e-b73f-4bad-ab44-67eba9be7dc7",
+  "measurement_id": "1b4f8a7e-be45-4e3a-a321-199b98f67d5a"
+}

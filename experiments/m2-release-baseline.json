@@ -1,0 +1,1870 @@
+{
+  "passed": true,
+  "purpose": "M2 software acceptance baseline; no factory or classifier validation",
+  "synthetic_cases": [
+    {
+      "case": "AM",
+      "band_hz": [
+        2000.0,
+        4000.0
+      ],
+      "numeric_configuration_sha256": "c120af93047e0ac04a0bf2ceb64a6ebbc3ac17260213daef0be6aa845567b637",
+      "original_sha256": "aa950719df371984ed64f5dfb3e4d6fcc8fc5bf5278b10dd04720b4e9a68ceb4",
+      "original_unchanged": true,
+      "target_id": "BPFO:1",
+      "target_status": "ambiguous",
+      "target_reasons": [
+        "alternative_explanations"
+      ],
+      "confounders": [
+        "possible_carrier_beating"
+      ],
+      "candidate_count": 1,
+      "row_count": 63,
+      "observation_status_counts": {
+        "observed_support": 1,
+        "no_observed_support": 32,
+        "ambiguous": 5,
+        "not_evaluable": 25
+      },
+      "guard_samples_each_side": 161,
+      "effective_segment": {
+        "start_index": 161,
+        "stop_index_exclusive": 48161,
+        "sample_count": 48000,
+        "start_time_s": 0.013416666666666667,
+        "last_sample_time_s": 4.013333333333334,
+        "duration_s": 4.0
+      },
+      "maximum_modulation_amplitude_m_s2": 0.49999999842948306,
+      "maximum_modulation_frequency_hz": 95.0,
+      "original_absolute_peak_m_s2": 2.5,
+      "diagnosis": null,
+      "evidence_eligible": false,
+      "independent_acquisition_count": 1,
+      "filter_sensitivity_in_registered_result": "not_checked"
+    },
+    {
+      "case": "AM",
+      "band_hz": [
+        1800.0,
+        4200.0
+      ],
+      "numeric_configuration_sha256": "b324653b87de115e8e3bfc4b3aa5a21ebe56b57b836044f047e437ffc5f32b6c",
+      "original_sha256": "aa950719df371984ed64f5dfb3e4d6fcc8fc5bf5278b10dd04720b4e9a68ceb4",
+      "original_unchanged": true,
+      "target_id": "BPFO:1",
+      "target_status": "ambiguous",
+      "target_reasons": [
+        "alternative_explanations"
+      ],
+      "confounders": [
+        "possible_carrier_beating"
+      ],
+      "candidate_count": 1,
+      "row_count": 63,
+      "observation_status_counts": {
+        "observed_support": 0,
+        "no_observed_support": 37,
+        "ambiguous": 1,
+        "not_evaluable": 25
+      },
+      "guard_samples_each_side": 145,
+      "effective_segment": {
+        "start_index": 145,
+        "stop_index_exclusive": 48177,
+        "sample_count": 48032,
+        "start_time_s": 0.012083333333333333,
+        "last_sample_time_s": 4.014666666666667,
+        "duration_s": 4.002666666666666
+      },
+      "maximum_modulation_amplitude_m_s2": 0.4796451604849399,
+      "maximum_modulation_frequency_hz": 94.9367088607595,
+      "original_absolute_peak_m_s2": 2.5,
+      "diagnosis": null,
+      "evidence_eligible": false,
+      "independent_acquisition_count": 1,
+      "filter_sensitivity_in_registered_result": "not_checked"
+    },
+    {
+      "case": "AM",
+      "band_hz": [
+        2200.0,
+        3800.0
+      ],
+      "numeric_configuration_sha256": "9197308705c2d3581dbb8a007260312d1eaba4346c4fc07d4fd1ea0f6884d148",
+      "original_sha256": "aa950719df371984ed64f5dfb3e4d6fcc8fc5bf5278b10dd04720b4e9a68ceb4",
+      "original_unchanged": true,
+      "target_id": "BPFO:1",
+      "target_status": "ambiguous",
+      "target_reasons": [
+        "alternative_explanations"
+      ],
+      "confounders": [
+        "possible_carrier_beating"
+      ],
+      "candidate_count": 1,
+      "row_count": 63,
+      "observation_status_counts": {
+        "observed_support": 0,
+        "no_observed_support": 37,
+        "ambiguous": 1,
+        "not_evaluable": 25
+      },
+      "guard_samples_each_side": 189,
+      "effective_segment": {
+        "start_index": 189,
+        "stop_index_exclusive": 48133,
+        "sample_count": 47944,
+        "start_time_s": 0.01575,
+        "last_sample_time_s": 4.011,
+        "duration_s": 3.9953333333333334
+      },
+      "maximum_modulation_amplitude_m_s2": 0.4397534942431115,
+      "maximum_modulation_frequency_hz": 95.11096278992157,
+      "original_absolute_peak_m_s2": 2.5,
+      "diagnosis": null,
+      "evidence_eligible": false,
+      "independent_acquisition_count": 1,
+      "filter_sensitivity_in_registered_result": "not_checked"
+    },
+    {
+      "case": "unmodulated",
+      "band_hz": [
+        2000.0,
+        4000.0
+      ],
+      "numeric_configuration_sha256": "c120af93047e0ac04a0bf2ceb64a6ebbc3ac17260213daef0be6aa845567b637",
+      "original_sha256": "840c991f437d2102ffe85be16b7dbf8683175cfc6b767fcd7a12631ec1cad584",
+      "original_unchanged": true,
+      "target_id": "BPFO:1",
+      "target_status": "no_observed_support",
+      "target_reasons": [],
+      "confounders": [],
+      "candidate_count": 1,
+      "row_count": 63,
+      "observation_status_counts": {
+        "observed_support": 0,
+        "no_observed_support": 38,
+        "ambiguous": 0,
+        "not_evaluable": 25
+      },
+      "guard_samples_each_side": 161,
+      "effective_segment": {
+        "start_index": 161,
+        "stop_index_exclusive": 48161,
+        "sample_count": 48000,
+        "start_time_s": 0.013416666666666667,
+        "last_sample_time_s": 4.013333333333334,
+        "duration_s": 4.0
+      },
+      "maximum_modulation_amplitude_m_s2": 9.921687147079226e-13,
+      "maximum_modulation_frequency_hz": 10.0,
+      "original_absolute_peak_m_s2": 2.0,
+      "diagnosis": null,
+      "evidence_eligible": false,
+      "independent_acquisition_count": 1,
+      "filter_sensitivity_in_registered_result": "not_checked"
+    },
+    {
+      "case": "unmodulated",
+      "band_hz": [
+        1800.0,
+        4200.0
+      ],
+      "numeric_configuration_sha256": "b324653b87de115e8e3bfc4b3aa5a21ebe56b57b836044f047e437ffc5f32b6c",
+      "original_sha256": "840c991f437d2102ffe85be16b7dbf8683175cfc6b767fcd7a12631ec1cad584",
+      "original_unchanged": true,
+      "target_id": "BPFO:1",
+      "target_status": "no_observed_support",
+      "target_reasons": [],
+      "confounders": [],
+      "candidate_count": 1,
+      "row_count": 63,
+      "observation_status_counts": {
+        "observed_support": 0,
+        "no_observed_support": 38,
+        "ambiguous": 0,
+        "not_evaluable": 25
+      },
+      "guard_samples_each_side": 145,
+      "effective_segment": {
+        "start_index": 145,
+        "stop_index_exclusive": 48177,
+        "sample_count": 48032,
+        "start_time_s": 0.012083333333333333,
+        "last_sample_time_s": 4.014666666666667,
+        "duration_s": 4.002666666666666
+      },
+      "maximum_modulation_amplitude_m_s2": 1.598327415385474e-12,
+      "maximum_modulation_frequency_hz": 10.243171219187207,
+      "original_absolute_peak_m_s2": 2.0,
+      "diagnosis": null,
+      "evidence_eligible": false,
+      "independent_acquisition_count": 1,
+      "filter_sensitivity_in_registered_result": "not_checked"
+    },
+    {
+      "case": "unmodulated",
+      "band_hz": [
+        2200.0,
+        3800.0
+      ],
+      "numeric_configuration_sha256": "9197308705c2d3581dbb8a007260312d1eaba4346c4fc07d4fd1ea0f6884d148",
+      "original_sha256": "840c991f437d2102ffe85be16b7dbf8683175cfc6b767fcd7a12631ec1cad584",
+      "original_unchanged": true,
+      "target_id": "BPFO:1",
+      "target_status": "no_observed_support",
+      "target_reasons": [],
+      "confounders": [],
+      "candidate_count": 3,
+      "row_count": 63,
+      "observation_status_counts": {
+        "observed_support": 0,
+        "no_observed_support": 38,
+        "ambiguous": 0,
+        "not_evaluable": 25
+      },
+      "guard_samples_each_side": 189,
+      "effective_segment": {
+        "start_index": 189,
+        "stop_index_exclusive": 48133,
+        "sample_count": 47944,
+        "start_time_s": 0.01575,
+        "last_sample_time_s": 4.011,
+        "duration_s": 3.9953333333333334
+      },
+      "maximum_modulation_amplitude_m_s2": 5.031339603952314e-13,
+      "maximum_modulation_frequency_hz": 10.011680293675955,
+      "original_absolute_peak_m_s2": 2.0,
+      "diagnosis": null,
+      "evidence_eligible": false,
+      "independent_acquisition_count": 1,
+      "filter_sensitivity_in_registered_result": "not_checked"
+    },
+    {
+      "case": "beating",
+      "band_hz": [
+        2000.0,
+        4000.0
+      ],
+      "numeric_configuration_sha256": "c120af93047e0ac04a0bf2ceb64a6ebbc3ac17260213daef0be6aa845567b637",
+      "original_sha256": "847b5f6fffb5d21ee6f58c84368fb32cd8a8c3eab4cc0676c64273c648a8e409",
+      "original_unchanged": true,
+      "target_id": "BPFO:1",
+      "target_status": "ambiguous",
+      "target_reasons": [
+        "alternative_explanations"
+      ],
+      "confounders": [
+        "possible_carrier_beating"
+      ],
+      "candidate_count": 1,
+      "row_count": 63,
+      "observation_status_counts": {
+        "observed_support": 3,
+        "no_observed_support": 25,
+        "ambiguous": 10,
+        "not_evaluable": 25
+      },
+      "guard_samples_each_side": 161,
+      "effective_segment": {
+        "start_index": 161,
+        "stop_index_exclusive": 48161,
+        "sample_count": 48000,
+        "start_time_s": 0.013416666666666667,
+        "last_sample_time_s": 4.013333333333334,
+        "duration_s": 4.0
+      },
+      "maximum_modulation_amplitude_m_s2": 0.19974968588918726,
+      "maximum_modulation_frequency_hz": 95.0,
+      "original_absolute_peak_m_s2": 2.2,
+      "diagnosis": null,
+      "evidence_eligible": false,
+      "independent_acquisition_count": 1,
+      "filter_sensitivity_in_registered_result": "not_checked"
+    },
+    {
+      "case": "beating",
+      "band_hz": [
+        1800.0,
+        4200.0
+      ],
+      "numeric_configuration_sha256": "b324653b87de115e8e3bfc4b3aa5a21ebe56b57b836044f047e437ffc5f32b6c",
+      "original_sha256": "847b5f6fffb5d21ee6f58c84368fb32cd8a8c3eab4cc0676c64273c648a8e409",
+      "original_unchanged": true,
+      "target_id": "BPFO:1",
+      "target_status": "ambiguous",
+      "target_reasons": [
+        "alternative_explanations"
+      ],
+      "confounders": [
+        "possible_carrier_beating"
+      ],
+      "candidate_count": 1,
+      "row_count": 63,
+      "observation_status_counts": {
+        "observed_support": 2,
+        "no_observed_support": 32,
+        "ambiguous": 4,
+        "not_evaluable": 25
+      },
+      "guard_samples_each_side": 145,
+      "effective_segment": {
+        "start_index": 145,
+        "stop_index_exclusive": 48177,
+        "sample_count": 48032,
+        "start_time_s": 0.012083333333333333,
+        "last_sample_time_s": 4.014666666666667,
+        "duration_s": 4.002666666666666
+      },
+      "maximum_modulation_amplitude_m_s2": 0.19161794089022943,
+      "maximum_modulation_frequency_hz": 94.9367088607595,
+      "original_absolute_peak_m_s2": 2.2,
+      "diagnosis": null,
+      "evidence_eligible": false,
+      "independent_acquisition_count": 1,
+      "filter_sensitivity_in_registered_result": "not_checked"
+    },
+    {
+      "case": "beating",
+      "band_hz": [
+        2200.0,
+        3800.0
+      ],
+      "numeric_configuration_sha256": "9197308705c2d3581dbb8a007260312d1eaba4346c4fc07d4fd1ea0f6884d148",
+      "original_sha256": "847b5f6fffb5d21ee6f58c84368fb32cd8a8c3eab4cc0676c64273c648a8e409",
+      "original_unchanged": true,
+      "target_id": "BPFO:1",
+      "target_status": "ambiguous",
+      "target_reasons": [
+        "alternative_explanations"
+      ],
+      "confounders": [
+        "possible_carrier_beating"
+      ],
+      "candidate_count": 1,
+      "row_count": 63,
+      "observation_status_counts": {
+        "observed_support": 2,
+        "no_observed_support": 32,
+        "ambiguous": 4,
+        "not_evaluable": 25
+      },
+      "guard_samples_each_side": 189,
+      "effective_segment": {
+        "start_index": 189,
+        "stop_index_exclusive": 48133,
+        "sample_count": 47944,
+        "start_time_s": 0.01575,
+        "last_sample_time_s": 4.011,
+        "duration_s": 3.9953333333333334
+      },
+      "maximum_modulation_amplitude_m_s2": 0.17568124525398665,
+      "maximum_modulation_frequency_hz": 95.11096278992157,
+      "original_absolute_peak_m_s2": 2.2,
+      "diagnosis": null,
+      "evidence_eligible": false,
+      "independent_acquisition_count": 1,
+      "filter_sensitivity_in_registered_result": "not_checked"
+    },
+    {
+      "case": "out_of_band",
+      "band_hz": [
+        2000.0,
+        4000.0
+      ],
+      "numeric_configuration_sha256": "c120af93047e0ac04a0bf2ceb64a6ebbc3ac17260213daef0be6aa845567b637",
+      "original_sha256": "51aa9afbacaab36e5b74edde34eb17c04c2fac053f35d4be7831914ce4aa6584",
+      "original_unchanged": true,
+      "target_id": "BPFO:1",
+      "target_status": "no_observed_support",
+      "target_reasons": [],
+      "confounders": [],
+      "candidate_count": 4,
+      "row_count": 63,
+      "observation_status_counts": {
+        "observed_support": 2,
+        "no_observed_support": 26,
+        "ambiguous": 10,
+        "not_evaluable": 25
+      },
+      "guard_samples_each_side": 161,
+      "effective_segment": {
+        "start_index": 161,
+        "stop_index_exclusive": 48161,
+        "sample_count": 48000,
+        "start_time_s": 0.013416666666666667,
+        "last_sample_time_s": 4.013333333333334,
+        "duration_s": 4.0
+      },
+      "maximum_modulation_amplitude_m_s2": 2.3903526109410478e-12,
+      "maximum_modulation_frequency_hz": 10.0,
+      "original_absolute_peak_m_s2": 2.5,
+      "diagnosis": null,
+      "evidence_eligible": false,
+      "independent_acquisition_count": 1,
+      "filter_sensitivity_in_registered_result": "not_checked"
+    },
+    {
+      "case": "out_of_band",
+      "band_hz": [
+        1800.0,
+        4200.0
+      ],
+      "numeric_configuration_sha256": "b324653b87de115e8e3bfc4b3aa5a21ebe56b57b836044f047e437ffc5f32b6c",
+      "original_sha256": "51aa9afbacaab36e5b74edde34eb17c04c2fac053f35d4be7831914ce4aa6584",
+      "original_unchanged": true,
+      "target_id": "BPFO:1",
+      "target_status": "no_observed_support",
+      "target_reasons": [],
+      "confounders": [],
+      "candidate_count": 5,
+      "row_count": 63,
+      "observation_status_counts": {
+        "observed_support": 2,
+        "no_observed_support": 26,
+        "ambiguous": 10,
+        "not_evaluable": 25
+      },
+      "guard_samples_each_side": 145,
+      "effective_segment": {
+        "start_index": 145,
+        "stop_index_exclusive": 48177,
+        "sample_count": 48032,
+        "start_time_s": 0.012083333333333333,
+        "last_sample_time_s": 4.014666666666667,
+        "duration_s": 4.002666666666666
+      },
+      "maximum_modulation_amplitude_m_s2": 3.9183542436785446e-12,
+      "maximum_modulation_frequency_hz": 10.243171219187207,
+      "original_absolute_peak_m_s2": 2.5,
+      "diagnosis": null,
+      "evidence_eligible": false,
+      "independent_acquisition_count": 1,
+      "filter_sensitivity_in_registered_result": "not_checked"
+    },
+    {
+      "case": "out_of_band",
+      "band_hz": [
+        2200.0,
+        3800.0
+      ],
+      "numeric_configuration_sha256": "9197308705c2d3581dbb8a007260312d1eaba4346c4fc07d4fd1ea0f6884d148",
+      "original_sha256": "51aa9afbacaab36e5b74edde34eb17c04c2fac053f35d4be7831914ce4aa6584",
+      "original_unchanged": true,
+      "target_id": "BPFO:1",
+      "target_status": "no_observed_support",
+      "target_reasons": [],
+      "confounders": [],
+      "candidate_count": 4,
+      "row_count": 63,
+      "observation_status_counts": {
+        "observed_support": 2,
+        "no_observed_support": 24,
+        "ambiguous": 12,
+        "not_evaluable": 25
+      },
+      "guard_samples_each_side": 189,
+      "effective_segment": {
+        "start_index": 189,
+        "stop_index_exclusive": 48133,
+        "sample_count": 47944,
+        "start_time_s": 0.01575,
+        "last_sample_time_s": 4.011,
+        "duration_s": 3.9953333333333334
+      },
+      "maximum_modulation_amplitude_m_s2": 1.212981159157299e-12,
+      "maximum_modulation_frequency_hz": 10.011680293675955,
+      "original_absolute_peak_m_s2": 2.5,
+      "diagnosis": null,
+      "evidence_eligible": false,
+      "independent_acquisition_count": 1,
+      "filter_sensitivity_in_registered_result": "not_checked"
+    },
+    {
+      "case": "weak_in_noise",
+      "band_hz": [
+        2000.0,
+        4000.0
+      ],
+      "numeric_configuration_sha256": "c120af93047e0ac04a0bf2ceb64a6ebbc3ac17260213daef0be6aa845567b637",
+      "original_sha256": "437002242bd6c2f9e684c584bc57a8ff04226abade3e3fcdf3a3893f5aa281b1",
+      "original_unchanged": true,
+      "target_id": "BPFO:1",
+      "target_status": "no_observed_support",
+      "target_reasons": [],
+      "confounders": [],
+      "candidate_count": 4,
+      "row_count": 63,
+      "observation_status_counts": {
+        "observed_support": 1,
+        "no_observed_support": 33,
+        "ambiguous": 4,
+        "not_evaluable": 25
+      },
+      "guard_samples_each_side": 161,
+      "effective_segment": {
+        "start_index": 161,
+        "stop_index_exclusive": 48161,
+        "sample_count": 48000,
+        "start_time_s": 0.013416666666666667,
+        "last_sample_time_s": 4.013333333333334,
+        "duration_s": 4.0
+      },
+      "maximum_modulation_amplitude_m_s2": 0.004945069713650894,
+      "maximum_modulation_frequency_hz": 321.75,
+      "original_absolute_peak_m_s2": 2.343846184665495,
+      "diagnosis": null,
+      "evidence_eligible": false,
+      "independent_acquisition_count": 1,
+      "filter_sensitivity_in_registered_result": "not_checked"
+    },
+    {
+      "case": "weak_in_noise",
+      "band_hz": [
+        1800.0,
+        4200.0
+      ],
+      "numeric_configuration_sha256": "b324653b87de115e8e3bfc4b3aa5a21ebe56b57b836044f047e437ffc5f32b6c",
+      "original_sha256": "437002242bd6c2f9e684c584bc57a8ff04226abade3e3fcdf3a3893f5aa281b1",
+      "original_unchanged": true,
+      "target_id": "BPFO:1",
+      "target_status": "no_observed_support",
+      "target_reasons": [],
+      "confounders": [],
+      "candidate_count": 3,
+      "row_count": 63,
+      "observation_status_counts": {
+        "observed_support": 0,
+        "no_observed_support": 36,
+        "ambiguous": 2,
+        "not_evaluable": 25
+      },
+      "guard_samples_each_side": 145,
+      "effective_segment": {
+        "start_index": 145,
+        "stop_index_exclusive": 48177,
+        "sample_count": 48032,
+        "start_time_s": 0.012083333333333333,
+        "last_sample_time_s": 4.014666666666667,
+        "duration_s": 4.002666666666666
+      },
+      "maximum_modulation_amplitude_m_s2": 0.0048850767831157054,
+      "maximum_modulation_frequency_hz": 321.7854763491006,
+      "original_absolute_peak_m_s2": 2.343846184665495,
+      "diagnosis": null,
+      "evidence_eligible": false,
+      "independent_acquisition_count": 1,
+      "filter_sensitivity_in_registered_result": "not_checked"
+    },
+    {
+      "case": "weak_in_noise",
+      "band_hz": [
+        2200.0,
+        3800.0
+      ],
+      "numeric_configuration_sha256": "9197308705c2d3581dbb8a007260312d1eaba4346c4fc07d4fd1ea0f6884d148",
+      "original_sha256": "437002242bd6c2f9e684c584bc57a8ff04226abade3e3fcdf3a3893f5aa281b1",
+      "original_unchanged": true,
+      "target_id": "BPFO:1",
+      "target_status": "no_observed_support",
+      "target_reasons": [],
+      "confounders": [],
+      "candidate_count": 3,
+      "row_count": 63,
+      "observation_status_counts": {
+        "observed_support": 0,
+        "no_observed_support": 36,
+        "ambiguous": 2,
+        "not_evaluable": 25
+      },
+      "guard_samples_each_side": 189,
+      "effective_segment": {
+        "start_index": 189,
+        "stop_index_exclusive": 48133,
+        "sample_count": 47944,
+        "start_time_s": 0.01575,
+        "last_sample_time_s": 4.011,
+        "duration_s": 3.9953333333333334
+      },
+      "maximum_modulation_amplitude_m_s2": 0.004453479691607656,
+      "maximum_modulation_frequency_hz": 321.62522943434004,
+      "original_absolute_peak_m_s2": 2.343846184665495,
+      "diagnosis": null,
+      "evidence_eligible": false,
+      "independent_acquisition_count": 1,
+      "filter_sensitivity_in_registered_result": "not_checked"
+    },
+    {
+      "case": "boundary_impulse",
+      "band_hz": [
+        2000.0,
+        4000.0
+      ],
+      "numeric_configuration_sha256": "c120af93047e0ac04a0bf2ceb64a6ebbc3ac17260213daef0be6aa845567b637",
+      "original_sha256": "3e390c5c3103e41b206c86fa5bbb2c51ab1ccf1118b19baa96ec30c103c329cd",
+      "original_unchanged": true,
+      "target_id": "BPFO:1",
+      "target_status": "ambiguous",
+      "target_reasons": [
+        "alternative_explanations"
+      ],
+      "confounders": [
+        "possible_carrier_beating"
+      ],
+      "candidate_count": 1,
+      "row_count": 63,
+      "observation_status_counts": {
+        "observed_support": 1,
+        "no_observed_support": 32,
+        "ambiguous": 5,
+        "not_evaluable": 25
+      },
+      "guard_samples_each_side": 161,
+      "effective_segment": {
+        "start_index": 161,
+        "stop_index_exclusive": 48161,
+        "sample_count": 48000,
+        "start_time_s": 0.013416666666666667,
+        "last_sample_time_s": 4.013333333333334,
+        "duration_s": 4.0
+      },
+      "maximum_modulation_amplitude_m_s2": 0.49999994146590276,
+      "maximum_modulation_frequency_hz": 95.0,
+      "original_absolute_peak_m_s2": 102.5,
+      "diagnosis": null,
+      "evidence_eligible": false,
+      "independent_acquisition_count": 1,
+      "filter_sensitivity_in_registered_result": "not_checked"
+    },
+    {
+      "case": "boundary_impulse",
+      "band_hz": [
+        1800.0,
+        4200.0
+      ],
+      "numeric_configuration_sha256": "b324653b87de115e8e3bfc4b3aa5a21ebe56b57b836044f047e437ffc5f32b6c",
+      "original_sha256": "3e390c5c3103e41b206c86fa5bbb2c51ab1ccf1118b19baa96ec30c103c329cd",
+      "original_unchanged": true,
+      "target_id": "BPFO:1",
+      "target_status": "ambiguous",
+      "target_reasons": [
+        "alternative_explanations"
+      ],
+      "confounders": [
+        "possible_carrier_beating"
+      ],
+      "candidate_count": 1,
+      "row_count": 63,
+      "observation_status_counts": {
+        "observed_support": 0,
+        "no_observed_support": 37,
+        "ambiguous": 1,
+        "not_evaluable": 25
+      },
+      "guard_samples_each_side": 145,
+      "effective_segment": {
+        "start_index": 145,
+        "stop_index_exclusive": 48177,
+        "sample_count": 48032,
+        "start_time_s": 0.012083333333333333,
+        "last_sample_time_s": 4.014666666666667,
+        "duration_s": 4.002666666666666
+      },
+      "maximum_modulation_amplitude_m_s2": 0.47964509053976745,
+      "maximum_modulation_frequency_hz": 94.9367088607595,
+      "original_absolute_peak_m_s2": 102.5,
+      "diagnosis": null,
+      "evidence_eligible": false,
+      "independent_acquisition_count": 1,
+      "filter_sensitivity_in_registered_result": "not_checked"
+    },
+    {
+      "case": "boundary_impulse",
+      "band_hz": [
+        2200.0,
+        3800.0
+      ],
+      "numeric_configuration_sha256": "9197308705c2d3581dbb8a007260312d1eaba4346c4fc07d4fd1ea0f6884d148",
+      "original_sha256": "3e390c5c3103e41b206c86fa5bbb2c51ab1ccf1118b19baa96ec30c103c329cd",
+      "original_unchanged": true,
+      "target_id": "BPFO:1",
+      "target_status": "ambiguous",
+      "target_reasons": [
+        "alternative_explanations"
+      ],
+      "confounders": [
+        "possible_carrier_beating"
+      ],
+      "candidate_count": 1,
+      "row_count": 63,
+      "observation_status_counts": {
+        "observed_support": 0,
+        "no_observed_support": 37,
+        "ambiguous": 1,
+        "not_evaluable": 25
+      },
+      "guard_samples_each_side": 189,
+      "effective_segment": {
+        "start_index": 189,
+        "stop_index_exclusive": 48133,
+        "sample_count": 47944,
+        "start_time_s": 0.01575,
+        "last_sample_time_s": 4.011,
+        "duration_s": 3.9953333333333334
+      },
+      "maximum_modulation_amplitude_m_s2": 0.43975347385051894,
+      "maximum_modulation_frequency_hz": 95.11096278992157,
+      "original_absolute_peak_m_s2": 102.5,
+      "diagnosis": null,
+      "evidence_eligible": false,
+      "independent_acquisition_count": 1,
+      "filter_sensitivity_in_registered_result": "not_checked"
+    }
+  ],
+  "profile_selection": {
+    "retained_band_hz": [
+      2000.0,
+      4000.0
+    ],
+    "reason": "Pre-existing synthetic development baseline, bounded budget and explicit response; neighbor-band observations do not establish an optimal or qualified field profile",
+    "alternatives": [
+      [
+        1800.0,
+        4200.0
+      ],
+      [
+        2200.0,
+        3800.0
+      ]
+    ],
+    "published_qualifications": 0,
+    "registered_result_sensitivity_updated": false
+  },
+  "public_baseline": {
+    "records": [
+      {
+        "record_id": "cwru-97-DE",
+        "dataset": "cwru",
+        "split": "development",
+        "label": "healthy_reference",
+        "entity_group": "cwru-DE-healthy_reference-all-severities-loads",
+        "decision": "unavailable",
+        "missing_requirements": [
+          "stored_acceleration_unit_not_established",
+          "sampling_rate_not_established",
+          "verified_current_speed_and_target_context",
+          "sourced_parameter_uncertainty",
+          "qualified_diagnostic_profile"
+        ],
+        "tool_executed": false,
+        "decision_scope": "strict matching applicability audit, not a persisted execution",
+        "observed_support": false,
+        "diagnosis": null,
+        "physical_metrics": null
+      },
+      {
+        "record_id": "cwru-105-DE",
+        "dataset": "cwru",
+        "split": "development",
+        "label": "inner_race",
+        "entity_group": "cwru-DE-inner_race-all-severities-loads",
+        "decision": "unavailable",
+        "missing_requirements": [
+          "stored_acceleration_unit_not_established",
+          "verified_current_speed_and_target_context",
+          "sourced_parameter_uncertainty",
+          "qualified_diagnostic_profile"
+        ],
+        "tool_executed": false,
+        "decision_scope": "strict matching applicability audit, not a persisted execution",
+        "observed_support": false,
+        "diagnosis": null,
+        "physical_metrics": null
+      },
+      {
+        "record_id": "cwru-118-DE",
+        "dataset": "cwru",
+        "split": "development",
+        "label": "rolling_element",
+        "entity_group": "cwru-DE-rolling_element-all-severities-loads",
+        "decision": "unavailable",
+        "missing_requirements": [
+          "stored_acceleration_unit_not_established",
+          "verified_current_speed_and_target_context",
+          "sourced_parameter_uncertainty",
+          "qualified_diagnostic_profile"
+        ],
+        "tool_executed": false,
+        "decision_scope": "strict matching applicability audit, not a persisted execution",
+        "observed_support": false,
+        "diagnosis": null,
+        "physical_metrics": null
+      },
+      {
+        "record_id": "cwru-130-DE",
+        "dataset": "cwru",
+        "split": "development",
+        "label": "outer_race",
+        "entity_group": "cwru-DE-outer_race-all-severities-loads",
+        "decision": "unavailable",
+        "missing_requirements": [
+          "stored_acceleration_unit_not_established",
+          "verified_current_speed_and_target_context",
+          "sourced_parameter_uncertainty",
+          "qualified_diagnostic_profile"
+        ],
+        "tool_executed": false,
+        "decision_scope": "strict matching applicability audit, not a persisted execution",
+        "observed_support": false,
+        "diagnosis": null,
+        "physical_metrics": null
+      },
+      {
+        "record_id": "pu-N15_M07_F10-K001-1",
+        "dataset": "paderborn",
+        "split": "development",
+        "label": "healthy_reference",
+        "entity_group": "paderborn-bearing-K001",
+        "decision": "unavailable",
+        "missing_requirements": [
+          "stored_acceleration_unit_not_established",
+          "time_axis_semantics_not_established",
+          "verified_current_speed_and_target_context",
+          "sourced_parameter_uncertainty",
+          "qualified_diagnostic_profile"
+        ],
+        "tool_executed": false,
+        "decision_scope": "strict matching applicability audit, not a persisted execution",
+        "observed_support": false,
+        "diagnosis": null,
+        "physical_metrics": null
+      },
+      {
+        "record_id": "pu-N15_M07_F10-K001-2",
+        "dataset": "paderborn",
+        "split": "development",
+        "label": "healthy_reference",
+        "entity_group": "paderborn-bearing-K001",
+        "decision": "unavailable",
+        "missing_requirements": [
+          "stored_acceleration_unit_not_established",
+          "time_axis_semantics_not_established",
+          "verified_current_speed_and_target_context",
+          "sourced_parameter_uncertainty",
+          "qualified_diagnostic_profile"
+        ],
+        "tool_executed": false,
+        "decision_scope": "strict matching applicability audit, not a persisted execution",
+        "observed_support": false,
+        "diagnosis": null,
+        "physical_metrics": null
+      },
+      {
+        "record_id": "pu-N09_M07_F10-K001-1",
+        "dataset": "paderborn",
+        "split": "development",
+        "label": "healthy_reference",
+        "entity_group": "paderborn-bearing-K001",
+        "decision": "unavailable",
+        "missing_requirements": [
+          "stored_acceleration_unit_not_established",
+          "time_axis_semantics_not_established",
+          "verified_current_speed_and_target_context",
+          "sourced_parameter_uncertainty",
+          "qualified_diagnostic_profile"
+        ],
+        "tool_executed": false,
+        "decision_scope": "strict matching applicability audit, not a persisted execution",
+        "observed_support": false,
+        "diagnosis": null,
+        "physical_metrics": null
+      },
+      {
+        "record_id": "pu-N09_M07_F10-K001-2",
+        "dataset": "paderborn",
+        "split": "development",
+        "label": "healthy_reference",
+        "entity_group": "paderborn-bearing-K001",
+        "decision": "unavailable",
+        "missing_requirements": [
+          "stored_acceleration_unit_not_established",
+          "time_axis_semantics_not_established",
+          "verified_current_speed_and_target_context",
+          "sourced_parameter_uncertainty",
+          "qualified_diagnostic_profile"
+        ],
+        "tool_executed": false,
+        "decision_scope": "strict matching applicability audit, not a persisted execution",
+        "observed_support": false,
+        "diagnosis": null,
+        "physical_metrics": null
+      },
+      {
+        "record_id": "pu-N15_M01_F10-K001-1",
+        "dataset": "paderborn",
+        "split": "development",
+        "label": "healthy_reference",
+        "entity_group": "paderborn-bearing-K001",
+        "decision": "unavailable",
+        "missing_requirements": [
+          "stored_acceleration_unit_not_established",
+          "time_axis_semantics_not_established",
+          "verified_current_speed_and_target_context",
+          "sourced_parameter_uncertainty",
+          "qualified_diagnostic_profile"
+        ],
+        "tool_executed": false,
+        "decision_scope": "strict matching applicability audit, not a persisted execution",
+        "observed_support": false,
+        "diagnosis": null,
+        "physical_metrics": null
+      },
+      {
+        "record_id": "pu-N15_M01_F10-K001-2",
+        "dataset": "paderborn",
+        "split": "development",
+        "label": "healthy_reference",
+        "entity_group": "paderborn-bearing-K001",
+        "decision": "unavailable",
+        "missing_requirements": [
+          "stored_acceleration_unit_not_established",
+          "time_axis_semantics_not_established",
+          "verified_current_speed_and_target_context",
+          "sourced_parameter_uncertainty",
+          "qualified_diagnostic_profile"
+        ],
+        "tool_executed": false,
+        "decision_scope": "strict matching applicability audit, not a persisted execution",
+        "observed_support": false,
+        "diagnosis": null,
+        "physical_metrics": null
+      },
+      {
+        "record_id": "pu-N15_M07_F04-K001-1",
+        "dataset": "paderborn",
+        "split": "development",
+        "label": "healthy_reference",
+        "entity_group": "paderborn-bearing-K001",
+        "decision": "unavailable",
+        "missing_requirements": [
+          "stored_acceleration_unit_not_established",
+          "time_axis_semantics_not_established",
+          "verified_current_speed_and_target_context",
+          "sourced_parameter_uncertainty",
+          "qualified_diagnostic_profile"
+        ],
+        "tool_executed": false,
+        "decision_scope": "strict matching applicability audit, not a persisted execution",
+        "observed_support": false,
+        "diagnosis": null,
+        "physical_metrics": null
+      },
+      {
+        "record_id": "pu-N15_M07_F04-K001-2",
+        "dataset": "paderborn",
+        "split": "development",
+        "label": "healthy_reference",
+        "entity_group": "paderborn-bearing-K001",
+        "decision": "unavailable",
+        "missing_requirements": [
+          "stored_acceleration_unit_not_established",
+          "time_axis_semantics_not_established",
+          "verified_current_speed_and_target_context",
+          "sourced_parameter_uncertainty",
+          "qualified_diagnostic_profile"
+        ],
+        "tool_executed": false,
+        "decision_scope": "strict matching applicability audit, not a persisted execution",
+        "observed_support": false,
+        "diagnosis": null,
+        "physical_metrics": null
+      },
+      {
+        "record_id": "pu-N15_M07_F10-KA01-1",
+        "dataset": "paderborn",
+        "split": "development",
+        "label": "outer_race",
+        "entity_group": "paderborn-bearing-KA01",
+        "decision": "unavailable",
+        "missing_requirements": [
+          "stored_acceleration_unit_not_established",
+          "time_axis_semantics_not_established",
+          "verified_current_speed_and_target_context",
+          "sourced_parameter_uncertainty",
+          "qualified_diagnostic_profile"
+        ],
+        "tool_executed": false,
+        "decision_scope": "strict matching applicability audit, not a persisted execution",
+        "observed_support": false,
+        "diagnosis": null,
+        "physical_metrics": null
+      },
+      {
+        "record_id": "pu-N15_M07_F10-KA01-2",
+        "dataset": "paderborn",
+        "split": "development",
+        "label": "outer_race",
+        "entity_group": "paderborn-bearing-KA01",
+        "decision": "unavailable",
+        "missing_requirements": [
+          "stored_acceleration_unit_not_established",
+          "time_axis_semantics_not_established",
+          "verified_current_speed_and_target_context",
+          "sourced_parameter_uncertainty",
+          "qualified_diagnostic_profile"
+        ],
+        "tool_executed": false,
+        "decision_scope": "strict matching applicability audit, not a persisted execution",
+        "observed_support": false,
+        "diagnosis": null,
+        "physical_metrics": null
+      },
+      {
+        "record_id": "pu-N09_M07_F10-KA01-1",
+        "dataset": "paderborn",
+        "split": "development",
+        "label": "outer_race",
+        "entity_group": "paderborn-bearing-KA01",
+        "decision": "unavailable",
+        "missing_requirements": [
+          "stored_acceleration_unit_not_established",
+          "time_axis_semantics_not_established",
+          "verified_current_speed_and_target_context",
+          "sourced_parameter_uncertainty",
+          "qualified_diagnostic_profile"
+        ],
+        "tool_executed": false,
+        "decision_scope": "strict matching applicability audit, not a persisted execution",
+        "observed_support": false,
+        "diagnosis": null,
+        "physical_metrics": null
+      },
+      {
+        "record_id": "pu-N09_M07_F10-KA01-2",
+        "dataset": "paderborn",
+        "split": "development",
+        "label": "outer_race",
+        "entity_group": "paderborn-bearing-KA01",
+        "decision": "unavailable",
+        "missing_requirements": [
+          "stored_acceleration_unit_not_established",
+          "time_axis_semantics_not_established",
+          "verified_current_speed_and_target_context",
+          "sourced_parameter_uncertainty",
+          "qualified_diagnostic_profile"
+        ],
+        "tool_executed": false,
+        "decision_scope": "strict matching applicability audit, not a persisted execution",
+        "observed_support": false,
+        "diagnosis": null,
+        "physical_metrics": null
+      },
+      {
+        "record_id": "pu-N15_M01_F10-KA01-1",
+        "dataset": "paderborn",
+        "split": "development",
+        "label": "outer_race",
+        "entity_group": "paderborn-bearing-KA01",
+        "decision": "unavailable",
+        "missing_requirements": [
+          "stored_acceleration_unit_not_established",
+          "time_axis_semantics_not_established",
+          "verified_current_speed_and_target_context",
+          "sourced_parameter_uncertainty",
+          "qualified_diagnostic_profile"
+        ],
+        "tool_executed": false,
+        "decision_scope": "strict matching applicability audit, not a persisted execution",
+        "observed_support": false,
+        "diagnosis": null,
+        "physical_metrics": null
+      },
+      {
+        "record_id": "pu-N15_M01_F10-KA01-2",
+        "dataset": "paderborn",
+        "split": "development",
+        "label": "outer_race",
+        "entity_group": "paderborn-bearing-KA01",
+        "decision": "unavailable",
+        "missing_requirements": [
+          "stored_acceleration_unit_not_established",
+          "time_axis_semantics_not_established",
+          "verified_current_speed_and_target_context",
+          "sourced_parameter_uncertainty",
+          "qualified_diagnostic_profile"
+        ],
+        "tool_executed": false,
+        "decision_scope": "strict matching applicability audit, not a persisted execution",
+        "observed_support": false,
+        "diagnosis": null,
+        "physical_metrics": null
+      },
+      {
+        "record_id": "pu-N15_M07_F04-KA01-1",
+        "dataset": "paderborn",
+        "split": "development",
+        "label": "outer_race",
+        "entity_group": "paderborn-bearing-KA01",
+        "decision": "unavailable",
+        "missing_requirements": [
+          "stored_acceleration_unit_not_established",
+          "time_axis_semantics_not_established",
+          "verified_current_speed_and_target_context",
+          "sourced_parameter_uncertainty",
+          "qualified_diagnostic_profile"
+        ],
+        "tool_executed": false,
+        "decision_scope": "strict matching applicability audit, not a persisted execution",
+        "observed_support": false,
+        "diagnosis": null,
+        "physical_metrics": null
+      },
+      {
+        "record_id": "pu-N15_M07_F04-KA01-2",
+        "dataset": "paderborn",
+        "split": "development",
+        "label": "outer_race",
+        "entity_group": "paderborn-bearing-KA01",
+        "decision": "unavailable",
+        "missing_requirements": [
+          "stored_acceleration_unit_not_established",
+          "time_axis_semantics_not_established",
+          "verified_current_speed_and_target_context",
+          "sourced_parameter_uncertainty",
+          "qualified_diagnostic_profile"
+        ],
+        "tool_executed": false,
+        "decision_scope": "strict matching applicability audit, not a persisted execution",
+        "observed_support": false,
+        "diagnosis": null,
+        "physical_metrics": null
+      },
+      {
+        "record_id": "pu-N15_M07_F10-KI01-1",
+        "dataset": "paderborn",
+        "split": "development",
+        "label": "inner_race",
+        "entity_group": "paderborn-bearing-KI01",
+        "decision": "unavailable",
+        "missing_requirements": [
+          "stored_acceleration_unit_not_established",
+          "time_axis_semantics_not_established",
+          "verified_current_speed_and_target_context",
+          "sourced_parameter_uncertainty",
+          "qualified_diagnostic_profile"
+        ],
+        "tool_executed": false,
+        "decision_scope": "strict matching applicability audit, not a persisted execution",
+        "observed_support": false,
+        "diagnosis": null,
+        "physical_metrics": null
+      },
+      {
+        "record_id": "pu-N15_M07_F10-KI01-2",
+        "dataset": "paderborn",
+        "split": "development",
+        "label": "inner_race",
+        "entity_group": "paderborn-bearing-KI01",
+        "decision": "unavailable",
+        "missing_requirements": [
+          "stored_acceleration_unit_not_established",
+          "time_axis_semantics_not_established",
+          "verified_current_speed_and_target_context",
+          "sourced_parameter_uncertainty",
+          "qualified_diagnostic_profile"
+        ],
+        "tool_executed": false,
+        "decision_scope": "strict matching applicability audit, not a persisted execution",
+        "observed_support": false,
+        "diagnosis": null,
+        "physical_metrics": null
+      },
+      {
+        "record_id": "pu-N09_M07_F10-KI01-1",
+        "dataset": "paderborn",
+        "split": "development",
+        "label": "inner_race",
+        "entity_group": "paderborn-bearing-KI01",
+        "decision": "unavailable",
+        "missing_requirements": [
+          "stored_acceleration_unit_not_established",
+          "time_axis_semantics_not_established",
+          "verified_current_speed_and_target_context",
+          "sourced_parameter_uncertainty",
+          "qualified_diagnostic_profile"
+        ],
+        "tool_executed": false,
+        "decision_scope": "strict matching applicability audit, not a persisted execution",
+        "observed_support": false,
+        "diagnosis": null,
+        "physical_metrics": null
+      },
+      {
+        "record_id": "pu-N09_M07_F10-KI01-2",
+        "dataset": "paderborn",
+        "split": "development",
+        "label": "inner_race",
+        "entity_group": "paderborn-bearing-KI01",
+        "decision": "unavailable",
+        "missing_requirements": [
+          "stored_acceleration_unit_not_established",
+          "time_axis_semantics_not_established",
+          "verified_current_speed_and_target_context",
+          "sourced_parameter_uncertainty",
+          "qualified_diagnostic_profile"
+        ],
+        "tool_executed": false,
+        "decision_scope": "strict matching applicability audit, not a persisted execution",
+        "observed_support": false,
+        "diagnosis": null,
+        "physical_metrics": null
+      },
+      {
+        "record_id": "pu-N15_M01_F10-KI01-1",
+        "dataset": "paderborn",
+        "split": "development",
+        "label": "inner_race",
+        "entity_group": "paderborn-bearing-KI01",
+        "decision": "unavailable",
+        "missing_requirements": [
+          "stored_acceleration_unit_not_established",
+          "time_axis_semantics_not_established",
+          "verified_current_speed_and_target_context",
+          "sourced_parameter_uncertainty",
+          "qualified_diagnostic_profile"
+        ],
+        "tool_executed": false,
+        "decision_scope": "strict matching applicability audit, not a persisted execution",
+        "observed_support": false,
+        "diagnosis": null,
+        "physical_metrics": null
+      },
+      {
+        "record_id": "pu-N15_M01_F10-KI01-2",
+        "dataset": "paderborn",
+        "split": "development",
+        "label": "inner_race",
+        "entity_group": "paderborn-bearing-KI01",
+        "decision": "unavailable",
+        "missing_requirements": [
+          "stored_acceleration_unit_not_established",
+          "time_axis_semantics_not_established",
+          "verified_current_speed_and_target_context",
+          "sourced_parameter_uncertainty",
+          "qualified_diagnostic_profile"
+        ],
+        "tool_executed": false,
+        "decision_scope": "strict matching applicability audit, not a persisted execution",
+        "observed_support": false,
+        "diagnosis": null,
+        "physical_metrics": null
+      },
+      {
+        "record_id": "pu-N15_M07_F04-KI01-1",
+        "dataset": "paderborn",
+        "split": "development",
+        "label": "inner_race",
+        "entity_group": "paderborn-bearing-KI01",
+        "decision": "unavailable",
+        "missing_requirements": [
+          "stored_acceleration_unit_not_established",
+          "time_axis_semantics_not_established",
+          "verified_current_speed_and_target_context",
+          "sourced_parameter_uncertainty",
+          "qualified_diagnostic_profile"
+        ],
+        "tool_executed": false,
+        "decision_scope": "strict matching applicability audit, not a persisted execution",
+        "observed_support": false,
+        "diagnosis": null,
+        "physical_metrics": null
+      },
+      {
+        "record_id": "pu-N15_M07_F04-KI01-2",
+        "dataset": "paderborn",
+        "split": "development",
+        "label": "inner_race",
+        "entity_group": "paderborn-bearing-KI01",
+        "decision": "unavailable",
+        "missing_requirements": [
+          "stored_acceleration_unit_not_established",
+          "time_axis_semantics_not_established",
+          "verified_current_speed_and_target_context",
+          "sourced_parameter_uncertainty",
+          "qualified_diagnostic_profile"
+        ],
+        "tool_executed": false,
+        "decision_scope": "strict matching applicability audit, not a persisted execution",
+        "observed_support": false,
+        "diagnosis": null,
+        "physical_metrics": null
+      },
+      {
+        "record_id": "pu-N15-M07-F10-K002-1",
+        "dataset": "paderborn",
+        "split": "validation",
+        "label": "healthy_reference",
+        "entity_group": "paderborn-bearing-K002",
+        "decision": "unavailable",
+        "missing_requirements": [
+          "stored_acceleration_unit_not_established",
+          "time_axis_semantics_not_established",
+          "verified_current_speed_and_target_context",
+          "sourced_parameter_uncertainty",
+          "qualified_diagnostic_profile"
+        ],
+        "tool_executed": false,
+        "decision_scope": "strict matching applicability audit, not a persisted execution",
+        "observed_support": false,
+        "diagnosis": null,
+        "physical_metrics": null
+      },
+      {
+        "record_id": "pu-N15-M07-F10-K002-2",
+        "dataset": "paderborn",
+        "split": "validation",
+        "label": "healthy_reference",
+        "entity_group": "paderborn-bearing-K002",
+        "decision": "unavailable",
+        "missing_requirements": [
+          "stored_acceleration_unit_not_established",
+          "time_axis_semantics_not_established",
+          "verified_current_speed_and_target_context",
+          "sourced_parameter_uncertainty",
+          "qualified_diagnostic_profile"
+        ],
+        "tool_executed": false,
+        "decision_scope": "strict matching applicability audit, not a persisted execution",
+        "observed_support": false,
+        "diagnosis": null,
+        "physical_metrics": null
+      },
+      {
+        "record_id": "pu-N09-M07-F10-K002-1",
+        "dataset": "paderborn",
+        "split": "validation",
+        "label": "healthy_reference",
+        "entity_group": "paderborn-bearing-K002",
+        "decision": "unavailable",
+        "missing_requirements": [
+          "stored_acceleration_unit_not_established",
+          "time_axis_semantics_not_established",
+          "verified_current_speed_and_target_context",
+          "sourced_parameter_uncertainty",
+          "qualified_diagnostic_profile"
+        ],
+        "tool_executed": false,
+        "decision_scope": "strict matching applicability audit, not a persisted execution",
+        "observed_support": false,
+        "diagnosis": null,
+        "physical_metrics": null
+      },
+      {
+        "record_id": "pu-N09-M07-F10-K002-2",
+        "dataset": "paderborn",
+        "split": "validation",
+        "label": "healthy_reference",
+        "entity_group": "paderborn-bearing-K002",
+        "decision": "unavailable",
+        "missing_requirements": [
+          "stored_acceleration_unit_not_established",
+          "time_axis_semantics_not_established",
+          "verified_current_speed_and_target_context",
+          "sourced_parameter_uncertainty",
+          "qualified_diagnostic_profile"
+        ],
+        "tool_executed": false,
+        "decision_scope": "strict matching applicability audit, not a persisted execution",
+        "observed_support": false,
+        "diagnosis": null,
+        "physical_metrics": null
+      },
+      {
+        "record_id": "pu-N15-M01-F10-K002-1",
+        "dataset": "paderborn",
+        "split": "validation",
+        "label": "healthy_reference",
+        "entity_group": "paderborn-bearing-K002",
+        "decision": "unavailable",
+        "missing_requirements": [
+          "stored_acceleration_unit_not_established",
+          "time_axis_semantics_not_established",
+          "verified_current_speed_and_target_context",
+          "sourced_parameter_uncertainty",
+          "qualified_diagnostic_profile"
+        ],
+        "tool_executed": false,
+        "decision_scope": "strict matching applicability audit, not a persisted execution",
+        "observed_support": false,
+        "diagnosis": null,
+        "physical_metrics": null
+      },
+      {
+        "record_id": "pu-N15-M01-F10-K002-2",
+        "dataset": "paderborn",
+        "split": "validation",
+        "label": "healthy_reference",
+        "entity_group": "paderborn-bearing-K002",
+        "decision": "unavailable",
+        "missing_requirements": [
+          "stored_acceleration_unit_not_established",
+          "time_axis_semantics_not_established",
+          "verified_current_speed_and_target_context",
+          "sourced_parameter_uncertainty",
+          "qualified_diagnostic_profile"
+        ],
+        "tool_executed": false,
+        "decision_scope": "strict matching applicability audit, not a persisted execution",
+        "observed_support": false,
+        "diagnosis": null,
+        "physical_metrics": null
+      },
+      {
+        "record_id": "pu-N15-M07-F04-K002-1",
+        "dataset": "paderborn",
+        "split": "validation",
+        "label": "healthy_reference",
+        "entity_group": "paderborn-bearing-K002",
+        "decision": "unavailable",
+        "missing_requirements": [
+          "stored_acceleration_unit_not_established",
+          "time_axis_semantics_not_established",
+          "verified_current_speed_and_target_context",
+          "sourced_parameter_uncertainty",
+          "qualified_diagnostic_profile"
+        ],
+        "tool_executed": false,
+        "decision_scope": "strict matching applicability audit, not a persisted execution",
+        "observed_support": false,
+        "diagnosis": null,
+        "physical_metrics": null
+      },
+      {
+        "record_id": "pu-N15-M07-F04-K002-2",
+        "dataset": "paderborn",
+        "split": "validation",
+        "label": "healthy_reference",
+        "entity_group": "paderborn-bearing-K002",
+        "decision": "unavailable",
+        "missing_requirements": [
+          "stored_acceleration_unit_not_established",
+          "time_axis_semantics_not_established",
+          "verified_current_speed_and_target_context",
+          "sourced_parameter_uncertainty",
+          "qualified_diagnostic_profile"
+        ],
+        "tool_executed": false,
+        "decision_scope": "strict matching applicability audit, not a persisted execution",
+        "observed_support": false,
+        "diagnosis": null,
+        "physical_metrics": null
+      },
+      {
+        "record_id": "pu-N15-M07-F10-KA03-1",
+        "dataset": "paderborn",
+        "split": "validation",
+        "label": "outer_race",
+        "entity_group": "paderborn-bearing-KA03",
+        "decision": "unavailable",
+        "missing_requirements": [
+          "stored_acceleration_unit_not_established",
+          "time_axis_semantics_not_established",
+          "verified_current_speed_and_target_context",
+          "sourced_parameter_uncertainty",
+          "qualified_diagnostic_profile"
+        ],
+        "tool_executed": false,
+        "decision_scope": "strict matching applicability audit, not a persisted execution",
+        "observed_support": false,
+        "diagnosis": null,
+        "physical_metrics": null
+      },
+      {
+        "record_id": "pu-N15-M07-F10-KA03-2",
+        "dataset": "paderborn",
+        "split": "validation",
+        "label": "outer_race",
+        "entity_group": "paderborn-bearing-KA03",
+        "decision": "unavailable",
+        "missing_requirements": [
+          "stored_acceleration_unit_not_established",
+          "time_axis_semantics_not_established",
+          "verified_current_speed_and_target_context",
+          "sourced_parameter_uncertainty",
+          "qualified_diagnostic_profile"
+        ],
+        "tool_executed": false,
+        "decision_scope": "strict matching applicability audit, not a persisted execution",
+        "observed_support": false,
+        "diagnosis": null,
+        "physical_metrics": null
+      },
+      {
+        "record_id": "pu-N09-M07-F10-KA03-1",
+        "dataset": "paderborn",
+        "split": "validation",
+        "label": "outer_race",
+        "entity_group": "paderborn-bearing-KA03",
+        "decision": "unavailable",
+        "missing_requirements": [
+          "stored_acceleration_unit_not_established",
+          "time_axis_semantics_not_established",
+          "verified_current_speed_and_target_context",
+          "sourced_parameter_uncertainty",
+          "qualified_diagnostic_profile"
+        ],
+        "tool_executed": false,
+        "decision_scope": "strict matching applicability audit, not a persisted execution",
+        "observed_support": false,
+        "diagnosis": null,
+        "physical_metrics": null
+      },
+      {
+        "record_id": "pu-N09-M07-F10-KA03-2",
+        "dataset": "paderborn",
+        "split": "validation",
+        "label": "outer_race",
+        "entity_group": "paderborn-bearing-KA03",
+        "decision": "unavailable",
+        "missing_requirements": [
+          "stored_acceleration_unit_not_established",
+          "time_axis_semantics_not_established",
+          "verified_current_speed_and_target_context",
+          "sourced_parameter_uncertainty",
+          "qualified_diagnostic_profile"
+        ],
+        "tool_executed": false,
+        "decision_scope": "strict matching applicability audit, not a persisted execution",
+        "observed_support": false,
+        "diagnosis": null,
+        "physical_metrics": null
+      },
+      {
+        "record_id": "pu-N15-M01-F10-KA03-1",
+        "dataset": "paderborn",
+        "split": "validation",
+        "label": "outer_race",
+        "entity_group": "paderborn-bearing-KA03",
+        "decision": "unavailable",
+        "missing_requirements": [
+          "stored_acceleration_unit_not_established",
+          "time_axis_semantics_not_established",
+          "verified_current_speed_and_target_context",
+          "sourced_parameter_uncertainty",
+          "qualified_diagnostic_profile"
+        ],
+        "tool_executed": false,
+        "decision_scope": "strict matching applicability audit, not a persisted execution",
+        "observed_support": false,
+        "diagnosis": null,
+        "physical_metrics": null
+      },
+      {
+        "record_id": "pu-N15-M01-F10-KA03-2",
+        "dataset": "paderborn",
+        "split": "validation",
+        "label": "outer_race",
+        "entity_group": "paderborn-bearing-KA03",
+        "decision": "unavailable",
+        "missing_requirements": [
+          "stored_acceleration_unit_not_established",
+          "time_axis_semantics_not_established",
+          "verified_current_speed_and_target_context",
+          "sourced_parameter_uncertainty",
+          "qualified_diagnostic_profile"
+        ],
+        "tool_executed": false,
+        "decision_scope": "strict matching applicability audit, not a persisted execution",
+        "observed_support": false,
+        "diagnosis": null,
+        "physical_metrics": null
+      },
+      {
+        "record_id": "pu-N15-M07-F04-KA03-1",
+        "dataset": "paderborn",
+        "split": "validation",
+        "label": "outer_race",
+        "entity_group": "paderborn-bearing-KA03",
+        "decision": "unavailable",
+        "missing_requirements": [
+          "stored_acceleration_unit_not_established",
+          "time_axis_semantics_not_established",
+          "verified_current_speed_and_target_context",
+          "sourced_parameter_uncertainty",
+          "qualified_diagnostic_profile"
+        ],
+        "tool_executed": false,
+        "decision_scope": "strict matching applicability audit, not a persisted execution",
+        "observed_support": false,
+        "diagnosis": null,
+        "physical_metrics": null
+      },
+      {
+        "record_id": "pu-N15-M07-F04-KA03-2",
+        "dataset": "paderborn",
+        "split": "validation",
+        "label": "outer_race",
+        "entity_group": "paderborn-bearing-KA03",
+        "decision": "unavailable",
+        "missing_requirements": [
+          "stored_acceleration_unit_not_established",
+          "time_axis_semantics_not_established",
+          "verified_current_speed_and_target_context",
+          "sourced_parameter_uncertainty",
+          "qualified_diagnostic_profile"
+        ],
+        "tool_executed": false,
+        "decision_scope": "strict matching applicability audit, not a persisted execution",
+        "observed_support": false,
+        "diagnosis": null,
+        "physical_metrics": null
+      },
+      {
+        "record_id": "pu-N15-M07-F10-KI03-1",
+        "dataset": "paderborn",
+        "split": "validation",
+        "label": "inner_race",
+        "entity_group": "paderborn-bearing-KI03",
+        "decision": "unavailable",
+        "missing_requirements": [
+          "stored_acceleration_unit_not_established",
+          "time_axis_semantics_not_established",
+          "verified_current_speed_and_target_context",
+          "sourced_parameter_uncertainty",
+          "qualified_diagnostic_profile"
+        ],
+        "tool_executed": false,
+        "decision_scope": "strict matching applicability audit, not a persisted execution",
+        "observed_support": false,
+        "diagnosis": null,
+        "physical_metrics": null
+      },
+      {
+        "record_id": "pu-N15-M07-F10-KI03-2",
+        "dataset": "paderborn",
+        "split": "validation",
+        "label": "inner_race",
+        "entity_group": "paderborn-bearing-KI03",
+        "decision": "unavailable",
+        "missing_requirements": [
+          "stored_acceleration_unit_not_established",
+          "time_axis_semantics_not_established",
+          "verified_current_speed_and_target_context",
+          "sourced_parameter_uncertainty",
+          "qualified_diagnostic_profile"
+        ],
+        "tool_executed": false,
+        "decision_scope": "strict matching applicability audit, not a persisted execution",
+        "observed_support": false,
+        "diagnosis": null,
+        "physical_metrics": null
+      },
+      {
+        "record_id": "pu-N09-M07-F10-KI03-1",
+        "dataset": "paderborn",
+        "split": "validation",
+        "label": "inner_race",
+        "entity_group": "paderborn-bearing-KI03",
+        "decision": "unavailable",
+        "missing_requirements": [
+          "stored_acceleration_unit_not_established",
+          "time_axis_semantics_not_established",
+          "verified_current_speed_and_target_context",
+          "sourced_parameter_uncertainty",
+          "qualified_diagnostic_profile"
+        ],
+        "tool_executed": false,
+        "decision_scope": "strict matching applicability audit, not a persisted execution",
+        "observed_support": false,
+        "diagnosis": null,
+        "physical_metrics": null
+      },
+      {
+        "record_id": "pu-N09-M07-F10-KI03-2",
+        "dataset": "paderborn",
+        "split": "validation",
+        "label": "inner_race",
+        "entity_group": "paderborn-bearing-KI03",
+        "decision": "unavailable",
+        "missing_requirements": [
+          "stored_acceleration_unit_not_established",
+          "time_axis_semantics_not_established",
+          "verified_current_speed_and_target_context",
+          "sourced_parameter_uncertainty",
+          "qualified_diagnostic_profile"
+        ],
+        "tool_executed": false,
+        "decision_scope": "strict matching applicability audit, not a persisted execution",
+        "observed_support": false,
+        "diagnosis": null,
+        "physical_metrics": null
+      },
+      {
+        "record_id": "pu-N15-M01-F10-KI03-1",
+        "dataset": "paderborn",
+        "split": "validation",
+        "label": "inner_race",
+        "entity_group": "paderborn-bearing-KI03",
+        "decision": "unavailable",
+        "missing_requirements": [
+          "stored_acceleration_unit_not_established",
+          "time_axis_semantics_not_established",
+          "verified_current_speed_and_target_context",
+          "sourced_parameter_uncertainty",
+          "qualified_diagnostic_profile"
+        ],
+        "tool_executed": false,
+        "decision_scope": "strict matching applicability audit, not a persisted execution",
+        "observed_support": false,
+        "diagnosis": null,
+        "physical_metrics": null
+      },
+      {
+        "record_id": "pu-N15-M01-F10-KI03-2",
+        "dataset": "paderborn",
+        "split": "validation",
+        "label": "inner_race",
+        "entity_group": "paderborn-bearing-KI03",
+        "decision": "unavailable",
+        "missing_requirements": [
+          "stored_acceleration_unit_not_established",
+          "time_axis_semantics_not_established",
+          "verified_current_speed_and_target_context",
+          "sourced_parameter_uncertainty",
+          "qualified_diagnostic_profile"
+        ],
+        "tool_executed": false,
+        "decision_scope": "strict matching applicability audit, not a persisted execution",
+        "observed_support": false,
+        "diagnosis": null,
+        "physical_metrics": null
+      },
+      {
+        "record_id": "pu-N15-M07-F04-KI03-1",
+        "dataset": "paderborn",
+        "split": "validation",
+        "label": "inner_race",
+        "entity_group": "paderborn-bearing-KI03",
+        "decision": "unavailable",
+        "missing_requirements": [
+          "stored_acceleration_unit_not_established",
+          "time_axis_semantics_not_established",
+          "verified_current_speed_and_target_context",
+          "sourced_parameter_uncertainty",
+          "qualified_diagnostic_profile"
+        ],
+        "tool_executed": false,
+        "decision_scope": "strict matching applicability audit, not a persisted execution",
+        "observed_support": false,
+        "diagnosis": null,
+        "physical_metrics": null
+      },
+      {
+        "record_id": "pu-N15-M07-F04-KI03-2",
+        "dataset": "paderborn",
+        "split": "validation",
+        "label": "inner_race",
+        "entity_group": "paderborn-bearing-KI03",
+        "decision": "unavailable",
+        "missing_requirements": [
+          "stored_acceleration_unit_not_established",
+          "time_axis_semantics_not_established",
+          "verified_current_speed_and_target_context",
+          "sourced_parameter_uncertainty",
+          "qualified_diagnostic_profile"
+        ],
+        "tool_executed": false,
+        "decision_scope": "strict matching applicability audit, not a persisted execution",
+        "observed_support": false,
+        "diagnosis": null,
+        "physical_metrics": null
+      }
+    ],
+    "by_label": {
+      "healthy_reference": {
+        "records": 17,
+        "matching_observation_coverage": 0.0,
+        "decision_counts": {
+          "unavailable": 17
+        }
+      },
+      "inner_race": {
+        "records": 17,
+        "matching_observation_coverage": 0.0,
+        "decision_counts": {
+          "unavailable": 17
+        }
+      },
+      "outer_race": {
+        "records": 17,
+        "matching_observation_coverage": 0.0,
+        "decision_counts": {
+          "unavailable": 17
+        }
+      },
+      "rolling_element": {
+        "records": 1,
+        "matching_observation_coverage": 0.0,
+        "decision_counts": {
+          "unavailable": 1
+        }
+      }
+    },
+    "by_dataset": {
+      "cwru": {
+        "records": 4,
+        "matching_observation_coverage": 0.0,
+        "decision_counts": {
+          "unavailable": 4
+        }
+      },
+      "paderborn": {
+        "records": 48,
+        "matching_observation_coverage": 0.0,
+        "decision_counts": {
+          "unavailable": 48
+        }
+      }
+    },
+    "by_split": {
+      "development": {
+        "records": 28,
+        "matching_observation_coverage": 0.0,
+        "decision_counts": {
+          "unavailable": 28
+        }
+      },
+      "validation": {
+        "records": 24,
+        "matching_observation_coverage": 0.0,
+        "decision_counts": {
+          "unavailable": 24
+        }
+      }
+    },
+    "decision_counts": {
+      "unavailable": 52
+    },
+    "effective_matching_coverage": 0.0,
+    "accuracy": null,
+    "tool_executions": 0,
+    "interpretation": "All-source applicability/refusal denominator, not empirical false-positive or refusal-accuracy measurement"
+  },
+  "sealed_test_signals_read": 0,
+  "factory_data_used": false,
+  "model_called": false,
+  "source_sha256": {
+    "backend/src/vibradiag/evaluation/m2_acceptance.py": "dbb7e75f9f7a271ecdd8c0d26b2c990fc9ee104b82f0eeee94c129205b39d5e3",
+    "backend/scripts/verify_m2_release_baseline.py": "69796e01091679b9e2c28fff5a66874cbc6ae8d769d04250a62f0bccb8f9e72e",
+    "backend/src/vibradiag/analysis/envelope.py": "dd769a9d8f1fe2ab010ed2ed8372d40af5bc50e72e07fbe447e89ec708b83d87",
+    "backend/src/vibradiag/analysis/bearing_frequencies.py": "c242d9173964844941021ab013aa15833b91339cc75c68ff997215a25c2154b8",
+    "backend/src/vibradiag/analysis/matching.py": "14fbf97fc726b27a7954d1f5a5cd1aad14cf5e0459806cb83c5fe158e07d2e0e",
+    "backend/src/vibradiag/analysis/basic.py": "5378fef761cd169a8ff70c851e0a8794aa0ebdf3ffa7c6071652bf82a373670e",
+    "datasets/public-data-v1/manifest.json": "1dca73047ba4b589ffa946926a6246fd3e31eb12ed2b83c2a7a29e8029f491d8",
+    "datasets/public-data-v2/validation-manifest.json": "7405b2765a1bb72c2f20600b6275b6daf28cb248822d174b54ce3bb4646791ba",
+    "datasets/public-data-v2/catalog.json": "e464483180aa87b0eca79eab4bdd74822ee353169f9dcecb7b944d709b22841b",
+    "backend/requirements.lock.txt": "db7bca83a22a77ed4e06f2c15ebfadf31947b268acebe406d8cccdfda889e88f"
+  }
+}

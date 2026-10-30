@@ -1,0 +1,45 @@
+{
+  "browser": "Tabbit via installed CLI",
+  "url": "http://127.0.0.1:5173/",
+  "input_source": "synthetic",
+  "factory_data_used": false,
+  "measurement_id": "eb2f48dc-48b5-4ef3-9569-3b90ca2ad518",
+  "checks": {
+    "login": true,
+    "upload_1024_point_sine": true,
+    "explicit_input_confirmation": true,
+    "analysis_metrics_and_charts": true,
+    "reload_restores_authorized_data": true,
+    "parameter_revision_requires_new_confirmation": true,
+    "old_analysis_remains_visible_with_historical_banner": true,
+    "response_loss_after_acceptance_then_reload_reuses_same_analysis": true,
+    "response_loss_history_count": 2,
+    "result_json_download_matches_analysis": true,
+    "invalid_csv_422_no_new_record": true,
+    "logout_clears_client_data": true,
+    "old_session_http_status_before_logout": 200,
+    "old_session_http_status_after_logout": 401,
+    "admin_does_not_inherit_engineer_records_or_import_actions": true,
+    "password_not_in_local_or_session_storage": true,
+    "session_cookie_http_only": true,
+    "explicit_retry_of_interrupted_million_point_task_creates_new_completed_task": true,
+    "constant_signal_warning_visible": true,
+    "new_tab_with_valid_cookie_requires_own_login_context": true,
+    "reauthentication_clears_cached_business_data": true
+  },
+  "page_errors_observed_during_final_runs": [],
+  "issues_resolved": [
+    "Vue numeric v-model can produce a number: removed string-only trim assumption; zero load retained",
+    "Removed sticky sidebar overlap and used scientific notation for tiny values",
+    "Label locator changed to combobox semantic locator; no product failure",
+    "One screenshot capture timed out after functional assertions; retained earlier inspected screenshot"
+  ],
+  "expected_browser_instrumentation_events": [
+    "401 before login",
+    "injected ERR_FAILED for response-loss test",
+    "422 for invalid CSV",
+    "204 logout sometimes reported as ERR_ABORTED; independently verified old token returns 401"
+  ],
+  "screenshot": "m1-analysis-browser.png",
+  "tested_by": "development agent; not independent engineer usability test"
+}

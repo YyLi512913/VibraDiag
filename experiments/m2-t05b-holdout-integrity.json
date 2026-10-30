@@ -1,0 +1,52 @@
+{
+  "passed": true,
+  "original_archives_verified": 6,
+  "validation_records_verified": 24,
+  "validation_members_extracted": 0,
+  "sealed_test_archives_verified": 3,
+  "sealed_test_members_listed": 0,
+  "sealed_test_members_extracted": 0,
+  "sealed_test_signals_parsed": 0,
+  "plan_sha256": "fd255e22e096597d90f45f47732b6bb402335badc8a7c27bf7b40574b605ae91",
+  "protocol_sha256": "12ca02db7183bdac6a26f99e69148e4ced20a2566da0bef2174beb08ccc53bde",
+  "split_audit": {
+    "cross_split_leakage": false,
+    "record_count": 52,
+    "entity_group_count": 10,
+    "split_counts": {
+      "development": 28,
+      "validation": 24,
+      "sealed_test": 0
+    },
+    "label_coverage": {
+      "development": [
+        "healthy_reference",
+        "inner_race",
+        "outer_race",
+        "rolling_element"
+      ],
+      "validation": [
+        "healthy_reference",
+        "inner_race",
+        "outer_race"
+      ],
+      "sealed_test": []
+    },
+    "missing_four_class_labels": {
+      "development": [],
+      "validation": [
+        "rolling_element"
+      ],
+      "sealed_test": [
+        "healthy_reference",
+        "inner_race",
+        "outer_race",
+        "rolling_element"
+      ]
+    },
+    "four_class_evaluation_ready": false,
+    "statistical_independence_established": false
+  },
+  "sealed_archive_scope": "opaque bytes/hash only; excluded from signal-level duplicate checks",
+  "factory_data_used": false
+}

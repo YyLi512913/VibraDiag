@@ -1,0 +1,15 @@
+{
+  "mode": "apply",
+  "batch_id": "m1-verification",
+  "source_scope": "6216da4c2dcfdfabe3d765aa4a0a41f2fd049d705622c46ec8c1447105bf0ae7",
+  "records": [
+    {
+      "legacy_id": "098fab125bbd438488cb589529266377",
+      "status": "imported_unconfirmed",
+      "measurement_id": "78dac593-02bf-404d-8d39-073707bd24c4"
+    }
+  ],
+  "rejected_count": 0,
+  "old_results_accepted": false,
+  "source_files_deleted": 0
+}

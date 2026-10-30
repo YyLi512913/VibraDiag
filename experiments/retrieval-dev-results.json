@@ -1,0 +1,1119 @@
+{
+  "created_at": "2026-10-29T07:12:33.856199+00:00",
+  "purpose": "development smoke comparison, authored corpus and queries; NOT held-out or factory validation",
+  "dataset_sha256": "237fa0c743a9a594966402cac4cf33295b7a204de6a862e65c5f754388ea7974",
+  "environment": {
+    "python": "3.11.15",
+    "platform": "Windows-10-10.0.22000-SP0",
+    "ollama": {
+      "version": "0.40.12"
+    }
+  },
+  "protocol": {
+    "embedding_device": "CPU requested via num_gpu=0",
+    "threads": 8,
+    "top_k": 5,
+    "query_batch_size": 1,
+    "repetitions": 1,
+    "warmup_queries": 1,
+    "order": [
+      "bge-m3:567m",
+      "qwen3-embedding:0.6b"
+    ],
+    "prefix": "Qwen uses official-style task instruction; BGE-M3 uses raw query"
+  },
+  "models": [
+    {
+      "metadata": {
+        "model": "bge-m3:567m",
+        "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+        "size_bytes": 1157672605,
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "bert",
+          "families": [
+            "bert"
+          ],
+          "parameter_size": "566.70M",
+          "quantization_level": "F16"
+        },
+        "capabilities": [
+          "embedding"
+        ]
+      },
+      "corpus_sha256": "f925f09f0cf2c13944f8b1f44396855d37fb6836da8fd72b18ee7b68ec22350d",
+      "dimension": 1024,
+      "index_wall_seconds": 7.720227199999499,
+      "embedding_index_timing": {
+        "wall_seconds": 7.616621999997733,
+        "load_seconds": 5.0802304,
+        "prompt_tokens": 718
+      },
+      "top1_accuracy": 0.9333333333333333,
+      "recall_at_5": 1.0,
+      "mrr_at_5": 0.9527777777777777,
+      "warm_query_wall_p50_seconds": 0.0974321499998041,
+      "warm_query_wall_p95_seconds": 0.11680522500173537,
+      "queries": [
+        {
+          "id": "Q01",
+          "query": "CSV不知道多少Hz，能默认按1024处理吗？",
+          "expected": "KB-01",
+          "ranking": [
+            "KB-01",
+            "KB-09",
+            "KB-07",
+            "KB-08",
+            "KB-02"
+          ],
+          "rank": 1,
+          "top_score": 0.5983228991450849,
+          "wall_seconds": 0.09884049999891431,
+          "load_seconds": 0.0049987,
+          "prompt_tokens": 17
+        },
+        {
+          "id": "Q02",
+          "query": "加速度以g记录，要怎么换成国际单位？",
+          "expected": "KB-01",
+          "ranking": [
+            "KB-01",
+            "KB-07",
+            "KB-08",
+            "KB-10",
+            "KB-09"
+          ],
+          "rank": 1,
+          "top_score": 0.65441914270069,
+          "wall_seconds": 0.10948689999713679,
+          "load_seconds": 0.0065547,
+          "prompt_tokens": 16
+        },
+        {
+          "id": "Q03",
+          "query": "导入文件没有填写单位怎么办？",
+          "expected": "KB-01",
+          "ranking": [
+            "KB-01",
+            "KB-10",
+            "KB-07",
+            "KB-08",
+            "KB-04"
+          ],
+          "rank": 1,
+          "top_score": 0.5517428170951741,
+          "wall_seconds": 0.08122150000053807,
+          "load_seconds": 0.0069989,
+          "prompt_tokens": 11
+        },
+        {
+          "id": "Q04",
+          "query": "RMS很大就一定能判断是哪种轴承坏了吗？",
+          "expected": "KB-02",
+          "ranking": [
+            "KB-08",
+            "KB-09",
+            "KB-05",
+            "KB-02",
+            "KB-04"
+          ],
+          "rank": 4,
+          "top_score": 0.6044545050110305,
+          "wall_seconds": 0.11281130000133999,
+          "load_seconds": 0.0068265,
+          "prompt_tokens": 17
+        },
+        {
+          "id": "Q05",
+          "query": "原始有效值和交流有效值有何区别？",
+          "expected": "KB-02",
+          "ranking": [
+            "KB-02",
+            "KB-09",
+            "KB-01",
+            "KB-08",
+            "KB-07"
+          ],
+          "rank": 1,
+          "top_score": 0.47364667728703436,
+          "wall_seconds": 0.08703990000140038,
+          "load_seconds": 0.0084626,
+          "prompt_tokens": 14
+        },
+        {
+          "id": "Q06",
+          "query": "峰值、能量和峭度分别说明什么？",
+          "expected": "KB-02",
+          "ranking": [
+            "KB-02",
+            "KB-09",
+            "KB-01",
+            "KB-10",
+            "KB-03"
+          ],
+          "rank": 1,
+          "top_score": 0.6724120485556047,
+          "wall_seconds": 0.09197380000114208,
+          "load_seconds": 0.0068562,
+          "prompt_tokens": 14
+        },
+        {
+          "id": "Q07",
+          "query": "想观察高频冲击的调制，采用什么分析？",
+          "expected": "KB-03",
+          "ranking": [
+            "KB-03",
+            "KB-06",
+            "KB-01",
+            "KB-09",
+            "KB-04"
+          ],
+          "rank": 1,
+          "top_score": 0.6170483278627021,
+          "wall_seconds": 0.09687269999994896,
+          "load_seconds": 0.0046684,
+          "prompt_tokens": 16
+        },
+        {
+          "id": "Q08",
+          "query": "包络分析结果需要记录哪些滤波配置？",
+          "expected": "KB-03",
+          "ranking": [
+            "KB-03",
+            "KB-04",
+            "KB-05",
+            "KB-01",
+            "KB-07"
+          ],
+          "rank": 1,
+          "top_score": 0.7170863843260993,
+          "wall_seconds": 0.09056590000182041,
+          "load_seconds": 0.0090018,
+          "prompt_tokens": 14
+        },
+        {
+          "id": "Q09",
+          "query": "带通频段不合法或记录太短，还能信任包络结果吗？",
+          "expected": "KB-03",
+          "ranking": [
+            "KB-03",
+            "KB-07",
+            "KB-01",
+            "KB-10",
+            "KB-08"
+          ],
+          "rank": 1,
+          "top_score": 0.6320430551909484,
+          "wall_seconds": 0.11481120000098599,
+          "load_seconds": 0.0089989,
+          "prompt_tokens": 21
+        },
+        {
+          "id": "Q10",
+          "query": "怀疑内环损伤，优先检查哪个特征频率？",
+          "expected": "KB-04",
+          "ranking": [
+            "KB-04",
+            "KB-05",
+            "KB-06",
+            "KB-03",
+            "KB-01"
+          ],
+          "rank": 1,
+          "top_score": 0.6065118911548093,
+          "wall_seconds": 0.09274229999937234,
+          "load_seconds": 0.0049994,
+          "prompt_tokens": 15
+        },
+        {
+          "id": "Q11",
+          "query": "BPFI周围的倍频和转频调制有什么用途？",
+          "expected": "KB-04",
+          "ranking": [
+            "KB-04",
+            "KB-07",
+            "KB-03",
+            "KB-05",
+            "KB-06"
+          ],
+          "rank": 1,
+          "top_score": 0.5693618093218227,
+          "wall_seconds": 0.10103969999909168,
+          "load_seconds": 0.0046858,
+          "prompt_tokens": 16
+        },
+        {
+          "id": "Q12",
+          "query": "只有一个内圈频率匹配峰可以确诊吗？",
+          "expected": "KB-04",
+          "ranking": [
+            "KB-04",
+            "KB-05",
+            "KB-07",
+            "KB-02",
+            "KB-06"
+          ],
+          "rank": 1,
+          "top_score": 0.6550089972720277,
+          "wall_seconds": 0.09097929999916232,
+          "load_seconds": 0.0049973,
+          "prompt_tokens": 15
+        },
+        {
+          "id": "Q13",
+          "query": "外环问题对应BPFO还是BPFI？",
+          "expected": "KB-05",
+          "ranking": [
+            "KB-05",
+            "KB-04",
+            "KB-07",
+            "KB-06",
+            "KB-03"
+          ],
+          "rank": 1,
+          "top_score": 0.584245447859735,
+          "wall_seconds": 0.08725380000032601,
+          "load_seconds": 0.004,
+          "prompt_tokens": 14
+        },
+        {
+          "id": "Q14",
+          "query": "传感器安装位置会影响外圈故障峰吗？",
+          "expected": "KB-05",
+          "ranking": [
+            "KB-05",
+            "KB-04",
+            "KB-06",
+            "KB-08",
+            "KB-09"
+          ],
+          "rank": 1,
+          "top_score": 0.6428223768166647,
+          "wall_seconds": 0.09173530000043684,
+          "load_seconds": 0.0069998,
+          "prompt_tokens": 14
+        },
+        {
+          "id": "Q15",
+          "query": "没看到BPFO是否能够完全排除外圈损伤？",
+          "expected": "KB-05",
+          "ranking": [
+            "KB-05",
+            "KB-04",
+            "KB-06",
+            "KB-07",
+            "KB-03"
+          ],
+          "rank": 1,
+          "top_score": 0.669333812037768,
+          "wall_seconds": 0.10302770000271266,
+          "load_seconds": 0.0079998,
+          "prompt_tokens": 16
+        },
+        {
+          "id": "Q16",
+          "query": "滚珠表面损伤时BSF和两倍BSF应怎么理解？",
+          "expected": "KB-06",
+          "ranking": [
+            "KB-06",
+            "KB-07",
+            "KB-05",
+            "KB-04",
+            "KB-02"
+          ],
+          "rank": 1,
+          "top_score": 0.68909602128134,
+          "wall_seconds": 0.12698340000133612,
+          "load_seconds": 0.0058724,
+          "prompt_tokens": 20
+        },
+        {
+          "id": "Q17",
+          "query": "可以把保持架频率等同滚动体自转频率吗？",
+          "expected": "KB-06",
+          "ranking": [
+            "KB-06",
+            "KB-01",
+            "KB-07",
+            "KB-09",
+            "KB-02"
+          ],
+          "rank": 1,
+          "top_score": 0.588346942564522,
+          "wall_seconds": 0.10498480000023847,
+          "load_seconds": 0.00538,
+          "prompt_tokens": 18
+        },
+        {
+          "id": "Q18",
+          "query": "频谱能直接告诉我滚动体破损尺寸吗？",
+          "expected": "KB-06",
+          "ranking": [
+            "KB-06",
+            "KB-03",
+            "KB-07",
+            "KB-01",
+            "KB-02"
+          ],
+          "rank": 1,
+          "top_score": 0.6198448575688955,
+          "wall_seconds": 0.09808990000237827,
+          "load_seconds": 0.0079223,
+          "prompt_tokens": 16
+        },
+        {
+          "id": "Q19",
+          "query": "铭牌写1500转，可以当实际转速计算故障频率吗？",
+          "expected": "KB-07",
+          "ranking": [
+            "KB-07",
+            "KB-04",
+            "KB-01",
+            "KB-08",
+            "KB-05"
+          ],
+          "rank": 1,
+          "top_score": 0.6567582581583611,
+          "wall_seconds": 0.10591560000102618,
+          "load_seconds": 0.0079997,
+          "prompt_tokens": 19
+        },
+        {
+          "id": "Q20",
+          "query": "不知道轴承几何尺寸还能生成理论故障频率吗？",
+          "expected": "KB-07",
+          "ranking": [
+            "KB-07",
+            "KB-06",
+            "KB-01",
+            "KB-05",
+            "KB-04"
+          ],
+          "rank": 1,
+          "top_score": 0.5850230612132443,
+          "wall_seconds": 0.09783640000023297,
+          "load_seconds": 0.0070016,
+          "prompt_tokens": 16
+        },
+        {
+          "id": "Q21",
+          "query": "缺少本次转速，哪些普通信号分析还能继续？",
+          "expected": "KB-07",
+          "ranking": [
+            "KB-07",
+            "KB-01",
+            "KB-09",
+            "KB-08",
+            "KB-03"
+          ],
+          "rank": 1,
+          "top_score": 0.6419399975437434,
+          "wall_seconds": 0.09337959999902523,
+          "load_seconds": 0.0050017,
+          "prompt_tokens": 15
+        },
+        {
+          "id": "Q22",
+          "query": "维修前后负载不一样可以直接比较RMS吗？",
+          "expected": "KB-08",
+          "ranking": [
+            "KB-08",
+            "KB-02",
+            "KB-09",
+            "KB-06",
+            "KB-10"
+          ],
+          "rank": 1,
+          "top_score": 0.7130828130395258,
+          "wall_seconds": 0.09946430000127293,
+          "load_seconds": 0.0047137,
+          "prompt_tokens": 16
+        },
+        {
+          "id": "Q23",
+          "query": "复测方向变了，怎样判断振动是否恶化？",
+          "expected": "KB-08",
+          "ranking": [
+            "KB-08",
+            "KB-01",
+            "KB-06",
+            "KB-05",
+            "KB-03"
+          ],
+          "rank": 1,
+          "top_score": 0.638721720757427,
+          "wall_seconds": 0.10414049999963026,
+          "load_seconds": 0.0079761,
+          "prompt_tokens": 17
+        },
+        {
+          "id": "Q24",
+          "query": "维修后有效值下降是否就说明修好了？",
+          "expected": "KB-08",
+          "ranking": [
+            "KB-08",
+            "KB-10",
+            "KB-09",
+            "KB-04",
+            "KB-05"
+          ],
+          "rank": 1,
+          "top_score": 0.6641967556227288,
+          "wall_seconds": 0.08737440000186325,
+          "load_seconds": 0.0069997,
+          "prompt_tokens": 14
+        },
+        {
+          "id": "Q25",
+          "query": "全零数据能不能算峭度和峰值因子？",
+          "expected": "KB-09",
+          "ranking": [
+            "KB-09",
+            "KB-02",
+            "KB-01",
+            "KB-07",
+            "KB-08"
+          ],
+          "rank": 1,
+          "top_score": 0.6639974854285614,
+          "wall_seconds": 0.10212630000023637,
+          "load_seconds": 0.0069314,
+          "prompt_tokens": 16
+        },
+        {
+          "id": "Q26",
+          "query": "波形有一个很大的冲击点，要直接删掉吗？",
+          "expected": "KB-09",
+          "ranking": [
+            "KB-09",
+            "KB-06",
+            "KB-10",
+            "KB-03",
+            "KB-01"
+          ],
+          "rank": 1,
+          "top_score": 0.519239428235182,
+          "wall_seconds": 0.09072670000023209,
+          "load_seconds": 0.0049961,
+          "prompt_tokens": 16
+        },
+        {
+          "id": "Q27",
+          "query": "所有采样值都相同能证明设备健康吗？",
+          "expected": "KB-09",
+          "ranking": [
+            "KB-08",
+            "KB-10",
+            "KB-09",
+            "KB-01",
+            "KB-04"
+          ],
+          "rank": 3,
+          "top_score": 0.5848102348183316,
+          "wall_seconds": 0.09702789999937522,
+          "load_seconds": 0.0059994,
+          "prompt_tokens": 15
+        },
+        {
+          "id": "Q28",
+          "query": "多种证据互相矛盾时报告应该怎么说？",
+          "expected": "KB-10",
+          "ranking": [
+            "KB-10",
+            "KB-08",
+            "KB-01",
+            "KB-03",
+            "KB-04"
+          ],
+          "rank": 1,
+          "top_score": 0.6018218581358115,
+          "wall_seconds": 0.08773609999843757,
+          "load_seconds": 0.0070012,
+          "prompt_tokens": 13
+        },
+        {
+          "id": "Q29",
+          "query": "检索到一个相似案例就可以自动停机或派工吗？",
+          "expected": "KB-10",
+          "ranking": [
+            "KB-10",
+            "KB-08",
+            "KB-09",
+            "KB-05",
+            "KB-04"
+          ],
+          "rank": 1,
+          "top_score": 0.5927867369430115,
+          "wall_seconds": 0.11843670000234852,
+          "load_seconds": 0.0079393,
+          "prompt_tokens": 18
+        },
+        {
+          "id": "Q30",
+          "query": "目标设备超出验证范围时怎么处理诊断？",
+          "expected": "KB-10",
+          "ranking": [
+            "KB-10",
+            "KB-08",
+            "KB-05",
+            "KB-07",
+            "KB-04"
+          ],
+          "rank": 1,
+          "top_score": 0.6714540488722884,
+          "wall_seconds": 0.08821870000247145,
+          "load_seconds": 0.0069972,
+          "prompt_tokens": 13
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "model": "qwen3-embedding:0.6b",
+        "digest": "ac6da0dfba84a81fdbfbaf330198c33cd77c4cdfc53e8bc50eb581914a15621d",
+        "size_bytes": 639150858,
+        "details": {
+          "parent_model": "/Users/ollama/.ollama/models/blobs/sha256-06507c7b42688469c4e7298b0a1e16deff06caf291cf0a5b278c308249c3e439",
+          "format": "gguf",
+          "family": "qwen3",
+          "families": [
+            "qwen3"
+          ],
+          "parameter_size": "595.78M",
+          "quantization_level": "Q8_0"
+        },
+        "capabilities": [
+          "tools",
+          "thinking",
+          "embedding"
+        ]
+      },
+      "corpus_sha256": "f925f09f0cf2c13944f8b1f44396855d37fb6836da8fd72b18ee7b68ec22350d",
+      "dimension": 1024,
+      "index_wall_seconds": 5.213759700000082,
+      "embedding_index_timing": {
+        "wall_seconds": 5.109137899999041,
+        "load_seconds": 1.5680842,
+        "prompt_tokens": 653
+      },
+      "top1_accuracy": 0.8333333333333334,
+      "recall_at_5": 1.0,
+      "mrr_at_5": 0.9027777777777779,
+      "warm_query_wall_p50_seconds": 0.23058149999997113,
+      "warm_query_wall_p95_seconds": 0.2524288849990626,
+      "queries": [
+        {
+          "id": "Q01",
+          "query": "CSV不知道多少Hz，能默认按1024处理吗？",
+          "expected": "KB-01",
+          "ranking": [
+            "KB-01",
+            "KB-07",
+            "KB-03",
+            "KB-09",
+            "KB-06"
+          ],
+          "rank": 1,
+          "top_score": 0.6841693141430844,
+          "wall_seconds": 0.22987769999963348,
+          "load_seconds": 0.0029989,
+          "prompt_tokens": 38
+        },
+        {
+          "id": "Q02",
+          "query": "加速度以g记录，要怎么换成国际单位？",
+          "expected": "KB-01",
+          "ranking": [
+            "KB-01",
+            "KB-07",
+            "KB-08",
+            "KB-09",
+            "KB-06"
+          ],
+          "rank": 1,
+          "top_score": 0.7060380781971793,
+          "wall_seconds": 0.21839700000055018,
+          "load_seconds": 0.0100007,
+          "prompt_tokens": 35
+        },
+        {
+          "id": "Q03",
+          "query": "导入文件没有填写单位怎么办？",
+          "expected": "KB-01",
+          "ranking": [
+            "KB-01",
+            "KB-07",
+            "KB-10",
+            "KB-08",
+            "KB-06"
+          ],
+          "rank": 1,
+          "top_score": 0.6241238296787655,
+          "wall_seconds": 0.21443189999990864,
+          "load_seconds": 0.0059523,
+          "prompt_tokens": 32
+        },
+        {
+          "id": "Q04",
+          "query": "RMS很大就一定能判断是哪种轴承坏了吗？",
+          "expected": "KB-02",
+          "ranking": [
+            "KB-08",
+            "KB-02",
+            "KB-05",
+            "KB-06",
+            "KB-07"
+          ],
+          "rank": 2,
+          "top_score": 0.6773104339895006,
+          "wall_seconds": 0.22558779999963008,
+          "load_seconds": 0.0080009,
+          "prompt_tokens": 34
+        },
+        {
+          "id": "Q05",
+          "query": "原始有效值和交流有效值有何区别？",
+          "expected": "KB-02",
+          "ranking": [
+            "KB-08",
+            "KB-01",
+            "KB-02",
+            "KB-09",
+            "KB-07"
+          ],
+          "rank": 3,
+          "top_score": 0.5632216310285774,
+          "wall_seconds": 0.2277914000005694,
+          "load_seconds": 0.0059996,
+          "prompt_tokens": 36
+        },
+        {
+          "id": "Q06",
+          "query": "峰值、能量和峭度分别说明什么？",
+          "expected": "KB-02",
+          "ranking": [
+            "KB-02",
+            "KB-09",
+            "KB-01",
+            "KB-07",
+            "KB-03"
+          ],
+          "rank": 1,
+          "top_score": 0.7031569919598091,
+          "wall_seconds": 0.24081719999958295,
+          "load_seconds": 0.0060002,
+          "prompt_tokens": 36
+        },
+        {
+          "id": "Q07",
+          "query": "想观察高频冲击的调制，采用什么分析？",
+          "expected": "KB-03",
+          "ranking": [
+            "KB-03",
+            "KB-07",
+            "KB-01",
+            "KB-06",
+            "KB-05"
+          ],
+          "rank": 1,
+          "top_score": 0.6463039333513302,
+          "wall_seconds": 0.24833209999997052,
+          "load_seconds": 0.0040008,
+          "prompt_tokens": 37
+        },
+        {
+          "id": "Q08",
+          "query": "包络分析结果需要记录哪些滤波配置？",
+          "expected": "KB-03",
+          "ranking": [
+            "KB-03",
+            "KB-05",
+            "KB-07",
+            "KB-04",
+            "KB-01"
+          ],
+          "rank": 1,
+          "top_score": 0.7613442084940255,
+          "wall_seconds": 0.21755800000028103,
+          "load_seconds": 0.0039989,
+          "prompt_tokens": 35
+        },
+        {
+          "id": "Q09",
+          "query": "带通频段不合法或记录太短，还能信任包络结果吗？",
+          "expected": "KB-03",
+          "ranking": [
+            "KB-03",
+            "KB-07",
+            "KB-05",
+            "KB-04",
+            "KB-01"
+          ],
+          "rank": 1,
+          "top_score": 0.7785805335624345,
+          "wall_seconds": 0.2557807999983197,
+          "load_seconds": 0.0069397,
+          "prompt_tokens": 43
+        },
+        {
+          "id": "Q10",
+          "query": "怀疑内环损伤，优先检查哪个特征频率？",
+          "expected": "KB-04",
+          "ranking": [
+            "KB-04",
+            "KB-05",
+            "KB-06",
+            "KB-07",
+            "KB-01"
+          ],
+          "rank": 1,
+          "top_score": 0.6593401569382195,
+          "wall_seconds": 0.24802549999731127,
+          "load_seconds": 0.0060001,
+          "prompt_tokens": 36
+        },
+        {
+          "id": "Q11",
+          "query": "BPFI周围的倍频和转频调制有什么用途？",
+          "expected": "KB-04",
+          "ranking": [
+            "KB-07",
+            "KB-04",
+            "KB-05",
+            "KB-03",
+            "KB-06"
+          ],
+          "rank": 2,
+          "top_score": 0.6979220171006645,
+          "wall_seconds": 0.22147939999922528,
+          "load_seconds": 0.0069994,
+          "prompt_tokens": 36
+        },
+        {
+          "id": "Q12",
+          "query": "只有一个内圈频率匹配峰可以确诊吗？",
+          "expected": "KB-04",
+          "ranking": [
+            "KB-04",
+            "KB-05",
+            "KB-07",
+            "KB-06",
+            "KB-01"
+          ],
+          "rank": 1,
+          "top_score": 0.760685184565389,
+          "wall_seconds": 0.23798019999958342,
+          "load_seconds": 0.0057688,
+          "prompt_tokens": 35
+        },
+        {
+          "id": "Q13",
+          "query": "外环问题对应BPFO还是BPFI？",
+          "expected": "KB-05",
+          "ranking": [
+            "KB-05",
+            "KB-04",
+            "KB-07",
+            "KB-06",
+            "KB-03"
+          ],
+          "rank": 1,
+          "top_score": 0.7739386630105556,
+          "wall_seconds": 0.21906640000088373,
+          "load_seconds": 0.0070001,
+          "prompt_tokens": 34
+        },
+        {
+          "id": "Q14",
+          "query": "传感器安装位置会影响外圈故障峰吗？",
+          "expected": "KB-05",
+          "ranking": [
+            "KB-05",
+            "KB-04",
+            "KB-07",
+            "KB-06",
+            "KB-09"
+          ],
+          "rank": 1,
+          "top_score": 0.7463289508887714,
+          "wall_seconds": 0.20857210000031046,
+          "load_seconds": 0.0037652,
+          "prompt_tokens": 34
+        },
+        {
+          "id": "Q15",
+          "query": "没看到BPFO是否能够完全排除外圈损伤？",
+          "expected": "KB-05",
+          "ranking": [
+            "KB-05",
+            "KB-04",
+            "KB-06",
+            "KB-07",
+            "KB-03"
+          ],
+          "rank": 1,
+          "top_score": 0.8274294674538556,
+          "wall_seconds": 0.24226759999874048,
+          "load_seconds": 0.0069999,
+          "prompt_tokens": 37
+        },
+        {
+          "id": "Q16",
+          "query": "滚珠表面损伤时BSF和两倍BSF应怎么理解？",
+          "expected": "KB-06",
+          "ranking": [
+            "KB-06",
+            "KB-07",
+            "KB-05",
+            "KB-04",
+            "KB-08"
+          ],
+          "rank": 1,
+          "top_score": 0.7945468610074083,
+          "wall_seconds": 0.2412360999987868,
+          "load_seconds": 0.0043285,
+          "prompt_tokens": 41
+        },
+        {
+          "id": "Q17",
+          "query": "可以把保持架频率等同滚动体自转频率吗？",
+          "expected": "KB-06",
+          "ranking": [
+            "KB-06",
+            "KB-07",
+            "KB-01",
+            "KB-04",
+            "KB-05"
+          ],
+          "rank": 1,
+          "top_score": 0.6764863847311451,
+          "wall_seconds": 0.2357441000021936,
+          "load_seconds": 0.0065499,
+          "prompt_tokens": 39
+        },
+        {
+          "id": "Q18",
+          "query": "频谱能直接告诉我滚动体破损尺寸吗？",
+          "expected": "KB-06",
+          "ranking": [
+            "KB-06",
+            "KB-05",
+            "KB-07",
+            "KB-04",
+            "KB-03"
+          ],
+          "rank": 1,
+          "top_score": 0.7253081456252699,
+          "wall_seconds": 0.2219595999995363,
+          "load_seconds": 0.0069993,
+          "prompt_tokens": 36
+        },
+        {
+          "id": "Q19",
+          "query": "铭牌写1500转，可以当实际转速计算故障频率吗？",
+          "expected": "KB-07",
+          "ranking": [
+            "KB-07",
+            "KB-01",
+            "KB-08",
+            "KB-04",
+            "KB-06"
+          ],
+          "rank": 1,
+          "top_score": 0.7522455284233014,
+          "wall_seconds": 0.28305790000013076,
+          "load_seconds": 0.0060004,
+          "prompt_tokens": 44
+        },
+        {
+          "id": "Q20",
+          "query": "不知道轴承几何尺寸还能生成理论故障频率吗？",
+          "expected": "KB-07",
+          "ranking": [
+            "KB-07",
+            "KB-04",
+            "KB-05",
+            "KB-06",
+            "KB-01"
+          ],
+          "rank": 1,
+          "top_score": 0.6887050435217936,
+          "wall_seconds": 0.21630150000055437,
+          "load_seconds": 0.0050001,
+          "prompt_tokens": 35
+        },
+        {
+          "id": "Q21",
+          "query": "缺少本次转速，哪些普通信号分析还能继续？",
+          "expected": "KB-07",
+          "ranking": [
+            "KB-07",
+            "KB-01",
+            "KB-08",
+            "KB-03",
+            "KB-09"
+          ],
+          "rank": 1,
+          "top_score": 0.7478430146764408,
+          "wall_seconds": 0.22931460000108927,
+          "load_seconds": 0.0069993,
+          "prompt_tokens": 37
+        },
+        {
+          "id": "Q22",
+          "query": "维修前后负载不一样可以直接比较RMS吗？",
+          "expected": "KB-08",
+          "ranking": [
+            "KB-08",
+            "KB-02",
+            "KB-01",
+            "KB-09",
+            "KB-07"
+          ],
+          "rank": 1,
+          "top_score": 0.7538426203560054,
+          "wall_seconds": 0.2349118999991333,
+          "load_seconds": 0.0040655,
+          "prompt_tokens": 35
+        },
+        {
+          "id": "Q23",
+          "query": "复测方向变了，怎样判断振动是否恶化？",
+          "expected": "KB-08",
+          "ranking": [
+            "KB-08",
+            "KB-01",
+            "KB-07",
+            "KB-10",
+            "KB-05"
+          ],
+          "rank": 1,
+          "top_score": 0.642573102309721,
+          "wall_seconds": 0.24093029999858118,
+          "load_seconds": 0.0068917,
+          "prompt_tokens": 35
+        },
+        {
+          "id": "Q24",
+          "query": "维修后有效值下降是否就说明修好了？",
+          "expected": "KB-08",
+          "ranking": [
+            "KB-08",
+            "KB-07",
+            "KB-10",
+            "KB-01",
+            "KB-09"
+          ],
+          "rank": 1,
+          "top_score": 0.7290383932919018,
+          "wall_seconds": 0.2210406000012881,
+          "load_seconds": 0.004999,
+          "prompt_tokens": 36
+        },
+        {
+          "id": "Q25",
+          "query": "全零数据能不能算峭度和峰值因子？",
+          "expected": "KB-09",
+          "ranking": [
+            "KB-09",
+            "KB-02",
+            "KB-01",
+            "KB-07",
+            "KB-08"
+          ],
+          "rank": 1,
+          "top_score": 0.7742968249829821,
+          "wall_seconds": 0.23128530000030878,
+          "load_seconds": 0.0069965,
+          "prompt_tokens": 35
+        },
+        {
+          "id": "Q26",
+          "query": "波形有一个很大的冲击点，要直接删掉吗？",
+          "expected": "KB-09",
+          "ranking": [
+            "KB-09",
+            "KB-03",
+            "KB-08",
+            "KB-05",
+            "KB-07"
+          ],
+          "rank": 1,
+          "top_score": 0.5905978392850748,
+          "wall_seconds": 0.22297640000033425,
+          "load_seconds": 0.0042981,
+          "prompt_tokens": 37
+        },
+        {
+          "id": "Q27",
+          "query": "所有采样值都相同能证明设备健康吗？",
+          "expected": "KB-09",
+          "ranking": [
+            "KB-08",
+            "KB-01",
+            "KB-07",
+            "KB-09",
+            "KB-10"
+          ],
+          "rank": 4,
+          "top_score": 0.5932889771153981,
+          "wall_seconds": 0.24076350000177626,
+          "load_seconds": 0.0069992,
+          "prompt_tokens": 37
+        },
+        {
+          "id": "Q28",
+          "query": "多种证据互相矛盾时报告应该怎么说？",
+          "expected": "KB-10",
+          "ranking": [
+            "KB-10",
+            "KB-08",
+            "KB-01",
+            "KB-04",
+            "KB-06"
+          ],
+          "rank": 1,
+          "top_score": 0.5552029394740756,
+          "wall_seconds": 0.24230270000043674,
+          "load_seconds": 0.0118547,
+          "prompt_tokens": 34
+        },
+        {
+          "id": "Q29",
+          "query": "检索到一个相似案例就可以自动停机或派工吗？",
+          "expected": "KB-10",
+          "ranking": [
+            "KB-07",
+            "KB-10",
+            "KB-08",
+            "KB-01",
+            "KB-06"
+          ],
+          "rank": 2,
+          "top_score": 0.5110311314727557,
+          "wall_seconds": 0.24401720000241767,
+          "load_seconds": 0.0070006,
+          "prompt_tokens": 40
+        },
+        {
+          "id": "Q30",
+          "query": "目标设备超出验证范围时怎么处理诊断？",
+          "expected": "KB-10",
+          "ranking": [
+            "KB-10",
+            "KB-07",
+            "KB-08",
+            "KB-05",
+            "KB-01"
+          ],
+          "rank": 1,
+          "top_score": 0.6184113354207279,
+          "wall_seconds": 0.21672899999975925,
+          "load_seconds": 0.0039946,
+          "prompt_tokens": 35
+        }
+      ]
+    }
+  ]
+}

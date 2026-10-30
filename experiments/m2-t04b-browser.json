@@ -1,0 +1,31 @@
+{
+  "denials": [
+    {
+      "metric_count": 0,
+      "reason": "checked_load_tolerance_required",
+      "status": "not_comparable"
+    },
+    {
+      "metric_count": 0,
+      "reason": "shared_acquisition_root",
+      "status": "related_or_same_acquisition"
+    }
+  ],
+  "factory_data_used": false,
+  "horizontal_overflow": false,
+  "normal_comparison": {
+    "metric_rows": 7,
+    "rms_percent": -50,
+    "run_id": "5b038d0a-22e5-4cbe-984f-e561250838dd"
+  },
+  "own_confirmation_before_and_after": true,
+  "response_loss": {
+    "reload_pending_restored": true,
+    "replay_http": 200,
+    "run_id": "129fbec2-a9e9-4e56-9963-0b5894c91b15",
+    "same_resource": true,
+    "server_completed": true
+  },
+  "synthetic": true,
+  "verification": "Actual Tabbit UI and HTTP responses; screenshot not captured"
+}

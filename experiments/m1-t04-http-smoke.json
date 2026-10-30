@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "transport": "loopback HTTP",
+  "input_source": "synthetic",
+  "factory_data_used": false,
+  "sine_analysis_id": "7773a3e8-3539-488a-9f55-d95066c5039f",
+  "interrupted_analysis_id": "620679f2-1b31-44c7-a642-ed40f5d4736d",
+  "retry_analysis_id": "c84a42ba-932f-459f-a67c-318d67c5741d",
+  "large_input_points": 1000000,
+  "checks": [
+    "sine_metrics",
+    "spectrum_npz",
+    "idempotent_replay",
+    "observed_committed_running",
+    "forced_API_process_kill",
+    "startup_interrupted_recovery",
+    "completed_result_survives_restart",
+    "interrupted_same_key_no_automatic_rerun",
+    "explicit_retry_new_id"
+  ]
+}

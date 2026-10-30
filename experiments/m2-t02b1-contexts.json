@@ -1,0 +1,37 @@
+{
+  "scope": "M2-T02b1 target/context persistence; no tool-run API or qualification",
+  "python": "3.11.15",
+  "postgresql": "18.6",
+  "business_table_count": 20,
+  "added_tables": [
+    "asset_components",
+    "bearing_revisions",
+    "diagnostic_contexts"
+  ],
+  "immutable_triggers": [
+    "bearing_revision_immutable",
+    "component_identity_immutable",
+    "diagnostic_context_immutable"
+  ],
+  "full_backend_tests": {
+    "tests": "241",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "30.544"
+  },
+  "source_sha256": {
+    "backend/migrations/versions/0009_diagnostic_contexts.py": "366a5ea41f682c3e1cac7bc1efc8610c747303de664ebebc8fcb67854a2b5c90",
+    "backend/src/vibradiag/schemas/diagnostic_contexts.py": "d03e4d1a5de02ffa757cab6624098af97c99b2772430ef7fd683236dc3b80795",
+    "backend/src/vibradiag/services/diagnostic_context_service.py": "e9a1f0c686cfc7797302477d0ddf1dec5e65c54b6d48b088a6ef99c642d92798",
+    "backend/src/vibradiag/services/compute_capacity.py": "91d70cd89ce6fdf62fb83c1aa526bf6f5fd5c39c90f05295226f20349bc242fa",
+    "backend/src/vibradiag/services/persistent_analysis_service.py": "ce973578a361ed9f469cce491c0ed3526a3192d3ed4e64ea716b1a21971e3505",
+    "backend/scripts/manage_diagnostics.py": "56c75e00d3870e0761e5359594c1e604c47e6f9b8b33b71a1dfc0bdcbfe25420",
+    "backend/scripts/verify_m2_contexts.py": "9c4c287836aecfee9627496aa2e6b026d67f7effcdf7912a9a3c7875dedf0750",
+    "backend/tests/integration/test_diagnostic_contexts.py": "042f3922e74383d4ff0e49a0bf8770b7582545b71094bcb094477df805d8242b",
+    "backend/tests/integration/test_migration_rebuild.py": "e889f162d21c2e8c62e8f6729e1c7bcbc2feaa6862ff6b57b591748afab22a0f",
+    "backend/tests/integration/test_postgres_identity.py": "b97e830296223c005b89180c16e1ff899c2c2883af67d67848824441a28cd1c7",
+    "backend/requirements.lock.txt": "db7bca83a22a77ed4e06f2c15ebfadf31947b268acebe406d8cccdfda889e88f",
+    "experiments/m2-t02b1-tests.xml": "f813cce3f16a64292c82538b286cd20b1ed775a729154cc3e84f90aeaf7db5c6"
+  }
+}

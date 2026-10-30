@@ -1,0 +1,486 @@
+{
+  "scope": "M2-T04a pure comparison core; no HTTP/persistence or field effectiveness evaluation",
+  "environment": {
+    "python": "3.11.15",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1"
+  },
+  "cases": [
+    {
+      "case": "half_amplitude",
+      "original_sample_count": 48322,
+      "envelope_comparison": true,
+      "signal_float64_sha256": [
+        "198a5695ca5aed7ba235acf6562ae574711294e7b1efc3795a65c88fcce48084",
+        "f4cf8d32543d899b3b8796b9406fc771d237eee3090d95cb45d38ea29c703f54"
+      ],
+      "comparison_only_seconds": 0.001261299999896437,
+      "tool_status": "ok",
+      "comparison_status": "comparable",
+      "metrics": {
+        "mean": {
+          "before": 4.785181485167921e-05,
+          "after": 2.3925907425839604e-05,
+          "unit": "m/s2",
+          "delta": -2.3925907425839604e-05,
+          "relative_change_percent": null,
+          "delta_status": "available",
+          "percent_reason": "SIGNED_MEAN_PERCENT_NOT_DEFINED",
+          "limitations": [
+            "measurement_uncertainty_not_supplied_or_unchecked"
+          ],
+          "delta_reason": null
+        },
+        "rms": {
+          "before": 1.4362611828124865,
+          "after": 0.7181305914062432,
+          "unit": "m/s2",
+          "delta": -0.7181305914062432,
+          "relative_change_percent": -50.0,
+          "delta_status": "available",
+          "percent_reason": null,
+          "limitations": [
+            "measurement_uncertainty_not_supplied_or_unchecked"
+          ],
+          "delta_reason": null
+        },
+        "ac_rms": {
+          "before": 1.436261182015349,
+          "after": 0.7181305910076745,
+          "unit": "m/s2",
+          "delta": -0.7181305910076745,
+          "relative_change_percent": -50.0,
+          "delta_status": "available",
+          "percent_reason": null,
+          "limitations": [
+            "measurement_uncertainty_not_supplied_or_unchecked"
+          ],
+          "delta_reason": null
+        },
+        "absolute_peak": {
+          "before": 2.5,
+          "after": 1.25,
+          "unit": "m/s2",
+          "delta": -1.25,
+          "relative_change_percent": -50.0,
+          "delta_status": "available",
+          "percent_reason": null,
+          "limitations": [
+            "measurement_uncertainty_not_supplied_or_unchecked"
+          ],
+          "delta_reason": null
+        },
+        "peak_to_peak": {
+          "before": 4.99605735065728,
+          "after": 2.49802867532864,
+          "unit": "m/s2",
+          "delta": -2.49802867532864,
+          "relative_change_percent": -50.0,
+          "delta_status": "available",
+          "percent_reason": null,
+          "limitations": [
+            "measurement_uncertainty_not_supplied_or_unchecked"
+          ],
+          "delta_reason": null
+        },
+        "crest_factor": {
+          "before": 1.740630485539197,
+          "after": 1.740630485539197,
+          "unit": "1",
+          "delta": 0.0,
+          "relative_change_percent": 0.0,
+          "delta_status": "available",
+          "percent_reason": null,
+          "limitations": [
+            "change_at_float64_resolution",
+            "measurement_uncertainty_not_supplied_or_unchecked"
+          ],
+          "delta_reason": null
+        },
+        "pearson_kurtosis": {
+          "before": 2.2359488065320785,
+          "after": 2.2359488065320785,
+          "unit": "1",
+          "delta": 0.0,
+          "relative_change_percent": 0.0,
+          "delta_status": "available",
+          "percent_reason": null,
+          "limitations": [
+            "change_at_float64_resolution",
+            "measurement_uncertainty_not_supplied_or_unchecked"
+          ],
+          "delta_reason": null
+        },
+        "envelope_mean": {
+          "before": 2.0000001398012563,
+          "after": 1.0000000699006282,
+          "unit": "m/s2",
+          "delta": -1.0000000699006282,
+          "relative_change_percent": -50.0,
+          "delta_status": "available",
+          "percent_reason": null,
+          "limitations": [
+            "measurement_uncertainty_not_supplied_or_unchecked"
+          ],
+          "delta_reason": null
+        },
+        "envelope_rms": {
+          "before": 2.0310097719273648,
+          "after": 1.0155048859636824,
+          "unit": "m/s2",
+          "delta": -1.0155048859636824,
+          "relative_change_percent": -50.0,
+          "delta_status": "available",
+          "percent_reason": null,
+          "limitations": [
+            "measurement_uncertainty_not_supplied_or_unchecked"
+          ],
+          "delta_reason": null
+        },
+        "envelope_peak": {
+          "before": 2.5067235167189765,
+          "after": 1.2533617583594883,
+          "unit": "m/s2",
+          "delta": -1.2533617583594883,
+          "relative_change_percent": -50.0,
+          "delta_status": "available",
+          "percent_reason": null,
+          "limitations": [
+            "measurement_uncertainty_not_supplied_or_unchecked"
+          ],
+          "delta_reason": null
+        }
+      },
+      "reasons": [],
+      "related_reasons": [],
+      "repair_effectiveness": null,
+      "diagnostic_evidence_eligible": false
+    },
+    {
+      "case": "zero_baseline",
+      "original_sample_count": 4096,
+      "envelope_comparison": false,
+      "signal_float64_sha256": [
+        "c35020473aed1b4642cd726cad727b63fff2824ad68cedd7ffb73c7cbd890479",
+        "75607e8415bcc412e350bd1eb5078e63ec2fd3dd86063c1cf90a43c6efd4a379"
+      ],
+      "comparison_only_seconds": 0.0003483000000414904,
+      "tool_status": "ok",
+      "comparison_status": "comparable",
+      "metrics": {
+        "mean": {
+          "before": 0.0,
+          "after": 1.436251232053991e-06,
+          "unit": "m/s2",
+          "delta": 1.436251232053991e-06,
+          "relative_change_percent": null,
+          "delta_status": "available",
+          "percent_reason": "SIGNED_MEAN_PERCENT_NOT_DEFINED",
+          "limitations": [
+            "measurement_uncertainty_not_supplied_or_unchecked"
+          ],
+          "delta_reason": null
+        },
+        "rms": {
+          "before": 0.0,
+          "after": 0.7178938512111301,
+          "unit": "m/s2",
+          "delta": 0.7178938512111301,
+          "relative_change_percent": null,
+          "delta_status": "available",
+          "percent_reason": "ZERO_BASELINE",
+          "limitations": [
+            "measurement_uncertainty_not_supplied_or_unchecked"
+          ],
+          "delta_reason": null
+        },
+        "ac_rms": {
+          "before": 0.0,
+          "after": 0.7178938512096934,
+          "unit": "m/s2",
+          "delta": 0.7178938512096934,
+          "relative_change_percent": null,
+          "delta_status": "available",
+          "percent_reason": "ZERO_BASELINE",
+          "limitations": [
+            "measurement_uncertainty_not_supplied_or_unchecked"
+          ],
+          "delta_reason": null
+        },
+        "absolute_peak": {
+          "before": 0.0,
+          "after": 1.25,
+          "unit": "m/s2",
+          "delta": 1.25,
+          "relative_change_percent": null,
+          "delta_status": "available",
+          "percent_reason": "ZERO_BASELINE",
+          "limitations": [
+            "measurement_uncertainty_not_supplied_or_unchecked"
+          ],
+          "delta_reason": null
+        },
+        "peak_to_peak": {
+          "before": 0.0,
+          "after": 2.498028675328621,
+          "unit": "m/s2",
+          "delta": 2.498028675328621,
+          "relative_change_percent": null,
+          "delta_status": "available",
+          "percent_reason": "ZERO_BASELINE",
+          "limitations": [
+            "measurement_uncertainty_not_supplied_or_unchecked"
+          ],
+          "delta_reason": null
+        },
+        "crest_factor": {
+          "before": null,
+          "after": 1.7412044940783022,
+          "unit": "1",
+          "delta": null,
+          "relative_change_percent": null,
+          "delta_status": "unavailable",
+          "percent_reason": "METRIC_UNAVAILABLE",
+          "limitations": [],
+          "delta_reason": "METRIC_UNAVAILABLE",
+          "before_reason": "ZERO_RMS",
+          "after_reason": null
+        },
+        "pearson_kurtosis": {
+          "before": null,
+          "after": 2.2359633991462973,
+          "unit": "1",
+          "delta": null,
+          "relative_change_percent": null,
+          "delta_status": "unavailable",
+          "percent_reason": "METRIC_UNAVAILABLE",
+          "limitations": [],
+          "delta_reason": "METRIC_UNAVAILABLE",
+          "before_reason": "ZERO_VARIANCE",
+          "after_reason": null
+        }
+      },
+      "reasons": [],
+      "related_reasons": [],
+      "repair_effectiveness": null,
+      "diagnostic_evidence_eligible": false
+    },
+    {
+      "case": "copied_content",
+      "original_sample_count": 4096,
+      "envelope_comparison": false,
+      "signal_float64_sha256": [
+        "f47ca1a7e80e65b84e2218ca07ca9509cbddb1fd15237fa046bb350fed3d801f",
+        "f47ca1a7e80e65b84e2218ca07ca9509cbddb1fd15237fa046bb350fed3d801f"
+      ],
+      "comparison_only_seconds": 0.000282599999991362,
+      "tool_status": "unavailable",
+      "comparison_status": "related_or_same_acquisition",
+      "metrics": {},
+      "reasons": [],
+      "related_reasons": [
+        "identical_original_content"
+      ],
+      "repair_effectiveness": null,
+      "diagnostic_evidence_eligible": false
+    },
+    {
+      "case": "unknown_load",
+      "original_sample_count": 4096,
+      "envelope_comparison": false,
+      "signal_float64_sha256": [
+        "f47ca1a7e80e65b84e2218ca07ca9509cbddb1fd15237fa046bb350fed3d801f",
+        "75607e8415bcc412e350bd1eb5078e63ec2fd3dd86063c1cf90a43c6efd4a379"
+      ],
+      "comparison_only_seconds": 0.00024699999994481914,
+      "tool_status": "unavailable",
+      "comparison_status": "not_comparable",
+      "metrics": {},
+      "reasons": [
+        "after_load_value_required",
+        "unsupported_load_units_or_quantity"
+      ],
+      "related_reasons": [],
+      "repair_effectiveness": null,
+      "diagnostic_evidence_eligible": false
+    },
+    {
+      "case": "million_half_amplitude",
+      "original_sample_count": 1000000,
+      "envelope_comparison": true,
+      "signal_float64_sha256": [
+        "bccd83258ae53607ce7c922140832463df258b79322016b4de6dafb720a30ea0",
+        "2eacbd49e3323dbe5040814d464457b464ec42122435d729a682e96cc13525fb"
+      ],
+      "comparison_only_seconds": 0.01531909999994241,
+      "tool_status": "ok",
+      "comparison_status": "comparable",
+      "metrics": {
+        "mean": {
+          "before": 4.1993972743625814e-14,
+          "after": 2.0996986371812907e-14,
+          "unit": "m/s2",
+          "delta": -2.0996986371812907e-14,
+          "relative_change_percent": null,
+          "delta_status": "available",
+          "percent_reason": "SIGNED_MEAN_PERCENT_NOT_DEFINED",
+          "limitations": [
+            "measurement_uncertainty_not_supplied_or_unchecked"
+          ],
+          "delta_reason": null
+        },
+        "rms": {
+          "before": 1.4361406616345072,
+          "after": 0.7180703308172536,
+          "unit": "m/s2",
+          "delta": -0.7180703308172536,
+          "relative_change_percent": -50.0,
+          "delta_status": "available",
+          "percent_reason": null,
+          "limitations": [
+            "measurement_uncertainty_not_supplied_or_unchecked"
+          ],
+          "delta_reason": null
+        },
+        "ac_rms": {
+          "before": 1.4361406616345072,
+          "after": 0.7180703308172536,
+          "unit": "m/s2",
+          "delta": -0.7180703308172536,
+          "relative_change_percent": -50.0,
+          "delta_status": "available",
+          "percent_reason": null,
+          "limitations": [
+            "measurement_uncertainty_not_supplied_or_unchecked"
+          ],
+          "delta_reason": null
+        },
+        "absolute_peak": {
+          "before": 2.5,
+          "after": 1.25,
+          "unit": "m/s2",
+          "delta": -1.25,
+          "relative_change_percent": -50.0,
+          "delta_status": "available",
+          "percent_reason": null,
+          "limitations": [
+            "measurement_uncertainty_not_supplied_or_unchecked"
+          ],
+          "delta_reason": null
+        },
+        "peak_to_peak": {
+          "before": 4.99605735065822,
+          "after": 2.49802867532911,
+          "unit": "m/s2",
+          "delta": -2.49802867532911,
+          "relative_change_percent": -50.0,
+          "delta_status": "available",
+          "percent_reason": null,
+          "limitations": [
+            "measurement_uncertainty_not_supplied_or_unchecked"
+          ],
+          "delta_reason": null
+        },
+        "crest_factor": {
+          "before": 1.7407765595569784,
+          "after": 1.7407765595569784,
+          "unit": "1",
+          "delta": 0.0,
+          "relative_change_percent": 0.0,
+          "delta_status": "available",
+          "percent_reason": null,
+          "limitations": [
+            "change_at_float64_resolution",
+            "measurement_uncertainty_not_supplied_or_unchecked"
+          ],
+          "delta_reason": null
+        },
+        "pearson_kurtosis": {
+          "before": 2.2359963269054175,
+          "after": 2.2359963269054175,
+          "unit": "1",
+          "delta": 0.0,
+          "relative_change_percent": 0.0,
+          "delta_status": "available",
+          "percent_reason": null,
+          "limitations": [
+            "change_at_float64_resolution",
+            "measurement_uncertainty_not_supplied_or_unchecked"
+          ],
+          "delta_reason": null
+        },
+        "envelope_mean": {
+          "before": 2.000010147256087,
+          "after": 1.0000050736280435,
+          "unit": "m/s2",
+          "delta": -1.0000050736280435,
+          "relative_change_percent": -50.0,
+          "delta_status": "available",
+          "percent_reason": null,
+          "limitations": [
+            "measurement_uncertainty_not_supplied_or_unchecked"
+          ],
+          "delta_reason": null
+        },
+        "envelope_rms": {
+          "before": 2.0310191158885,
+          "after": 1.01550955794425,
+          "unit": "m/s2",
+          "delta": -1.01550955794425,
+          "relative_change_percent": -50.0,
+          "delta_status": "available",
+          "percent_reason": null,
+          "limitations": [
+            "measurement_uncertainty_not_supplied_or_unchecked"
+          ],
+          "delta_reason": null
+        },
+        "envelope_peak": {
+          "before": 2.50820268911074,
+          "after": 1.25410134455537,
+          "unit": "m/s2",
+          "delta": -1.25410134455537,
+          "relative_change_percent": -50.0,
+          "delta_status": "available",
+          "percent_reason": null,
+          "limitations": [
+            "measurement_uncertainty_not_supplied_or_unchecked"
+          ],
+          "delta_reason": null
+        }
+      },
+      "reasons": [],
+      "related_reasons": [],
+      "repair_effectiveness": null,
+      "diagnostic_evidence_eligible": false
+    }
+  ],
+  "fixture_ids_are_real_records": false,
+  "factory_data_used": false,
+  "qualification_published": false,
+  "full_backend_tests": {
+    "tests": "394",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "106.312"
+  },
+  "limitations": [
+    "Signal hashes describe synthetic float64 fixture bytes, not field CSV originals",
+    "Only the comparison function is timed; parent calculations, HTTP, database and memory are excluded",
+    "Supplied declarations do not prove calibration, independence or repair effectiveness"
+  ],
+  "source_sha256": {
+    "backend/src/vibradiag/analysis/comparison.py": "c8eeba68e9ed4b92cf3ef2025f58d42c8db185be829f06920580996a8f1e5c7a",
+    "backend/src/vibradiag/schemas/comparison.py": "4f133529be63781bedb72825f5fe1d9ab3925ada6ffc561ecd20051ec732805b",
+    "backend/tests/unit/test_comparison.py": "b0e6f2fb1d01f3c0c7211889a95d4faaa55eb1b118905eb97fc5f8053027ce59",
+    "backend/scripts/verify_m2_comparison.py": "283848baac74934c00270200a03819c105d6fba02619047b93c1e50974c800c7",
+    "backend/src/vibradiag/analysis/basic.py": "5378fef761cd169a8ff70c851e0a8794aa0ebdf3ffa7c6071652bf82a373670e",
+    "backend/src/vibradiag/analysis/envelope.py": "dd769a9d8f1fe2ab010ed2ed8372d40af5bc50e72e07fbe447e89ec708b83d87",
+    "backend/src/vibradiag/schemas/measurements.py": "f2ef25ef1d72e61eae51cbaf631e6652e2ff9f84db48ebf869f54ff1781dd7a2",
+    "backend/src/vibradiag/schemas/tools.py": "1baf54398e28a032f28e39346d311e47f055b5d5dad2c61a5d9133aa2f85d9de",
+    "backend/src/vibradiag/domain/tool_results.py": "014a18c8803214b3b5a981fb9f2f746d9d70493a1bd4a74f38d3ca8e749ee7c8",
+    "backend/requirements.lock.txt": "db7bca83a22a77ed4e06f2c15ebfadf31947b268acebe406d8cccdfda889e88f",
+    "experiments/m2-t04a-tests.xml": "39b58b10322232fdbd74b01d325e1ee10a986ccdabd1da4a1446cc2179eb464b"
+  }
+}

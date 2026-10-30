@@ -1,0 +1,248 @@
+{
+  "scope": "M2-T03a pure numerical matching; no HTTP, persistence or registered evidence",
+  "environment": {
+    "python": "3.11.15",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1"
+  },
+  "fixture_ids_are_real_records": false,
+  "factory_data_used": false,
+  "qualification_published": false,
+  "cases": [
+    {
+      "original_sample_count": 48322,
+      "synthetic_signal_float64_sha256": "aa950719df371984ed64f5dfb3e4d6fcc8fc5bf5278b10dd04720b4e9a68ceb4",
+      "case": "AM",
+      "matching_only_seconds": 0.0729871000003186,
+      "result_status": "ok",
+      "target": {
+        "target_id": "BPFO:1",
+        "family": "BPFO",
+        "harmonic": 1,
+        "sideband_order": 0,
+        "sideband_spacing": null,
+        "aliases": [],
+        "auxiliary_only": false,
+        "target_hz": 95.1,
+        "half_width_hz": 1.451,
+        "propagated_uncertainty_hz": 0.0,
+        "status": "ambiguous",
+        "reasons": [
+          "alternative_explanations"
+        ],
+        "candidates": [
+          {
+            "peak_id": "00000000-0000-0000-0000-000000000005:bin:380",
+            "bin": 380,
+            "frequency_hz": 95.0,
+            "amplitude_m_s2": 0.49999999842948306,
+            "frequency_error_hz": -0.09999999999999432,
+            "prominence_m_s2": 0.49999999842888304,
+            "amplitude_ratio": 493328741242.7225,
+            "prominence_ratio": 493328741242.1305,
+            "passes_thresholds": true
+          }
+        ],
+        "reference": {
+          "bin_count": 21,
+          "range_hz": [
+            89.29599999999999,
+            100.904
+          ],
+          "median_or_floor_m_s2": 1.013522944497325e-12,
+          "reference_floor_applied": false
+        },
+        "overlap_group": null,
+        "confounders": [
+          {
+            "kind": "possible_carrier_beating",
+            "pairs": [
+              {
+                "carrier_bins": [
+                  12080,
+                  12463
+                ],
+                "difference_hz": 95.11195728653593
+              },
+              {
+                "carrier_bins": [
+                  12080,
+                  11698
+                ],
+                "difference_hz": 94.86362319440423
+              }
+            ],
+            "pair_count": 2
+          }
+        ],
+        "candidate_count": 1
+      },
+      "row_count": 63,
+      "evidence_eligible": false,
+      "confounder_checks_complete": false,
+      "independent_acquisition_count": 1
+    },
+    {
+      "original_sample_count": 48322,
+      "synthetic_signal_float64_sha256": "847b5f6fffb5d21ee6f58c84368fb32cd8a8c3eab4cc0676c64273c648a8e409",
+      "case": "two_carrier",
+      "matching_only_seconds": 0.07379200000013952,
+      "result_status": "ok",
+      "target": {
+        "target_id": "BPFO:1",
+        "family": "BPFO",
+        "harmonic": 1,
+        "sideband_order": 0,
+        "sideband_spacing": null,
+        "aliases": [],
+        "auxiliary_only": false,
+        "target_hz": 95.1,
+        "half_width_hz": 1.451,
+        "propagated_uncertainty_hz": 0.0,
+        "status": "ambiguous",
+        "reasons": [
+          "alternative_explanations"
+        ],
+        "candidates": [
+          {
+            "peak_id": "00000000-0000-0000-0000-000000000005:bin:380",
+            "bin": 380,
+            "frequency_hz": 95.0,
+            "amplitude_m_s2": 0.19974968588918726,
+            "frequency_error_hz": -0.09999999999999432,
+            "prominence_m_s2": 0.19974968588889483,
+            "amplitude_ratio": 409796411799.3364,
+            "prominence_ratio": 409796411798.7365,
+            "passes_thresholds": true
+          }
+        ],
+        "reference": {
+          "bin_count": 21,
+          "range_hz": [
+            89.29599999999999,
+            100.904
+          ],
+          "median_or_floor_m_s2": 4.874363955802473e-13,
+          "reference_floor_applied": false
+        },
+        "overlap_group": null,
+        "confounders": [
+          {
+            "kind": "possible_carrier_beating",
+            "pairs": [
+              {
+                "carrier_bins": [
+                  12081,
+                  12463
+                ],
+                "difference_hz": 94.86362319440423
+              }
+            ],
+            "pair_count": 1
+          }
+        ],
+        "candidate_count": 1
+      },
+      "row_count": 63,
+      "evidence_eligible": false,
+      "confounder_checks_complete": false,
+      "independent_acquisition_count": 1
+    },
+    {
+      "original_sample_count": 1000000,
+      "synthetic_signal_float64_sha256": "92dab4247a7acbe2ee92cd0203eba78afb9606d12b6cb00a362305c80f85d6df",
+      "case": "AM",
+      "matching_only_seconds": 1.8601331999998365,
+      "result_status": "ok",
+      "target": {
+        "target_id": "BPFO:1",
+        "family": "BPFO",
+        "harmonic": 1,
+        "sideband_order": 0,
+        "sideband_spacing": null,
+        "aliases": [],
+        "auxiliary_only": false,
+        "target_hz": 95.1,
+        "half_width_hz": 0.9750077304892175,
+        "propagated_uncertainty_hz": 0.0,
+        "status": "ambiguous",
+        "reasons": [
+          "alternative_explanations"
+        ],
+        "candidates": [
+          {
+            "peak_id": "00000000-0000-0000-0000-000000000005:bin:7914",
+            "bin": 7914,
+            "frequency_hz": 94.99858954583377,
+            "amplitude_m_s2": 0.49556380442236236,
+            "frequency_error_hz": -0.10141045416622774,
+            "prominence_m_s2": 0.4955564797750688,
+            "amplitude_ratio": 55081775.604170375,
+            "prominence_ratio": 55080961.47171154,
+            "passes_thresholds": true
+          }
+        ],
+        "reference": {
+          "bin_count": 418,
+          "range_hz": [
+            91.19996907804313,
+            99.00003092195686
+          ],
+          "median_or_floor_m_s2": 8.996874174565317e-09,
+          "reference_floor_applied": false
+        },
+        "overlap_group": null,
+        "confounders": [
+          {
+            "kind": "possible_carrier_beating",
+            "pairs": [
+              {
+                "carrier_bins": [
+                  250000,
+                  242083
+                ],
+                "difference_hz": 95.0039999999999
+              },
+              {
+                "carrier_bins": [
+                  250000,
+                  257917
+                ],
+                "difference_hz": 95.0039999999999
+              }
+            ],
+            "pair_count": 2
+          }
+        ],
+        "candidate_count": 1
+      },
+      "row_count": 63,
+      "evidence_eligible": false,
+      "confounder_checks_complete": false,
+      "independent_acquisition_count": 1
+    }
+  ],
+  "full_backend_tests": {
+    "tests": "311",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "53.865"
+  },
+  "limitations": [
+    "Developer thresholds, not industrial fault criteria",
+    "Single matching-only timing; not an API/memory/P95 benchmark",
+    "Carrier screen is bounded and filter sensitivity is untested; no evidence eligibility"
+  ],
+  "source_sha256": {
+    "backend/src/vibradiag/analysis/matching.py": "25994b95db2204d91a6d81512849d25d8059830c3ac917cf04ceda02a7ed0fb7",
+    "backend/src/vibradiag/schemas/matching.py": "2e2f0005d1d0fb7f978d32766c573fbcfd1292cddbef7ff8864642109f05ff63",
+    "backend/tests/unit/test_matching.py": "9f5fa3cf269339f75d2a25adda2afcc1b15857f423d73fc0ad207d81bca7bdf3",
+    "backend/scripts/verify_m2_matching.py": "a9eafbf8346b86765d1d1eb79c850cc083454cacd0c32660f99f2ff6c09219b5",
+    "backend/src/vibradiag/analysis/envelope.py": "dd769a9d8f1fe2ab010ed2ed8372d40af5bc50e72e07fbe447e89ec708b83d87",
+    "backend/src/vibradiag/analysis/bearing_frequencies.py": "c242d9173964844941021ab013aa15833b91339cc75c68ff997215a25c2154b8",
+    "backend/src/vibradiag/analysis/basic.py": "5378fef761cd169a8ff70c851e0a8794aa0ebdf3ffa7c6071652bf82a373670e",
+    "backend/requirements.lock.txt": "db7bca83a22a77ed4e06f2c15ebfadf31947b268acebe406d8cccdfda889e88f",
+    "experiments/m2-t03a-tests.xml": "c2cd42167502675a0a064fda20d75207236ac9b42e5a8fe6652be8a6266586ba"
+  }
+}
