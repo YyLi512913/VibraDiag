@@ -24,6 +24,7 @@ langchain-core==1.7.1
 langchain-protocol==0.0.20
 langgraph==1.2.18
 langgraph-checkpoint==4.3.1
+langgraph-checkpoint-postgres==3.2.0
 langgraph-prebuilt==1.1.1
 langgraph-sdk==0.4.10
 langsmith==0.14.14
@@ -37,6 +38,7 @@ packaging==26.3
 pluggy==1.7.0
 psycopg==3.3.6
 psycopg-binary==3.3.6
+psycopg-pool==3.3.3
 pycparser==3.12
 pydantic==2.14.1
 pydantic-core==2.50.1

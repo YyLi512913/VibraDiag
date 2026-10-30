@@ -1,0 +1,104 @@
+{
+  "passed": true,
+  "scope": "M3-T02b1 isolated compatibility probe only",
+  "run_id": "9d54ee2fa58b450eacd7a20f2ce609ee",
+  "versions": {
+    "langgraph": "1.2.18",
+    "langgraph-checkpoint": "4.3.1",
+    "langgraph-checkpoint-postgres": "3.2.0",
+    "psycopg": "3.3.6",
+    "psycopg-pool": "3.3.3"
+  },
+  "environment": {
+    "python": "3.11.15",
+    "platform": "Windows-10-10.0.22000-SP0",
+    "postgresql": "18.6"
+  },
+  "business_migration_head": "0013_agent_tasks",
+  "business_tables": 31,
+  "production_task_graph_integrated": false,
+  "production_hard_cancel_implemented": false,
+  "model_called": false,
+  "factory_data_used": false,
+  "checkpoint_tables": 4,
+  "isolated_probe_ledger_tables": 1,
+  "probe_schema_removed": true,
+  "vendor_migrations_sha256": "f1a06ba21be55813fd71eee928a27c70a6181d08dbc61da79470551148cbe60f",
+  "migration_versions": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "migration_transactional_on_empty_tables": true,
+  "application_ddl_denied": true,
+  "checkpoint_count": 4,
+  "serializer": {
+    "restricted_msgpack": true,
+    "pickle_fallback": false,
+    "stored_types": [
+      "null",
+      "msgpack"
+    ],
+    "blocked_constructor_returns_raw_data": true,
+    "semantic_integrity_validation": false
+  },
+  "process_recovery": {
+    "separate_processes": true,
+    "interrupted_node_reentered": true,
+    "counts": {
+      "node_entries": 3,
+      "compute_count": 1
+    },
+    "result": {
+      "rms": 1.4142135623730951,
+      "unit": "m/s2",
+      "sample_count": 4096,
+      "source_sha256": "b26fec14dbd4ff2815d557479a18fd61bc95fe19e228619fc1ec4d331d699c9d"
+    },
+    "timeout_seconds": 0.5,
+    "timeout_excludes_child_startup": true,
+    "actual_timeout_and_termination_seconds": 0.6880000000001019,
+    "owned_child_terminated": true
+  },
+  "full_backend_tests": {
+    "tests": "542",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "216.322"
+  },
+  "new_probe_tests": 17,
+  "limitations": [
+    "Probe schemas only; no production checkpointer setup or API graph execution",
+    "No tenant/actor/lease fencing in raw PostgresSaver; must add controlled task binding before integration",
+    "Process termination demonstrated only for a trusted probe child, not M1/M2 API numerical calls",
+    "Cross-process shared capacity, delegated identity and task-cancel reconciliation remain T02b2+",
+    "Strict serializer blocks constructor revival but can return raw data; persisted business state still needs validation"
+  ],
+  "sources": {
+    "postgres_saver": "https://pypi.org/project/langgraph-checkpoint-postgres/",
+    "interrupts": "https://docs.langchain.com/oss/python/langgraph/interrupts",
+    "persistence": "https://docs.langchain.com/oss/python/langgraph/persistence"
+  },
+  "source_sha256": {
+    "backend/scripts/m3_checkpoint_probe.py": "e0ed07e35ee9b7f66f586616f8e0b2842503a0154292c023b44e0df9f9d4eeaa",
+    "backend/scripts/verify_m3_checkpoints.py": "83c49db8d3be07483f7ea41cc422db95536bb99b0a53d4582da122891fb3081b",
+    "backend/tests/integration/test_checkpoint_probe.py": "f714c24bed46d7ec12e5dbdc08cf08b3d6de0dafe19a176183ac2a1bb3c95418",
+    "backend/requirements.lock.txt": "0d62d852c7ecdf17eddd4d5a459b56b9d4c198d52f1c8ce26ead6e329b0b50c7",
+    "backend/pyproject.toml": "b2516e783df6839d88bd86fd27d4bc267255ba3de07c377b2c26b6cec3ca06b1",
+    "experiments/m3-t02b1-tests.xml": "6ca53b4d79d7f24d2a72aba37e227da0a1ce57d9c17244e8098761d41ce3e58d",
+    "docs/07-m3-agent-design.md": "b5f3bca4a48cfa7ef5089d40e70a64f56039662ecc02b1e9aa71f7352b5283b6",
+    "docs/acceptance/M3-T02b1-verification.md": "8a5bf32703c1fcc0e603fadcee2e6c99f4637245b4af25da76e78b802acb2bd1",
+    "docs/README.md": "439fb9e125fec11af82e15cd63e7332d603eb19abcdd487e04cad194e3727b36",
+    "docs/03-milestones.md": "e9bfa97a7983315cd2ecd363bc525d79ba97134a86334610b3b6d3aba76bb61f",
+    "README.md": "e61ead77d3caeb181612d79ca381e9bf05695afe9d08bd69325bffe3d1406639",
+    "backend/README.md": "4d2458a8d360976f86d963adb7a09cab4924b83cda4bc4cfe1bd2dd4f633b67d"
+  }
+}

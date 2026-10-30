@@ -158,3 +158,19 @@ API启动默认开启一个托管规则消费者，`VIBRADIAG_AGENT_WORKER_ENABL
 ```
 
 详见[T02a验证与限制](../docs/acceptance/M3-T02a-verification.md)。T01契约与回执保留为当时的设计快照，不覆盖其未实现标记。
+
+## M3-T02b1 官方检查点兼容性验证
+
+锁定可选依赖组`checkpoint-probe`：langgraph-checkpoint-postgres 3.2.0及psycopg-pool 3.3.3，完整requirements.lock.txt包含此组。仅安装backend包时可用`uv pip install --python .venv/Scripts/python.exe -e "backend[checkpoint-probe]"`安装；完整开发环境继续按锁文件同步。
+
+`scripts/m3_checkpoint_probe.py`与`verify_m3_checkpoints.py`是验证代码，不被API或任务执行器导入。脚本要求专用测试库及独立迁移/应用角色，在随机且带归属标记的schema内创建4张官方检查点表和1张验证账本；结束时只清理该schema，业务表保持0013/31张。不在应用启动调用PostgresSaver.setup，不提供任意thread_id读取或删除接口。
+
+```bat
+.venv\Scripts\python.exe -m pytest -c backend\pyproject.toml backend\tests -q --junitxml=experiments\m3-t02b1-tests.xml
+.venv\Scripts\python.exe backend\scripts\verify_m3_checkpoints.py
+uv pip check --python .venv\Scripts\python.exe
+```
+
+真实子进程验证：首次运行动态中断，下一进程恢复后在节点提交前阻塞，父进程超时终止自建进程，再由新进程从持久resume继续。解析正弦基础计算登记一次，节点会重入三次；这证明需要幂等账本，不是检查点天然提供exactly-once。0.5秒终止门槛从子进程就绪开始计时，排除解释器启动；不是业务API硬超时或设备效果指标。
+
+显式限制反序列化类型并禁用pickle；官方严格模式仍可能把未批准构造对象变成普通数据，业务图恢复必须另做状态校验。原始Saver不含组织/操作者/租约授权，T02b2完成任务绑定及读写围栏后才能接正式图；业务跨进程容量和委托身份另行实现。详见[验证记录](../docs/acceptance/M3-T02b1-verification.md)。

@@ -1,6 +1,6 @@
 # 07 M3 Agent取证闭环详细设计
 
-> 版本：v0.2，M3-T01契约及T02a持久任务/规则执行基础；日期：2026-10-30。
+> 版本：v0.3，M3-T01契约、T02a规则任务及T02b1检查点兼容性验证；日期：2026-10-30。
 > 上游：[需求](01-requirements.md)、[阶段计划](03-milestones.md)、[M2总验收](acceptance/M2-acceptance.md)、[M2工具契约](contracts/m2-tool-contract.json)。
 > T01已实现DTO、纯策略与机器契约；T02a已实现数据库任务、幂等命令、调用账本及托管规则执行器。尚未接入正式LangGraph持久图、RAG或DeepSeek决策。M2-R01—R04继续阻断正式诊断发布。
 
@@ -105,7 +105,7 @@ numeric_fact只接受基础分析/事实；exploratory_observation接受工具�
 
 [Interrupts](https://docs.langchain.com/oss/python/langgraph/interrupts)说明恢复会重新进入中断节点，因此中断前的外部副作用必须受账本/幂等保护。使用服务器生成thread_id，不能把知道thread_id当作授权。恢复数据先通过本项目schema和业务校验，再提交图恢复命令。
 
-T02先验证PostgreSQL checkpointer与当前版本/角色兼容性，所有新增表由迁移身份创建，运行账号不自动DDL/setup。本轮没有安装新的checkpointer包、没有用MemorySaver假装正式持久化，也没有写入检查点表。
+T02b1已安装锁定的官方PostgresSaver依赖，并在专用测试库的隔离schema验证跨进程持久化。所有验证表由迁移身份创建，应用身份不执行DDL/setup；验证schema结束时按标记删除，业务迁移仍0013/31表。业务执行器尚未连接检查点，不使用MemorySaver替代跨重启恢复。
 
 ## 10. T02任务/Worker落地计划
 
@@ -159,3 +159,17 @@ T01覆盖C01—C05纯契约/策略用例；T02a新增真实数据库/API/工具/
 启动先恢复M1/M2遗留运行，再将任务running改为interrupted并清除租约；旧执行器不能提交迟到结果。未知响应先重放同一逻辑键取回来源；已知失败/中断来源在显式恢复后生成带retry_of的新调用，消耗新工具预算。无来源ID的中断执行可能先需要一次重放对账，再一次显式恢复，不能静默视为成功。
 
 取消阻断后续调度和草稿写入，不能硬终止已进入M1/M2的只读计算。草稿重读时再验证来源hash、当前输入和确认；失效时保留历史状态并隐藏草稿。T01的机器契约及验收回执是历史快照，不重新生成来覆盖当时的“未实现”状态。
+
+## 15. T02b1检查点与隔离验证结论
+
+本轮锁定langgraph-checkpoint-postgres 3.2.0、psycopg-pool 3.3.3，现有langgraph 1.2.18、checkpoint 4.3.1、psycopg 3.3.6保持。选择官方Saver以减少自维护存储协议，先验证接口与权限再接业务。详见[T02b1记录](acceptance/M3-T02b1-verification.md)及[官方包说明](https://pypi.org/project/langgraph-checkpoint-postgres/)。
+
+官方10条迁移含CREATE INDEX CONCURRENTLY，不适合直接放入现有Alembic事务。本轮只针对全新空表将三条建索引改为事务内普通索引，并验证整体回滚；未对已有生产表提供在线升级方案。初始化只在测试库的UUID专属schema执行，4张官方表加1张验证账本，应用身份只有schema USAGE、运行表SELECT/INSERT/UPDATE及迁移版本SELECT，不能DDL、删历史或改版本。没有新增业务迁移或开放setup入口。
+
+验证图使用解析正弦及真实compute_basic，先计算并登记验证账本，再interrupt，最后确认完成。每次使用新的数据库连接和Saver。节点重新进入时按稳定operation键重读账本；并发验证实际数值函数只执行一次。真实子进程在接受resume后、节点结果提交前阻塞，父进程触发超时并终止自建子进程，新进程invoke(None)从已保存的resume继续。该实验验证光标与未知结果恢复，不产生正式业务事实/证据UUID。
+
+显式禁用pickle回退和额外构造器，保留库内置安全类型。严格模式会阻止未批准类型构造，但可能返回普通字典；因此不能把“反序列化成功”当作业务状态真实或可信。正式接入仍需恢复状态schema/版本/大小校验，预算和授权一律从业务表加载，不能信任checkpoint中的角色、预算、结果文字或执行ID。
+
+T02b2必须先补：任务与服务器生成thread_id的一对一绑定、图版本校验、每次读取/写入的当前身份和租约围栏、取消/恢复与检查点提交窗口的对账；不能把原始Saver对象或任意thread_id读取接口暴露给浏览器。检查点是可重建光标，M1/M2来源和agent_calls账本仍是执行权威。
+
+隔离进程超时目前仅针对验证子进程，未替换业务任务线程。下一步先接有授权围栏的分步持久规则图，再落实数值隔离、受控委托身份与跨进程总容量；不能直接在新进程各开并发2或让独立Worker绕过现有API租约。DeepSeek动作选择仍归T04，不因验证图可运行而提前声明模型Agent已实现。
