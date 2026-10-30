@@ -1,7 +1,9 @@
 from fastapi import APIRouter
 from .v1 import analyses,diagnoses,knowledge,identity,assets,measurements,persistent_analyses,tool_runs,evidence
+from .v1 import agent_tasks
 
 router=APIRouter(prefix='/api/v1')
+router.include_router(agent_tasks.router)
 router.include_router(identity.router)
 router.include_router(assets.router)
 router.include_router(measurements.router)

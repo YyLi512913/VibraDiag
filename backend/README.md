@@ -22,7 +22,7 @@ uv pip install --python .venv\Scripts\python.exe --no-deps -e backend
 .venv\Scripts\python.exe -m pytest -c backend\pyproject.toml backend\tests -q
 ```
 
-`.env`位于本目录，环境变量优先于本地文件；不通过API或前端返回密钥。M1已有PostgreSQL、身份、采集、持久基础分析及正式前端；完整报告/工单闭环与Agent任务恢复仍待实现。
+`.env`位于本目录，环境变量优先于本地文件；不通过API或前端返回密钥。M1已有PostgreSQL、身份、采集、持久基础分析及正式前端；M3已提供持久规则任务及中断恢复；正式模型Agent图、报告/工单闭环仍待实现。
 
 ## PostgreSQL与基础账号
 
@@ -39,7 +39,7 @@ uv pip install --python .venv\Scripts\python.exe --no-deps -e backend
 
 create-user交互输入12—1024字符的应用密码，也支持私有进程环境VIBRADIAG_INITIAL_PASSWORD；数据库口令和应用登录密码分开。CLI是可信本机运维入口，不提供公开注册。create-asset、grant-asset、set-roles、set-user-status的参数见 `manage.py --help` 及子命令帮助；变更与审计同事务，禁用用户/调整角色会撤销其会话。管理员只有显式业务角色及数据范围时才有相应业务权。
 
-迁移包含0001—0004的16张基础表，0005完成产物保护、0006文件校验/身份保护、0007分析快照保护、0008新增legacy_imports映射账本，M1为17张业务表；0009再新增组件/轴承版本/context三张，0010再新增tool_profiles/tool_runs/tool_artifacts/tool_idempotency_records，0011新增analysis_facts/evidence_items并扩展匹配父引用，当前26张业务表；重复升级安全。已执行版本不修改，后续新增迁移；当前不提供破坏性downgrade。迁移脚本给应用账号授权并撤销其对迁移版本表及历史表的修改权。不要只运行SQLAlchemy create_all代替迁移。
+迁移包含0001—0004的16张基础表，0005完成产物保护、0006文件校验/身份保护、0007分析快照保护、0008新增legacy_imports映射账本，M1为17张业务表；0009再新增组件/轴承版本/context三张，0010再新增tool_profiles/tool_runs/tool_artifacts/tool_idempotency_records，0011新增analysis_facts/evidence_items并扩展匹配父引用，0012新增comparison_declarations，0013新增四张Agent任务表，当前31张业务表；重复升级安全。已执行版本不修改，后续新增迁移；当前不提供破坏性downgrade。迁移脚本给应用账号授权并撤销其对迁移版本表及历史表的修改权。不要只运行SQLAlchemy create_all代替迁移。
 
 登录接口 `POST /api/v1/auth/login` 输入organization_id、username、password；返回csrf_token并设置HttpOnly/SameSite=Strict Cookie。写请求需X-CSRF-Token。`GET /auth/me`、`POST /auth/logout`及授权分页资产/测点接口已实现。共享HTTPS默认Secure Cookie；仅本机HTTP开发设置VIBRADIAG_COOKIE_SECURE=false。Vite保留Host，走同源/api代理；直接跨源登录被拒绝。基础限流为单进程每来源IP每分钟20次，不能当作生产分布式限流。
 
@@ -138,3 +138,23 @@ T04a新增62项的历史结果见[T04a记录](../docs/acceptance/M2-T04a-verific
 ## M3-T01 正式Agent契约（未接运行API）
 
 `agents/formal_contracts.py`定义任务/恢复、候选选择、预算及未发布草稿；`formal_policy.py`提供无IO的预算/候选/引用检查。现有`agents/graph.py`仍是M0原型，本轮没有连接正式任务API、Worker或模型。`export_m3_agent_contract.py`导出机器契约，`verify_m3_t01.py`核对实际JUnit与源码。见[07设计](../docs/07-m3-agent-design.md)，下一步T02a持久任务及真实授权执行。
+
+## M3-T02a 持久任务与规则执行基础
+
+`POST /api/v1/agent-tasks`接受goal、description及measurement_revision_id；比较还需comparison_declaration_id。目标为inspect_signal、bearing_observations、compare_measurements、explain_method。写操作要求登录Cookie、X-CSRF-Token及Idempotency-Key，创建202，同命令重放200；GET列表和详情仅对发起人开放，并重查输入范围/来源。原API文档`/docs`可用于本机调试，目前没有任务前端。
+
+缺确认、目标或配置时状态waiting_information；详情提供question.id及可选choices。先用既有采集/工程操作补齐条件，再POST /agent-tasks/{id}/resume，输入expected_version、question_id、answer，使用新幂等键。choices存在时answer须为提供的UUID，普通文字不能确认输入或覆盖参数。POST /agent-tasks/{id}/cancel接受expected_version和幂等键，版本冲突409。会话失效需重新登录，再由同一操作者受控恢复。
+
+API启动默认开启一个托管规则消费者，`VIBRADIAG_AGENT_WORKER_ENABLED=false`可关闭调度但保留任务API。仍只能一个API进程连接同一数据库，M1/M2共享数值并发2；不支持多进程Worker。每人最多32个未结束任务，恢复最多20次。工具预留与调用键持久化，恢复不重置预算。容量429自动退避一次，未知响应重放原键；明确失败/中断需显式恢复，产生关联retry_of的新调用。
+
+响应明确标记rules_scaffold_v1、model_called=false、formal_graph_executed=false。草稿始终unpublished_draft，规则文本不作故障分类；正式知识尚未接入，explain_method返回有缺失原因的refused。取消和120秒预算为步骤边界的协作控制，不能硬终止数值计算；重启时按持久tick保守计时，包括停机时间。完整持久图、对账与隔离/硬预算由T02b推进。
+
+验证命令（从根目录，先完成测试，脚本使用独立测试库且只终止自建API）：
+
+```bat
+.venv\Scripts\python.exe -m pytest -c backend\pyproject.toml backend\tests -q --junitxml=experiments\m3-t02a-tests.xml
+.venv\Scripts\python.exe -m pytest -c backend\pyproject.toml backend\tests\integration\test_agent_tasks.py -q --junitxml=experiments\m3-t02a-task-tests.xml
+.venv\Scripts\python.exe backend\scripts\verify_m3_task_flow.py
+```
+
+详见[T02a验证与限制](../docs/acceptance/M3-T02a-verification.md)。T01契约与回执保留为当时的设计快照，不覆盖其未实现标记。

@@ -12,14 +12,20 @@ from vibradiag.api.upload_limits import MeasurementBodyLimit
 from vibradiag.domain.measurement_errors import MeasurementError
 from contextlib import asynccontextmanager
 from vibradiag.services.analysis_runtime import runtime
+from vibradiag.services.agent_runtime import agent_runtime
 
 @asynccontextmanager
 async def lifespan(app):
     runtime.start()
+    hosted=False
     try:
+        hosted=agent_runtime.start()
         yield
     finally:
-        runtime.stop()
+        try:
+            if hosted:agent_runtime.stop()
+        finally:
+            runtime.stop()
 
 app=FastAPI(title='VibraDiag API',version='0.1.0',lifespan=lifespan)
 app.add_exception_handler(RequestValidationError,request_validation_error)

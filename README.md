@@ -8,7 +8,7 @@
 
 “模型实验（开发）”保留DeepSeek工具调用及本地开发检索，仍读取原型数据，尚未接入正式取证闭环。M2已提供包络、理论频率、探索匹配和条件比较；正式故障定类、知识审核、完整Agent持久恢复和工单仍待实现。见[操作指南](docs/05-m1-local-guide.md)与[M1验收](docs/acceptance/M1-acceptance.md)。
 
-**M2软件交付完工，本机探索工具范围有条件通过**，见[M2总验收](docs/acceptance/M2-acceptance.md)。四类工具API、来源追溯、双输入比较和最小工作台齐备；匹配算法为frequency-matching-v2，已修复不显著多峰误标歧义。18项验收有完整追溯，公开数据/正式诊断资格保留明确限制，不能据此称工厂试用已通过。[M3-T01设计与契约](docs/acceptance/M3-T01-verification.md)已完成，下一步T02a持久任务与真实执行，按[工具契约](docs/contracts/m2-tool-contract.json)接入现有授权服务。当前27张业务表。
+**M2软件交付完工，本机探索工具范围有条件通过**，见[M2总验收](docs/acceptance/M2-acceptance.md)。四类工具API、来源追溯、双输入比较和最小工作台齐备；匹配算法为frequency-matching-v2，已修复不显著多峰误标歧义。18项验收有完整追溯，公开数据/正式诊断资格保留明确限制，不能据此称工厂试用已通过。[M3-T01设计与契约](docs/acceptance/M3-T01-verification.md)与[T02a持久任务/规则执行基础](docs/acceptance/M3-T02a-verification.md)已实现：任务API、挂起恢复、真实授权工具、调用账本及进程重启对账；LangGraph持久图、正式RAG和模型决策仍待接入。当前31张业务表，单API/单托管消费者。
 
 ## 工程结构
 
@@ -46,7 +46,7 @@ VibraDiag/
 └─ .runtime/                   # 忽略入库的原始上传、索引与运行结果
 ```
 
-真实密钥和数据库连接保存在 `backend/.env`；前端不持有密钥。数据库使用SQLAlchemy Core连接/事务及Alembic显式SQL迁移；原型JSON/NPZ尚未迁移。持久任务留后续阶段。
+真实密钥和数据库连接保存在 `backend/.env`；前端不持有密钥。数据库使用SQLAlchemy Core连接/事务及Alembic显式SQL迁移；原型JSON/NPZ尚未迁移。M3已提供持久规则任务，完整Agent图与隔离执行留后续阶段。
 
 ## 本机启动
 
