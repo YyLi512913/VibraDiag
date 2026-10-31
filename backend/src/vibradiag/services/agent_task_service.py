@@ -75,6 +75,7 @@ def _change(connection,row,status,*,question=None,draft=None,error=None,budget=N
     if not result:raise Fenced()
     if terminal:
         connection.execute(text("UPDATE agent_calls SET state='interrupted',finished_at=now(),error_code='TASK_CLOSED' WHERE task_id=:id AND state='running'"),dict(id=row['id']))
+        connection.execute(text("UPDATE agent_model_rounds SET state='interrupted',finished_at=now(),error_code='TASK_CLOSED' WHERE task_id=:id AND state='running'"),dict(id=row['id']))
     _event(connection,result,status,{'error_code':error} if error else {})
     return result
 
@@ -174,6 +175,8 @@ def read_task(identifier,principal):
         row,current,active=_authorize(connection,principal,identifier)
         calls=connection.execute(text('SELECT * FROM agent_calls WHERE task_id=:id ORDER BY call_no'),dict(id=identifier)).mappings().all()
         events=connection.execute(text('SELECT task_version,kind,details,created_at FROM agent_events WHERE task_id=:id ORDER BY created_at,id LIMIT 200'),dict(id=identifier)).mappings().all()
+        model_rounds=connection.execute(text('''SELECT r.id,r.phase,r.state,r.error_code,r.trace,b.configuration FROM agent_model_rounds r
+            JOIN agent_model_bindings b ON b.task_id=r.task_id WHERE r.task_id=:id ORDER BY r.round_no'''),dict(id=identifier)).mappings().all()
         knowledge_calls=[call['id'] for call in calls if call['resource_kind']=='knowledge_retrieval']
         confirmed_embedding=bool(knowledge_calls and connection.execute(text('SELECT 1 FROM knowledge_retrieval_runs WHERE agent_call_id=ANY(CAST(:calls AS uuid[])) AND model_called LIMIT 1'),dict(calls=knowledge_calls)).first())
     with transaction() as connection:
@@ -202,7 +205,9 @@ def read_task(identifier,principal):
         'calls':[{'id':str(c['id']),'call_no':c['call_no'],'action':c['action_name'],'state':c['state'],
             'resource_kind':c['resource_kind'],'resource_id':str(c['resource_id']) if c['resource_id'] else None,
             'logical_call_key':c['logical_key'],'error_code':c['error_code']} for c in calls],
-        'events':[dict(e) for e in events],'executor':row['input_snapshot']['executor'],'model_called':False,'formal_graph_executed':bool(checkpoint_count),
+        'model_rounds':[dict(id=str(m['id']),phase=m['phase'],state=m['state'],error_code=m['error_code'],provider=m['configuration']['provider'],requested_model=m['configuration']['model'],trace=m['trace']) for m in model_rounds],
+        'model_call_activity':'confirmed_called' if any(m['trace'] for m in model_rounds) else 'unknown' if model_rounds else 'not_called',
+        'events':[dict(e) for e in events],'executor':row['input_snapshot']['executor'],'model_called':any(bool(m['trace']) for m in model_rounds),'formal_graph_executed':bool(checkpoint_count),
         'graph':{'version':binding['graph_version'],'checkpoint_count':checkpoint_count} if binding else None}
 
 
@@ -516,7 +521,9 @@ def recover_interrupted():
             elapsed=max(0,int((datetime.now(timezone.utc)-row['last_tick_at']).total_seconds()*1000))
             budget=charge_active_time(row['budget'],elapsed)
             connection.execute(text("UPDATE agent_calls SET state='interrupted',finished_at=now(),error_code='PROCESS_INTERRUPTED' WHERE task_id=:id AND state='running'"),dict(id=row['id']))
+            # Close model reservations only after clearing the old task lease below.
             question={'id':str(uuid4()),'code':'execution_retry_required','choices':[],'selection_field':None}
             _change(connection,row,'budget_exhausted' if budget.active_ms>=120000 else 'interrupted',
                 question=None if budget.active_ms>=120000 else question,budget=budget.model_dump(mode='json'),error='PROCESS_INTERRUPTED',charge=False)
+            connection.execute(text("UPDATE agent_model_rounds SET state='interrupted',finished_at=now(),error_code='PROCESS_INTERRUPTED' WHERE task_id=:id AND state='running'"),dict(id=row['id']))
     return len(rows)

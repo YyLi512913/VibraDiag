@@ -1,0 +1,4 @@
+{
+  "deepseek": {"provider": "deepseek", "model": "deepseek-flash", "digest": null, "max_output_tokens": 512},
+  "ollama": {"provider": "ollama", "model": "qwen3.5:2b", "digest": "53a3cb30c58c8971d650fd15e50fabe4e72bd40dcbf25fa08371460e49ee0b05", "max_output_tokens": 512}
+}

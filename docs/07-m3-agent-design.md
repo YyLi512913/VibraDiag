@@ -1,6 +1,6 @@
 # 07 M3 Agent取证闭环详细设计
 
-> 版本：v0.7，T03c方法任务的受控检索与知识引用；日期：2026-10-31。
+> 版本：v0.8，T04a受控模型网关与模型轮预检；日期：2026-10-31。
 > 上游：[需求](01-requirements.md)、[阶段计划](03-milestones.md)、[M2总验收](acceptance/M2-acceptance.md)、[M2工具契约](contracts/m2-tool-contract.json)。
 > T01已实现DTO、纯策略与机器契约；T02a已实现数据库任务、幂等命令、调用账本及托管规则执行器。T02b2已将新任务接入分步LangGraph持久规则图，T03c已接方法任务的真实知识引用，DeepSeek决策与生成仍未接入。M2-R01—R04继续阻断正式诊断发布。
 
@@ -231,3 +231,11 @@ search_published_knowledge进入agent_calls工具账本，固定排除developer_
 提交草稿前重查来源和引用角色，并锁定对应文档/版本/索引头及授权；读取终态时仍重查，撤回、索引替换和撤权后隐藏过期草稿或拒绝范围访问。仅允许真实knowledge_chunk支持method_explanation，不接受跨任务回执、未解析UUID或资料冒充数值事实；原文独立授权留档。
 
 本轮输出待复核资料引用，正文标untrusted_content，不执行其中指令、不复制为维修建议。相关性未准入时保持completed_degraded与knowledge_relevance_not_qualified，无有效来源则拒答；model_called仍表示LLM决策且为false，embedding_called单独记录。见[T03c验收](acceptance/M3-T03c-verification.md)。下一步T04受限DeepSeek决策与草稿生成，再由T05评测。
+
+## 21. T04a 模型网关与轮次预检
+
+[09模型设计](09-model-runtime-design.md)已独立统一DeepSeek官方API与固定digest的本地Qwen适配。0018新增任务配置绑定及模型轮两表，当前44张业务表、4张检查点表；每轮发起前占用模型预算，记录配置/提示策略/上下文/schema指纹、实际身份、用量、状态及校验输出。取消、来源撤回和旧租约拒绝迟到结果，失败/未知不能免费重放，完成轮可在当前上下文一致时复用。
+
+模型只能建议已登记候选，原文摘录须真实授权source_id且逐字匹配给定片段；不接受任意工具参数或开放式诊断结论。云端/本地显式选择、每任务配置固定，不在外部故障时切本地；外部还需私有key及外发开关。本轮只做方法任务内部网关预检，现有规则图尚不消费模型输出，也不发布生成草稿。
+
+见[T04a记录](acceptance/M3-T04a-verification.md)。下一步T04b建立独立模型图版本，消费受限决策、执行真实授权工具并校验未发布草稿；效果和本地准入仍留T05，不能把两个英文兼容阶段当模型Agent成功率。

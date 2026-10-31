@@ -282,3 +282,20 @@ GET /knowledge-indexes/revisions/{id}和/runs/{id}按原文范围授权；GET /r
 实际进程验证须等所有pytest结束；使用专用测试库和真实本地模型。探针只在自建进程暂停/终止及恢复指定任务，普通API/消费者不加载故障模式。详见[T03c验收](../docs/acceptance/M3-T03c-verification.md)，下一步T04模型决策和生成，知识界面仍留M4。
 
 Embedding活动按已提交回执确认：embedding_activity区分confirmed_called、not_called和unknown。取消或失败时没有成功回执不能据此断言模型从未执行；model_called仍单独表示LLM决策。
+
+## M3-T04a 受控模型网关
+
+迁移0018新增模型配置绑定和轮次，当前44张业务表、4检查点表。内部agent_model_service仅为方法任务准备已授权最小上下文，模型轮在网络请求前占用8轮/120秒预算；云端/本地统一校验候选ID和原文摘录。本轮无公开任意prompt/试验接口，规则图不自动调用模型或消费建议。
+
+VIBRADIAG_FORMAL_LLM_PROVIDER显式为deepseek或ollama；默认deepseek，云端还须VIBRADIAG_ALLOW_EXTERNAL_LLM=true及私有key。配置见config/formal-models.json，首次模型轮绑定配置/提示策略hash，既有绑定不因默认配置变更而切换；显式要求换供应商冲突，失败不切本地。T04b再把模型决策接入新图，T05再判定本地工业能力。
+
+模型调用正文仅问题、有限候选ID或最多5个source_id及每块前400字符；不外发CSV、路径、会话、角色或数据库凭据。摘录必须逐字来自给定片段，不代表相关性/专家认可。完成轮可重放，失败/未知不自动修复或重试；取消和恢复会封闭未完成模型轮。任务详情只展示model_rounds的状态/脱敏身份/用量，不回传原始prompt或失败正文。
+
+```bat
+.venv\Scripts\python.exe backend\scripts\migrate.py
+.venv\Scripts\python.exe -m pytest -c backend\pyproject.toml backend\tests -q --junitxml=experiments\m3-t04a-tests.xml
+.venv\Scripts\python.exe -m pytest -c backend\pyproject.toml backend\tests\unit\test_formal_model_gateway.py backend\tests\integration\test_agent_models.py -q --junitxml=experiments\m3-t04a-model-tests.xml
+.venv\Scripts\python.exe backend\scripts\verify_formal_models.py
+```
+
+真实脚本须等全部pytest结束，使用专用测试库与同一单进程租约，会实际调用DeepSeek API和本机Qwen并记录各自成功/失败；不是生产图自主执行或模型效果排名。详见[09设计](../docs/09-model-runtime-design.md)及[T04a验收](../docs/acceptance/M3-T04a-verification.md)。
