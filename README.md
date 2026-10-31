@@ -116,3 +116,5 @@ node scripts\check-docs.cjs
 [T03c](docs/acceptance/M3-T03c-verification.md)已将授权检索接入方法任务：显式范围澄清、真实块引用、任务/调用回执绑定、进程恢复重附着及撤回后的草稿失效。输出仍是待复核资料，未调用DeepSeek决策或生成答案；下一步T04。
 
 [T04a](docs/acceptance/M3-T04a-verification.md)已建立DeepSeek/本地Qwen的统一受控网关、每任务模型绑定和预算账本；校验候选ID与逐字摘录，无静默回退。此阶段尚未让正式图消费模型建议，下一步T04b。配置与边界见[09设计](docs/09-model-runtime-design.md)。
+
+[T04b1](docs/acceptance/M3-T04b1-verification.md)已提供可选方法模型图：VIBRADIAG_METHOD_EXECUTOR=model对新方法任务启用模型候选选择、授权检索和逐字摘录草稿；分发默认rules，旧任务/数值图保留。配置在受理时固定，模型/工具完成回执可在恢复时复用；相关性未准入，不输出诊断结论。下一步T04b2数值候选编排。

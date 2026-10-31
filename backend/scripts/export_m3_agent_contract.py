@@ -8,7 +8,7 @@ from vibradiag.agents.formal_contracts import (CreateAgentTask,ResumeAgentTask,A
 
 
 def contract():
-    return {'contract_version':'m3-t03c-runtime-contract-v1','implementation_stage':'Persistent numeric rules and method-only task-bound knowledge retrieval',
+    return {'contract_version':'m3-t04b1-runtime-contract-v1','implementation_stage':'Persistent numerical rules and opt-in model-driven method graph',
         'schemas':{'create_task':CreateAgentTask.model_json_schema(),'resume_task':ResumeAgentTask.model_json_schema(),
             'model_decision':TypeAdapter(AgentDecision).json_schema(),'unpublished_draft':ExploratoryDraft.model_json_schema(),
             'internal_budget':ExecutionBudget.model_json_schema(),'task_status':TypeAdapter(TaskStatus).json_schema(),
@@ -22,7 +22,9 @@ def contract():
         'knowledge':{'graph_version':'rules-knowledge-v1','executor':'rules_knowledge_v1','action':'search_published_knowledge',
             'developer_content_allowed':False,'citation_kind':'knowledge_chunk','permitted_claim':'method_explanation',
             'semantic_relevance_qualified':False,'generated_answer':False,'durable_retrieval_binding':True},
-        'not_implemented_here':['LLM action selection and answer generation','retrieval relevance qualification',
+        'model_method':{'graph_version':'model-method-v1','executor':'model_method_v1','enabled_by':'VIBRADIAG_METHOD_EXECUTOR=model',
+            'default_mode':'rules','decision_drives_authorized_search':True,'extractive_draft_only':True,'configuration_pinned_at_acceptance':True},
+        'not_implemented_here':['Numerical-task model candidate orchestration','open-ended diagnostic generation','retrieval relevance qualification',
             'knowledge frontend','formal model/draft semantic evaluation'],
         'formal_diagnostic_release':False,'factory_trial_approved':False}
 
@@ -31,7 +33,7 @@ def main():
     target=PROJECT_ROOT/'docs/contracts/m3-agent-contract.json'
     target.write_text(json.dumps(contract(),ensure_ascii=False,indent=2)+'\n',encoding='utf8')
     print(json.dumps({'contract':target.relative_to(PROJECT_ROOT).as_posix(),'sha256':sha256(target.read_bytes()).hexdigest(),
-        'formal_rule_runtime_implemented':True,'model_decision_integrated':False}))
+        'formal_rule_runtime_implemented':True,'model_method_decision_integrated':True,'numerical_model_decision_integrated':False}))
 
 
 if __name__=='__main__':main()

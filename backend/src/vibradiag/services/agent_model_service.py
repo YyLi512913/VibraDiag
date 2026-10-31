@@ -17,7 +17,7 @@ from vibradiag.services import agent_task_service as tasks,agent_knowledge_servi
 
 def _prepared(c,identifier,token,principal,phase,*,lock=False):
     row=tasks._running(c,identifier,token);_,current,_=tasks._authorize(c,principal,identifier,write=True,current_only=True)
-    if row['goal']!='explain_method' or row['input_snapshot']['executor']!='rules_knowledge_v1':
+    if row['goal']!='explain_method' or row['input_snapshot']['executor'] not in {'rules_knowledge_v1','model_method_v1'}:
         raise MeasurementError('MODEL_METHOD_SCOPE_REQUIRED','This model stage accepts explicit method tasks only',status=409)
     selected=knowledge.scope(row)
     if selected is None:raise MeasurementError('MODEL_SCOPE_REQUIRED','Resolve method scope before a model call',status=409)
@@ -60,16 +60,17 @@ def _validate(phase,raw,prepared):
 def _fence(c,token):c.execute(text("SELECT set_config('vibradiag.model_lease',:token,true)"),dict(token=str(token)))
 
 
-def run_round(identifier,token,principal,phase,*,provider=None):
+def run_round(identifier,token,principal,phase,*,provider=None,read_only=False):
     tasks.runtime.ensure()
     identifier=UUID(str(identifier));model_id=None
     with transaction() as c:
         row,current,context,schema,prepared=_prepared(c,identifier,token,principal,phase)
         if tasks._active_budget(row).active_ms>=120000:raise PolicyStop('ACTIVE_TIME_EXHAUSTED')
         binding=c.execute(text('SELECT * FROM agent_model_bindings WHERE task_id=:id'),dict(id=identifier)).mappings().first()
-        try:cfg=ModelConfig(**binding['configuration']) if binding else configuration(provider)
+        try:cfg=ModelConfig(**binding['configuration']) if binding else ModelConfig(**row['input_snapshot']['model_configuration']) if row['input_snapshot'].get('model_configuration') else configuration(provider)
         except (ValueError,TypeError):tasks.conflict('MODEL_POLICY_OR_CONFIGURATION_CHANGED')
         if binding and cfg.fingerprint!=binding['configuration_sha256']:tasks.conflict('MODEL_CONFIGURATION_INTEGRITY')
+        if row['input_snapshot'].get('model_configuration') and asdict(cfg)!=row['input_snapshot']['model_configuration']:tasks.conflict('MODEL_CONFIGURATION_PINNED')
         if provider is not None and cfg!=configuration(provider):tasks.conflict('MODEL_CONFIGURATION_PINNED')
         key=logical_call_key(identifier,row['input_fingerprint'],dict(phase=phase,context_sha256=digest(context),configuration_sha256=cfg.fingerprint,schema_sha256=digest(schema),prompt_version=PROMPT_VERSION))
         existing=c.execute(text('SELECT * FROM agent_model_rounds WHERE task_id=:id AND logical_key=:key'),dict(id=identifier,key=key)).mappings().first()
@@ -78,6 +79,7 @@ def run_round(identifier,token,principal,phase,*,provider=None):
             if digest(existing['validated_output'])!=existing['output_sha256']:tasks.conflict('MODEL_ROUND_INTEGRITY')
             output=_validate(phase,json.dumps(existing['validated_output']),prepared)
             return dict(id=str(existing['id']),state='completed',output=output,trace=existing['trace'],reused=True,executed_decision=False,published_draft=False)
+        if read_only:tasks.conflict('MODEL_RESULT_REQUIRED')
         budget,_=reserve_call(tasks._active_budget(row),'model',key)
         row=tasks._change(c,row,'running',budget=budget.model_dump(mode='json'),charge=False)
         _fence(c,token)
@@ -118,3 +120,19 @@ def run_round(identifier,token,principal,phase,*,provider=None):
             with transaction() as c:
                 row=tasks._running(c,identifier,token);tasks._change(c,row,'timed_out',error='ACTIVE_TIME_EXHAUSTED')
         raise
+
+
+def completed_output(c,identifier,token,principal,phase):
+    """Read-only, currently authorized result resolution inside the final task transaction."""
+    row,current,context,schema,prepared=_prepared(c,identifier,token,principal,phase,lock=True)
+    binding=c.execute(text('SELECT * FROM agent_model_bindings WHERE task_id=:id'),dict(id=identifier)).mappings().first()
+    if not binding:tasks.conflict('MODEL_RESULT_REQUIRED')
+    try:cfg=ModelConfig(**binding['configuration'])
+    except (ValueError,TypeError):tasks.conflict('MODEL_POLICY_OR_CONFIGURATION_CHANGED')
+    if cfg.fingerprint!=binding['configuration_sha256']:tasks.conflict('MODEL_CONFIGURATION_INTEGRITY')
+    if row['input_snapshot'].get('model_configuration') and asdict(cfg)!=row['input_snapshot']['model_configuration']:tasks.conflict('MODEL_CONFIGURATION_PINNED')
+    key=logical_call_key(identifier,row['input_fingerprint'],dict(phase=phase,context_sha256=digest(context),configuration_sha256=cfg.fingerprint,schema_sha256=digest(schema),prompt_version=PROMPT_VERSION))
+    result=c.execute(text('SELECT * FROM agent_model_rounds WHERE task_id=:id AND logical_key=:key'),dict(id=identifier,key=key)).mappings().first()
+    if not result or result['state']!='completed':tasks.conflict('MODEL_RESULT_REQUIRED')
+    if digest(result['validated_output'])!=result['output_sha256']:tasks.conflict('MODEL_ROUND_INTEGRITY')
+    return _validate(phase,json.dumps(result['validated_output']),prepared)

@@ -299,3 +299,19 @@ VIBRADIAG_FORMAL_LLM_PROVIDER显式为deepseek或ollama；默认deepseek，云�
 ```
 
 真实脚本须等全部pytest结束，使用专用测试库与同一单进程租约，会实际调用DeepSeek API和本机Qwen并记录各自成功/失败；不是生产图自主执行或模型效果排名。详见[09设计](../docs/09-model-runtime-design.md)及[T04a验收](../docs/acceptance/M3-T04a-verification.md)。
+
+## M3-T04b1 可选方法模型图
+
+迁移0019后重启API。VIBRADIAG_METHOD_EXECUTOR默认为rules；显式model后，新explain_method任务使用model_method_v1/model-method-v1，并在创建时固定VIBRADIAG_FORMAL_LLM_PROVIDER对应的配置及策略hash。既有方法/数值任务不升级，用户不能通过请求覆盖执行器。云端外发仍须原有开关和私有key。
+
+模型选择服务器候选后才检索，选择结束则拒答；有有效来源才摘录，结果须逐字匹配给定片段，提交前再验证当前来源/角色。摘录失败保留明确标注的资料上下文，不伪装模型回答；模型失败/未知不自动重试、不切供应商。完成模型轮和工具结果在重启后复用，取消及撤回阻止迟到或过期草稿。
+
+```bat
+.venv\Scripts\python.exe backend\scripts\migrate.py
+.venv\Scripts\python.exe backend\scripts\export_m3_agent_contract.py
+.venv\Scripts\python.exe -m pytest -c backend\pyproject.toml backend\tests -q --junitxml=experiments\m3-t04b1-tests.xml
+.venv\Scripts\python.exe -m pytest -c backend\pyproject.toml backend\tests\integration\test_model_method_graph.py -q --junitxml=experiments\m3-t04b1-model-graph-tests.xml
+.venv\Scripts\python.exe backend\scripts\verify_model_method_graph.py
+```
+
+真实脚本要等全部pytest结束，使用专用测试库、真实DeepSeek与本地Qwen；API与探针交替持有同一租约，不是允许多执行器。数值任务仍保留规则图，开放式回答/数值模型编排/效果准入与界面留后续。详见[T04b1验收](../docs/acceptance/M3-T04b1-verification.md)。

@@ -9,13 +9,13 @@
 | 00 | [项目定义](00-project-charter.md) | v1.1 范围基线草案，后续随评审记录修订 |
 | 01 | [需求规格](01-requirements.md) | v0.9 完整草案；已覆盖功能、非功能、评测与试用验收，待评审和后续实测 |
 | 02 | [总体设计](02-system-design.md) | v0.3 草案；含工程包结构及前后端分离的当前实现边界，完整试用能力待实施 |
-| 03 | [版本计划与验收](03-milestones.md) | M1通过、M2探索范围有条件通过，M3至T04a已实施，M4—M6待实施 |
+| 03 | [版本计划与验收](03-milestones.md) | M1通过、M2探索范围有条件通过，M3至T04b1已实施，M4—M6待实施 |
 | 04 | [第一轮详细设计](04-first-iteration.md) | v0.1 M1设计及实施补充；T01—T05和本机阶段验收已完成 |
 | 05 | [M1本机操作指南](05-m1-local-guide.md) | 登录、导入、确认、分析/历史、迁移与验证步骤 |
 | 06 | [M2轴承工具详细设计](06-m2-tool-design.md) | v1.2；M2本机探索工具交付完工，有条件通过；正式诊断资格保留阻断 |
-| 07 | [M3 Agent详细设计](07-m3-agent-design.md) | v0.8；T03c方法引用、T04a模型网关/账本已实现；图消费模型决策待T04b |
+| 07 | [M3 Agent详细设计](07-m3-agent-design.md) | v0.9；T04b1已接方法模型图，数值模型编排待T04b2 |
 | 08 | [知识发布与检索设计](08-knowledge-design.md) | v0.4；T03b2索引检索、T03c方法任务回执绑定与引用已实现；相关性待评测 |
-| 09 | [正式模型调用与受限决策设计](09-model-runtime-design.md) | v0.1；T04a网关/轮次预检，T04b再接图决策与执行 |
+| 09 | [正式模型调用与受限决策设计](09-model-runtime-design.md) | v0.2；T04a网关及T04b1方法闭环已实现，数值编排待T04b2 |
 
 编号按阅读顺序排列。M1本机阶段已通过；M2-T02b2工具配置、运行API和受控产物完成，T03a匹配数值核心完成，T03b已接匹配API/事实/探索证据及最小界面，T04a比较核心完成，T04b双输入服务/页面已完成，T05a公开数据清单/开发基线已完成，T05b1实体分组/验证准入已完成，T05b2条件性研究适配/特征已完成，M2本机探索范围已结项，M3-T01契约及T02a持久任务/真实规则执行已实现，T02b1已验证官方检查点及子进程终止，T02b2已接业务图/权限围栏，T02b3已接受控数值子进程，T03a文本发布、T03b1真实Embedding及T03b2授权索引检索已实现，T03c已接方法任务知识引用，下一步T04模型决策与生成。文档状态、软件阶段和工厂试用准入分别记录。
 
@@ -34,7 +34,7 @@
 
 M1已执行基线：135项后端测试及前端类型/构建通过；实际浏览器、迁移、空schema重建和性能基线已验证，见[M1验收](acceptance/M1-acceptance.md)。120000点100次合成分析0失败，P95约0.484s；这不是现场故障效果或M6性能准入。历史记录：[T04](acceptance/M1-T04-verification.md)、[T03](acceptance/M1-T03-verification.md)、[T02](acceptance/M1-T02-verification.md)。
 
-当前进度：**M3-T04a受控模型网关与模型轮预检已实现**，见[T02a记录](acceptance/M3-T02a-verification.md)、[T02b1验证](acceptance/M3-T02b1-verification.md)、[T02b2接入](acceptance/M3-T02b2-verification.md)、[T02b3隔离](acceptance/M3-T02b3-verification.md)、[T03a发布](acceptance/M3-T03a-verification.md)及[08知识设计](08-knowledge-design.md)、[07设计](07-m3-agent-design.md)。新增任务API、命令幂等、调用账本、挂起恢复、取消围栏与托管消费者，调用M1/M2真实授权工具。当前44张业务表、4张检查点表；新任务运行分步持久规则图，旧任务保留原执行器。五类纯数值核心在受控子进程运行，知识文本已具备版本/显式审核/撤回；固定身份的Embedding、pgvector索引与授权检索已实现，方法任务知识引用已接入，DeepSeek决策与生成仍未接入。M2正式诊断条件继续阻断。
+当前进度：**M3-T04b1可选方法模型图已实现**，见[T02a记录](acceptance/M3-T02a-verification.md)、[T02b1验证](acceptance/M3-T02b1-verification.md)、[T02b2接入](acceptance/M3-T02b2-verification.md)、[T02b3隔离](acceptance/M3-T02b3-verification.md)、[T03a发布](acceptance/M3-T03a-verification.md)及[08知识设计](08-knowledge-design.md)、[07设计](07-m3-agent-design.md)。新增任务API、命令幂等、调用账本、挂起恢复、取消围栏与托管消费者，调用M1/M2真实授权工具。当前44张业务表、4张检查点表；新任务运行分步持久规则图，旧任务保留原执行器。五类纯数值核心在受控子进程运行，知识文本已具备版本/显式审核/撤回；固定身份的Embedding、pgvector索引与授权检索已实现，方法任务知识引用已接入，DeepSeek决策与生成仍未接入。M2正式诊断条件继续阻断。
 
 本机原型已整理为 `backend/` 和 `frontend/` 两个独立工程。后端采用src包布局，路由、服务、Agent、分析和基础设施分开；前端使用Vue3/TypeScript/Vite，组件、API客户端和状态分开。模型验证脚本位于backend/scripts，仓库级工具位于scripts；实际运行结果仍保存在experiments，原文件和索引仍保存在忽略入库的.runtime。
 
@@ -67,3 +67,5 @@ M1已执行基线：135项后端测试及前端类型/构建通过；实际浏�
 T03c最新推进：[验收记录](acceptance/M3-T03c-verification.md)。新方法任务已接授权检索、回执重附着与动态引用校验，下一步T04；知识前端仍归M4。
 
 T04a最新推进：[验收记录](acceptance/M3-T04a-verification.md)。统一外部/本地调用、固定每任务配置及受控模型轮已实现，现有规则图不消费其输出；下一步T04b，界面与试用准入仍按M4/M6推进。
+
+T04b1最新推进：[验收记录](acceptance/M3-T04b1-verification.md)。方法任务可显式启用模型选择、授权检索与逐字摘录闭环；旧图保留，下一步T04b2数值候选编排。

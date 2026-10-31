@@ -4,7 +4,7 @@ from hashlib import sha256
 import json
 from uuid import UUID,uuid4
 
-from vibradiag.agents.graph_state import EXECUTOR,GRAPH_VERSION,KNOWLEDGE_EXECUTOR,KNOWLEDGE_GRAPH,GraphWait,defer_wait
+from vibradiag.agents.graph_state import EXECUTOR,GRAPH_VERSION,KNOWLEDGE_EXECUTOR,KNOWLEDGE_GRAPH,MODEL_EXECUTOR,MODEL_GRAPH,GraphWait,defer_wait
 from pydantic import TypeAdapter
 from sqlalchemy import text
 from vibradiag.agents.formal_contracts import CreateAgentTask,ResumeAgentTask,ExecutionBudget,ExploratoryDraft
@@ -111,7 +111,7 @@ def _authorize(connection,principal,identifier,*,write=False,lock=False,current_
         if str(record['id'])!=root['measurement_id'] or record['sha256']!=root['sha256']:conflict('TASK_SOURCE_INTEGRITY')
         active=active and record['current_revision_id']==rev['id']
     if current_only and not active:conflict('STALE_TASK_INPUT')
-    if row['input_snapshot']['executor']==KNOWLEDGE_EXECUTOR:
+    if row['input_snapshot']['executor'] in {KNOWLEDGE_EXECUTOR,MODEL_EXECUTOR}:
         from .agent_knowledge_service import authorize_scope,scope
         authorize_scope(connection,current,scope(row))
     return row,current,bool(active)
@@ -154,6 +154,17 @@ def create_task(payload,key,principal):
             if count>=MAX_PENDING:raise MeasurementError('AGENT_QUEUE_FULL','Too many unfinished tasks',status=429)
             roots=_roots(connection,current,payload);method=payload.goal=='explain_method'
             snapshot={'roots':roots,'executor':KNOWLEDGE_EXECUTOR if method else EXECUTOR}
+            graph_version=KNOWLEDGE_GRAPH if method else GRAPH_VERSION
+            if method:
+                from vibradiag.core.config import setting
+                mode=setting('VIBRADIAG_METHOD_EXECUTOR','rules')
+                if mode not in {'rules','model'}:raise MeasurementError('METHOD_EXECUTOR_INVALID','Explicit rules or model method mode required',status=503)
+                if mode=='model':
+                    from dataclasses import asdict
+                    from vibradiag.infrastructure.llm.formal_gateway import configuration
+                    try:snapshot.update(executor=MODEL_EXECUTOR,model_configuration=asdict(configuration()))
+                    except (ValueError,TypeError,OSError):raise MeasurementError('MODEL_CONFIGURATION_INVALID','Formal model configuration unavailable',status=503) from None
+                    graph_version=MODEL_GRAPH
             identifier=uuid4()
             before=next((root['revision_id'] for root in roots if root['revision_id']!=str(payload.measurement_revision_id)),None)
             if payload.goal=='compare_measurements' and before is None:before=str(payload.measurement_revision_id)
@@ -165,7 +176,7 @@ def create_task(payload,key,principal):
             row=connection.execute(text('SELECT * FROM agent_tasks WHERE id=:id'),dict(id=identifier)).mappings().one()
             connection.execute(text('''INSERT INTO agent_graph_bindings(task_id,organization_id,requested_by,thread_id,graph_version,input_fingerprint)
                 VALUES (:task,:org,:actor,:thread,:version,:fingerprint)'''),dict(task=identifier,org=current.organization_id,
-                actor=current.user_id,thread=str(uuid4()),version=KNOWLEDGE_GRAPH if method else GRAPH_VERSION,fingerprint=row['input_fingerprint']))
+                actor=current.user_id,thread=str(uuid4()),version=graph_version,fingerprint=row['input_fingerprint']))
             _event(connection,row,'accepted');_save_command(connection,current,identifier,'create',digest,request);status=202
     return read_task(identifier,principal),status
 
@@ -426,12 +437,17 @@ def execute_claimed(task):
         with transaction() as connection:
             _running(connection,identifier,token);row,current,_=_authorize(connection,principal,identifier,write=True,current_only=True)
         principal=current;payload=CreateAgentTask.model_validate(row['payload'])
+        if row['input_snapshot']['executor']==MODEL_EXECUTOR:
+            from vibradiag.agents.model_method_graph import execute
+            execute(task,principal);return
         if row['input_snapshot']['executor']==KNOWLEDGE_EXECUTOR:
             from vibradiag.agents.knowledge_graph import execute
             execute(task,principal);return
         if row['input_snapshot']['executor']==EXECUTOR:
             from vibradiag.agents.rules_graph import execute
             execute(task,principal);return
+        if row['input_snapshot']['executor']!='rules_scaffold_v1':
+            raise MeasurementError('TASK_EXECUTOR_UNSUPPORTED','Stored task executor is not supported by this release',status=409)
         if payload.goal=='explain_method':
             _finish(identifier,token,principal,'refused',(),('published_knowledge_service_not_integrated',));return
         confirmation=_confirmation(payload.measurement_revision_id,principal)

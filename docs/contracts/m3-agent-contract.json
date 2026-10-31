@@ -1,6 +1,6 @@
 {
-  "contract_version": "m3-t03c-runtime-contract-v1",
-  "implementation_stage": "Persistent numeric rules and method-only task-bound knowledge retrieval",
+  "contract_version": "m3-t04b1-runtime-contract-v1",
+  "implementation_stage": "Persistent numerical rules and opt-in model-driven method graph",
   "schemas": {
     "create_task": {
       "$defs": {
@@ -550,8 +550,18 @@
     "generated_answer": false,
     "durable_retrieval_binding": true
   },
+  "model_method": {
+    "graph_version": "model-method-v1",
+    "executor": "model_method_v1",
+    "enabled_by": "VIBRADIAG_METHOD_EXECUTOR=model",
+    "default_mode": "rules",
+    "decision_drives_authorized_search": true,
+    "extractive_draft_only": true,
+    "configuration_pinned_at_acceptance": true
+  },
   "not_implemented_here": [
-    "LLM action selection and answer generation",
+    "Numerical-task model candidate orchestration",
+    "open-ended diagnostic generation",
     "retrieval relevance qualification",
     "knowledge frontend",
     "formal model/draft semantic evaluation"
