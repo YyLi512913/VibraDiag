@@ -1,0 +1,138 @@
+{
+  "protocol_version": "m3-t05b-feedback-v1",
+  "purpose": "Feedback-conditioned development controls and independent-holdout admission audit",
+  "repetitions": 1,
+  "independent_annotations": false,
+  "blind_holdout": false,
+  "strategies": [
+    "rules",
+    "single_router",
+    "agent"
+  ],
+  "rules_baseline": "Feedback-aware deterministic frequency-first rule workflow; not the original unconditional production rules graph",
+  "single_router": "One routing call may select the same feedback-aware rule workflow; no deliberately weak single-call baseline",
+  "data_policy": "Paired cases share waveform bytes; all belong to the same analytic AM family, not independent physical entities",
+  "cases": [
+    {
+      "id": "F01",
+      "goal": "bearing_observations",
+      "description": "First run basic analysis and calculate ideal bearing frequencies BEFORE envelope analysis. Read the actual frequency result: if it reports missing uncertainty (such as geometry_uncertainty), stop with the available basic/frequency observations. Only if uncertainty is complete continue with unbound envelope, context-bound envelope and frequency matching. Preserve diagnostic qualification limits.",
+      "confirmed": true,
+      "uncertainty_complete": false,
+      "split": "development",
+      "signal": {
+        "sampling_rate_hz": 12000,
+        "sample_count": 48322,
+        "carrier_hz": 2800,
+        "modulation_hz": 96,
+        "amplitude": 1.3,
+        "modulation_depth": 0.2
+      },
+      "fault": "none",
+      "source_family": "analytic_am_v1",
+      "annotation_origin": "developer_authored"
+    },
+    {
+      "id": "F02",
+      "goal": "bearing_observations",
+      "description": "First run basic analysis and calculate ideal bearing frequencies BEFORE envelope analysis. Read the actual frequency result: if it reports missing uncertainty (such as geometry_uncertainty), stop with the available basic/frequency observations. Only if uncertainty is complete continue with unbound envelope, context-bound envelope and frequency matching. Preserve diagnostic qualification limits.",
+      "confirmed": true,
+      "uncertainty_complete": true,
+      "split": "development",
+      "signal": {
+        "sampling_rate_hz": 12000,
+        "sample_count": 48322,
+        "carrier_hz": 2800,
+        "modulation_hz": 96,
+        "amplitude": 1.3,
+        "modulation_depth": 0.2
+      },
+      "fault": "none",
+      "source_family": "analytic_am_v1",
+      "annotation_origin": "developer_authored"
+    },
+    {
+      "id": "F03",
+      "goal": "bearing_observations",
+      "description": "First run basic analysis and calculate ideal bearing frequencies BEFORE envelope analysis. Read the actual frequency result: if it reports missing uncertainty (such as geometry_uncertainty), stop with the available basic/frequency observations. Only if uncertainty is complete continue with unbound envelope, context-bound envelope and frequency matching. Preserve diagnostic qualification limits.",
+      "confirmed": true,
+      "uncertainty_complete": false,
+      "split": "prospective_synthetic",
+      "signal": {
+        "sampling_rate_hz": 12000,
+        "sample_count": 49538,
+        "carrier_hz": 3200,
+        "modulation_hz": 144,
+        "amplitude": 0.9,
+        "modulation_depth": 0.35
+      },
+      "fault": "none",
+      "source_family": "analytic_am_v1",
+      "annotation_origin": "developer_authored"
+    },
+    {
+      "id": "F04",
+      "goal": "bearing_observations",
+      "description": "First run basic analysis and calculate ideal bearing frequencies BEFORE envelope analysis. Read the actual frequency result: if it reports missing uncertainty (such as geometry_uncertainty), stop with the available basic/frequency observations. Only if uncertainty is complete continue with unbound envelope, context-bound envelope and frequency matching. Preserve diagnostic qualification limits.",
+      "confirmed": true,
+      "uncertainty_complete": true,
+      "split": "prospective_synthetic",
+      "signal": {
+        "sampling_rate_hz": 12000,
+        "sample_count": 49538,
+        "carrier_hz": 3200,
+        "modulation_hz": 144,
+        "amplitude": 0.9,
+        "modulation_depth": 0.35
+      },
+      "fault": "none",
+      "source_family": "analytic_am_v1",
+      "annotation_origin": "developer_authored"
+    },
+    {
+      "id": "F05",
+      "goal": "bearing_observations",
+      "description": "First run basic analysis and calculate ideal bearing frequencies BEFORE envelope analysis. Read the actual frequency result: if it reports missing uncertainty (such as geometry_uncertainty), stop with the available basic/frequency observations. Only if uncertainty is complete continue with unbound envelope, context-bound envelope and frequency matching. Preserve diagnostic qualification limits.",
+      "confirmed": true,
+      "uncertainty_complete": true,
+      "split": "development",
+      "signal": {
+        "sampling_rate_hz": 12000,
+        "sample_count": 48322,
+        "carrier_hz": 2800,
+        "modulation_hz": 96,
+        "amplitude": 1.3,
+        "modulation_depth": 0.2
+      },
+      "fault": "cancel_after_frequency",
+      "source_family": "analytic_am_v1",
+      "annotation_origin": "developer_authored"
+    },
+    {
+      "id": "F06",
+      "goal": "bearing_observations",
+      "description": "First run basic analysis and calculate ideal bearing frequencies BEFORE envelope analysis. Read the actual frequency result: if it reports missing uncertainty (such as geometry_uncertainty), stop with the available basic/frequency observations. Only if uncertainty is complete continue with unbound envelope, context-bound envelope and frequency matching. Preserve diagnostic qualification limits.",
+      "confirmed": true,
+      "uncertainty_complete": true,
+      "split": "prospective_synthetic",
+      "signal": {
+        "sampling_rate_hz": 12000,
+        "sample_count": 49538,
+        "carrier_hz": 3200,
+        "modulation_hz": 144,
+        "amplitude": 0.9,
+        "modulation_depth": 0.35
+      },
+      "fault": "revoke_confirmation_after_frequency",
+      "source_family": "analytic_am_v1",
+      "annotation_origin": "developer_authored"
+    }
+  ],
+  "scope_exclusions": [
+    "method/RAG relevance",
+    "comparison-declaration benchmark",
+    "local model qualification",
+    "independent engineering labels",
+    "field effectiveness"
+  ]
+}

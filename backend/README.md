@@ -325,3 +325,7 @@ VIBRADIAG_NUMERIC_EXECUTOR=rules/model独立控制新数值任务，分发默认
 ## M3-T05a 正式开发对照
 
 benchmark_agent.py仍为M0历史实验。正式对照使用backend/scripts/benchmark_formal_agent.py --allow-paid-model-calls，在专用测试数据库运行规则、一次工作流路由及正式Agent。先完成pytest；命令固定DeepSeek、单次轮换三组，运行前冻结配置/源码，已有公开回执拒绝覆盖。结果记录客观开发预期、来源、开销及token，缺货币价格/账单时不估算金额。单次路由是离线评测适配器，其模型调用单独回执并计入预算，不冒充生产图账本。详见[T05a验收](../docs/acceptance/M3-T05a-verification.md)。
+
+## M3-T05b 反馈型对照及准入审计
+
+backend/scripts/benchmark_agent_feedback.py --allow-paid-model-calls使用新冻结反馈协议，运行条件规则、可选择相同规则的单次路由及原生产Agent。无需生产迁移或更改提示；真实工具输出后决定停止/继续。故障注入只包装自有任务dispatch且退出恢复，托管消费者关闭，不能并发使用。必须先完成pytest。报告区分功能/生命周期与开发分区，独立实体/标注缺失时明确阻断准入。见[T05b验收](../docs/acceptance/M3-T05b-verification.md)。

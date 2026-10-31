@@ -13,19 +13,20 @@ from vibradiag.services import agent_task_service as tasks,agent_knowledge_servi
 from vibradiag.domain.measurement_errors import MeasurementError
 
 
-def execute(task,principal,configuration,receipt_path):
+def execute(task,principal,configuration,receipt_path,*,workflows=None):
     identifier,token=task['id'],task['lease_token'];trace=None;record=None
     def save():
         temp=receipt_path.with_suffix('.tmp');temp.write_text(json.dumps(record,ensure_ascii=False,indent=2)+'\n',encoding='utf8');temp.replace(receipt_path)
     try:
         run=RuleExecution(task,principal);run.prepare()  # Same required input confirmation before paying for routing.
-        row=run.scope();names=['full_rules']+(['basic_only'] if row['goal']=='bearing_observations' else [])
+        row=run.scope();names=list(workflows) if workflows is not None else ['full_rules']+(['basic_only'] if row['goal']=='bearing_observations' else [])
         plans={str(uuid5(identifier,'benchmark-workflow/'+name)):name for name in names}
         context=dict(step=0,goal=row['goal'],description=row['payload']['description'][:1000],completed=[],
             candidates=[dict(candidate_id=k,action='registered_workflow:'+v) for k,v in plans.items()],
             workflow_definitions=dict(full_rules='Run the fixed rules workflow for this explicit goal, using only valid deterministic tools and prerequisite checks.',
                 basic_only='Run basic analysis only and mark the bearing workflow incomplete. No intermediate model feedback.'),
             limitation='Benchmark-only one-call workflow routing; server resolves all tool payloads and checks actual prerequisites.')
+        if workflows is not None:context['workflow_definitions']={name:value['description'] for name,value in workflows.items()}
         schema=TypeAdapter(AgentDecision).json_schema();key=logical_call_key(identifier,row['input_fingerprint'],dict(evaluation_router=digest(context),configuration=digest(asdict(configuration))))
         record=dict(state='reserved_unknown',task_id=str(identifier),configuration=asdict(configuration),context_sha256=digest(context),schema_sha256=digest(schema),trace=None)
         with transaction() as c:
@@ -46,7 +47,8 @@ def execute(task,principal,configuration,receipt_path):
         with transaction() as c:
             row=tasks._running(c,identifier,token);tasks._authorize(c,principal,identifier,write=True,current_only=True)
             tasks._event(c,row,'benchmark.router_completed',dict(selected_workflow=plan,trace=trace))
-        if plan=='full_rules':tasks.execute_claimed(task)
+        if workflows is not None and plan in workflows:workflows[plan]['execute'](task,principal)
+        elif plan=='full_rules':tasks.execute_claimed(task)
         elif plan=='basic_only':
             result=run.dispatch('analyze_basic')
             tasks._finish(identifier,token,principal,'completed_degraded',(tasks._observation(result['analysis_id'],'basic_analysis','numeric_fact','基础指标由确定性工具计算。'),),('benchmark_workflow_incomplete','diagnostic_profile_not_qualified'))

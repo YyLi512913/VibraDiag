@@ -1,0 +1,2823 @@
+{
+  "protocol_version": "m3-t05b-feedback-v1",
+  "protocol_sha256": "92f0e485f185b407af4bc0eb1d36e8396c75d505e1a17c24833582756b0e3934",
+  "configuration": {
+    "provider": "deepseek",
+    "model": "deepseek-flash",
+    "digest": null,
+    "max_output_tokens": 512,
+    "policy_sha256": "2862a3f1c6cec3a47f025ff33bd6e42676ac5cc6ac48e3030296eabffd4d78d4"
+  },
+  "rows": [
+    {
+      "case_id": "F01",
+      "split": "development",
+      "strategy": "rules",
+      "status": "completed_degraded",
+      "error_code": null,
+      "task_id": "4de444bc-513f-4e80-8baa-e1f8e1573956",
+      "calls": [
+        {
+          "id": "f2cc268a-ca98-4ab0-9e6e-5033bef706fc",
+          "call_no": 1,
+          "action": "analyze_basic",
+          "state": "completed",
+          "resource_kind": "analysis",
+          "resource_id": "8d8fd1ac-9de4-4634-ab36-83d432789299",
+          "logical_call_key": "27e43db07ebdd5dc66ca194135d8404c8b885cc921b630f4efcc30f54473aec5",
+          "error_code": null
+        },
+        {
+          "id": "0c15e2d3-1407-423f-89ad-3d59ae979ba8",
+          "call_no": 2,
+          "action": "calculate_bearing_frequencies",
+          "state": "completed",
+          "resource_kind": "tool",
+          "resource_id": "6ffe5eef-aa3c-42dd-882f-3835265cda56",
+          "logical_call_key": "889596bc10f13724084338c2de1fe4ca2d215ec2b8433c121f901cac7d056eac",
+          "error_code": null
+        }
+      ],
+      "graph": {
+        "version": "rules-graph-v1",
+        "checkpoint_count": 0
+      },
+      "execution_seconds": 7.359000000000378,
+      "model_traces": [],
+      "budget": {
+        "active_ms": 7155,
+        "reservations": [
+          {
+            "key": "27e43db07ebdd5dc66ca194135d8404c8b885cc921b630f4efcc30f54473aec5",
+            "kind": "tool",
+            "retries_used": 0
+          },
+          {
+            "key": "889596bc10f13724084338c2de1fe4ca2d215ec2b8433c121f901cac7d056eac",
+            "kind": "tool",
+            "retries_used": 0
+          }
+        ],
+        "policy_version": "agent-budget-v1"
+      },
+      "selected_workflow": null,
+      "signal_sha256": "dfb377dcd33720bbe299e2a9504f63c43c9052e5ef47f38c85751b944c5a9dbc",
+      "metrics": {
+        "expectation_met": true,
+        "tool_coverage_exact": true,
+        "frequency_before_envelope": true,
+        "lifecycle_boundary_valid": null,
+        "fault_injected": false,
+        "tool_calls_at_injection": null,
+        "citation_count": 2,
+        "citation_links_valid": true,
+        "diagnostic_qualification_still_blocked": true,
+        "model_calls_reserved": 0,
+        "model_calls_confirmed": 0,
+        "model_calls_unknown": 0,
+        "semantic_correctness_evaluated": false
+      },
+      "missing_requirements": [
+        "geometry_uncertainty",
+        "diagnostic_profile_not_qualified"
+      ]
+    },
+    {
+      "case_id": "F01",
+      "split": "development",
+      "strategy": "single_router",
+      "status": "completed_degraded",
+      "error_code": null,
+      "task_id": "f535d272-634c-4b69-8488-b32f465d03e0",
+      "calls": [
+        {
+          "id": "a8c8b031-f35d-455f-9ae2-d51bace644a8",
+          "call_no": 1,
+          "action": "analyze_basic",
+          "state": "completed",
+          "resource_kind": "analysis",
+          "resource_id": "46eef2a2-7080-44c3-a0f2-0e85c9ff0b25",
+          "logical_call_key": "fd07252066b94aab0eb9a60db5eabc0ec1818a08ff99cc111b64aba8674ac1d8",
+          "error_code": null
+        },
+        {
+          "id": "559cc1f3-4d84-4c5d-a120-506049f3398a",
+          "call_no": 2,
+          "action": "calculate_bearing_frequencies",
+          "state": "completed",
+          "resource_kind": "tool",
+          "resource_id": "cfb62791-9fe7-4945-9251-0ec5dceb2dce",
+          "logical_call_key": "632c9d9d8e4bd353d66d883ae71b4b687776549ea3003f4caead900219a8a8e3",
+          "error_code": null
+        }
+      ],
+      "graph": {
+        "version": "rules-graph-v1",
+        "checkpoint_count": 0
+      },
+      "execution_seconds": 8.312000000001717,
+      "model_traces": [
+        {
+          "provider": "deepseek",
+          "requested_model": "deepseek-flash",
+          "served_model": "deepseek-flash",
+          "policy_sha256": "2862a3f1c6cec3a47f025ff33bd6e42676ac5cc6ac48e3030296eabffd4d78d4",
+          "local_digest": null,
+          "runtime_version": null,
+          "usage": {
+            "prompt_tokens": 808,
+            "completion_tokens": 92,
+            "total_tokens": 900
+          },
+          "finish_reason": "stop",
+          "wall_seconds": 1.4839999999967404,
+          "structured_output": "json_with_local_validation",
+          "provider_weight_version_attested": false
+        }
+      ],
+      "budget": {
+        "active_ms": 8154,
+        "reservations": [
+          {
+            "key": "9b4cb050e22cde2c6e923118d33f446abbf153e0a49df5ee66e02f5ecd9542de",
+            "kind": "model",
+            "retries_used": 0
+          },
+          {
+            "key": "fd07252066b94aab0eb9a60db5eabc0ec1818a08ff99cc111b64aba8674ac1d8",
+            "kind": "tool",
+            "retries_used": 0
+          },
+          {
+            "key": "632c9d9d8e4bd353d66d883ae71b4b687776549ea3003f4caead900219a8a8e3",
+            "kind": "tool",
+            "retries_used": 0
+          }
+        ],
+        "policy_version": "agent-budget-v1"
+      },
+      "selected_workflow": "feedback_rules",
+      "signal_sha256": "dfb377dcd33720bbe299e2a9504f63c43c9052e5ef47f38c85751b944c5a9dbc",
+      "metrics": {
+        "expectation_met": true,
+        "tool_coverage_exact": true,
+        "frequency_before_envelope": true,
+        "lifecycle_boundary_valid": null,
+        "fault_injected": false,
+        "tool_calls_at_injection": null,
+        "citation_count": 2,
+        "citation_links_valid": true,
+        "diagnostic_qualification_still_blocked": true,
+        "model_calls_reserved": 1,
+        "model_calls_confirmed": 1,
+        "model_calls_unknown": 0,
+        "semantic_correctness_evaluated": false
+      },
+      "missing_requirements": [
+        "geometry_uncertainty",
+        "diagnostic_profile_not_qualified"
+      ]
+    },
+    {
+      "case_id": "F01",
+      "split": "development",
+      "strategy": "agent",
+      "status": "completed_degraded",
+      "error_code": null,
+      "task_id": "5fa298c0-1fe7-454a-b60b-e31577b75678",
+      "calls": [
+        {
+          "id": "fc346ac7-1cec-4799-a3a8-e938affbc359",
+          "call_no": 1,
+          "action": "analyze_basic",
+          "state": "completed",
+          "resource_kind": "analysis",
+          "resource_id": "db36290e-bc4b-4a21-89fb-26f7e0694b9c",
+          "logical_call_key": "96f556c5ec8b6cf402ed73bb5fe0e0a57cb8e4dde9b861121de8d60ff81b0bef",
+          "error_code": null
+        },
+        {
+          "id": "dc84ab54-e7a9-44a7-97d0-763e9c9b2c14",
+          "call_no": 2,
+          "action": "calculate_bearing_frequencies",
+          "state": "completed",
+          "resource_kind": "tool",
+          "resource_id": "ef22b2d6-9287-4e75-b888-ffad4ecb59e2",
+          "logical_call_key": "31df020aae35b046f37b7275b05685f3482c1ec78de6755056f97fa1dbb46cbc",
+          "error_code": null
+        }
+      ],
+      "graph": {
+        "version": "model-numeric-v1",
+        "checkpoint_count": 8
+      },
+      "execution_seconds": 11.96900000000096,
+      "model_traces": [
+        {
+          "usage": {
+            "total_tokens": 778,
+            "prompt_tokens": 692,
+            "completion_tokens": 86
+          },
+          "provider": "deepseek",
+          "local_digest": null,
+          "served_model": "deepseek-flash",
+          "wall_seconds": 1.2809999999990396,
+          "finish_reason": "stop",
+          "policy_sha256": "2862a3f1c6cec3a47f025ff33bd6e42676ac5cc6ac48e3030296eabffd4d78d4",
+          "requested_model": "deepseek-flash",
+          "runtime_version": null,
+          "structured_output": "json_with_local_validation",
+          "provider_weight_version_attested": false
+        },
+        {
+          "usage": {
+            "total_tokens": 851,
+            "prompt_tokens": 777,
+            "completion_tokens": 74
+          },
+          "provider": "deepseek",
+          "local_digest": null,
+          "served_model": "deepseek-flash",
+          "wall_seconds": 1.0469999999986612,
+          "finish_reason": "stop",
+          "policy_sha256": "2862a3f1c6cec3a47f025ff33bd6e42676ac5cc6ac48e3030296eabffd4d78d4",
+          "requested_model": "deepseek-flash",
+          "runtime_version": null,
+          "structured_output": "json_with_local_validation",
+          "provider_weight_version_attested": false
+        },
+        {
+          "usage": {
+            "total_tokens": 846,
+            "prompt_tokens": 789,
+            "completion_tokens": 57
+          },
+          "provider": "deepseek",
+          "local_digest": null,
+          "served_model": "deepseek-flash",
+          "wall_seconds": 1.2809999999990396,
+          "finish_reason": "stop",
+          "policy_sha256": "2862a3f1c6cec3a47f025ff33bd6e42676ac5cc6ac48e3030296eabffd4d78d4",
+          "requested_model": "deepseek-flash",
+          "runtime_version": null,
+          "structured_output": "json_with_local_validation",
+          "provider_weight_version_attested": false
+        }
+      ],
+      "budget": {
+        "active_ms": 12254,
+        "reservations": [
+          {
+            "key": "0877bd0033d34a9c12c8f51b80e1ec0153cde57be4543b42437de67f072101bf",
+            "kind": "model",
+            "retries_used": 0
+          },
+          {
+            "key": "96f556c5ec8b6cf402ed73bb5fe0e0a57cb8e4dde9b861121de8d60ff81b0bef",
+            "kind": "tool",
+            "retries_used": 0
+          },
+          {
+            "key": "d6780209ed43261f180a840039a61ac2a4abbf3c65c2cb9d60e0a8a092f4b69b",
+            "kind": "model",
+            "retries_used": 0
+          },
+          {
+            "key": "31df020aae35b046f37b7275b05685f3482c1ec78de6755056f97fa1dbb46cbc",
+            "kind": "tool",
+            "retries_used": 0
+          },
+          {
+            "key": "6247a370087eb651b349a03c724c6b3470a29e257e8b97a770b166014657a33e",
+            "kind": "model",
+            "retries_used": 0
+          }
+        ],
+        "policy_version": "agent-budget-v1"
+      },
+      "selected_workflow": null,
+      "signal_sha256": "dfb377dcd33720bbe299e2a9504f63c43c9052e5ef47f38c85751b944c5a9dbc",
+      "metrics": {
+        "expectation_met": true,
+        "tool_coverage_exact": true,
+        "frequency_before_envelope": true,
+        "lifecycle_boundary_valid": null,
+        "fault_injected": false,
+        "tool_calls_at_injection": null,
+        "citation_count": 2,
+        "citation_links_valid": true,
+        "diagnostic_qualification_still_blocked": true,
+        "model_calls_reserved": 3,
+        "model_calls_confirmed": 3,
+        "model_calls_unknown": 0,
+        "semantic_correctness_evaluated": false
+      },
+      "missing_requirements": [
+        "geometry_uncertainty",
+        "diagnostic_profile_not_qualified",
+        "matching_not_completed",
+        "model_finished_with_remaining_candidates"
+      ]
+    },
+    {
+      "case_id": "F02",
+      "split": "development",
+      "strategy": "single_router",
+      "status": "completed_degraded",
+      "error_code": null,
+      "task_id": "2c4d7a64-cbfc-4036-9db6-ef7b5fcc02ff",
+      "calls": [
+        {
+          "id": "995f2638-7fdc-46b7-8248-6c92f433c90a",
+          "call_no": 1,
+          "action": "analyze_basic",
+          "state": "completed",
+          "resource_kind": "analysis",
+          "resource_id": "a9d3c9d3-db08-4553-87d1-47d4deee974b",
+          "logical_call_key": "6acb12a68fbd15d19ffe963849d42db4bc0d8f3d930b62fbd27283eefc5d5168",
+          "error_code": null
+        },
+        {
+          "id": "e8ffbdac-1909-49ec-907f-9ec5f21a7346",
+          "call_no": 2,
+          "action": "calculate_bearing_frequencies",
+          "state": "completed",
+          "resource_kind": "tool",
+          "resource_id": "acb25b74-974f-4b0a-936d-63760e87c3fd",
+          "logical_call_key": "8ede07cc062e08d9bf1f5b5e57ac94afb59d6efcc075f9943c6429528311a644",
+          "error_code": null
+        },
+        {
+          "id": "ce211eb9-a4f2-4b31-ad8f-af3263c67e2b",
+          "call_no": 3,
+          "action": "analyze_envelope",
+          "state": "completed",
+          "resource_kind": "tool",
+          "resource_id": "d5f238cb-38d1-43c5-8133-6399a76fe0ee",
+          "logical_call_key": "6c28eae213052296b9cc73d08a8cb0bf1a1e3da5807cb0a8cee3e2fd43cc6077",
+          "error_code": null
+        },
+        {
+          "id": "cb9573a1-cfa9-4f4b-b54e-131b16ab88b5",
+          "call_no": 4,
+          "action": "analyze_envelope",
+          "state": "completed",
+          "resource_kind": "tool",
+          "resource_id": "21e8e74d-7ea3-4630-a567-409464bd29e2",
+          "logical_call_key": "2528e1fe70c12e4fd4e3a6e321aa1f71f74c2655a2763d152ea72d6bf7bf7538",
+          "error_code": null
+        },
+        {
+          "id": "00b40e56-c23a-4f2c-bd3d-1dcb79204b8a",
+          "call_no": 5,
+          "action": "match_frequency_evidence",
+          "state": "completed",
+          "resource_kind": "tool",
+          "resource_id": "89deafde-33c9-4277-887e-49208c46eb3a",
+          "logical_call_key": "9c6d721462cef081069fa02b47f08fa2af6a80bef57922a70929150b945e151c",
+          "error_code": null
+        }
+      ],
+      "graph": {
+        "version": "rules-graph-v1",
+        "checkpoint_count": 0
+      },
+      "execution_seconds": 19.93699999999808,
+      "model_traces": [
+        {
+          "provider": "deepseek",
+          "requested_model": "deepseek-flash",
+          "served_model": "deepseek-flash",
+          "policy_sha256": "2862a3f1c6cec3a47f025ff33bd6e42676ac5cc6ac48e3030296eabffd4d78d4",
+          "local_digest": null,
+          "runtime_version": null,
+          "usage": {
+            "prompt_tokens": 805,
+            "completion_tokens": 84,
+            "total_tokens": 889
+          },
+          "finish_reason": "stop",
+          "wall_seconds": 1.1879999999982829,
+          "structured_output": "json_with_local_validation",
+          "provider_weight_version_attested": false
+        }
+      ],
+      "budget": {
+        "active_ms": 19318,
+        "reservations": [
+          {
+            "key": "a95c9514acaf170dac2bbf20962a39c7ebe26e1e8cfc4b935b77245f54604a8c",
+            "kind": "model",
+            "retries_used": 0
+          },
+          {
+            "key": "6acb12a68fbd15d19ffe963849d42db4bc0d8f3d930b62fbd27283eefc5d5168",
+            "kind": "tool",
+            "retries_used": 0
+          },
+          {
+            "key": "8ede07cc062e08d9bf1f5b5e57ac94afb59d6efcc075f9943c6429528311a644",
+            "kind": "tool",
+            "retries_used": 0
+          },
+          {
+            "key": "6c28eae213052296b9cc73d08a8cb0bf1a1e3da5807cb0a8cee3e2fd43cc6077",
+            "kind": "tool",
+            "retries_used": 0
+          },
+          {
+            "key": "2528e1fe70c12e4fd4e3a6e321aa1f71f74c2655a2763d152ea72d6bf7bf7538",
+            "kind": "tool",
+            "retries_used": 0
+          },
+          {
+            "key": "9c6d721462cef081069fa02b47f08fa2af6a80bef57922a70929150b945e151c",
+            "kind": "tool",
+            "retries_used": 0
+          }
+        ],
+        "policy_version": "agent-budget-v1"
+      },
+      "selected_workflow": "feedback_rules",
+      "signal_sha256": "dfb377dcd33720bbe299e2a9504f63c43c9052e5ef47f38c85751b944c5a9dbc",
+      "metrics": {
+        "expectation_met": true,
+        "tool_coverage_exact": true,
+        "frequency_before_envelope": true,
+        "lifecycle_boundary_valid": null,
+        "fault_injected": false,
+        "tool_calls_at_injection": null,
+        "citation_count": 5,
+        "citation_links_valid": true,
+        "diagnostic_qualification_still_blocked": true,
+        "model_calls_reserved": 1,
+        "model_calls_confirmed": 1,
+        "model_calls_unknown": 0,
+        "semantic_correctness_evaluated": false
+      },
+      "missing_requirements": [
+        "filter_sensitivity_check",
+        "server_registered_evidence",
+        "diagnostic_profile_not_qualified"
+      ]
+    },
+    {
+      "case_id": "F02",
+      "split": "development",
+      "strategy": "agent",
+      "status": "completed_degraded",
+      "error_code": null,
+      "task_id": "0532dfbe-0308-496d-ab38-844132f015d8",
+      "calls": [
+        {
+          "id": "4f292dc0-502d-46c1-bb12-3dda5829f0a7",
+          "call_no": 1,
+          "action": "analyze_basic",
+          "state": "completed",
+          "resource_kind": "analysis",
+          "resource_id": "60db2e42-64cb-41a6-9165-18e22a5d55ae",
+          "logical_call_key": "f326186b366c997b59942f6ea5d3cb2b172814ce8bfa5f532d4af197da9e531f",
+          "error_code": null
+        },
+        {
+          "id": "89e55408-dc9e-4c82-8aa7-cb8d6ed58df1",
+          "call_no": 2,
+          "action": "calculate_bearing_frequencies",
+          "state": "completed",
+          "resource_kind": "tool",
+          "resource_id": "ce5dca46-0585-4c70-8a17-842f375470bd",
+          "logical_call_key": "0f414cefb2265889142aae3ec3826c43e486697c7bcfc538d146879ea500bd46",
+          "error_code": null
+        },
+        {
+          "id": "9f0423c0-b33f-4656-8eca-1ed183cd8716",
+          "call_no": 3,
+          "action": "analyze_envelope",
+          "state": "completed",
+          "resource_kind": "tool",
+          "resource_id": "bc14159f-e7ea-431e-aca3-0aaf368db7d2",
+          "logical_call_key": "d882cadf9484d4bd17a166d08ccf2dfdde0483ad1e8ab100af1df8914b2f50f3",
+          "error_code": null
+        }
+      ],
+      "graph": {
+        "version": "model-numeric-v1",
+        "checkpoint_count": 10
+      },
+      "execution_seconds": 17.39099999999962,
+      "model_traces": [
+        {
+          "usage": {
+            "total_tokens": 758,
+            "prompt_tokens": 692,
+            "completion_tokens": 66
+          },
+          "provider": "deepseek",
+          "local_digest": null,
+          "served_model": "deepseek-flash",
+          "wall_seconds": 1.2659999999996217,
+          "finish_reason": "stop",
+          "policy_sha256": "2862a3f1c6cec3a47f025ff33bd6e42676ac5cc6ac48e3030296eabffd4d78d4",
+          "requested_model": "deepseek-flash",
+          "runtime_version": null,
+          "structured_output": "json_with_local_validation",
+          "provider_weight_version_attested": false
+        },
+        {
+          "usage": {
+            "total_tokens": 862,
+            "prompt_tokens": 784,
+            "completion_tokens": 78
+          },
+          "provider": "deepseek",
+          "local_digest": null,
+          "served_model": "deepseek-flash",
+          "wall_seconds": 1.4690000000009604,
+          "finish_reason": "stop",
+          "policy_sha256": "2862a3f1c6cec3a47f025ff33bd6e42676ac5cc6ac48e3030296eabffd4d78d4",
+          "requested_model": "deepseek-flash",
+          "runtime_version": null,
+          "structured_output": "json_with_local_validation",
+          "provider_weight_version_attested": false
+        },
+        {
+          "usage": {
+            "total_tokens": 855,
+            "prompt_tokens": 786,
+            "completion_tokens": 69
+          },
+          "provider": "deepseek",
+          "local_digest": null,
+          "served_model": "deepseek-flash",
+          "wall_seconds": 0.8440000000009604,
+          "finish_reason": "stop",
+          "policy_sha256": "2862a3f1c6cec3a47f025ff33bd6e42676ac5cc6ac48e3030296eabffd4d78d4",
+          "requested_model": "deepseek-flash",
+          "runtime_version": null,
+          "structured_output": "json_with_local_validation",
+          "provider_weight_version_attested": false
+        },
+        {
+          "usage": {
+            "total_tokens": 911,
+            "prompt_tokens": 840,
+            "completion_tokens": 71
+          },
+          "provider": "deepseek",
+          "local_digest": null,
+          "served_model": "deepseek-flash",
+          "wall_seconds": 1.4369999999980791,
+          "finish_reason": "stop",
+          "policy_sha256": "2862a3f1c6cec3a47f025ff33bd6e42676ac5cc6ac48e3030296eabffd4d78d4",
+          "requested_model": "deepseek-flash",
+          "runtime_version": null,
+          "structured_output": "json_with_local_validation",
+          "provider_weight_version_attested": false
+        }
+      ],
+      "budget": {
+        "active_ms": 17944,
+        "reservations": [
+          {
+            "key": "3fe94b87bac7550abc04f39989754f1c648363f5ce85a4c4a480087f8686d8eb",
+            "kind": "model",
+            "retries_used": 0
+          },
+          {
+            "key": "f326186b366c997b59942f6ea5d3cb2b172814ce8bfa5f532d4af197da9e531f",
+            "kind": "tool",
+            "retries_used": 0
+          },
+          {
+            "key": "011c9d54cfb574e34ad4b0fd132222a15ebfed7eef92edf22a2b6794d62ffc48",
+            "kind": "model",
+            "retries_used": 0
+          },
+          {
+            "key": "0f414cefb2265889142aae3ec3826c43e486697c7bcfc538d146879ea500bd46",
+            "kind": "tool",
+            "retries_used": 0
+          },
+          {
+            "key": "7bf84ca6d5e1ff2f454ce210fe2fb1064bb9da6e3ab647fe3860c7fa44cc6c87",
+            "kind": "model",
+            "retries_used": 0
+          },
+          {
+            "key": "d882cadf9484d4bd17a166d08ccf2dfdde0483ad1e8ab100af1df8914b2f50f3",
+            "kind": "tool",
+            "retries_used": 0
+          },
+          {
+            "key": "c3ce904924ac5aea446d490ebd0229bed664174bf1da237aac4d28204012da3a",
+            "kind": "model",
+            "retries_used": 0
+          }
+        ],
+        "policy_version": "agent-budget-v1"
+      },
+      "selected_workflow": null,
+      "signal_sha256": "dfb377dcd33720bbe299e2a9504f63c43c9052e5ef47f38c85751b944c5a9dbc",
+      "metrics": {
+        "expectation_met": false,
+        "tool_coverage_exact": false,
+        "frequency_before_envelope": true,
+        "lifecycle_boundary_valid": null,
+        "fault_injected": false,
+        "tool_calls_at_injection": null,
+        "citation_count": 3,
+        "citation_links_valid": true,
+        "diagnostic_qualification_still_blocked": true,
+        "model_calls_reserved": 4,
+        "model_calls_confirmed": 4,
+        "model_calls_unknown": 0,
+        "semantic_correctness_evaluated": false
+      },
+      "missing_requirements": [
+        "verified_acquisition_bandwidth",
+        "qualified_numeric_profile",
+        "diagnostic_profile_not_qualified",
+        "matching_not_completed",
+        "model_finished_with_remaining_candidates"
+      ]
+    },
+    {
+      "case_id": "F02",
+      "split": "development",
+      "strategy": "rules",
+      "status": "completed_degraded",
+      "error_code": null,
+      "task_id": "70b008f8-55c9-41f9-bcc6-781a1cb18852",
+      "calls": [
+        {
+          "id": "4b6825c3-a308-41b8-873d-40aa74395ead",
+          "call_no": 1,
+          "action": "analyze_basic",
+          "state": "completed",
+          "resource_kind": "analysis",
+          "resource_id": "aca527c6-de5c-4ce0-a0b1-48585e641f73",
+          "logical_call_key": "bfb15133bbfada8e51d578c60da42c73447437cb5fe5543affe5c46511219961",
+          "error_code": null
+        },
+        {
+          "id": "19289276-70d1-4fd6-a128-91ab0f7de3d7",
+          "call_no": 2,
+          "action": "calculate_bearing_frequencies",
+          "state": "completed",
+          "resource_kind": "tool",
+          "resource_id": "f9d9eb81-f595-4d2a-abba-3eed32e5c4f7",
+          "logical_call_key": "a2eea42c61628f0c91e2c32e8e2ce6a279f06a3e910d509efb0b304a8bedb099",
+          "error_code": null
+        },
+        {
+          "id": "dce0d57e-0b4f-4bce-9399-10d29e1aba03",
+          "call_no": 3,
+          "action": "analyze_envelope",
+          "state": "completed",
+          "resource_kind": "tool",
+          "resource_id": "29758535-af93-4003-aebc-1576ba00e458",
+          "logical_call_key": "657d55788b2f92e701605948473a0802679e1812904091cfca335647fcb6c4bf",
+          "error_code": null
+        },
+        {
+          "id": "08feebb4-7888-4dbd-8763-ffe3e7a0b507",
+          "call_no": 4,
+          "action": "analyze_envelope",
+          "state": "completed",
+          "resource_kind": "tool",
+          "resource_id": "01585cad-b591-4c53-945b-e03f97e6ccd6",
+          "logical_call_key": "58f3583472b49bd1fa55b1317333be4c0e00a7698284f1b6d9f48ae258a50d63",
+          "error_code": null
+        },
+        {
+          "id": "466e5e67-2b9c-41f2-bde8-5c90417b2c50",
+          "call_no": 5,
+          "action": "match_frequency_evidence",
+          "state": "completed",
+          "resource_kind": "tool",
+          "resource_id": "dc4bf158-d2dd-4afd-9058-e1015fe0611c",
+          "logical_call_key": "08362f4ade1a059ea6c35c4f4c6ac6f509b5348684fd8f891bf8d1fdb8500e05",
+          "error_code": null
+        }
+      ],
+      "graph": {
+        "version": "rules-graph-v1",
+        "checkpoint_count": 0
+      },
+      "execution_seconds": 19.59400000000096,
+      "model_traces": [],
+      "budget": {
+        "active_ms": 18909,
+        "reservations": [
+          {
+            "key": "bfb15133bbfada8e51d578c60da42c73447437cb5fe5543affe5c46511219961",
+            "kind": "tool",
+            "retries_used": 0
+          },
+          {
+            "key": "a2eea42c61628f0c91e2c32e8e2ce6a279f06a3e910d509efb0b304a8bedb099",
+            "kind": "tool",
+            "retries_used": 0
+          },
+          {
+            "key": "657d55788b2f92e701605948473a0802679e1812904091cfca335647fcb6c4bf",
+            "kind": "tool",
+            "retries_used": 0
+          },
+          {
+            "key": "58f3583472b49bd1fa55b1317333be4c0e00a7698284f1b6d9f48ae258a50d63",
+            "kind": "tool",
+            "retries_used": 0
+          },
+          {
+            "key": "08362f4ade1a059ea6c35c4f4c6ac6f509b5348684fd8f891bf8d1fdb8500e05",
+            "kind": "tool",
+            "retries_used": 0
+          }
+        ],
+        "policy_version": "agent-budget-v1"
+      },
+      "selected_workflow": null,
+      "signal_sha256": "dfb377dcd33720bbe299e2a9504f63c43c9052e5ef47f38c85751b944c5a9dbc",
+      "metrics": {
+        "expectation_met": true,
+        "tool_coverage_exact": true,
+        "frequency_before_envelope": true,
+        "lifecycle_boundary_valid": null,
+        "fault_injected": false,
+        "tool_calls_at_injection": null,
+        "citation_count": 5,
+        "citation_links_valid": true,
+        "diagnostic_qualification_still_blocked": true,
+        "model_calls_reserved": 0,
+        "model_calls_confirmed": 0,
+        "model_calls_unknown": 0,
+        "semantic_correctness_evaluated": false
+      },
+      "missing_requirements": [
+        "filter_sensitivity_check",
+        "server_registered_evidence",
+        "diagnostic_profile_not_qualified"
+      ]
+    },
+    {
+      "case_id": "F03",
+      "split": "prospective_synthetic",
+      "strategy": "agent",
+      "status": "completed_degraded",
+      "error_code": null,
+      "task_id": "5eeb9b20-1403-4a00-b4c1-65ba19c75da2",
+      "calls": [
+        {
+          "id": "03687b08-5f06-4450-82ab-550b6af9a6c8",
+          "call_no": 1,
+          "action": "analyze_basic",
+          "state": "completed",
+          "resource_kind": "analysis",
+          "resource_id": "3fd7d22d-6969-4e63-8019-0cc2ddefdc0c",
+          "logical_call_key": "399061d01a08a517155e995bcf003cbc981918b616ffe3d0d7838b0b11355a25",
+          "error_code": null
+        },
+        {
+          "id": "5d096b9f-60a0-4435-9b30-35e6fdc0e500",
+          "call_no": 2,
+          "action": "calculate_bearing_frequencies",
+          "state": "completed",
+          "resource_kind": "tool",
+          "resource_id": "0acff3f5-4b91-4cee-a9e8-682af51bf25c",
+          "logical_call_key": "f52e96067093315e567e0408f1b604f9bab9b063de676ca592921d3361b31f5a",
+          "error_code": null
+        }
+      ],
+      "graph": {
+        "version": "model-numeric-v1",
+        "checkpoint_count": 8
+      },
+      "execution_seconds": 11.515999999999622,
+      "model_traces": [
+        {
+          "usage": {
+            "total_tokens": 779,
+            "prompt_tokens": 694,
+            "completion_tokens": 85
+          },
+          "provider": "deepseek",
+          "local_digest": null,
+          "served_model": "deepseek-flash",
+          "wall_seconds": 1.235000000000582,
+          "finish_reason": "stop",
+          "policy_sha256": "2862a3f1c6cec3a47f025ff33bd6e42676ac5cc6ac48e3030296eabffd4d78d4",
+          "requested_model": "deepseek-flash",
+          "runtime_version": null,
+          "structured_output": "json_with_local_validation",
+          "provider_weight_version_attested": false
+        },
+        {
+          "usage": {
+            "total_tokens": 855,
+            "prompt_tokens": 782,
+            "completion_tokens": 73
+          },
+          "provider": "deepseek",
+          "local_digest": null,
+          "served_model": "deepseek-flash",
+          "wall_seconds": 1.235000000000582,
+          "finish_reason": "stop",
+          "policy_sha256": "2862a3f1c6cec3a47f025ff33bd6e42676ac5cc6ac48e3030296eabffd4d78d4",
+          "requested_model": "deepseek-flash",
+          "runtime_version": null,
+          "structured_output": "json_with_local_validation",
+          "provider_weight_version_attested": false
+        },
+        {
+          "usage": {
+            "total_tokens": 846,
+            "prompt_tokens": 790,
+            "completion_tokens": 56
+          },
+          "provider": "deepseek",
+          "local_digest": null,
+          "served_model": "deepseek-flash",
+          "wall_seconds": 1.0160000000032596,
+          "finish_reason": "stop",
+          "policy_sha256": "2862a3f1c6cec3a47f025ff33bd6e42676ac5cc6ac48e3030296eabffd4d78d4",
+          "requested_model": "deepseek-flash",
+          "runtime_version": null,
+          "structured_output": "json_with_local_validation",
+          "provider_weight_version_attested": false
+        }
+      ],
+      "budget": {
+        "active_ms": 11753,
+        "reservations": [
+          {
+            "key": "c15ad4782510095442b5bf6ec462f883fbf0f7a3b0aaac1df69f7a7c86821966",
+            "kind": "model",
+            "retries_used": 0
+          },
+          {
+            "key": "399061d01a08a517155e995bcf003cbc981918b616ffe3d0d7838b0b11355a25",
+            "kind": "tool",
+            "retries_used": 0
+          },
+          {
+            "key": "8de1c417e0ca76ed183a8b63802af62525046d459832391b2a68f028f1680335",
+            "kind": "model",
+            "retries_used": 0
+          },
+          {
+            "key": "f52e96067093315e567e0408f1b604f9bab9b063de676ca592921d3361b31f5a",
+            "kind": "tool",
+            "retries_used": 0
+          },
+          {
+            "key": "28f3fafda3347f2b4e256e867fcdb78bc73a5b009d8912cdf4ea11aa6f3e24bd",
+            "kind": "model",
+            "retries_used": 0
+          }
+        ],
+        "policy_version": "agent-budget-v1"
+      },
+      "selected_workflow": null,
+      "signal_sha256": "486b526baf1a64ccb53cbaa333c1080ff80c9301d464b055b66c248d4f60f95b",
+      "metrics": {
+        "expectation_met": true,
+        "tool_coverage_exact": true,
+        "frequency_before_envelope": true,
+        "lifecycle_boundary_valid": null,
+        "fault_injected": false,
+        "tool_calls_at_injection": null,
+        "citation_count": 2,
+        "citation_links_valid": true,
+        "diagnostic_qualification_still_blocked": true,
+        "model_calls_reserved": 3,
+        "model_calls_confirmed": 3,
+        "model_calls_unknown": 0,
+        "semantic_correctness_evaluated": false
+      },
+      "missing_requirements": [
+        "geometry_uncertainty",
+        "diagnostic_profile_not_qualified",
+        "matching_not_completed",
+        "model_finished_with_remaining_candidates"
+      ]
+    },
+    {
+      "case_id": "F03",
+      "split": "prospective_synthetic",
+      "strategy": "rules",
+      "status": "completed_degraded",
+      "error_code": null,
+      "task_id": "ce92ab1a-5b4e-46df-81ef-a0c5c30257ca",
+      "calls": [
+        {
+          "id": "51e92180-d6c6-4fa8-b4b9-85aa84688cb6",
+          "call_no": 1,
+          "action": "analyze_basic",
+          "state": "completed",
+          "resource_kind": "analysis",
+          "resource_id": "257d16c6-5d00-450e-ac8d-6bd97c88e1a9",
+          "logical_call_key": "dd66085b136c18169fdfa8f26872859b652252123baed1d6555940355170649e",
+          "error_code": null
+        },
+        {
+          "id": "099ef2f0-9f44-4990-bc34-59f30f806e3d",
+          "call_no": 2,
+          "action": "calculate_bearing_frequencies",
+          "state": "completed",
+          "resource_kind": "tool",
+          "resource_id": "4d303f8a-3f71-4aaa-bd5c-1f839b8788c9",
+          "logical_call_key": "1e3078002d17d1c63f56b19be5c1908533cf3040dd04e589808113ae8ebda822",
+          "error_code": null
+        }
+      ],
+      "graph": {
+        "version": "rules-graph-v1",
+        "checkpoint_count": 0
+      },
+      "execution_seconds": 6.48399999999674,
+      "model_traces": [],
+      "budget": {
+        "active_ms": 6330,
+        "reservations": [
+          {
+            "key": "dd66085b136c18169fdfa8f26872859b652252123baed1d6555940355170649e",
+            "kind": "tool",
+            "retries_used": 0
+          },
+          {
+            "key": "1e3078002d17d1c63f56b19be5c1908533cf3040dd04e589808113ae8ebda822",
+            "kind": "tool",
+            "retries_used": 0
+          }
+        ],
+        "policy_version": "agent-budget-v1"
+      },
+      "selected_workflow": null,
+      "signal_sha256": "486b526baf1a64ccb53cbaa333c1080ff80c9301d464b055b66c248d4f60f95b",
+      "metrics": {
+        "expectation_met": true,
+        "tool_coverage_exact": true,
+        "frequency_before_envelope": true,
+        "lifecycle_boundary_valid": null,
+        "fault_injected": false,
+        "tool_calls_at_injection": null,
+        "citation_count": 2,
+        "citation_links_valid": true,
+        "diagnostic_qualification_still_blocked": true,
+        "model_calls_reserved": 0,
+        "model_calls_confirmed": 0,
+        "model_calls_unknown": 0,
+        "semantic_correctness_evaluated": false
+      },
+      "missing_requirements": [
+        "geometry_uncertainty",
+        "diagnostic_profile_not_qualified"
+      ]
+    },
+    {
+      "case_id": "F03",
+      "split": "prospective_synthetic",
+      "strategy": "single_router",
+      "status": "completed_degraded",
+      "error_code": null,
+      "task_id": "9b0984ea-23b2-4b29-aa46-2b0f9641796e",
+      "calls": [
+        {
+          "id": "85c54d2e-2a93-4738-93a2-e29485e7fc69",
+          "call_no": 1,
+          "action": "analyze_basic",
+          "state": "completed",
+          "resource_kind": "analysis",
+          "resource_id": "f91d93ae-9965-42f9-ad55-eb94b3a2ff39",
+          "logical_call_key": "1286fdc0bbb42c9ee8fee87233d4384cd6e1778fcf61dab019dd5a0ba13b6eb2",
+          "error_code": null
+        },
+        {
+          "id": "159cf26b-3929-46d0-8740-724dcfa359be",
+          "call_no": 2,
+          "action": "calculate_bearing_frequencies",
+          "state": "completed",
+          "resource_kind": "tool",
+          "resource_id": "49bb6039-49b3-4c61-a1b4-04c7fc3ee2b9",
+          "logical_call_key": "05c37e766668263d7670969c103ae147dd44388c943e694381c241ce9d9230ef",
+          "error_code": null
+        }
+      ],
+      "graph": {
+        "version": "rules-graph-v1",
+        "checkpoint_count": 0
+      },
+      "execution_seconds": 7.952999999997701,
+      "model_traces": [
+        {
+          "provider": "deepseek",
+          "requested_model": "deepseek-flash",
+          "served_model": "deepseek-flash",
+          "policy_sha256": "2862a3f1c6cec3a47f025ff33bd6e42676ac5cc6ac48e3030296eabffd4d78d4",
+          "local_digest": null,
+          "runtime_version": null,
+          "usage": {
+            "prompt_tokens": 800,
+            "completion_tokens": 80,
+            "total_tokens": 880
+          },
+          "finish_reason": "stop",
+          "wall_seconds": 1.235000000000582,
+          "structured_output": "json_with_local_validation",
+          "provider_weight_version_attested": false
+        }
+      ],
+      "budget": {
+        "active_ms": 7780,
+        "reservations": [
+          {
+            "key": "27c195b47d0795e2c5f722f5c221c6505e245aaebf9169bf5d59ca970544e80d",
+            "kind": "model",
+            "retries_used": 0
+          },
+          {
+            "key": "1286fdc0bbb42c9ee8fee87233d4384cd6e1778fcf61dab019dd5a0ba13b6eb2",
+            "kind": "tool",
+            "retries_used": 0
+          },
+          {
+            "key": "05c37e766668263d7670969c103ae147dd44388c943e694381c241ce9d9230ef",
+            "kind": "tool",
+            "retries_used": 0
+          }
+        ],
+        "policy_version": "agent-budget-v1"
+      },
+      "selected_workflow": "feedback_rules",
+      "signal_sha256": "486b526baf1a64ccb53cbaa333c1080ff80c9301d464b055b66c248d4f60f95b",
+      "metrics": {
+        "expectation_met": true,
+        "tool_coverage_exact": true,
+        "frequency_before_envelope": true,
+        "lifecycle_boundary_valid": null,
+        "fault_injected": false,
+        "tool_calls_at_injection": null,
+        "citation_count": 2,
+        "citation_links_valid": true,
+        "diagnostic_qualification_still_blocked": true,
+        "model_calls_reserved": 1,
+        "model_calls_confirmed": 1,
+        "model_calls_unknown": 0,
+        "semantic_correctness_evaluated": false
+      },
+      "missing_requirements": [
+        "geometry_uncertainty",
+        "diagnostic_profile_not_qualified"
+      ]
+    },
+    {
+      "case_id": "F04",
+      "split": "prospective_synthetic",
+      "strategy": "rules",
+      "status": "completed_degraded",
+      "error_code": null,
+      "task_id": "be75fdb7-8685-46af-a665-cb8b9c308acf",
+      "calls": [
+        {
+          "id": "af2aae51-2352-4900-a51b-ccdeb25ec4b4",
+          "call_no": 1,
+          "action": "analyze_basic",
+          "state": "completed",
+          "resource_kind": "analysis",
+          "resource_id": "22af5818-9747-428f-bf7f-bad498026056",
+          "logical_call_key": "c4924bc90fce6d2331de1cbe6fcd80b76641ba89817fd88710bc6e1a841a425f",
+          "error_code": null
+        },
+        {
+          "id": "7f15a0af-aa1c-4585-8ff2-4958cc598f2e",
+          "call_no": 2,
+          "action": "calculate_bearing_frequencies",
+          "state": "completed",
+          "resource_kind": "tool",
+          "resource_id": "a98624d5-b987-43a2-bf97-bbb1132f18ed",
+          "logical_call_key": "8a5b00d3145548ea29cdf5985b6f62476dec8c3b0e2c0e26d2a66fde94c8163a",
+          "error_code": null
+        },
+        {
+          "id": "87d6342e-1133-4774-bc1f-fad016d86c50",
+          "call_no": 3,
+          "action": "analyze_envelope",
+          "state": "completed",
+          "resource_kind": "tool",
+          "resource_id": "4255d5b7-1ca9-45ba-9aa8-3d76b9abdd8c",
+          "logical_call_key": "e5de67129a70ab3b1f5fb3dbea1224d5b51467aa696ea32b64b9beb3ecaabdec",
+          "error_code": null
+        },
+        {
+          "id": "42414a5f-497c-440e-acfc-1edd2bc8adcf",
+          "call_no": 4,
+          "action": "analyze_envelope",
+          "state": "completed",
+          "resource_kind": "tool",
+          "resource_id": "e69d3c51-42c1-4b18-8c9a-95cf03e36813",
+          "logical_call_key": "33079b3f2d7ba508d87591000ef8848ccd81d112d4b341928bbb01d57c798d70",
+          "error_code": null
+        },
+        {
+          "id": "6853833b-3c2f-4d78-aaa2-9dd602a72bc7",
+          "call_no": 5,
+          "action": "match_frequency_evidence",
+          "state": "completed",
+          "resource_kind": "tool",
+          "resource_id": "cde61056-15f6-4c61-970c-e700906253b9",
+          "logical_call_key": "51ee9c1fff1f883e9e6594cb05e3d125bf68a18d6bba472c025f19345c3e503b",
+          "error_code": null
+        }
+      ],
+      "graph": {
+        "version": "rules-graph-v1",
+        "checkpoint_count": 0
+      },
+      "execution_seconds": 18.562000000001717,
+      "model_traces": [],
+      "budget": {
+        "active_ms": 18030,
+        "reservations": [
+          {
+            "key": "c4924bc90fce6d2331de1cbe6fcd80b76641ba89817fd88710bc6e1a841a425f",
+            "kind": "tool",
+            "retries_used": 0
+          },
+          {
+            "key": "8a5b00d3145548ea29cdf5985b6f62476dec8c3b0e2c0e26d2a66fde94c8163a",
+            "kind": "tool",
+            "retries_used": 0
+          },
+          {
+            "key": "e5de67129a70ab3b1f5fb3dbea1224d5b51467aa696ea32b64b9beb3ecaabdec",
+            "kind": "tool",
+            "retries_used": 0
+          },
+          {
+            "key": "33079b3f2d7ba508d87591000ef8848ccd81d112d4b341928bbb01d57c798d70",
+            "kind": "tool",
+            "retries_used": 0
+          },
+          {
+            "key": "51ee9c1fff1f883e9e6594cb05e3d125bf68a18d6bba472c025f19345c3e503b",
+            "kind": "tool",
+            "retries_used": 0
+          }
+        ],
+        "policy_version": "agent-budget-v1"
+      },
+      "selected_workflow": null,
+      "signal_sha256": "486b526baf1a64ccb53cbaa333c1080ff80c9301d464b055b66c248d4f60f95b",
+      "metrics": {
+        "expectation_met": true,
+        "tool_coverage_exact": true,
+        "frequency_before_envelope": true,
+        "lifecycle_boundary_valid": null,
+        "fault_injected": false,
+        "tool_calls_at_injection": null,
+        "citation_count": 5,
+        "citation_links_valid": true,
+        "diagnostic_qualification_still_blocked": true,
+        "model_calls_reserved": 0,
+        "model_calls_confirmed": 0,
+        "model_calls_unknown": 0,
+        "semantic_correctness_evaluated": false
+      },
+      "missing_requirements": [
+        "filter_sensitivity_check",
+        "server_registered_evidence",
+        "diagnostic_profile_not_qualified"
+      ]
+    },
+    {
+      "case_id": "F04",
+      "split": "prospective_synthetic",
+      "strategy": "single_router",
+      "status": "completed_degraded",
+      "error_code": null,
+      "task_id": "1eea4294-ec59-41bf-9253-40b545944768",
+      "calls": [
+        {
+          "id": "7e04121a-bcdc-42c7-aea7-ccfcdf02c9ff",
+          "call_no": 1,
+          "action": "analyze_basic",
+          "state": "completed",
+          "resource_kind": "analysis",
+          "resource_id": "1de48f16-353b-4f2f-a258-b1b34257cd07",
+          "logical_call_key": "c571c1eb3d3e0b2a35f082e2a82c558f703c9e0aef317d63035f52979895e0fd",
+          "error_code": null
+        },
+        {
+          "id": "b5e3bc70-bc58-4b7e-a44a-d62321354d28",
+          "call_no": 2,
+          "action": "calculate_bearing_frequencies",
+          "state": "completed",
+          "resource_kind": "tool",
+          "resource_id": "e99c456c-f672-4a44-a617-770df6fbf4dd",
+          "logical_call_key": "fafb3f074fb4fd93648660fe8b54ce608ece78c7fa4905b3c53e85baa8c16745",
+          "error_code": null
+        },
+        {
+          "id": "5501d709-f78c-4fae-a0ba-6be975dab0d5",
+          "call_no": 3,
+          "action": "analyze_envelope",
+          "state": "completed",
+          "resource_kind": "tool",
+          "resource_id": "637ba8bb-1e8e-40a7-a9e9-61e6319c0b72",
+          "logical_call_key": "36e0d0b35efc66fc7d5305141c74d95b4ff3d1244f18f8fe97e69c7656e6ce64",
+          "error_code": null
+        },
+        {
+          "id": "06207f73-5f5f-4550-8faa-dda60c190ea0",
+          "call_no": 4,
+          "action": "analyze_envelope",
+          "state": "completed",
+          "resource_kind": "tool",
+          "resource_id": "3a4e0fa2-334b-4c19-8b0a-539e4d464ce4",
+          "logical_call_key": "68c2045d281beedd9dfb59300ee49723ba177e3fc098d50effa483ab41bb11b5",
+          "error_code": null
+        },
+        {
+          "id": "39315859-1cab-4136-90e8-0133e2a5b219",
+          "call_no": 5,
+          "action": "match_frequency_evidence",
+          "state": "completed",
+          "resource_kind": "tool",
+          "resource_id": "704d1ed5-b789-49c4-9a93-e8ec7198f9cb",
+          "logical_call_key": "0136fbb77f9c066a34796766a5e6ac08ef434ea6495a565ca1888d55178fd54f",
+          "error_code": null
+        }
+      ],
+      "graph": {
+        "version": "rules-graph-v1",
+        "checkpoint_count": 0
+      },
+      "execution_seconds": 20.68699999999808,
+      "model_traces": [
+        {
+          "provider": "deepseek",
+          "requested_model": "deepseek-flash",
+          "served_model": "deepseek-flash",
+          "policy_sha256": "2862a3f1c6cec3a47f025ff33bd6e42676ac5cc6ac48e3030296eabffd4d78d4",
+          "local_digest": null,
+          "runtime_version": null,
+          "usage": {
+            "prompt_tokens": 804,
+            "completion_tokens": 78,
+            "total_tokens": 882
+          },
+          "finish_reason": "stop",
+          "wall_seconds": 1.5940000000009604,
+          "structured_output": "json_with_local_validation",
+          "provider_weight_version_attested": false
+        }
+      ],
+      "budget": {
+        "active_ms": 20097,
+        "reservations": [
+          {
+            "key": "4a576704a7891881e9e263f008403784d3976531026801a737de3691accb57ed",
+            "kind": "model",
+            "retries_used": 0
+          },
+          {
+            "key": "c571c1eb3d3e0b2a35f082e2a82c558f703c9e0aef317d63035f52979895e0fd",
+            "kind": "tool",
+            "retries_used": 0
+          },
+          {
+            "key": "fafb3f074fb4fd93648660fe8b54ce608ece78c7fa4905b3c53e85baa8c16745",
+            "kind": "tool",
+            "retries_used": 0
+          },
+          {
+            "key": "36e0d0b35efc66fc7d5305141c74d95b4ff3d1244f18f8fe97e69c7656e6ce64",
+            "kind": "tool",
+            "retries_used": 0
+          },
+          {
+            "key": "68c2045d281beedd9dfb59300ee49723ba177e3fc098d50effa483ab41bb11b5",
+            "kind": "tool",
+            "retries_used": 0
+          },
+          {
+            "key": "0136fbb77f9c066a34796766a5e6ac08ef434ea6495a565ca1888d55178fd54f",
+            "kind": "tool",
+            "retries_used": 0
+          }
+        ],
+        "policy_version": "agent-budget-v1"
+      },
+      "selected_workflow": "feedback_rules",
+      "signal_sha256": "486b526baf1a64ccb53cbaa333c1080ff80c9301d464b055b66c248d4f60f95b",
+      "metrics": {
+        "expectation_met": true,
+        "tool_coverage_exact": true,
+        "frequency_before_envelope": true,
+        "lifecycle_boundary_valid": null,
+        "fault_injected": false,
+        "tool_calls_at_injection": null,
+        "citation_count": 5,
+        "citation_links_valid": true,
+        "diagnostic_qualification_still_blocked": true,
+        "model_calls_reserved": 1,
+        "model_calls_confirmed": 1,
+        "model_calls_unknown": 0,
+        "semantic_correctness_evaluated": false
+      },
+      "missing_requirements": [
+        "filter_sensitivity_check",
+        "server_registered_evidence",
+        "diagnostic_profile_not_qualified"
+      ]
+    },
+    {
+      "case_id": "F04",
+      "split": "prospective_synthetic",
+      "strategy": "agent",
+      "status": "completed_degraded",
+      "error_code": null,
+      "task_id": "8358c9bb-7722-4628-8894-be8e3adc3cfb",
+      "calls": [
+        {
+          "id": "8b6b3c74-33cc-4868-902b-d666c7bdd5d9",
+          "call_no": 1,
+          "action": "analyze_basic",
+          "state": "completed",
+          "resource_kind": "analysis",
+          "resource_id": "af7dfe84-ecd6-4d72-bcc3-6e60fba8e846",
+          "logical_call_key": "37daf2ca1f3bfa846d0189bfbab2b3ea6320d1062ab57392f57abee43f0f0549",
+          "error_code": null
+        },
+        {
+          "id": "70e36944-8fa6-403c-9b28-1ab7e5e848ed",
+          "call_no": 2,
+          "action": "calculate_bearing_frequencies",
+          "state": "completed",
+          "resource_kind": "tool",
+          "resource_id": "60fb47db-1403-4179-909d-d27466fe2bf2",
+          "logical_call_key": "ae5d7c92dc952bcc27c54bdbb6edd2af2bdb7b24e481b635a15006b3160cfa80",
+          "error_code": null
+        },
+        {
+          "id": "fca0b2c2-7f55-45cb-aa76-a2893c5c0fd5",
+          "call_no": 3,
+          "action": "analyze_envelope",
+          "state": "completed",
+          "resource_kind": "tool",
+          "resource_id": "f2d0615a-153b-4b23-b512-f37fecee9ee5",
+          "logical_call_key": "274cb986299820867961153f796b78daf1997144ff3003c3122c008ff93371c2",
+          "error_code": null
+        },
+        {
+          "id": "9c51eb0a-1c75-4bcf-95d4-7c5fb966e81f",
+          "call_no": 4,
+          "action": "analyze_envelope",
+          "state": "completed",
+          "resource_kind": "tool",
+          "resource_id": "d897a6b1-48df-4f97-94b4-2ae8ecdf424b",
+          "logical_call_key": "0b3643769e78d68a43ea8a79d7be8602a74b616fa4ad162a587aa44e539fedde",
+          "error_code": null
+        },
+        {
+          "id": "8eb9ddcc-a8ff-4f09-ac74-3cdef9450d40",
+          "call_no": 5,
+          "action": "match_frequency_evidence",
+          "state": "completed",
+          "resource_kind": "tool",
+          "resource_id": "1b593bbb-8ff6-470f-b2a3-4ef392c0668c",
+          "logical_call_key": "1a86601b06514c29b4d1acb75605409482677c2dfeba4027d70f9365262543b6",
+          "error_code": null
+        }
+      ],
+      "graph": {
+        "version": "model-numeric-v1",
+        "checkpoint_count": 14
+      },
+      "execution_seconds": 33.81200000000172,
+      "model_traces": [
+        {
+          "usage": {
+            "total_tokens": 774,
+            "prompt_tokens": 692,
+            "completion_tokens": 82
+          },
+          "provider": "deepseek",
+          "local_digest": null,
+          "served_model": "deepseek-flash",
+          "wall_seconds": 1.0630000000019209,
+          "finish_reason": "stop",
+          "policy_sha256": "2862a3f1c6cec3a47f025ff33bd6e42676ac5cc6ac48e3030296eabffd4d78d4",
+          "requested_model": "deepseek-flash",
+          "runtime_version": null,
+          "structured_output": "json_with_local_validation",
+          "provider_weight_version_attested": false
+        },
+        {
+          "usage": {
+            "total_tokens": 845,
+            "prompt_tokens": 778,
+            "completion_tokens": 67
+          },
+          "provider": "deepseek",
+          "local_digest": null,
+          "served_model": "deepseek-flash",
+          "wall_seconds": 1.1090000000003783,
+          "finish_reason": "stop",
+          "policy_sha256": "2862a3f1c6cec3a47f025ff33bd6e42676ac5cc6ac48e3030296eabffd4d78d4",
+          "requested_model": "deepseek-flash",
+          "runtime_version": null,
+          "structured_output": "json_with_local_validation",
+          "provider_weight_version_attested": false
+        },
+        {
+          "usage": {
+            "total_tokens": 861,
+            "prompt_tokens": 785,
+            "completion_tokens": 76
+          },
+          "provider": "deepseek",
+          "local_digest": null,
+          "served_model": "deepseek-flash",
+          "wall_seconds": 0.9380000000019209,
+          "finish_reason": "stop",
+          "policy_sha256": "2862a3f1c6cec3a47f025ff33bd6e42676ac5cc6ac48e3030296eabffd4d78d4",
+          "requested_model": "deepseek-flash",
+          "runtime_version": null,
+          "structured_output": "json_with_local_validation",
+          "provider_weight_version_attested": false
+        },
+        {
+          "usage": {
+            "total_tokens": 935,
+            "prompt_tokens": 843,
+            "completion_tokens": 92
+          },
+          "provider": "deepseek",
+          "local_digest": null,
+          "served_model": "deepseek-flash",
+          "wall_seconds": 2.0940000000009604,
+          "finish_reason": "stop",
+          "policy_sha256": "2862a3f1c6cec3a47f025ff33bd6e42676ac5cc6ac48e3030296eabffd4d78d4",
+          "requested_model": "deepseek-flash",
+          "runtime_version": null,
+          "structured_output": "json_with_local_validation",
+          "provider_weight_version_attested": false
+        },
+        {
+          "usage": {
+            "total_tokens": 990,
+            "prompt_tokens": 899,
+            "completion_tokens": 91
+          },
+          "provider": "deepseek",
+          "local_digest": null,
+          "served_model": "deepseek-flash",
+          "wall_seconds": 1.5,
+          "finish_reason": "stop",
+          "policy_sha256": "2862a3f1c6cec3a47f025ff33bd6e42676ac5cc6ac48e3030296eabffd4d78d4",
+          "requested_model": "deepseek-flash",
+          "runtime_version": null,
+          "structured_output": "json_with_local_validation",
+          "provider_weight_version_attested": false
+        },
+        {
+          "usage": {
+            "total_tokens": 965,
+            "prompt_tokens": 915,
+            "completion_tokens": 50
+          },
+          "provider": "deepseek",
+          "local_digest": null,
+          "served_model": "deepseek-flash",
+          "wall_seconds": 1.1409999999996217,
+          "finish_reason": "stop",
+          "policy_sha256": "2862a3f1c6cec3a47f025ff33bd6e42676ac5cc6ac48e3030296eabffd4d78d4",
+          "requested_model": "deepseek-flash",
+          "runtime_version": null,
+          "structured_output": "json_with_local_validation",
+          "provider_weight_version_attested": false
+        }
+      ],
+      "budget": {
+        "active_ms": 35853,
+        "reservations": [
+          {
+            "key": "e49d93620c677b83c4bd559bba09a4d5271101ec7520cb325cca0ae85e95eac7",
+            "kind": "model",
+            "retries_used": 0
+          },
+          {
+            "key": "37daf2ca1f3bfa846d0189bfbab2b3ea6320d1062ab57392f57abee43f0f0549",
+            "kind": "tool",
+            "retries_used": 0
+          },
+          {
+            "key": "91f3b0b0d7d85ce2e8ab81b4b21eaf856fdd2f123d8c40367c6da3f418b281bb",
+            "kind": "model",
+            "retries_used": 0
+          },
+          {
+            "key": "ae5d7c92dc952bcc27c54bdbb6edd2af2bdb7b24e481b635a15006b3160cfa80",
+            "kind": "tool",
+            "retries_used": 0
+          },
+          {
+            "key": "f8d48aa1add3f7650a48b758a2f378ab9bc4e358257d3ce1e81d7c94b59e7cb2",
+            "kind": "model",
+            "retries_used": 0
+          },
+          {
+            "key": "274cb986299820867961153f796b78daf1997144ff3003c3122c008ff93371c2",
+            "kind": "tool",
+            "retries_used": 0
+          },
+          {
+            "key": "d9e654f531da745947d4f23b877380f7b71a64cbb09252e17982f9294680653d",
+            "kind": "model",
+            "retries_used": 0
+          },
+          {
+            "key": "0b3643769e78d68a43ea8a79d7be8602a74b616fa4ad162a587aa44e539fedde",
+            "kind": "tool",
+            "retries_used": 0
+          },
+          {
+            "key": "4641cf14108f8be266d944753418b0d570526eebdf2deda8ef87d5f3a41b6fcf",
+            "kind": "model",
+            "retries_used": 0
+          },
+          {
+            "key": "1a86601b06514c29b4d1acb75605409482677c2dfeba4027d70f9365262543b6",
+            "kind": "tool",
+            "retries_used": 0
+          },
+          {
+            "key": "680aade757c22414af476ed48ef197f1c6cae18cf33de9297bd4d8a31a42917f",
+            "kind": "model",
+            "retries_used": 0
+          }
+        ],
+        "policy_version": "agent-budget-v1"
+      },
+      "selected_workflow": null,
+      "signal_sha256": "486b526baf1a64ccb53cbaa333c1080ff80c9301d464b055b66c248d4f60f95b",
+      "metrics": {
+        "expectation_met": true,
+        "tool_coverage_exact": true,
+        "frequency_before_envelope": true,
+        "lifecycle_boundary_valid": null,
+        "fault_injected": false,
+        "tool_calls_at_injection": null,
+        "citation_count": 5,
+        "citation_links_valid": true,
+        "diagnostic_qualification_still_blocked": true,
+        "model_calls_reserved": 6,
+        "model_calls_confirmed": 6,
+        "model_calls_unknown": 0,
+        "semantic_correctness_evaluated": false
+      },
+      "missing_requirements": [
+        "verified_acquisition_bandwidth",
+        "qualified_numeric_profile",
+        "filter_sensitivity_check",
+        "server_registered_evidence",
+        "diagnostic_profile_not_qualified"
+      ]
+    },
+    {
+      "case_id": "F05",
+      "split": "development",
+      "strategy": "single_router",
+      "status": "cancelled",
+      "error_code": "USER_CANCELLED",
+      "task_id": "e2601190-14c6-42da-8f0b-cb550ae21e1d",
+      "calls": [
+        {
+          "id": "73577d26-d6b2-4480-9001-be3a12043263",
+          "call_no": 1,
+          "action": "analyze_basic",
+          "state": "completed",
+          "resource_kind": "analysis",
+          "resource_id": "00ccefdd-d2e7-4cba-b1d5-22a4a39a72b6",
+          "logical_call_key": "d128f9a2f5b2ef00743c405813b7e7266153c645e6f6ab8da85d512f2cd9f878",
+          "error_code": null
+        },
+        {
+          "id": "7e176181-c80a-4812-a1b8-ec64fcbdd345",
+          "call_no": 2,
+          "action": "calculate_bearing_frequencies",
+          "state": "completed",
+          "resource_kind": "tool",
+          "resource_id": "f73f74a4-051e-4fc8-8dff-52fed6240e3a",
+          "logical_call_key": "de23f7e7771b3c68e7b19fa960e0f7e89d4a8b9babeb2857ac2d3e3228294e17",
+          "error_code": null
+        }
+      ],
+      "graph": {
+        "version": "rules-graph-v1",
+        "checkpoint_count": 0
+      },
+      "execution_seconds": 8.139999999999418,
+      "model_traces": [
+        {
+          "provider": "deepseek",
+          "requested_model": "deepseek-flash",
+          "served_model": "deepseek-flash",
+          "policy_sha256": "2862a3f1c6cec3a47f025ff33bd6e42676ac5cc6ac48e3030296eabffd4d78d4",
+          "local_digest": null,
+          "runtime_version": null,
+          "usage": {
+            "prompt_tokens": 811,
+            "completion_tokens": 94,
+            "total_tokens": 905
+          },
+          "finish_reason": "stop",
+          "wall_seconds": 1.0619999999980791,
+          "structured_output": "json_with_local_validation",
+          "provider_weight_version_attested": false
+        }
+      ],
+      "budget": {
+        "active_ms": 7820,
+        "reservations": [
+          {
+            "key": "9393e8080183c01f6ab80e6965144f9156e4d523b6c202858eedeaecec7a500b",
+            "kind": "model",
+            "retries_used": 0
+          },
+          {
+            "key": "d128f9a2f5b2ef00743c405813b7e7266153c645e6f6ab8da85d512f2cd9f878",
+            "kind": "tool",
+            "retries_used": 0
+          },
+          {
+            "key": "de23f7e7771b3c68e7b19fa960e0f7e89d4a8b9babeb2857ac2d3e3228294e17",
+            "kind": "tool",
+            "retries_used": 0
+          }
+        ],
+        "policy_version": "agent-budget-v1"
+      },
+      "selected_workflow": "feedback_rules",
+      "signal_sha256": "dfb377dcd33720bbe299e2a9504f63c43c9052e5ef47f38c85751b944c5a9dbc",
+      "metrics": {
+        "expectation_met": true,
+        "tool_coverage_exact": true,
+        "frequency_before_envelope": true,
+        "lifecycle_boundary_valid": true,
+        "fault_injected": true,
+        "tool_calls_at_injection": 2,
+        "citation_count": 0,
+        "citation_links_valid": null,
+        "diagnostic_qualification_still_blocked": true,
+        "model_calls_reserved": 1,
+        "model_calls_confirmed": 1,
+        "model_calls_unknown": 0,
+        "semantic_correctness_evaluated": false
+      },
+      "missing_requirements": []
+    },
+    {
+      "case_id": "F05",
+      "split": "development",
+      "strategy": "agent",
+      "status": "cancelled",
+      "error_code": "USER_CANCELLED",
+      "task_id": "b8030f3a-1370-4604-b9ca-d5727ff6f6b2",
+      "calls": [
+        {
+          "id": "c7a45573-2a19-4ccb-aabe-0e2a71baf165",
+          "call_no": 1,
+          "action": "analyze_basic",
+          "state": "completed",
+          "resource_kind": "analysis",
+          "resource_id": "b771af67-cd7f-456b-b45f-566c65c1c58c",
+          "logical_call_key": "7f47f62f836514b414c442957df349953597a25b96ab4353fb9fe79dc959e483",
+          "error_code": null
+        },
+        {
+          "id": "39adb59c-2848-4b1a-affb-13d7a95278bc",
+          "call_no": 2,
+          "action": "calculate_bearing_frequencies",
+          "state": "completed",
+          "resource_kind": "tool",
+          "resource_id": "8ce40ed3-6342-41bf-9060-9fd083fb050f",
+          "logical_call_key": "6d9d7ed687fd5c22af0b3c6833c53d7924000b4209d3fda1787c2ca453d0db79",
+          "error_code": null
+        }
+      ],
+      "graph": {
+        "version": "model-numeric-v1",
+        "checkpoint_count": 6
+      },
+      "execution_seconds": 9.984000000000378,
+      "model_traces": [
+        {
+          "usage": {
+            "total_tokens": 757,
+            "prompt_tokens": 691,
+            "completion_tokens": 66
+          },
+          "provider": "deepseek",
+          "local_digest": null,
+          "served_model": "deepseek-flash",
+          "wall_seconds": 1.0620000000017171,
+          "finish_reason": "stop",
+          "policy_sha256": "2862a3f1c6cec3a47f025ff33bd6e42676ac5cc6ac48e3030296eabffd4d78d4",
+          "requested_model": "deepseek-flash",
+          "runtime_version": null,
+          "structured_output": "json_with_local_validation",
+          "provider_weight_version_attested": false
+        },
+        {
+          "usage": {
+            "total_tokens": 853,
+            "prompt_tokens": 776,
+            "completion_tokens": 77
+          },
+          "provider": "deepseek",
+          "local_digest": null,
+          "served_model": "deepseek-flash",
+          "wall_seconds": 1.0470000000022992,
+          "finish_reason": "stop",
+          "policy_sha256": "2862a3f1c6cec3a47f025ff33bd6e42676ac5cc6ac48e3030296eabffd4d78d4",
+          "requested_model": "deepseek-flash",
+          "runtime_version": null,
+          "structured_output": "json_with_local_validation",
+          "provider_weight_version_attested": false
+        }
+      ],
+      "budget": {
+        "active_ms": 9843,
+        "reservations": [
+          {
+            "key": "5598a6c31e535969d88a86bfd3e8c9fb89a1aeab796d2622a8fa7ab3931e2c65",
+            "kind": "model",
+            "retries_used": 0
+          },
+          {
+            "key": "7f47f62f836514b414c442957df349953597a25b96ab4353fb9fe79dc959e483",
+            "kind": "tool",
+            "retries_used": 0
+          },
+          {
+            "key": "5f2d365bf3b1d827cd425c50c6da324974d7c9f5659f27a6f273463e55592a33",
+            "kind": "model",
+            "retries_used": 0
+          },
+          {
+            "key": "6d9d7ed687fd5c22af0b3c6833c53d7924000b4209d3fda1787c2ca453d0db79",
+            "kind": "tool",
+            "retries_used": 0
+          }
+        ],
+        "policy_version": "agent-budget-v1"
+      },
+      "selected_workflow": null,
+      "signal_sha256": "dfb377dcd33720bbe299e2a9504f63c43c9052e5ef47f38c85751b944c5a9dbc",
+      "metrics": {
+        "expectation_met": true,
+        "tool_coverage_exact": true,
+        "frequency_before_envelope": true,
+        "lifecycle_boundary_valid": true,
+        "fault_injected": true,
+        "tool_calls_at_injection": 2,
+        "citation_count": 0,
+        "citation_links_valid": null,
+        "diagnostic_qualification_still_blocked": true,
+        "model_calls_reserved": 2,
+        "model_calls_confirmed": 2,
+        "model_calls_unknown": 0,
+        "semantic_correctness_evaluated": false
+      },
+      "missing_requirements": []
+    },
+    {
+      "case_id": "F05",
+      "split": "development",
+      "strategy": "rules",
+      "status": "cancelled",
+      "error_code": "USER_CANCELLED",
+      "task_id": "89bf1f18-ecce-4cab-af79-9d4be7af2541",
+      "calls": [
+        {
+          "id": "6d2f4b1a-91b2-4609-bf26-a4bf33536749",
+          "call_no": 1,
+          "action": "analyze_basic",
+          "state": "completed",
+          "resource_kind": "analysis",
+          "resource_id": "20d389a3-c35a-488d-87ce-f557cb184b69",
+          "logical_call_key": "3c5f07de1e4339e309497045bc16527d1b72ac26b3de4088e57989c98164b8e6",
+          "error_code": null
+        },
+        {
+          "id": "2317cb36-c6a9-4c19-af7c-6d13f399c76a",
+          "call_no": 2,
+          "action": "calculate_bearing_frequencies",
+          "state": "completed",
+          "resource_kind": "tool",
+          "resource_id": "1cbdd0e8-f36f-46a8-8e26-89bf1126b177",
+          "logical_call_key": "95b7942ea039921b6e9ec9269dfcac943fd7ba2056d07a1e21e479d743c6953e",
+          "error_code": null
+        }
+      ],
+      "graph": {
+        "version": "rules-graph-v1",
+        "checkpoint_count": 0
+      },
+      "execution_seconds": 6.687000000001717,
+      "model_traces": [],
+      "budget": {
+        "active_ms": 6368,
+        "reservations": [
+          {
+            "key": "3c5f07de1e4339e309497045bc16527d1b72ac26b3de4088e57989c98164b8e6",
+            "kind": "tool",
+            "retries_used": 0
+          },
+          {
+            "key": "95b7942ea039921b6e9ec9269dfcac943fd7ba2056d07a1e21e479d743c6953e",
+            "kind": "tool",
+            "retries_used": 0
+          }
+        ],
+        "policy_version": "agent-budget-v1"
+      },
+      "selected_workflow": null,
+      "signal_sha256": "dfb377dcd33720bbe299e2a9504f63c43c9052e5ef47f38c85751b944c5a9dbc",
+      "metrics": {
+        "expectation_met": true,
+        "tool_coverage_exact": true,
+        "frequency_before_envelope": true,
+        "lifecycle_boundary_valid": true,
+        "fault_injected": true,
+        "tool_calls_at_injection": 2,
+        "citation_count": 0,
+        "citation_links_valid": null,
+        "diagnostic_qualification_still_blocked": true,
+        "model_calls_reserved": 0,
+        "model_calls_confirmed": 0,
+        "model_calls_unknown": 0,
+        "semantic_correctness_evaluated": false
+      },
+      "missing_requirements": []
+    },
+    {
+      "case_id": "F06",
+      "split": "prospective_synthetic",
+      "strategy": "agent",
+      "status": "waiting_information",
+      "error_code": "input_confirmation_required",
+      "task_id": "b8db911d-d509-4157-8d1b-ef29d3aa3717",
+      "calls": [
+        {
+          "id": "b1489c22-295f-4895-8a3a-73f4784168a4",
+          "call_no": 1,
+          "action": "analyze_basic",
+          "state": "completed",
+          "resource_kind": "analysis",
+          "resource_id": "63702a25-0f7c-46af-8460-62090f42375c",
+          "logical_call_key": "e2785b984a9b0436c97725f502e0078b86042e4bf244512dd256369b7b5bb008",
+          "error_code": null
+        },
+        {
+          "id": "fc7f4ee1-1348-45b3-bb84-62aaaf3ad353",
+          "call_no": 2,
+          "action": "calculate_bearing_frequencies",
+          "state": "completed",
+          "resource_kind": "tool",
+          "resource_id": "39556bd4-fc19-48df-a44c-2177333babae",
+          "logical_call_key": "81a39ddfd9c1fc5fddfe219ab010d96a6e79d6555aaeeb8e47c7ee2f58ac4169",
+          "error_code": null
+        }
+      ],
+      "graph": {
+        "version": "model-numeric-v1",
+        "checkpoint_count": 7
+      },
+      "execution_seconds": 9.9220000000023,
+      "model_traces": [
+        {
+          "usage": {
+            "total_tokens": 757,
+            "prompt_tokens": 691,
+            "completion_tokens": 66
+          },
+          "provider": "deepseek",
+          "local_digest": null,
+          "served_model": "deepseek-flash",
+          "wall_seconds": 1.5,
+          "finish_reason": "stop",
+          "policy_sha256": "2862a3f1c6cec3a47f025ff33bd6e42676ac5cc6ac48e3030296eabffd4d78d4",
+          "requested_model": "deepseek-flash",
+          "runtime_version": null,
+          "structured_output": "json_with_local_validation",
+          "provider_weight_version_attested": false
+        },
+        {
+          "usage": {
+            "total_tokens": 844,
+            "prompt_tokens": 778,
+            "completion_tokens": 66
+          },
+          "provider": "deepseek",
+          "local_digest": null,
+          "served_model": "deepseek-flash",
+          "wall_seconds": 1.2190000000009604,
+          "finish_reason": "stop",
+          "policy_sha256": "2862a3f1c6cec3a47f025ff33bd6e42676ac5cc6ac48e3030296eabffd4d78d4",
+          "requested_model": "deepseek-flash",
+          "runtime_version": null,
+          "structured_output": "json_with_local_validation",
+          "provider_weight_version_attested": false
+        }
+      ],
+      "budget": {
+        "active_ms": 9930,
+        "reservations": [
+          {
+            "key": "44ff08077937f211eeff934b7a8d95febc630bbe56dba21141a422a625781883",
+            "kind": "model",
+            "retries_used": 0
+          },
+          {
+            "key": "e2785b984a9b0436c97725f502e0078b86042e4bf244512dd256369b7b5bb008",
+            "kind": "tool",
+            "retries_used": 0
+          },
+          {
+            "key": "d129b642e351e1a79cc91996acbb7d2cd0bb4f6f1e8ee770438fff557e5e090a",
+            "kind": "model",
+            "retries_used": 0
+          },
+          {
+            "key": "81a39ddfd9c1fc5fddfe219ab010d96a6e79d6555aaeeb8e47c7ee2f58ac4169",
+            "kind": "tool",
+            "retries_used": 0
+          }
+        ],
+        "policy_version": "agent-budget-v1"
+      },
+      "selected_workflow": null,
+      "signal_sha256": "486b526baf1a64ccb53cbaa333c1080ff80c9301d464b055b66c248d4f60f95b",
+      "metrics": {
+        "expectation_met": true,
+        "tool_coverage_exact": true,
+        "frequency_before_envelope": true,
+        "lifecycle_boundary_valid": true,
+        "fault_injected": true,
+        "tool_calls_at_injection": 2,
+        "citation_count": 0,
+        "citation_links_valid": null,
+        "diagnostic_qualification_still_blocked": true,
+        "model_calls_reserved": 2,
+        "model_calls_confirmed": 2,
+        "model_calls_unknown": 0,
+        "semantic_correctness_evaluated": false
+      },
+      "missing_requirements": []
+    },
+    {
+      "case_id": "F06",
+      "split": "prospective_synthetic",
+      "strategy": "rules",
+      "status": "failed",
+      "error_code": "INPUT_CONFIRMATION_REVOKED",
+      "task_id": "805b2735-780f-48c8-9788-08ed4da65967",
+      "calls": [
+        {
+          "id": "4eeed97c-c614-4169-8e8a-f37861899679",
+          "call_no": 1,
+          "action": "analyze_basic",
+          "state": "completed",
+          "resource_kind": "analysis",
+          "resource_id": "496fb355-134e-49bb-a838-6a346d0b078d",
+          "logical_call_key": "c8954b78cbfd2bf1e418dfd97f74b6a1b0d401bfb41fef4481692c810c299ef2",
+          "error_code": null
+        },
+        {
+          "id": "966a0800-c38f-4c6a-b18e-fb9b96342f1c",
+          "call_no": 2,
+          "action": "calculate_bearing_frequencies",
+          "state": "completed",
+          "resource_kind": "tool",
+          "resource_id": "9605f29a-61f8-4a7f-ac79-b40ad762cb94",
+          "logical_call_key": "f507e756f96ec25c1f4366db2278c4e67581ceabefdf21b757e8e6266dc1f684",
+          "error_code": null
+        }
+      ],
+      "graph": {
+        "version": "rules-graph-v1",
+        "checkpoint_count": 0
+      },
+      "execution_seconds": 6.609000000000378,
+      "model_traces": [],
+      "budget": {
+        "active_ms": 6465,
+        "reservations": [
+          {
+            "key": "c8954b78cbfd2bf1e418dfd97f74b6a1b0d401bfb41fef4481692c810c299ef2",
+            "kind": "tool",
+            "retries_used": 0
+          },
+          {
+            "key": "f507e756f96ec25c1f4366db2278c4e67581ceabefdf21b757e8e6266dc1f684",
+            "kind": "tool",
+            "retries_used": 0
+          }
+        ],
+        "policy_version": "agent-budget-v1"
+      },
+      "selected_workflow": null,
+      "signal_sha256": "486b526baf1a64ccb53cbaa333c1080ff80c9301d464b055b66c248d4f60f95b",
+      "metrics": {
+        "expectation_met": true,
+        "tool_coverage_exact": true,
+        "frequency_before_envelope": true,
+        "lifecycle_boundary_valid": true,
+        "fault_injected": true,
+        "tool_calls_at_injection": 2,
+        "citation_count": 0,
+        "citation_links_valid": null,
+        "diagnostic_qualification_still_blocked": true,
+        "model_calls_reserved": 0,
+        "model_calls_confirmed": 0,
+        "model_calls_unknown": 0,
+        "semantic_correctness_evaluated": false
+      },
+      "missing_requirements": []
+    },
+    {
+      "case_id": "F06",
+      "split": "prospective_synthetic",
+      "strategy": "single_router",
+      "status": "failed",
+      "error_code": "INPUT_CONFIRMATION_REVOKED",
+      "task_id": "cff98043-f087-4cc9-a26a-2e8be60a9373",
+      "calls": [
+        {
+          "id": "59c468cb-3c74-4e50-9f24-d6bdea36477d",
+          "call_no": 1,
+          "action": "analyze_basic",
+          "state": "completed",
+          "resource_kind": "analysis",
+          "resource_id": "870c0583-f9b7-4c0a-b921-2ec4bbb10239",
+          "logical_call_key": "e357d18b00027dedf2660d906fc555711c13d5266e7465adb0ea838dacbc85be",
+          "error_code": null
+        },
+        {
+          "id": "2f111792-cf14-4d6a-af80-8c3d4e7ccc99",
+          "call_no": 2,
+          "action": "calculate_bearing_frequencies",
+          "state": "completed",
+          "resource_kind": "tool",
+          "resource_id": "bdee9919-f607-4d5d-81e4-8d5a989bf5a8",
+          "logical_call_key": "0cab9267046b8e824af98535eea14006f4e73346e73e9c24d21d1c40ed64f77b",
+          "error_code": null
+        }
+      ],
+      "graph": {
+        "version": "rules-graph-v1",
+        "checkpoint_count": 0
+      },
+      "execution_seconds": 8.562999999998283,
+      "model_traces": [
+        {
+          "provider": "deepseek",
+          "requested_model": "deepseek-flash",
+          "served_model": "deepseek-flash",
+          "policy_sha256": "2862a3f1c6cec3a47f025ff33bd6e42676ac5cc6ac48e3030296eabffd4d78d4",
+          "local_digest": null,
+          "runtime_version": null,
+          "usage": {
+            "prompt_tokens": 805,
+            "completion_tokens": 85,
+            "total_tokens": 890
+          },
+          "finish_reason": "stop",
+          "wall_seconds": 1.8430000000007567,
+          "structured_output": "json_with_local_validation",
+          "provider_weight_version_attested": false
+        }
+      ],
+      "budget": {
+        "active_ms": 8391,
+        "reservations": [
+          {
+            "key": "b000578368b5e74b7c4f6f8909ca8176faff09013294246195034651ba09b9c2",
+            "kind": "model",
+            "retries_used": 0
+          },
+          {
+            "key": "e357d18b00027dedf2660d906fc555711c13d5266e7465adb0ea838dacbc85be",
+            "kind": "tool",
+            "retries_used": 0
+          },
+          {
+            "key": "0cab9267046b8e824af98535eea14006f4e73346e73e9c24d21d1c40ed64f77b",
+            "kind": "tool",
+            "retries_used": 0
+          }
+        ],
+        "policy_version": "agent-budget-v1"
+      },
+      "selected_workflow": "feedback_rules",
+      "signal_sha256": "486b526baf1a64ccb53cbaa333c1080ff80c9301d464b055b66c248d4f60f95b",
+      "metrics": {
+        "expectation_met": true,
+        "tool_coverage_exact": true,
+        "frequency_before_envelope": true,
+        "lifecycle_boundary_valid": true,
+        "fault_injected": true,
+        "tool_calls_at_injection": 2,
+        "citation_count": 0,
+        "citation_links_valid": null,
+        "diagnostic_qualification_still_blocked": true,
+        "model_calls_reserved": 1,
+        "model_calls_confirmed": 1,
+        "model_calls_unknown": 0,
+        "semantic_correctness_evaluated": false
+      },
+      "missing_requirements": []
+    }
+  ],
+  "inventory": [
+    {
+      "case_id": "F01",
+      "signal_sha256": "dfb377dcd33720bbe299e2a9504f63c43c9052e5ef47f38c85751b944c5a9dbc",
+      "source_family": "analytic_am_v1",
+      "split": "development"
+    },
+    {
+      "case_id": "F02",
+      "signal_sha256": "dfb377dcd33720bbe299e2a9504f63c43c9052e5ef47f38c85751b944c5a9dbc",
+      "source_family": "analytic_am_v1",
+      "split": "development"
+    },
+    {
+      "case_id": "F03",
+      "signal_sha256": "486b526baf1a64ccb53cbaa333c1080ff80c9301d464b055b66c248d4f60f95b",
+      "source_family": "analytic_am_v1",
+      "split": "prospective_synthetic"
+    },
+    {
+      "case_id": "F04",
+      "signal_sha256": "486b526baf1a64ccb53cbaa333c1080ff80c9301d464b055b66c248d4f60f95b",
+      "source_family": "analytic_am_v1",
+      "split": "prospective_synthetic"
+    },
+    {
+      "case_id": "F05",
+      "signal_sha256": "dfb377dcd33720bbe299e2a9504f63c43c9052e5ef47f38c85751b944c5a9dbc",
+      "source_family": "analytic_am_v1",
+      "split": "development"
+    },
+    {
+      "case_id": "F06",
+      "signal_sha256": "486b526baf1a64ccb53cbaa333c1080ff80c9301d464b055b66c248d4f60f95b",
+      "source_family": "analytic_am_v1",
+      "split": "prospective_synthetic"
+    }
+  ],
+  "summary": {
+    "rules": {
+      "runs": 6,
+      "expectations_met": 6,
+      "statuses": {
+        "completed_degraded": 4,
+        "cancelled": 1,
+        "failed": 1
+      },
+      "cited_drafts": 4,
+      "citation_links_valid": 4,
+      "model_reserved": 0,
+      "model_confirmed": 0,
+      "tools": 18,
+      "median_execution_seconds": 7.023000000001048,
+      "token_usage": {
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "total_tokens": 0
+      },
+      "monetary_cost": null,
+      "monetary_cost_reason": "No dated provider pricing/invoice bound to this run"
+    },
+    "single_router": {
+      "runs": 6,
+      "expectations_met": 6,
+      "statuses": {
+        "completed_degraded": 4,
+        "cancelled": 1,
+        "failed": 1
+      },
+      "cited_drafts": 4,
+      "citation_links_valid": 4,
+      "model_reserved": 6,
+      "model_confirmed": 6,
+      "tools": 18,
+      "median_execution_seconds": 8.4375,
+      "token_usage": {
+        "prompt_tokens": 4833,
+        "completion_tokens": 513,
+        "total_tokens": 5346
+      },
+      "monetary_cost": null,
+      "monetary_cost_reason": "No dated provider pricing/invoice bound to this run"
+    },
+    "agent": {
+      "runs": 6,
+      "expectations_met": 5,
+      "statuses": {
+        "completed_degraded": 4,
+        "cancelled": 1,
+        "waiting_information": 1
+      },
+      "cited_drafts": 4,
+      "citation_links_valid": 4,
+      "model_reserved": 20,
+      "model_confirmed": 20,
+      "tools": 16,
+      "median_execution_seconds": 11.742500000000291,
+      "token_usage": {
+        "prompt_tokens": 15474,
+        "completion_tokens": 1448,
+        "total_tokens": 16922
+      },
+      "monetary_cost": null,
+      "monetary_cost_reason": "No dated provider pricing/invoice bound to this run"
+    }
+  },
+  "summary_functional": {
+    "rules": {
+      "runs": 4,
+      "expectations_met": 4,
+      "statuses": {
+        "completed_degraded": 4
+      },
+      "cited_drafts": 4,
+      "citation_links_valid": 4,
+      "model_reserved": 0,
+      "model_confirmed": 0,
+      "tools": 14,
+      "median_execution_seconds": 12.960500000001048,
+      "token_usage": {
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "total_tokens": 0
+      },
+      "monetary_cost": null,
+      "monetary_cost_reason": "No dated provider pricing/invoice bound to this run"
+    },
+    "single_router": {
+      "runs": 4,
+      "expectations_met": 4,
+      "statuses": {
+        "completed_degraded": 4
+      },
+      "cited_drafts": 4,
+      "citation_links_valid": 4,
+      "model_reserved": 4,
+      "model_confirmed": 4,
+      "tools": 14,
+      "median_execution_seconds": 14.124499999999898,
+      "token_usage": {
+        "prompt_tokens": 3217,
+        "completion_tokens": 334,
+        "total_tokens": 3551
+      },
+      "monetary_cost": null,
+      "monetary_cost_reason": "No dated provider pricing/invoice bound to this run"
+    },
+    "agent": {
+      "runs": 4,
+      "expectations_met": 3,
+      "statuses": {
+        "completed_degraded": 4
+      },
+      "cited_drafts": 4,
+      "citation_links_valid": 4,
+      "model_reserved": 16,
+      "model_confirmed": 16,
+      "tools": 12,
+      "median_execution_seconds": 14.680000000000291,
+      "token_usage": {
+        "prompt_tokens": 12538,
+        "completion_tokens": 1173,
+        "total_tokens": 13711
+      },
+      "monetary_cost": null,
+      "monetary_cost_reason": "No dated provider pricing/invoice bound to this run"
+    }
+  },
+  "summary_lifecycle": {
+    "rules": {
+      "runs": 2,
+      "expectations_met": 2,
+      "statuses": {
+        "cancelled": 1,
+        "failed": 1
+      },
+      "cited_drafts": 0,
+      "citation_links_valid": 0,
+      "model_reserved": 0,
+      "model_confirmed": 0,
+      "tools": 4,
+      "median_execution_seconds": 6.648000000001048,
+      "token_usage": {
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "total_tokens": 0
+      },
+      "monetary_cost": null,
+      "monetary_cost_reason": "No dated provider pricing/invoice bound to this run"
+    },
+    "single_router": {
+      "runs": 2,
+      "expectations_met": 2,
+      "statuses": {
+        "cancelled": 1,
+        "failed": 1
+      },
+      "cited_drafts": 0,
+      "citation_links_valid": 0,
+      "model_reserved": 2,
+      "model_confirmed": 2,
+      "tools": 4,
+      "median_execution_seconds": 8.35149999999885,
+      "token_usage": {
+        "prompt_tokens": 1616,
+        "completion_tokens": 179,
+        "total_tokens": 1795
+      },
+      "monetary_cost": null,
+      "monetary_cost_reason": "No dated provider pricing/invoice bound to this run"
+    },
+    "agent": {
+      "runs": 2,
+      "expectations_met": 2,
+      "statuses": {
+        "cancelled": 1,
+        "waiting_information": 1
+      },
+      "cited_drafts": 0,
+      "citation_links_valid": 0,
+      "model_reserved": 4,
+      "model_confirmed": 4,
+      "tools": 4,
+      "median_execution_seconds": 9.953000000001339,
+      "token_usage": {
+        "prompt_tokens": 2936,
+        "completion_tokens": 275,
+        "total_tokens": 3211
+      },
+      "monetary_cost": null,
+      "monetary_cost_reason": "No dated provider pricing/invoice bound to this run"
+    }
+  },
+  "summary_by_partition": {
+    "development": {
+      "rules": {
+        "runs": 3,
+        "expectations_met": 3,
+        "statuses": {
+          "completed_degraded": 2,
+          "cancelled": 1
+        },
+        "cited_drafts": 2,
+        "citation_links_valid": 2,
+        "model_reserved": 0,
+        "model_confirmed": 0,
+        "tools": 9,
+        "median_execution_seconds": 7.359000000000378,
+        "token_usage": {
+          "prompt_tokens": 0,
+          "completion_tokens": 0,
+          "total_tokens": 0
+        },
+        "monetary_cost": null,
+        "monetary_cost_reason": "No dated provider pricing/invoice bound to this run"
+      },
+      "single_router": {
+        "runs": 3,
+        "expectations_met": 3,
+        "statuses": {
+          "completed_degraded": 2,
+          "cancelled": 1
+        },
+        "cited_drafts": 2,
+        "citation_links_valid": 2,
+        "model_reserved": 3,
+        "model_confirmed": 3,
+        "tools": 9,
+        "median_execution_seconds": 8.312000000001717,
+        "token_usage": {
+          "prompt_tokens": 2424,
+          "completion_tokens": 270,
+          "total_tokens": 2694
+        },
+        "monetary_cost": null,
+        "monetary_cost_reason": "No dated provider pricing/invoice bound to this run"
+      },
+      "agent": {
+        "runs": 3,
+        "expectations_met": 2,
+        "statuses": {
+          "completed_degraded": 2,
+          "cancelled": 1
+        },
+        "cited_drafts": 2,
+        "citation_links_valid": 2,
+        "model_reserved": 9,
+        "model_confirmed": 9,
+        "tools": 7,
+        "median_execution_seconds": 11.96900000000096,
+        "token_usage": {
+          "prompt_tokens": 6827,
+          "completion_tokens": 644,
+          "total_tokens": 7471
+        },
+        "monetary_cost": null,
+        "monetary_cost_reason": "No dated provider pricing/invoice bound to this run"
+      }
+    },
+    "prospective_synthetic": {
+      "rules": {
+        "runs": 3,
+        "expectations_met": 3,
+        "statuses": {
+          "completed_degraded": 2,
+          "failed": 1
+        },
+        "cited_drafts": 2,
+        "citation_links_valid": 2,
+        "model_reserved": 0,
+        "model_confirmed": 0,
+        "tools": 9,
+        "median_execution_seconds": 6.609000000000378,
+        "token_usage": {
+          "prompt_tokens": 0,
+          "completion_tokens": 0,
+          "total_tokens": 0
+        },
+        "monetary_cost": null,
+        "monetary_cost_reason": "No dated provider pricing/invoice bound to this run"
+      },
+      "single_router": {
+        "runs": 3,
+        "expectations_met": 3,
+        "statuses": {
+          "completed_degraded": 2,
+          "failed": 1
+        },
+        "cited_drafts": 2,
+        "citation_links_valid": 2,
+        "model_reserved": 3,
+        "model_confirmed": 3,
+        "tools": 9,
+        "median_execution_seconds": 8.562999999998283,
+        "token_usage": {
+          "prompt_tokens": 2409,
+          "completion_tokens": 243,
+          "total_tokens": 2652
+        },
+        "monetary_cost": null,
+        "monetary_cost_reason": "No dated provider pricing/invoice bound to this run"
+      },
+      "agent": {
+        "runs": 3,
+        "expectations_met": 3,
+        "statuses": {
+          "completed_degraded": 2,
+          "waiting_information": 1
+        },
+        "cited_drafts": 2,
+        "citation_links_valid": 2,
+        "model_reserved": 11,
+        "model_confirmed": 11,
+        "tools": 9,
+        "median_execution_seconds": 11.515999999999622,
+        "token_usage": {
+          "prompt_tokens": 8647,
+          "completion_tokens": 804,
+          "total_tokens": 9451
+        },
+        "monetary_cost": null,
+        "monetary_cost_reason": "No dated provider pricing/invoice bound to this run"
+      }
+    }
+  },
+  "previous_development_receipt_sha256": "db9cfc023c5ff640a5e2dd4d9b25fb182211a6d1484de525a9bca0fe3f5a310d",
+  "all_cases_met_expectations": false,
+  "admission": {
+    "independent_holdout_admitted": false,
+    "blockers": [
+      "same_source_family_across_partitions",
+      "independent_annotations_missing",
+      "protocol_and_expected_behavior_author_visible",
+      "synthetic_controls_are_not_physical_entity_holdout",
+      "independent_entity_and_annotation_evidence_not_verified"
+    ],
+    "exact_waveform_overlap": [],
+    "previous_development_overlap": [],
+    "shared_source_families": [
+      "analytic_am_v1"
+    ],
+    "synthetic_waveform_bytes_disjoint": true,
+    "diagnostic_release": false,
+    "factory_trial_approved": false
+  },
+  "independent_holdout": false,
+  "semantic_quality_qualified": false,
+  "factory_trial_approved": false,
+  "methodology": {
+    "strategies": "feedback-aware deterministic rules, one-call router offered the same rules, and production Agent",
+    "transport": "in-process ASGI, real database/files/numerical services",
+    "repetitions": 1,
+    "warmup": false,
+    "independent_acquisitions": 0,
+    "source_families": 1,
+    "intervention": "Scoped dispatch wrapper injects cancellation or confirmation revocation after the actual frequency result; no synthetic model/tool output",
+    "separate_input_ids_per_strategy": true,
+    "source_bytes_paired_within_case": true
+  },
+  "limitations": [
+    "method/RAG relevance",
+    "comparison-declaration benchmark",
+    "local model qualification",
+    "independent engineering labels",
+    "field effectiveness",
+    "Public developer-authored controls; prospective synthetic partition is not independent equipment holdout",
+    "Rules baseline is upgraded to handle the conditional policy, so outcomes are not directly comparable to T05a rules timings",
+    "Lifecycle outcomes are boundary checks, not model reasoning successes; no monetary or general latency superiority claim"
+  ],
+  "run_completed": true,
+  "recorded_at": "2026-10-31T08:51:21.674462+00:00",
+  "run_id": "3d5b61de81b94c8db2380e2ccca69eb2",
+  "pre_run_manifest_sha256": "4b4c4a5f12f1f70cdf27190eaf14284430f4caa2449cb1c1b792be43841d366f",
+  "frozen_at": "2026-10-31T08:47:20.407753+00:00",
+  "source_fingerprints": {
+    "backend/.env.example": "c2db7461ee25a4b081344042edf2d24b44215e3aa223a33857a899b9855639e7",
+    "backend/config/agent-evaluation-v1.json": "30aeb6dfc3d6c3e1fcbae0d8a08bcbb35ca087319df8fc59ea592dfbc11695dd",
+    "backend/config/agent-feedback-evaluation-v1.json": "92f0e485f185b407af4bc0eb1d36e8396c75d505e1a17c24833582756b0e3934",
+    "backend/config/embedding-bge-m3.json": "b152680043e01fb299b1b5a18ee872d472e943370d05f714f31264a525aeddfa",
+    "backend/config/formal-models.json": "0e6e5cc90271c82707cd230518d2fd03fc8866ec70587e1ae04920e37ed94639",
+    "backend/migrations/env.py": "d95a8389d2bc54622b039303feab2692eb3425438985001d7552a92b77c50df5",
+    "backend/migrations/versions/0001_identity_audit.py": "baf012d4a5cd67c374ca15b024ca9ef634c714b20df231646752a7de89a0316b",
+    "backend/migrations/versions/0002_assets_files.py": "ac817ba2a69e1c817c221ad1e02f55cda4deddf872bdcac6c74d334f0fc88f26",
+    "backend/migrations/versions/0003_measurement_versions.py": "d5e55e3ccb0350bcec2efb1e3c267ae6221f994e8a8092bd02cb5aecb64f2dfb",
+    "backend/migrations/versions/0004_analysis.py": "2674a53358e58c61d9d31413c9047d349b4216a32e9d15f86fdf9f8f51331c55",
+    "backend/migrations/versions/0005_artifact_history.py": "c79a75a8381b32277665e283b17085aa9b1bccaa46ad7c74dec1d236aaa33299",
+    "backend/migrations/versions/0006_file_validation.py": "0f4a3ad01397798ed246fb83f9c816cf016447f52d2bfe202964e1221006cefc",
+    "backend/migrations/versions/0007_analysis_snapshot.py": "bc83edc40f6c6a886790b35dfa42023e3bd4d09761a91c04f529058925c02cb6",
+    "backend/migrations/versions/0008_legacy_imports.py": "cb46398127f862672cb1e71f8f21015bf550ce9fe7e9a6c6eff47791579e9b1f",
+    "backend/migrations/versions/0009_diagnostic_contexts.py": "366a5ea41f682c3e1cac7bc1efc8610c747303de664ebebc8fcb67854a2b5c90",
+    "backend/migrations/versions/0010_tool_runs.py": "6c38f9a4202888a445d012cc25a04999d02b66ea317cda5ada521d048f028941",
+    "backend/migrations/versions/0011_matching_evidence.py": "3ab8d05d33aab72af742391a0e1f7c5483c9f242facf44454ca1eaa7c6299768",
+    "backend/migrations/versions/0012_comparison_runs.py": "c2fba4fdc3c6496a621f77e8cd05376182fe30267fd9facf5b4d095f55011a4b",
+    "backend/migrations/versions/0013_agent_tasks.py": "842d36a2b095fed8dc56f4669f6d185cfb3401ce1366537dd18d183086c9e777",
+    "backend/migrations/versions/0014_agent_graph.py": "73d2bb902674563ee58fafbb68fd87db7899b867824b4d3bfe79d4991dea1f2d",
+    "backend/migrations/versions/0015_knowledge_documents.py": "3efc56d2fdad6a49d492029136904e8e9b7febc1d12dfe2f3dc48e61fde3dd5f",
+    "backend/migrations/versions/0016_knowledge_vectors.py": "c629d0e1d93dd458f15993757236d86cd9c51303e76e1c35b33f8a99709768eb",
+    "backend/migrations/versions/0017_agent_knowledge.py": "3823dd43a95e9b3ba33d47f75050b37547c53eacd76d92c192d3ccf13c8bdba3",
+    "backend/migrations/versions/0018_agent_models.py": "9a8a2c9276ce7ded7cdeca13f6390c1b82299fd75a883d89237b975b677ea8e3",
+    "backend/migrations/versions/0019_model_method_graph.py": "50a6c72f9269feb47d6360fdff2e64891aa4cccf8578542194427c7a6a862ee9",
+    "backend/migrations/versions/0020_numeric_model_graph.py": "d3744c4834ec6aaeb3656d3347b04e34deddcd5a7b55b49077c74cbab5a90714",
+    "backend/README.md": "6f7cd80fe28dcac3c42d7f6f3c879b7cd6d3b49d0831d75373768e71fddf40e1",
+    "backend/requirements.lock.txt": "0d62d852c7ecdf17eddd4d5a459b56b9d4c198d52f1c8ce26ead6e329b0b50c7",
+    "backend/scripts/benchmark_agent.py": "8d83afb13007493d6d0f543b1dcf3a0ee798ef4cc6c92061ed289951cc781853",
+    "backend/scripts/benchmark_agent_feedback.py": "2c1d9c97a580a699303854c389c059dbec4fa3bfb2e7435c748f23486d477e2a",
+    "backend/scripts/benchmark_formal_agent.py": "20a39aba2d8bae65877a2f934f86af9d6c357cf6bd9aebc5b17ea0d5d3bd18d6",
+    "backend/scripts/benchmark_m1.py": "c3b46ff18ebb70883e27b22f1d1ba7d4e86bc63a474384407c6142e2bcd31552",
+    "backend/scripts/benchmark_public_data.py": "4c2ea98c0b17d326949edaca28a74ff0ea1b397076be810ca8a2df87ab0bbc9d",
+    "backend/scripts/benchmark_retrieval.py": "ea1d9312970c370b5be3a49179259b0372764c4958a834df7beb437f0c3d7675",
+    "backend/scripts/benchmark_time_adaptation.py": "d0c95a053564f224ae10b702d0e9b40b8e73db34c3aa3d15807085fd4ab917ef",
+    "backend/scripts/check_deepseek.py": "02a6a5f5538e10b80f12f35b6464a50a9849fea87e7a1ae0f6d9be7d720536c6",
+    "backend/scripts/check_secret_hygiene.py": "c60c9a6bd1b2fe6aade9f8a0d691118b6ba2490ebac173e8fc42971997b745df",
+    "backend/scripts/export_m2_tool_contract.py": "39552039e07ed244c7e3b233787083ee229f5bd41322f1a71f6ed11b3c51aa78",
+    "backend/scripts/export_m3_agent_contract.py": "249feac0692c3980411e8d7bf6f670610b000efe2815e15092b8c0b609598f8c",
+    "backend/scripts/import_legacy.py": "5e6972f008af87b47986e0a72da2873416fe0a7eaff0246eeb8e4e9285ed7737",
+    "backend/scripts/m3_checkpoint_probe.py": "e0ed07e35ee9b7f66f586616f8e0b2842503a0154292c023b44e0df9f9d4eeaa",
+    "backend/scripts/m3_knowledge_probe.py": "113e2ceac97ef23bee918b9517243f22625d47ca2586d3794249104799d54d8b",
+    "backend/scripts/m3_model_graph_probe.py": "085f72eb0457120db9f4bf3b579ca8f1fca01f28b0f1d9866eeaafde3b3ddcfa",
+    "backend/scripts/m3_numeric_graph_probe.py": "ab07d2376c1d457834b7c5222f62eff92edc98ff45178193435c3e26a59306ba",
+    "backend/scripts/manage.py": "31218fe7f9924a28f65a4e71adbe9a070ebf10882965dba01354c4205d4ea35a",
+    "backend/scripts/manage_diagnostics.py": "e53477b4170a5d9e5843386b75155af7833dba56a7243c3b0782bc477f4187e9",
+    "backend/scripts/migrate.py": "4a024a2a75e35e6b94a91c23ee45cc4f697d239b4a754fd27c3eef76fd533e91",
+    "backend/scripts/prepare_holdout_data.py": "ef1ced477a2cadf3a6b680f72264c66c2bda6a3e9e82fd69179c78c4a55c408e",
+    "backend/scripts/prepare_public_data.py": "0f9ab70e052adb87406328698c51062e6d327b18191f6b925f94c2f4adaa61cc",
+    "backend/scripts/reconcile_files.py": "10af01c6f967e3946a19e4e7d6ac7b304d93cc414a65dc8bcc2d0836b27dd083",
+    "backend/scripts/setup_vector_extension.py": "9c67dfd9452d4d7f0e057f4c6a0800312fa51ec1126468d77685532bae88aa84",
+    "backend/scripts/source_manifest.py": "a348841aa724d62b0671432e73e59e4660113c9290bb83b78721e98aa32d4e2d",
+    "backend/scripts/validate_public_readiness.py": "bec6613e0ad6ffe1672543fbfe7fdbd4b58988b23cd4c87dcee61e548478821f",
+    "backend/scripts/verification_cli.py": "7a290dc336fd7680486741eadc0b7ea843bb7504902cd70f3b9337f9a26a0629",
+    "backend/scripts/verify_agent_knowledge.py": "cc67bba2384b42a34991c0780dd45963595c441fba6848a716cf509da15c5f61",
+    "backend/scripts/verify_analysis_flow.py": "342fbc83bd324170b430e43b108b7b209776d722bccc8e3adeec263f592c09e1",
+    "backend/scripts/verify_deepseek.py": "ba7f66711e479378013ebc6e851cbb86c4aa1ab9ca96e0aadc16ebe023933c03",
+    "backend/scripts/verify_formal_embedding.py": "edce9b7187d27f0a08166bc3f9c148dc7862f5c4601a139b7d22890713df5e11",
+    "backend/scripts/verify_formal_models.py": "effec1cb46eaf23e7f9f035d843d968b881fec72ad808060cf6fca2dc200b7a6",
+    "backend/scripts/verify_frontend_build.py": "49dc3533c7360d1a3ab3e88c9240f3789aa53ae8bbd0ab9d0b1e335af0fc9f3c",
+    "backend/scripts/verify_holdout_reproduction.py": "8c6aadec44be631cc9b83d58202c1fe6df6150242f0675017e7493843dbb9b39",
+    "backend/scripts/verify_knowledge_publication.py": "355f3777eb8870716d9afa4fe85a70ad7fcac87572acbfc4165ae5c7292f524d",
+    "backend/scripts/verify_knowledge_retrieval.py": "6322f298cc5c4979b5c029629bb8b8e8706b7b9a4e4dec62ee43d581a50d345b",
+    "backend/scripts/verify_m2_acceptance.py": "eb0029702239ea2e14f934d7ffc23762d1df29067242a4cffce45caa6ff50615",
+    "backend/scripts/verify_m2_comparison.py": "283848baac74934c00270200a03819c105d6fba02619047b93c1e50974c800c7",
+    "backend/scripts/verify_m2_comparison_flow.py": "3c596756d1e707347e909f379140d8ef1b5b97c46b15f72b921f3850ec8f2453",
+    "backend/scripts/verify_m2_contexts.py": "9c4c287836aecfee9627496aa2e6b026d67f7effcdf7912a9a3c7875dedf0750",
+    "backend/scripts/verify_m2_matching.py": "a9eafbf8346b86765d1d1eb79c850cc083454cacd0c32660f99f2ff6c09219b5",
+    "backend/scripts/verify_m2_matching_flow.py": "6be69e26a5c833e0df03e853397e52902186470fda15ffeee168e7812b5a920e",
+    "backend/scripts/verify_m2_numerics.py": "28c2c67e4b9f314e07e7486b548846af9dd9888aa7b417325af68adb3de965f7",
+    "backend/scripts/verify_m2_release_baseline.py": "69796e01091679b9e2c28fff5a66874cbc6ae8d769d04250a62f0bccb8f9e72e",
+    "backend/scripts/verify_m2_tool_flow.py": "8700a9959e79b0d338c5cbf02314a987abb5599a8bb60508272a2fab6e670e00",
+    "backend/scripts/verify_m3_checkpoints.py": "83c49db8d3be07483f7ea41cc422db95536bb99b0a53d4582da122891fb3081b",
+    "backend/scripts/verify_m3_durable_flow.py": "8c67d01142afb56e96b9b8fd9cc2121714d909baf27592f2bbc03119213082ae",
+    "backend/scripts/verify_m3_isolation_flow.py": "6523d6dae782bd4078ab9e67eb3eebf2e8cb0fb2653efbdc168a9ce9f2d3b2cc",
+    "backend/scripts/verify_m3_t01.py": "7ddaaa577b79fcf5a2b3dfdec3835e85d2cf5f50d7c060810e29bd9971c02301",
+    "backend/scripts/verify_m3_task_flow.py": "5966b22879ac72aa3106df8b23dbfc47896e3e6667c7f11d14ce4b93f2326a9b",
+    "backend/scripts/verify_measurement_flow.py": "e1eb24f1e8aa56f9bf3a87dcada96f03b28cf2ba9a2442f26f9636bdd9ccf4c4",
+    "backend/scripts/verify_model_method_graph.py": "db731ae784e394731dc960db044471e642801b2b9db08295d575959da9170de6",
+    "backend/scripts/verify_model_numeric_graph.py": "1129ae63ded7412044b76eb805919107d50297c1a48017b6700bec34d0263f28",
+    "backend/scripts/verify_public_data_reproduction.py": "1750a5688bf5ebc29a8f24c9162af3d41f74b06f0cdc7cca299591219c0d2172",
+    "backend/scripts/verify_time_adaptation.py": "3028f356b4953550ebcbbb2c810a56e4bcd159619b155e4eee307e514d12c2bf",
+    "backend/src/vibradiag/__init__.py": "edb391170e4ca196b3bc73734a8dd111b18ce08d81993c8aa52ad3c883e55dcc",
+    "backend/src/vibradiag/agents/__init__.py": "3bd42a09fe4185d37a208033e79d1b72d092d56dc2847c7c8a01f4a8b20c91b8",
+    "backend/src/vibradiag/agents/contracts.py": "cc60a23398da7c7abb97079ba4c3c5bea4c32920611649bcc34590ce18415266",
+    "backend/src/vibradiag/agents/formal_contracts.py": "f078d10ec37d9e797c29aee9ea0d300631d75368dacfac23a444d88d5749025b",
+    "backend/src/vibradiag/agents/formal_policy.py": "150b19e0025cb29ea4fb17a82f125357bbb07188d41a504ad52b979268e3b077",
+    "backend/src/vibradiag/agents/graph.py": "363b17986b1fc745b1494fa0ecdd8a38eb32b73c15fc96d649b705d68ae665c6",
+    "backend/src/vibradiag/agents/graph_state.py": "fa2cd0cc90aacd905920b77e9695425d410d29a59cc632fb8f00749fd86ecf21",
+    "backend/src/vibradiag/agents/knowledge_graph.py": "62412b66af0f51d859e704b4acd2c30c4bff5ff052e94fcb0fa75bd08e4cada6",
+    "backend/src/vibradiag/agents/model_contracts.py": "f56eaed1eb9234164290a8f734a25bbee8ba84df2d8672c8ef3832b190bbcccd",
+    "backend/src/vibradiag/agents/model_method_graph.py": "5df4a16add2406f3a96837e579d0bf1c52663e04a2cd5931dd6d94c1fa643b70",
+    "backend/src/vibradiag/agents/model_numeric_graph.py": "1759a2992ca906b5c5df2a82053cd7a3c66a7131f3b016678b8364c62f4d52eb",
+    "backend/src/vibradiag/agents/rules_graph.py": "17589fd6d04a49bc1401f85e4272e5a9dcb30ae1f6514cc3043fd59b85115d43",
+    "backend/src/vibradiag/analysis/__init__.py": "e53eacf894cd2aedffea13a07093ff997cf88a911369a474cc6922533defd1c6",
+    "backend/src/vibradiag/analysis/basic.py": "5378fef761cd169a8ff70c851e0a8794aa0ebdf3ffa7c6071652bf82a373670e",
+    "backend/src/vibradiag/analysis/bearing_frequencies.py": "c242d9173964844941021ab013aa15833b91339cc75c68ff997215a25c2154b8",
+    "backend/src/vibradiag/analysis/comparison.py": "c8eeba68e9ed4b92cf3ef2025f58d42c8db185be829f06920580996a8f1e5c7a",
+    "backend/src/vibradiag/analysis/csv_input.py": "89fd5eb2a62528ea7193641fb6597c87fe8cbd5a801e66e7f431366a9af13f79",
+    "backend/src/vibradiag/analysis/envelope.py": "dd769a9d8f1fe2ab010ed2ed8372d40af5bc50e72e07fbe447e89ec708b83d87",
+    "backend/src/vibradiag/analysis/matching.py": "14fbf97fc726b27a7954d1f5a5cd1aad14cf5e0459806cb83c5fe158e07d2e0e",
+    "backend/src/vibradiag/analysis/signal.py": "de3d376c88eace0e8231045593b251deefba0d066c17f890b508d693938d46f0",
+    "backend/src/vibradiag/api/__init__.py": "3a0732258bfbf0ca1cbd72e453a20a281f9b094616185b0cf8a3fd4017b683d0",
+    "backend/src/vibradiag/api/dependencies.py": "e4a30487df3472e941b92caf10fba784b621688647c7dee8c69c3ca90db15595",
+    "backend/src/vibradiag/api/errors.py": "c3d59be9da20630565ceb19f3d2d557af585f8eefd9562370216a668868e8a33",
+    "backend/src/vibradiag/api/router.py": "18b9e02695e69817cbcc2f4021383eb0a547776c7e27c449df089a512e3cee45",
+    "backend/src/vibradiag/api/upload_limits.py": "7ce6fb5a0d10262c2f61fac6b609855195540bdfedcba39beb07e47f56cc211e",
+    "backend/src/vibradiag/api/v1/__init__.py": "7085c3419a21d6ac81828eb17d360bb5e7064a8c94916d3b84bd531cbf96c1a2",
+    "backend/src/vibradiag/api/v1/agent_tasks.py": "246e4499f33d4efafd67cfa982138157f6a2e947554faf256af299c38e7e3a9f",
+    "backend/src/vibradiag/api/v1/analyses.py": "6f41e2cf242787afe31ec695829f32c878347ebed5923fe7fdcd32085fbec1ae",
+    "backend/src/vibradiag/api/v1/assets.py": "1260806666eef42a82ada1e7c1381dacd48651168805f347d86382699709b916",
+    "backend/src/vibradiag/api/v1/diagnoses.py": "a6336c0d7f4e1ea103f9a69b0082a11d9a8e78b863260e1f13fa113ac8dfa432",
+    "backend/src/vibradiag/api/v1/evidence.py": "68fa70f261fc6fdddd4fcc2b13537cc189a03d9c87fe60228cbfdf49f5c8da79",
+    "backend/src/vibradiag/api/v1/identity.py": "1173c44e29eef4a52d3e62828071a347b842f5936411f84fba2d297bca737eae",
+    "backend/src/vibradiag/api/v1/knowledge.py": "05921aedf2fb8aaffafe292593c60494ce642b4eb430b6583575d6824eaf81e1",
+    "backend/src/vibradiag/api/v1/knowledge_documents.py": "7e6eb0656f7e667ea93da51444fe0dc82e8f7bc02b59464760a2d98da2620c2b",
+    "backend/src/vibradiag/api/v1/knowledge_indexes.py": "3be1c4570b810133d606b977ceee4995d885da255ef5c529bd0c1d3a4229567e",
+    "backend/src/vibradiag/api/v1/measurements.py": "b1733be82affd1a7540e87ca021399da4d7b95c1a7e78648d9f9397e7e4a40b5",
+    "backend/src/vibradiag/api/v1/persistent_analyses.py": "4471583fde9db4ae07082e7bd692629f25315da86f761c7b48d0ed41e4e2160a",
+    "backend/src/vibradiag/api/v1/tool_runs.py": "ad6dbb723cddb8b039a9c078ba61eee4ba81c6eb4efffd0b6f3ee1409bcca4b1",
+    "backend/src/vibradiag/core/__init__.py": "1d8e08ff4a1bda8fc66802853290467621c58475ebc5eb46ede82542d044e36c",
+    "backend/src/vibradiag/core/config.py": "70c6da1ba8548a9874aacfb87ab16641f23fa76ca879e5249f780470d05c01df",
+    "backend/src/vibradiag/core/paths.py": "c64350dd78faee67496f6c48107e68809669e173d3caf9ca32e8f32dfaba6192",
+    "backend/src/vibradiag/domain/__init__.py": "4b23a1361a501611a73acb3816934fc28043d8443073e774c6e98a24e280ceab",
+    "backend/src/vibradiag/domain/errors.py": "047fcd3c85acc75fa987ab2f6424a7156c357363a5e2fc5c31c06c73d1adc7f1",
+    "backend/src/vibradiag/domain/knowledge_text.py": "d4e709c1e5f88ddf5195aecaf3ddf5ba3f336241aad9c15127be956332a8c6d5",
+    "backend/src/vibradiag/domain/measurement_errors.py": "04bfdaa445db6658f38ac6c0d04cdec90d43cd454fbe0b9113e011e95ebaa524",
+    "backend/src/vibradiag/domain/tool_results.py": "014a18c8803214b3b5a981fb9f2f746d9d70493a1bd4a74f38d3ca8e749ee7c8",
+    "backend/src/vibradiag/evaluation/__init__.py": "bbc928833da913a3c27f6cca8ff9075cf3dea023ab3d05b31ca44d256a058e5c",
+    "backend/src/vibradiag/evaluation/agent_admission.py": "ca6dc4342eff7fd610cb448c7c58206acff05379bc0ff21f6c0b75b18f05a8f5",
+    "backend/src/vibradiag/evaluation/agent_benchmark.py": "76ddcad10e6045f428ffc27dd9833c0fd1b078e08cf4191bbe28db2ede47884e",
+    "backend/src/vibradiag/evaluation/agent_metrics.py": "2ef440e1a83b739cdce7e1ecc5e923a8afbf535a85eae01f3fc1e1f93efe088f",
+    "backend/src/vibradiag/evaluation/baseline.py": "1951312b5f6169005f73a4ab82fafb7f17fcfe557a275e5e17a84f58d554f5dd",
+    "backend/src/vibradiag/evaluation/datasets.py": "1bb74f5d6864c8a3be56ba26942e56f0d64cc9cc8822a8456916f153bb314847",
+    "backend/src/vibradiag/evaluation/feedback_benchmark.py": "10ef24859e0061b0ed13942c4903c7ec1dfc314125fa6f89092fe2777ad4f552",
+    "backend/src/vibradiag/evaluation/holdout.py": "c00674e446e3e683dc671fc50a607ed802a9a3626f422796c42b95b3b0a35b6a",
+    "backend/src/vibradiag/evaluation/m2_acceptance.py": "dbb7e75f9f7a271ecdd8c0d26b2c990fc9ee104b82f0eeee94c129205b39d5e3",
+    "backend/src/vibradiag/evaluation/readiness.py": "972d4de0baf8456814a3d3343212ed87c105269a5530f207727dcd9c9e4f7be8",
+    "backend/src/vibradiag/evaluation/single_router.py": "03835d9c60f03801f013709fdce99a206a5a6f1519ea90cf02373277a1f2d70a",
+    "backend/src/vibradiag/evaluation/time_adaptation.py": "17447412cce087cb7b0764e033857a418ba3d487a7aa597d0768add29de62101",
+    "backend/src/vibradiag/infrastructure/__init__.py": "11f998af66bd5d1ca53372bfcc886c9de0891e5ed9c144da535724b2612d8fe1",
+    "backend/src/vibradiag/infrastructure/compute/__init__.py": "4656c476eba756150a2fa4f8ea08fc5f9231e39aeaa642541b3f5ab2605ee7fd",
+    "backend/src/vibradiag/infrastructure/compute/child.py": "38ac4c7a25b29981652d3e9256178c6af2684b124587ed67508710d96c32e4a7",
+    "backend/src/vibradiag/infrastructure/compute/codec.py": "b355ab4442afbff7c85eabe32be5a0df4a27339f22985a09c89d86818161aaef",
+    "backend/src/vibradiag/infrastructure/compute/process.py": "237fd649530445b47b1a324b3d28f567397b482139b21479ae8b3cd1bcd916c9",
+    "backend/src/vibradiag/infrastructure/compute/runner.py": "d9494c8a16510f947aa1f16d501bb69e89e8276bbe7954dae3f8823e5b2ef0ee",
+    "backend/src/vibradiag/infrastructure/llm/__init__.py": "eeaa9057639d598d5872bb4faa7675bcc18c0137efd77403b8018a30b58f611d",
+    "backend/src/vibradiag/infrastructure/llm/deepseek.py": "42787656508befb49b976348174393c8dc73b23955ce024ebbb3526026cf4686",
+    "backend/src/vibradiag/infrastructure/llm/formal_gateway.py": "bf00b6a6eeac626c8355ce3fc69215667ae5e872ea3de29526245576f5508039",
+    "backend/src/vibradiag/infrastructure/llm/ollama.py": "cf9733c5728450c70d1191dc794ace85b846bb4910fe289c7a1eec4300fe21d8",
+    "backend/src/vibradiag/infrastructure/llm/router.py": "9d73589c45cff2f2da230d13fcf3af4e0041625f66d93601d87f45647d9754c6",
+    "backend/src/vibradiag/infrastructure/persistence/__init__.py": "be07b5ab18ad79d741859f4052a7fe6eb330a8f7a76765ac9eb5ee546844ed2e",
+    "backend/src/vibradiag/infrastructure/persistence/analysis_store.py": "10c9eb2ec384be5af0398aa8ee70a0b6bd92fff916355b7795500d99c907557a",
+    "backend/src/vibradiag/infrastructure/persistence/database.py": "e7ea3b6d093016a62d6a981185d38c49f50610e234c8d9dad4e86548e2df27cf",
+    "backend/src/vibradiag/infrastructure/persistence/file_store.py": "cecbca056b2dd9229db56abac319df954309c1bd7833f82a6dcf42dd8cdfce63",
+    "backend/src/vibradiag/infrastructure/persistence/graph_store.py": "220a35b7b13e9727718f8880ba51a7afb538b1dbc359fbfe9625aa2f5ddfd8e2",
+    "backend/src/vibradiag/infrastructure/persistence/local_repository.py": "11b9615192f1ed54201c34fb94147c1566f2623a66ea2bb0c77bc172dece82d5",
+    "backend/src/vibradiag/infrastructure/persistence/tool_store.py": "eb8e7cfc0dcf9c885123962d66b0ac73a6689bd110801b20a435d7717bb2c85b",
+    "backend/src/vibradiag/infrastructure/retrieval/__init__.py": "1c30ac32d8804d2444d1cc414dbb71ee28db8bdbea6fb6e1ed6415d0633f2d17",
+    "backend/src/vibradiag/infrastructure/retrieval/embedding.py": "e3d677329c1396e586aed680e5c605c51e63ab7c6a9834a59ae298dbd9218388",
+    "backend/src/vibradiag/infrastructure/retrieval/vector_index.py": "2bcba20cc111ef3fe74c62d905f20a98bdee5ed650f59f79b542d02d65fc8550",
+    "backend/src/vibradiag/infrastructure/retrieval/vector_readiness.py": "732370d1010c8b9b309461e717a0f73775a19d5b6239c7c38acd9095553663d4",
+    "backend/src/vibradiag/main.py": "62121b35c12d01859a1f27f7fc62090a8e3f7afb692d6495b8263804da2c0948",
+    "backend/src/vibradiag/schemas/__init__.py": "8e4cd634f0a1ddf7b8a47bef23faef2b67441235b9e330ce3d65d1a6c7297f7d",
+    "backend/src/vibradiag/schemas/agent_tasks.py": "0b2419a563c35160c07d402990aaf49b6caced31631ab6ef16590d4187eddcef",
+    "backend/src/vibradiag/schemas/analyses.py": "7861e5a00d69ef1d3d2e6214867b347ba38bed958a3d1b17900b970bfdde60f4",
+    "backend/src/vibradiag/schemas/comparison.py": "4f133529be63781bedb72825f5fe1d9ab3925ada6ffc561ecd20051ec732805b",
+    "backend/src/vibradiag/schemas/comparison_declarations.py": "6b59cd6e7141347a6b8afcee86edaf7a56b023000074064469d7276516f26734",
+    "backend/src/vibradiag/schemas/diagnostic_contexts.py": "d03e4d1a5de02ffa757cab6624098af97c99b2772430ef7fd683236dc3b80795",
+    "backend/src/vibradiag/schemas/knowledge_documents.py": "2beb8d164a417331ff11abaf31cd1fabf40852207db852ec2e323370ef821a44",
+    "backend/src/vibradiag/schemas/knowledge_indexes.py": "4b542f0a60d16d346f561bf5377633fd48a2bc208621fb558bb427abbd66ed06",
+    "backend/src/vibradiag/schemas/matching.py": "2e2f0005d1d0fb7f978d32766c573fbcfd1292cddbef7ff8864642109f05ff63",
+    "backend/src/vibradiag/schemas/measurements.py": "f2ef25ef1d72e61eae51cbaf631e6652e2ff9f84db48ebf869f54ff1781dd7a2",
+    "backend/src/vibradiag/schemas/requests.py": "e53b872c99ccb289007adb2cf24dd0ac2d49a13cd29f5ef73faea2cedc621165",
+    "backend/src/vibradiag/schemas/tool_runs.py": "f526298252a96051c917ef11989bf5c283cd867c5854dca4c14a11720e4b8184",
+    "backend/src/vibradiag/schemas/tools.py": "1baf54398e28a032f28e39346d311e47f055b5d5dad2c61a5d9133aa2f85d9de",
+    "backend/src/vibradiag/services/__init__.py": "29e11776481bc42eb2c21d31ee0682a8a49bea8ec1c92e2a51350470c8f71322",
+    "backend/src/vibradiag/services/agent_knowledge_service.py": "f292bfcb68252df5d5472342085de2f9400b1d03f6c43759cab394459b702910",
+    "backend/src/vibradiag/services/agent_model_service.py": "f2e39794adf410f0bee3f2a42eaa9c84b4b45bdc633a30d3aa07b942b1c0588d",
+    "backend/src/vibradiag/services/agent_numeric_service.py": "c201caa416b8ae5130ade82f5a014e3315bdc2ce90a2fbc2c348b9389c264e1e",
+    "backend/src/vibradiag/services/agent_runtime.py": "98894421be8daa29c53c226a62307189add19e8f15a85e362e79f959c4ca14f3",
+    "backend/src/vibradiag/services/agent_task_service.py": "54496878b31417e77bc0418ccfe59e4fe64880dc8a95a5339ce6aa595af35041",
+    "backend/src/vibradiag/services/analysis_runtime.py": "1db82cb6a1843a27e77715383fc165db18fe3322c4d8c1c62eb12aa8f45b3796",
+    "backend/src/vibradiag/services/analysis_service.py": "73efdd4e5167968bea60b4891c27d248327f3275a00c9361e378fc54324407cf",
+    "backend/src/vibradiag/services/comparison_service.py": "689d59e5fec74097970c9273852418efe2946fb9c6197d4ff8684e6ce8114879",
+    "backend/src/vibradiag/services/compute_capacity.py": "b42edd3ced29db26b86ea2956925240a6f8b683180b61ca7db03a7537f4c975a",
+    "backend/src/vibradiag/services/diagnosis_service.py": "75247b1cfb692c30f51f6819ecfa97340abfa329fa87e8d3467a2f01e948ed45",
+    "backend/src/vibradiag/services/diagnostic_context_service.py": "e9a1f0c686cfc7797302477d0ddf1dec5e65c54b6d48b088a6ef99c642d92798",
+    "backend/src/vibradiag/services/evidence_service.py": "2874ee3bd7924cb1744166614c6dac37c8388b819646858c4e785ae1e6fbe0a5",
+    "backend/src/vibradiag/services/execution_gate.py": "492320118d1c4b34f66df7abba5885f77e7dc7ff895b37a4b200c4b86c3a3abe",
+    "backend/src/vibradiag/services/file_reconciliation.py": "563ed7a432aa16a6a78b88c204e3664771809db62090dda7594a43fa141447f4",
+    "backend/src/vibradiag/services/identity_service.py": "94f39e205cf3cca9fb8b59e99ae47f1fb5c61a17b53a3f6c62a0e75bdf33a261",
+    "backend/src/vibradiag/services/knowledge_document_service.py": "c4fe05a2c10842519890d44d78e90b235ebf6f9c72ce19b0bda96bba10ed7d0e",
+    "backend/src/vibradiag/services/knowledge_index_service.py": "8346ac6bd09cd6b366284dec8d654c906a5c4dc0258e7ae0f73411b11bccaae4",
+    "backend/src/vibradiag/services/knowledge_service.py": "4cf0675540d2d974d7fc4c5b02e30076f9f290fa156f0cb9e805d93623275896",
+    "backend/src/vibradiag/services/legacy_import_service.py": "7e99a33c8a8a9762cb488b089e8c26f062e7dcb202d8fa01d5d875d882971a0e",
+    "backend/src/vibradiag/services/matching_service.py": "f6b2d68f28b0526bb578d4b637d11efe89525881ab450b7acf0039c1c9bab713",
+    "backend/src/vibradiag/services/measurement_service.py": "c9ba52e09cdd9d01cfcea1bdf7903916ef3f2c62c9ff4e5c4643370c06ba616c",
+    "backend/src/vibradiag/services/model_method_service.py": "0fe47a878dd406b7e13560f3de1626b88afd227518c2a489d759e5363a8655dd",
+    "backend/src/vibradiag/services/persistent_analysis_service.py": "54cfbd6e7461cde1d90e532cff803e7ad7509b3d905faf61a2be612a4b9ab0b0",
+    "backend/src/vibradiag/services/ports.py": "9378f1b7c67d02135b646b3ea4151120ef9c6a9a81622a7f1d80ad3007b646c5",
+    "backend/src/vibradiag/services/tool_contract.py": "3b7f7b5268db55d51831729ba96feeaa51c3d09a987206b2eb6e980c60ada59a",
+    "backend/src/vibradiag/services/tool_options_service.py": "b0ea32743e744002893bb4fc534289167421095a0f69c4b88c18a3c02b41474a",
+    "backend/src/vibradiag/services/tool_profile_service.py": "39b88d3ae9e28cb1825130ca08c7fe667127cd1fd0e5311bf31272831f8fa788",
+    "backend/src/vibradiag/services/tool_run_service.py": "d540b2b691c3772a0992a06334baf2f4f0470bc50ca6d8ce3b8e40886b961749",
+    "backend/tests/conftest.py": "68d25d48ca446eeaa40482609b39f7c911091e64574e8646f5d6e8a6d48216c8",
+    "backend/tests/integration/conftest.py": "830ec1e5a025c37aafd166cdbff7ff904de1ae18754ad8c05ad07ab41d86d409",
+    "backend/tests/integration/test_agent_feedback_evaluation.py": "68afe70f49368457a865e2c5ce312b52149a251fadb39f72e8d996c89db27265",
+    "backend/tests/integration/test_agent_knowledge.py": "bfe6e8ba04cd8248241f181c9b17cb7513db339d685af8e2ed527de6e4a7bbf7",
+    "backend/tests/integration/test_agent_models.py": "930ca753a325c387aa97c07a6d39c5b59514bf7436d1b0089694660ad31ee0e2",
+    "backend/tests/integration/test_agent_tasks.py": "f849883b417de0596ea7b4ac58283e534452d148ccc105b98945452f29dd32c6",
+    "backend/tests/integration/test_api.py": "90dc3e1b5070a67949f1812bdd41fe9825e8dedd92660b0ae6384621ff5caa21",
+    "backend/tests/integration/test_checkpoint_probe.py": "f714c24bed46d7ec12e5dbdc08cf08b3d6de0dafe19a176183ac2a1bb3c95418",
+    "backend/tests/integration/test_comparison_runs.py": "1dc5c23b2c27e196bc3fa76799f0bf13b70e596dbd30ff827ce5e25ba09a1fe0",
+    "backend/tests/integration/test_diagnostic_contexts.py": "042f3922e74383d4ff0e49a0bf8770b7582545b71094bcb094477df805d8242b",
+    "backend/tests/integration/test_durable_rules_graph.py": "65a4a8d7eabb6e9ea396d911f40813fe924770037a2bf0df84f4a9e55234252a",
+    "backend/tests/integration/test_formal_agent_evaluation.py": "d2aa1fd6e58f16531f1f8535e7bb690291db256f50ebea8e736cb6b9add63f3f",
+    "backend/tests/integration/test_knowledge_documents.py": "bf913fd90c859addc9efea424b205406354f6d491646c54665558aa6542d5c3d",
+    "backend/tests/integration/test_knowledge_indexes.py": "99016c82ccfc4922c73b7f7a1fc23930423c540eb55f266790e5920654a809ff",
+    "backend/tests/integration/test_legacy_import.py": "56aa241cfc39f7523ae86fcab2fcce14120baa929229bd84f8a79bb8cd7525cf",
+    "backend/tests/integration/test_matching_runs.py": "2150f13a2056a3a6d2139da8a982dc292d649b200488e845589801dc59bdfe95",
+    "backend/tests/integration/test_measurements.py": "26a8bcd2632fc41f1f355cdbe13e0653ffc63886290e44d62d59ef4fc4e9fdce",
+    "backend/tests/integration/test_migration_rebuild.py": "1a6c42a71d4e3d29c0bc1e807419c1024b0e8fc1d7f0cc6356a483566beec82f",
+    "backend/tests/integration/test_model_method_graph.py": "c672331b41cd4170bc5ea1f532547ddae0543b4857304230883e64e44bb8b8c1",
+    "backend/tests/integration/test_model_numeric_graph.py": "913ea40d71675ce7e79076b027ff74ef8483949d80f60a74de6e72b1b7c9524b",
+    "backend/tests/integration/test_numeric_process.py": "22dbe85fcdc1148dfa3cd158e124cd9321fbb775681a4a41ae189d0fd5ea34fb",
+    "backend/tests/integration/test_persistent_analyses.py": "c7b535d72b0354ec483918247d77d5bb96b62a9543686f704bf10cf4e2f0ad15",
+    "backend/tests/integration/test_postgres_identity.py": "e3300e137c87d84a44d5fda19cdafbc8cc3ce3899bffcf873aaae76893181f72",
+    "backend/tests/integration/test_tool_runs.py": "88271c61e8295588676f31f241c27dcae30344b0c48b42e965a6fb5c39db548d",
+    "backend/tests/integration/test_vector_readiness.py": "76fb685e60cb1e7ec862ad8c03cd9bda7060697cc8bde77e8db9018534b63b2c",
+    "backend/tests/unit/test_agent_evaluation.py": "4ae34a28a130df677be3e1fb6e4906c5711d4f792b936692c63cb33ea588faa6",
+    "backend/tests/unit/test_agent_feedback.py": "5025b499d243454f0cd18c456185ac8870c5c79d32fc97bac084051b614d9650",
+    "backend/tests/unit/test_agent_guards.py": "e2cf0048b9076a5f7b27aa21ffdcbac3dd41079b73645b444f06416f00a190f0",
+    "backend/tests/unit/test_basic_analysis.py": "04c8d3d61d271d237df6de2945a11c679537ad6952448393160a07e0d5717337",
+    "backend/tests/unit/test_bearing_frequencies.py": "ccc556ec74c402a1fda9080e9d8b37ac19af5e471c0b674614c9bd772ea3b4b6",
+    "backend/tests/unit/test_comparison.py": "b0e6f2fb1d01f3c0c7211889a95d4faaa55eb1b118905eb97fc5f8053027ce59",
+    "backend/tests/unit/test_csv_input.py": "1ab55ae57bbab8a1f0e7d87179186f77f4717d193b4bdd5800f61edc71504df7",
+    "backend/tests/unit/test_deepseek.py": "fba55ae742bdec9ef88dc74a86cb72574b9ba992a35c43df2aa4fee43005d5d7",
+    "backend/tests/unit/test_envelope.py": "582e99f09add38f6123db66ef8f3f267964ba2b6dbcf884cfceb6c766e097622",
+    "backend/tests/unit/test_file_store.py": "57ae4752593cd00a1b8ac801d62d14c60719a43f5239c0daa8a0639ce0e17d95",
+    "backend/tests/unit/test_formal_agent_policy.py": "ca0b7ee7969d83d1e568c90976bc91514a7ab8b8b61f836041cbd7dde8f847af",
+    "backend/tests/unit/test_formal_embedding.py": "b938010329ae69fe54d6728db36d9740d6c82c244a384b3a6c50d70158940cf8",
+    "backend/tests/unit/test_formal_model_gateway.py": "a29291db46ef7f28786b0a516a27751db8243783bb4fd62e9659953a240dc80f",
+    "backend/tests/unit/test_knowledge_text.py": "b6e0d5b0c61f8b2cbf488a3b485a1f21a81387f2ff0a1ccdad0a52b04152db2e",
+    "backend/tests/unit/test_m2_release.py": "34cbdf311a316abca00678954fed7bc3df1d2a5993aeaa78efd4bcf9733409d8",
+    "backend/tests/unit/test_matching.py": "3e3f415bc066e31cf17086c589413b89d011c789bdf95541fe9460fd22eec41e",
+    "backend/tests/unit/test_numeric_codec.py": "e7760c91c2336ad09256dc9bcb9f6d3385234829fc8255c03bdabbab78e79966",
+    "backend/tests/unit/test_public_datasets.py": "6d1442fb43e152d95f68f025bd03ab27cf8d841aef42bd7e68c9c2fe9cb660cb",
+    "backend/tests/unit/test_public_holdouts.py": "a8518854909af439ad666c65348804af43896eae06422f0a5fa59c3900269b9d",
+    "backend/tests/unit/test_signal.py": "f9e91a36282ac9af7f6b2f4a19ced216457b14f56244103f4d22b49e2372a022",
+    "backend/tests/unit/test_time_adaptation.py": "1c3cd7c520b2da7177cd486060fc381d08c3fe7c25bf9ce49711a88c3e3b9f85",
+    "docs/03-milestones.md": "e4eb2adef428b4d233ae86f33c8e4c1634d6136d57b229930cda6317157ef5a9",
+    "docs/07-m3-agent-design.md": "2bc4f063a033090f3786a36a6a2174fc272665a1d040939b7bedf1f33b65d260",
+    "docs/10-agent-evaluation-design.md": "3ee6afb772134cb64c64184823824df81de6ee74d23e3c27b67b91efebf17d77",
+    "docs/acceptance/M3-T05b-verification.md": "cca63c3131592eda056052e540e0621233ba8a6cf6581a850a78a8396498715e",
+    "docs/README.md": "571b9d5a69d370155c9c7d25f0ff7746836f07567ad7472f0012dfeac92688fd",
+    "experiments/m3-t05a-development-comparison.json": "db9cfc023c5ff640a5e2dd4d9b25fb182211a6d1484de525a9bca0fe3f5a310d",
+    "experiments/m3-t05b-feedback-tests.xml": "6da0cfbd5c5a8ce505ae2b9edc7c1ec22c0ef844d156358d69cf8a698b1c333f",
+    "experiments/m3-t05b-tests.xml": "19ed31468fb0bacfa659a2b44123816c8f7b7d5e7082fb4fdd22b67ad9b30e26",
+    "README.md": "6f8c20a837c7f5e4bceb25f54849ef6468a0ba8adc7c4cac7a2b8c410a35d62c"
+  }
+}
