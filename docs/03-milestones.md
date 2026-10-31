@@ -254,7 +254,7 @@ v1.0-rc只交给受控测试；全部软件准入通过后标记v1.0。对具体
 
 ## 14. 下一步行动
 
-进入 **M3-T05c：提前结束问题修正与方法/比较评测**。[T02a](acceptance/M3-T02a-verification.md)已接任务API、幂等命令、真实M1/M2规则执行、预算累计、取消围栏及托管消费者。[T02b1](acceptance/M3-T02b1-verification.md)已验证官方PostgresSaver、迁移角色、节点重入与隔离子进程终止。[T02b2](acceptance/M3-T02b2-verification.md)已接入有身份/租约围栏的分步持久图；[T02b3](acceptance/M3-T02b3-verification.md)已实现API授权后的纯数值快照委托、统一两名额及数值终止；[T03a](acceptance/M3-T03a-verification.md)已实现文本发布基础；T03b2已接授权向量检索，T03c已接方法任务知识引用，下一步T04接模型决策；规则链不能充当DeepSeek Agent效果验证。M2诊断资格门槛继续保留。
+进入 **M3-T05c2：方法资料及比较任务评测**。[T02a](acceptance/M3-T02a-verification.md)已接任务API、幂等命令、真实M1/M2规则执行、预算累计、取消围栏及托管消费者。[T02b1](acceptance/M3-T02b1-verification.md)已验证官方PostgresSaver、迁移角色、节点重入与隔离子进程终止。[T02b2](acceptance/M3-T02b2-verification.md)已接入有身份/租约围栏的分步持久图；[T02b3](acceptance/M3-T02b3-verification.md)已实现API授权后的纯数值快照委托、统一两名额及数值终止；[T03a](acceptance/M3-T03a-verification.md)已实现文本发布基础；T03b2已接授权向量检索，T03c已接方法任务知识引用，下一步T04接模型决策；规则链不能充当DeepSeek Agent效果验证。M2诊断资格门槛继续保留。
 
 M1通过仅代表本机数据基础能力，M2—M6仍依次验证；软件试用准入留M6，不能由原型模型输出或本机性能基线代替。
 
@@ -274,3 +274,7 @@ M1通过仅代表本机数据基础能力，M2—M6仍依次验证；软件试�
 [T05b](acceptance/M3-T05b-verification.md)新增反馈条件对照、模拟生命周期边界及独立留出准入审计。不同仿真波形不能构成独立设备留出，审计保持阻断；下一步T05c补方法/比较矩阵，再汇总M3本机条件验收。
 
 T05b实测：强条件规则与单次路由功能4/4，Agent功能3/4；三组生命周期2/2。原始F02提前结束保留，下一步优先核查修正，不能把774项测试通过写成真实模型质量全通过。
+
+[T05c1](acceptance/M3-T05c1-verification.md)新增独立作用域v2与原始F02决策回归；只对新任务显式开启，原失败和v1保留。新实测结果单列，不作为独立准入。之后T05c2补方法/比较评测。
+
+T05c1真实新版本回归8/8通过（6功能、2生命周期，F02/F04各含一次预登记重复）；只证明已知开发回归，保留T05b原始失败，独立准入仍阻断。下一步T05c2。

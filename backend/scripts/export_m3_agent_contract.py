@@ -8,7 +8,7 @@ from vibradiag.agents.formal_contracts import (CreateAgentTask,ResumeAgentTask,A
 
 
 def contract():
-    return {'contract_version':'m3-t04b2-runtime-contract-v1','implementation_stage':'Persistent rules and opt-in model-driven method/numerical graphs',
+    return {'contract_version':'m3-t05c1-runtime-contract-v1','implementation_stage':'Persistent rules and opt-in model-driven method/numerical graphs',
         'schemas':{'create_task':CreateAgentTask.model_json_schema(),'resume_task':ResumeAgentTask.model_json_schema(),
             'model_decision':TypeAdapter(AgentDecision).json_schema(),'unpublished_draft':ExploratoryDraft.model_json_schema(),
             'internal_budget':ExecutionBudget.model_json_schema(),'task_status':TypeAdapter(TaskStatus).json_schema(),
@@ -27,6 +27,9 @@ def contract():
         'model_numeric':{'graph_version':'model-numeric-v1','executor':'model_numeric_v1','enabled_by':'VIBRADIAG_NUMERIC_EXECUTOR=model',
             'default_mode':'rules','decision_drives_authorized_tools':True,'max_graph_tools':5,'max_graph_decisions':6,
             'free_form_generated_draft':False,'server_assembled_cited_draft':True,'configuration_pinned_at_acceptance':True},
+        'model_numeric_v2':{'graph_version':'model-numeric-v2','executor':'model_numeric_v2','enabled_by':'VIBRADIAG_NUMERIC_EXECUTOR=model_v2',
+            'default_mode':'rules','requirement_scopes':True,'raw_requirements_retained':True,'diagnostic_release_allowed':False,
+            'legacy_numeric_policy_preserved':True,'legitimate_refusal_preserved':True},
         'not_implemented_here':['open-ended diagnostic generation','retrieval relevance qualification',
             'knowledge frontend','formal model/draft semantic evaluation'],
         'formal_diagnostic_release':False,'factory_trial_approved':False}

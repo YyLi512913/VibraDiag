@@ -1,0 +1,146 @@
+{
+  "origin": "T05b F02 actual persisted decision, not a reconstructed model response",
+  "original_receipt_sha256": "02fed478c01d559ed9df5738f602e8ba2ee2b08f598d23a8345f9457d5a58b41",
+  "task_id": "0532dfbe-0308-496d-ab38-844132f015d8",
+  "rounds": [
+    {
+      "round_no": 1,
+      "context": {
+        "goal": "bearing_observations",
+        "step": 0,
+        "completed": [],
+        "candidates": [
+          {
+            "action": "analyze_basic",
+            "variant": "unbound",
+            "candidate_id": "08eafd9e-f1fb-5c36-99d3-dae24699e62a"
+          }
+        ],
+        "limitation": "Exploratory numerical tools only. No qualified diagnostic profile or fault conclusion.",
+        "description": "First run basic analysis and calculate ideal bearing frequencies BEFORE envelope analysis. Read the actual frequency result: if it reports missing uncertainty (such as geometry_uncertainty), stop with the available basic/frequency observations. Only if uncertainty is complete continue with unbound envelope, context-bound envelope and frequency matching. Preserve diagnostic qualification limits."
+      },
+      "validated_output": {
+        "action": "choose_action",
+        "rationale": "Step 0 with no completed observations; the offered basic analysis is the required first step to compute ideal bearing frequencies before any envelope work.",
+        "candidate_id": "08eafd9e-f1fb-5c36-99d3-dae24699e62a"
+      },
+      "state": "completed"
+    },
+    {
+      "round_no": 2,
+      "context": {
+        "goal": "bearing_observations",
+        "step": 1,
+        "completed": [
+          {
+            "action": "analyze_basic",
+            "status": "completed",
+            "call_id": "4f292dc0-502d-46c1-bb12-3dda5829f0a7",
+            "missing_requirements": []
+          }
+        ],
+        "candidates": [
+          {
+            "action": "analyze_envelope",
+            "variant": "unbound",
+            "candidate_id": "76c7d68c-9657-58f8-ada0-c27f553d9774"
+          },
+          {
+            "action": "calculate_bearing_frequencies",
+            "variant": "context_bound",
+            "candidate_id": "6f8d3c5f-3446-541a-aece-3d94eab5e55f"
+          }
+        ],
+        "limitation": "Exploratory numerical tools only. No qualified diagnostic profile or fault conclusion.",
+        "description": "First run basic analysis and calculate ideal bearing frequencies BEFORE envelope analysis. Read the actual frequency result: if it reports missing uncertainty (such as geometry_uncertainty), stop with the available basic/frequency observations. Only if uncertainty is complete continue with unbound envelope, context-bound envelope and frequency matching. Preserve diagnostic qualification limits."
+      },
+      "validated_output": {
+        "action": "choose_action",
+        "rationale": "Basic analysis is complete. Per the stated sequence, calculate ideal bearing frequencies next and inspect whether uncertainty (e.g., geometry_uncertainty) is reported before any envelope analysis.",
+        "candidate_id": "6f8d3c5f-3446-541a-aece-3d94eab5e55f"
+      },
+      "state": "completed"
+    },
+    {
+      "round_no": 3,
+      "context": {
+        "goal": "bearing_observations",
+        "step": 2,
+        "completed": [
+          {
+            "action": "analyze_basic",
+            "status": "completed",
+            "call_id": "4f292dc0-502d-46c1-bb12-3dda5829f0a7",
+            "missing_requirements": []
+          },
+          {
+            "action": "calculate_bearing_frequencies",
+            "status": "ok",
+            "call_id": "89e55408-dc9e-4c82-8aa7-cb8d6ed58df1",
+            "missing_requirements": []
+          }
+        ],
+        "candidates": [
+          {
+            "action": "analyze_envelope",
+            "variant": "unbound",
+            "candidate_id": "76c7d68c-9657-58f8-ada0-c27f553d9774"
+          }
+        ],
+        "limitation": "Exploratory numerical tools only. No qualified diagnostic profile or fault conclusion.",
+        "description": "First run basic analysis and calculate ideal bearing frequencies BEFORE envelope analysis. Read the actual frequency result: if it reports missing uncertainty (such as geometry_uncertainty), stop with the available basic/frequency observations. Only if uncertainty is complete continue with unbound envelope, context-bound envelope and frequency matching. Preserve diagnostic qualification limits."
+      },
+      "validated_output": {
+        "action": "choose_action",
+        "rationale": "Basic analysis and bearing frequency calculation completed with no missing requirements, so uncertainty is complete. Proceeding with the unbound envelope analysis as the next exploratory step.",
+        "candidate_id": "76c7d68c-9657-58f8-ada0-c27f553d9774"
+      },
+      "state": "completed"
+    },
+    {
+      "round_no": 4,
+      "context": {
+        "goal": "bearing_observations",
+        "step": 3,
+        "completed": [
+          {
+            "action": "analyze_basic",
+            "status": "completed",
+            "call_id": "4f292dc0-502d-46c1-bb12-3dda5829f0a7",
+            "missing_requirements": []
+          },
+          {
+            "action": "calculate_bearing_frequencies",
+            "status": "ok",
+            "call_id": "89e55408-dc9e-4c82-8aa7-cb8d6ed58df1",
+            "missing_requirements": []
+          },
+          {
+            "action": "analyze_envelope",
+            "status": "ok",
+            "call_id": "9f0423c0-b33f-4656-8eca-1ed183cd8716",
+            "missing_requirements": [
+              "verified_acquisition_bandwidth",
+              "qualified_numeric_profile"
+            ]
+          }
+        ],
+        "candidates": [
+          {
+            "action": "analyze_envelope",
+            "variant": "context_bound",
+            "candidate_id": "5a89abea-81da-5781-a36e-2ec1341be875"
+          }
+        ],
+        "limitation": "Exploratory numerical tools only. No qualified diagnostic profile or fault conclusion.",
+        "description": "First run basic analysis and calculate ideal bearing frequencies BEFORE envelope analysis. Read the actual frequency result: if it reports missing uncertainty (such as geometry_uncertainty), stop with the available basic/frequency observations. Only if uncertainty is complete continue with unbound envelope, context-bound envelope and frequency matching. Preserve diagnostic qualification limits."
+      },
+      "validated_output": {
+        "action": "finish",
+        "outcome": "analysis_only",
+        "rationale": "The prior envelope attempt reported missing verified acquisition bandwidth and a qualified numeric profile, so the description's stop condition applies. Basic analysis and bearing frequency calculation completed; the remaining context-bound envelope candidate cannot resolve those missing prerequisites. Finishing with available exploratory observations only, without diagnostic qualification."
+      },
+      "state": "completed"
+    }
+  ]
+}

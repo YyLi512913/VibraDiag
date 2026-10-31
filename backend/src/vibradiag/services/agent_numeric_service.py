@@ -42,8 +42,13 @@ def prepare_step(task,principal,step):
         run.select('profile_id');run.select('context_id')
 
 
-def prepared(c,row,principal,step):
-    if row['input_snapshot']['executor']!='model_numeric_v1' or row['goal']=='explain_method':tasks.conflict('NUMERIC_MODEL_SCOPE_REQUIRED')
+def phase(task):return 'numeric_decision_v2' if task['input_snapshot']['executor']=='model_numeric_v2' else 'numeric_decision'
+
+
+def prepared(c,row,principal,step,*,phase=None):
+    if row['input_snapshot']['executor'] not in {'model_numeric_v1','model_numeric_v2'} or row['goal']=='explain_method':tasks.conflict('NUMERIC_MODEL_SCOPE_REQUIRED')
+    expected_phase='numeric_decision_v2' if row['input_snapshot']['executor']=='model_numeric_v2' else 'numeric_decision'
+    if phase is not None and phase!=expected_phase:tasks.conflict('NUMERIC_MODEL_PHASE_MISMATCH')
     if type(step) is not int or not 0<=step<=5:tasks.conflict('NUMERIC_STEP_INVALID')
     history=calls(c,row['id'])
     if not step<=len(history)<=step+1:tasks.conflict('NUMERIC_STEP_HISTORY_MISMATCH')
@@ -84,13 +89,16 @@ def prepared(c,row,principal,step):
                         missing_requirements=r.get('result',{}).get('missing_requirements',[])[:8]) for h,r in zip(history,results)],
         candidates=[dict(candidate_id=str(a.id),action=a.kind,variant='context_bound' if payloads[str(a.id)][1].get('context_id') else 'unbound') for a in offered],
         limitation='Exploratory numerical tools only. No qualified diagnostic profile or fault conclusion.')
+    if expected_phase=='numeric_decision_v2':
+        from .numeric_requirement_scope import enrich
+        context=enrich(context,history,results)
     return row,principal,context,TypeAdapter(AgentDecision).json_schema(),dict(scope=scope,candidates=tuple(offered),payloads=payloads)
 
 
 def dispatch_step(task,principal,step):
     from . import agent_model_service as models
     with transaction() as c:
-        decision=models.completed_output(c,task['id'],task['lease_token'],principal,'numeric_decision',step=step)
+        decision=models.completed_output(c,task['id'],task['lease_token'],principal,phase(task),step=step)
         row=tasks._running(c,task['id'],task['lease_token']);_,current,_=tasks._authorize(c,principal,task['id'],write=True,current_only=True)
         _,_,_,_,data=prepared(c,row,current,step)
         if decision['action']!='choose_action':tasks.conflict('NUMERIC_DECISION_NOT_EXECUTABLE')
@@ -104,7 +112,7 @@ def finish(task,principal):
     with transaction() as c:
         row=tasks._running(c,task['id'],task['lease_token']);_,current,_=tasks._authorize(c,principal,task['id'],write=True,current_only=True)
         history=calls(c,task['id']);step=len(history)
-        decision=models.completed_output(c,task['id'],task['lease_token'],principal,'numeric_decision',step=step)
+        decision=models.completed_output(c,task['id'],task['lease_token'],principal,phase(task),step=step)
         if decision['action']!='finish':tasks.conflict('NUMERIC_FINISH_REQUIRED')
         # Lock mutable provenance while resolving immutable artifacts and constructing the final draft.
         root_ids=sorted((UUID(root['revision_id']) for root in row['input_snapshot']['roots']),key=str)

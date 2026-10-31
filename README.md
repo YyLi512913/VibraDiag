@@ -124,3 +124,7 @@ node scripts\check-docs.cjs
 [T05a](docs/acceptance/M3-T05a-verification.md)新增正式数值链路的规则/单次模型路由/逐步Agent开发对照，协议与源码运行前冻结，记录真实工具覆盖、引用链接、状态、耗时及token；不作为故障准确率或工厂准入。设计见[10评测设计](docs/10-agent-evaluation-design.md)。
 
 [T05b](docs/acceptance/M3-T05b-verification.md)扩展了基于实际不确定量的反馈对照，并提供同样支持条件的规则基线；取消/撤确认单独计为生命周期边界。波形hash与来源族审计阻止将新仿真配置写成独立设备留出。真实首轮Agent功能3/4，原始F02提前结束保留；下一步T05c先核查修正，再补方法/比较评测。
+
+[T05c1](docs/acceptance/M3-T05c1-verification.md)针对实际F02的停止条件混用新增数值v2：VIBRADIAG_NUMERIC_EXECUTOR=model_v2对新任务提供缺项作用域和实际频率不确定量；旧model/v1及方法策略保留，默认rules。新回归仅为已知开发样例，不覆盖原始失败或独立准入。
+
+T05c1真实新版本开发回归8/8通过，保留旧F02失败及rules默认；下一步T05c2方法/比较任务评测。

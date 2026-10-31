@@ -17,9 +17,9 @@ from vibradiag.services import agent_task_service as tasks,agent_knowledge_servi
 
 def _prepared(c,identifier,token,principal,phase,*,lock=False,step=None):
     row=tasks._running(c,identifier,token);_,current,_=tasks._authorize(c,principal,identifier,write=True,current_only=True)
-    if phase=='numeric_decision':
+    if phase in {'numeric_decision','numeric_decision_v2'}:
         from .agent_numeric_service import prepared
-        return prepared(c,row,current,step)
+        return prepared(c,row,current,step,phase=phase)
     if row['goal']!='explain_method' or row['input_snapshot']['executor'] not in {'rules_knowledge_v1','model_method_v1'}:
         raise MeasurementError('MODEL_METHOD_SCOPE_REQUIRED','This model stage accepts explicit method tasks only',status=409)
     selected=knowledge.scope(row)
@@ -45,10 +45,10 @@ def _prepared(c,identifier,token,principal,phase,*,lock=False,step=None):
 
 def _validate(phase,raw,prepared):
     try:
-        if phase in {'decision','numeric_decision'}:
+        if phase in {'decision','numeric_decision','numeric_decision_v2'}:
             output=TypeAdapter(AgentDecision).validate_json(raw)
             validate_decision(output,prepared['scope'],prepared['candidates'],())
-            if not isinstance(output,(ChooseAction,FinishDecision)) or isinstance(output,FinishDecision) and output.outcome not in ({'analysis_only','insufficient_evidence'} if phase=='numeric_decision' else {'insufficient_evidence'}):
+            if not isinstance(output,(ChooseAction,FinishDecision)) or isinstance(output,FinishDecision) and output.outcome not in ({'analysis_only','insufficient_evidence'} if phase in {'numeric_decision','numeric_decision_v2'} else {'insufficient_evidence'}):
                 raise PolicyStop('MODEL_DECISION_UNSUPPORTED')
         else:
             output=ExtractiveMethodDraft.model_validate_json(raw)

@@ -1,5 +1,5 @@
 {
-  "contract_version": "m3-t04b2-runtime-contract-v1",
+  "contract_version": "m3-t05c1-runtime-contract-v1",
   "implementation_stage": "Persistent rules and opt-in model-driven method/numerical graphs",
   "schemas": {
     "create_task": {
@@ -570,6 +570,17 @@
     "free_form_generated_draft": false,
     "server_assembled_cited_draft": true,
     "configuration_pinned_at_acceptance": true
+  },
+  "model_numeric_v2": {
+    "graph_version": "model-numeric-v2",
+    "executor": "model_numeric_v2",
+    "enabled_by": "VIBRADIAG_NUMERIC_EXECUTOR=model_v2",
+    "default_mode": "rules",
+    "requirement_scopes": true,
+    "raw_requirements_retained": true,
+    "diagnostic_release_allowed": false,
+    "legacy_numeric_policy_preserved": true,
+    "legitimate_refusal_preserved": true
   },
   "not_implemented_here": [
     "open-ended diagnostic generation",

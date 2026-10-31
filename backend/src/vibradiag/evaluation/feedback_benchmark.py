@@ -85,24 +85,26 @@ def assess(case,task,reserved,confirmed,injected,calls_at_injection=None):
         semantic_correctness_evaluated=False)
 
 
-def run(private,progress=lambda value:None):
+def run(private,progress=lambda value:None,*,numeric_mode='model',protocol_path=None,evaluated_strategies=('rules','single_router','agent')):
     from vibradiag.main import app
-    spec=json.loads(PROTOCOL.read_text(encoding='utf8'));cfg=configuration('deepseek',purpose='numeric');org=uuid4();user=uuid4();password=str(uuid4())+str(uuid4())
+    selected_protocol=protocol_path or PROTOCOL
+    spec=json.loads(selected_protocol.read_text(encoding='utf8'));cfg=configuration('deepseek',purpose='numeric');org=uuid4();user=uuid4();password=str(uuid4())+str(uuid4())
     with transaction() as c:
         c.execute(text('INSERT INTO organizations(id,name) VALUES (:id,:name)'),dict(id=org,name='Synthetic feedback evaluation '+str(org)))
         c.execute(text('INSERT INTO users(id,organization_id,username_normalized,password_hash) VALUES (:id,:org,:name,:hash)'),dict(id=user,org=org,name='evaluation',hash=password_hasher.hash(password)))
         c.execute(text("INSERT INTO role_assignments(user_id,organization_id,role,granted_by) VALUES (:id,:org,'engineer',:id)"),dict(id=user,org=org))
+    agent_cfg=configuration('deepseek',purpose='numeric_v2' if numeric_mode=='model_v2' else 'numeric')
     rows=[];inventory=[]
     with TestClient(app) as client:
         response=client.post('/api/v1/auth/login',json=dict(organization_id=str(org),username='evaluation',password=password));response.raise_for_status();client.headers['x-csrf-token']=response.json()['csrf_token']
         with transaction() as c:principal=authenticate(c,client.cookies.get('vibradiag_session'))
         for index,case in enumerate(spec['cases']):
             # A separate input per strategy prevents injected lifecycle changes leaking to the next arm.
-            for strategy in order(index):
+            for strategy in (s for s in order(index) if s in evaluated_strategies):
                 revision,signal_hash=fixture(client,principal,case,case['signal'])
                 confirmation=tasks._confirmation(UUID(revision),principal)
-                if strategy=='rules':inventory.append(dict(case_id=case['id'],signal_sha256=signal_hash,source_family=case['source_family'],split=case['split']))
-                os.environ['VIBRADIAG_NUMERIC_EXECUTOR']='model' if strategy=='agent' else 'rules'
+                if strategy==next(s for s in order(index) if s in evaluated_strategies):inventory.append(dict(case_id=case['id'],signal_sha256=signal_hash,source_family=case['source_family'],split=case['split']))
+                os.environ['VIBRADIAG_NUMERIC_EXECUTOR']=numeric_mode if strategy=='agent' else 'rules'
                 started=monotonic();response=client.post('/api/v1/agent-tasks',json=dict(goal=case['goal'],description=case['description'],measurement_revision_id=revision),headers={'Idempotency-Key':str(uuid4())});response.raise_for_status()
                 identifier=response.json()['id'];claimed=tasks.claim_next(UUID(identifier));receipt=None
                 with lifecycle(claimed,case,client,confirmation) as injected:
@@ -123,8 +125,12 @@ def run(private,progress=lambda value:None):
                     missing_requirements=(task['draft'] or {}).get('missing_requirements',[]))
                 rows.append(row);(private/'partial-results.json').write_text(json.dumps(rows,ensure_ascii=False,indent=2)+'\n',encoding='utf8');progress(dict(case_id=case['id'],strategy=strategy,status=task['status'],expectation_met=metric['expectation_met']))
     previous=json.loads((PROJECT_ROOT/'experiments/m3-t05a-development-comparison.json').read_text(encoding='utf8'))
-    readiness=audit(inventory,{r['signal_sha256'] for r in previous['rows']},independent_annotations=spec['independent_annotations'],blind_holdout=spec['blind_holdout'])
-    return dict(protocol_version=spec['protocol_version'],protocol_sha256=sha256(PROTOCOL.read_bytes()).hexdigest(),configuration=asdict(cfg),rows=rows,inventory=inventory,
+    previous_hashes={r['signal_sha256'] for r in previous['rows']}
+    for name in spec.get('additional_development_receipts',[]):
+        previous_hashes.update(r['signal_sha256'] for r in json.loads((PROJECT_ROOT/name).read_text(encoding='utf8'))['rows'])
+    readiness=audit(inventory,previous_hashes,independent_annotations=spec['independent_annotations'],blind_holdout=spec['blind_holdout'])
+    return dict(protocol_version=spec['protocol_version'],protocol_sha256=sha256(selected_protocol.read_bytes()).hexdigest(),configuration=asdict(agent_cfg if evaluated_strategies==('agent',) else cfg),
+        configurations=dict(agent=asdict(agent_cfg),single_router=asdict(cfg)),evaluated_strategies=list(evaluated_strategies),rows=rows,inventory=inventory,
         summary=summarize(rows),summary_functional=summarize([r for r in rows if r['case_id'] in {c['id'] for c in spec['cases'] if c['fault']=='none'}]),
         summary_lifecycle=summarize([r for r in rows if r['case_id'] in {c['id'] for c in spec['cases'] if c['fault']!='none'}]),
         summary_by_partition={split:summarize([r for r in rows if r['split']==split]) for split in ('development','prospective_synthetic')},
@@ -136,5 +142,6 @@ def run(private,progress=lambda value:None):
             intervention='Scoped dispatch wrapper injects cancellation or confirmation revocation after the actual frequency result; no synthetic model/tool output',
             separate_input_ids_per_strategy=True,source_bytes_paired_within_case=True),
         limitations=spec['scope_exclusions']+['Public developer-authored controls; prospective synthetic partition is not independent equipment holdout',
+            'Historical baseline reuse or absent strategies are not contemporaneous comparative measurements',
             'Rules baseline is upgraded to handle the conditional policy, so outcomes are not directly comparable to T05a rules timings',
             'Lifecycle outcomes are boundary checks, not model reasoning successes; no monetary or general latency superiority claim'])

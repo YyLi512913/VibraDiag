@@ -51,7 +51,22 @@ NUMERIC_POLICY_SHA256=digest(dict(prompt_version=NUMERIC_PROMPT_VERSION,system=S
     local_prompt_bytes=6000,cloud_prompt_bytes=MAX_PROMPT,temperature=0,seed=42,thinking=False))
 
 
-def prompt_version(phase):return NUMERIC_PROMPT_VERSION if phase=='numeric_decision' else PROMPT_VERSION
+NUMERIC_V2_PROMPT_VERSION='formal-numeric-json-v2'
+SYSTEMS['numeric_decision_v2']=SYSTEMS['numeric_decision']+'''
+Interpret requirements by their supplied scope and by the exact task condition, not by the mere presence of any missing item.
+A stop condition about frequency uncertainty concerns the actual frequency observation and its frequency_uncertainty_complete flag. Envelope diagnostic-release limitations are not frequency uncertainty failures.
+Diagnostic release is always prohibited here. Missing qualification can prevent diagnostic claims while exploratory computation remains offered by the server.
+A context-bound envelope may add acquisition context that an earlier unbound envelope lacked. Do not assume an offered next candidate cannot help solely from the previous diagnostic limitations.
+Candidates are exploratory opportunities, not guarantees of successful results or proof of qualification. Respect execution blockers and unclassified missing items; do not invent resolved prerequisites.
+Follow the requested exploratory sequence when useful candidates remain. You may still finish or refuse when the actual task cannot be supported; never claim completion of unexecuted tools.'''
+NUMERIC_V2_POLICY_SHA256=digest(dict(prompt_version=NUMERIC_V2_PROMPT_VERSION,system=SYSTEMS['numeric_decision_v2'],local_context=8192,cpu_threads=4,
+    local_prompt_bytes=6000,cloud_prompt_bytes=MAX_PROMPT,temperature=0,seed=42,thinking=False))
+
+
+def phase_policy(phase):return NUMERIC_V2_POLICY_SHA256 if phase=='numeric_decision_v2' else NUMERIC_POLICY_SHA256 if phase=='numeric_decision' else POLICY_SHA256
+
+
+def prompt_version(phase):return NUMERIC_V2_PROMPT_VERSION if phase=='numeric_decision_v2' else NUMERIC_PROMPT_VERSION if phase=='numeric_decision' else PROMPT_VERSION
 
 
 @dataclass(frozen=True)
@@ -64,7 +79,7 @@ class ModelConfig:
 
     def __post_init__(self):
         if type(self.max_output_tokens) is not int or not 64<=self.max_output_tokens<=1024:raise ValueError('Invalid formal token cap')
-        if self.policy_sha256 not in {POLICY_SHA256,NUMERIC_POLICY_SHA256}:raise ValueError('Pinned model policy changed; new task required')
+        if self.policy_sha256 not in {POLICY_SHA256,NUMERIC_POLICY_SHA256,NUMERIC_V2_POLICY_SHA256}:raise ValueError('Pinned model policy changed; new task required')
         if self.provider=='deepseek':
             if self.model!='deepseek-flash' or self.digest is not None:raise ValueError('Unsupported cloud configuration')
         elif self.provider=='ollama':
@@ -79,8 +94,8 @@ def configuration(provider=None,*,purpose='method'):
     selected=provider or setting('VIBRADIAG_FORMAL_LLM_PROVIDER','deepseek')
     values=json.loads((BACKEND_ROOT/'config/formal-models.json').read_text(encoding='utf8'))
     if selected not in values:raise ValueError('Unknown formal provider; no fallback')
-    if purpose not in {'method','numeric'}:raise ValueError('Unknown model purpose')
-    return ModelConfig(**dict(values[selected],policy_sha256=NUMERIC_POLICY_SHA256 if purpose=='numeric' else POLICY_SHA256))
+    if purpose not in {'method','numeric','numeric_v2'}:raise ValueError('Unknown model purpose')
+    return ModelConfig(**dict(values[selected],policy_sha256=NUMERIC_V2_POLICY_SHA256 if purpose=='numeric_v2' else NUMERIC_POLICY_SHA256 if purpose=='numeric' else POLICY_SHA256))
 
 
 class Gateway:
@@ -90,7 +105,7 @@ class Gateway:
 
     def invoke(self,phase,context,schema,*,timeout=60,guard=None):
         if phase not in SYSTEMS or not 0<timeout<=60:fail('MODEL_INPUT_INVALID',422)
-        if self.config.policy_sha256!=(NUMERIC_POLICY_SHA256 if phase=='numeric_decision' else POLICY_SHA256):fail('MODEL_POLICY_MISMATCH',409)
+        if self.config.policy_sha256!=phase_policy(phase):fail('MODEL_POLICY_MISMATCH',409)
         user=canonical(dict(phase=phase,data=context,json_schema=schema))
         if len(user.encode())>MAX_PROMPT:fail('MODEL_CONTEXT_TOO_LARGE',422)
         # Conservative byte cap leaves room for the pinned local chat template and output.

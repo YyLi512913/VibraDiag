@@ -329,3 +329,9 @@ benchmark_agent.py仍为M0历史实验。正式对照使用backend/scripts/bench
 ## M3-T05b 反馈型对照及准入审计
 
 backend/scripts/benchmark_agent_feedback.py --allow-paid-model-calls使用新冻结反馈协议，运行条件规则、可选择相同规则的单次路由及原生产Agent。无需生产迁移或更改提示；真实工具输出后决定停止/继续。故障注入只包装自有任务dispatch且退出恢复，托管消费者关闭，不能并发使用。必须先完成pytest。报告区分功能/生命周期与开发分区，独立实体/标注缺失时明确阻断准入。见[T05b验收](../docs/acceptance/M3-T05b-verification.md)。
+
+## M3-T05c1 条件作用域v2
+
+新任务可显式配置VIBRADIAG_NUMERIC_EXECUTOR=model_v2，绑定model_numeric_v2/model-numeric-v2与numeric_decision_v2；model仍表示原v1，默认rules。0021扩展图/阶段/绑定允许值，不新增表。上下文按实际结果/模式分类执行阻断、频率匹配、诊断发布及未知缺项，原缺项保留，合法拒答不强制执行。旧提示hash/配置与检查点不升级。
+
+完成pytest后运行backend/scripts/benchmark_agent_scoped.py --allow-paid-model-calls，只对新Agent跑8条已知开发回归，旧基线不重测。仅验证DeepSeek，本地较长上下文字节限制及质量未准入。详见[T05c1验收](../docs/acceptance/M3-T05c1-verification.md)。
