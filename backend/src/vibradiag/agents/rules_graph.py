@@ -79,7 +79,7 @@ class RuleExecution:
     def node(self,name):
         def execute(state):
             try:
-                CursorBinding.model_validate(state).check(self.id)
+                CursorBinding.model_validate(state).check(self.id,GRAPH_VERSION)
                 flag=defer_wait.set(True)
                 try:
                     self.scope();getattr(self,name)()

@@ -1,8 +1,53 @@
 {
-  "contract_version": "m3-t01-design-contract-v1",
-  "implementation_stage": "DTOs and pure policy checks only",
+  "contract_version": "m3-t03c-runtime-contract-v1",
+  "implementation_stage": "Persistent numeric rules and method-only task-bound knowledge retrieval",
   "schemas": {
     "create_task": {
+      "$defs": {
+        "MethodKnowledgeScope": {
+          "additionalProperties": false,
+          "properties": {
+            "equipment": {
+              "enum": [
+                "motor",
+                "pump",
+                "fan",
+                "rotating_generic"
+              ],
+              "title": "Equipment",
+              "type": "string"
+            },
+            "component": {
+              "enum": [
+                "bearing",
+                "rotating_assembly",
+                "general"
+              ],
+              "title": "Component",
+              "type": "string"
+            },
+            "asset_id": {
+              "anyOf": [
+                {
+                  "format": "uuid",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Asset Id"
+            }
+          },
+          "required": [
+            "equipment",
+            "component"
+          ],
+          "title": "MethodKnowledgeScope",
+          "type": "object"
+        }
+      },
       "additionalProperties": false,
       "properties": {
         "measurement_revision_id": {
@@ -46,6 +91,17 @@
           ],
           "default": null,
           "title": "Comparison Declaration Id"
+        },
+        "knowledge_scope": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/MethodKnowledgeScope"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
         }
       },
       "required": [
@@ -415,6 +471,49 @@
         "timed_out"
       ],
       "type": "string"
+    },
+    "method_knowledge_scope": {
+      "additionalProperties": false,
+      "properties": {
+        "equipment": {
+          "enum": [
+            "motor",
+            "pump",
+            "fan",
+            "rotating_generic"
+          ],
+          "title": "Equipment",
+          "type": "string"
+        },
+        "component": {
+          "enum": [
+            "bearing",
+            "rotating_assembly",
+            "general"
+          ],
+          "title": "Component",
+          "type": "string"
+        },
+        "asset_id": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Asset Id"
+        }
+      },
+      "required": [
+        "equipment",
+        "component"
+      ],
+      "title": "MethodKnowledgeScope",
+      "type": "object"
     }
   },
   "limits": {
@@ -440,11 +539,21 @@
     "evidence resolution/validity",
     "budgets and model configuration"
   ],
+  "knowledge": {
+    "graph_version": "rules-knowledge-v1",
+    "executor": "rules_knowledge_v1",
+    "action": "search_published_knowledge",
+    "developer_content_allowed": false,
+    "citation_kind": "knowledge_chunk",
+    "permitted_claim": "method_explanation",
+    "semantic_relevance_qualified": false,
+    "generated_answer": false,
+    "durable_retrieval_binding": true
+  },
   "not_implemented_here": [
-    "formal task API",
-    "LangGraph runtime with durable checkpoint",
-    "worker queue/lease/CAS ledger",
-    "published knowledge search",
+    "LLM action selection and answer generation",
+    "retrieval relevance qualification",
+    "knowledge frontend",
     "formal model/draft semantic evaluation"
   ],
   "formal_diagnostic_release": false,

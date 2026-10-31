@@ -1,8 +1,8 @@
 # 07 M3 Agent取证闭环详细设计
 
-> 版本：v0.6，T03b2版本化知识索引与授权检索；日期：2026-10-31。
+> 版本：v0.7，T03c方法任务的受控检索与知识引用；日期：2026-10-31。
 > 上游：[需求](01-requirements.md)、[阶段计划](03-milestones.md)、[M2总验收](acceptance/M2-acceptance.md)、[M2工具契约](contracts/m2-tool-contract.json)。
-> T01已实现DTO、纯策略与机器契约；T02a已实现数据库任务、幂等命令、调用账本及托管规则执行器。T02b2已将新任务接入分步LangGraph持久规则图，RAG与DeepSeek决策仍未接入。M2-R01—R04继续阻断正式诊断发布。
+> T01已实现DTO、纯策略与机器契约；T02a已实现数据库任务、幂等命令、调用账本及托管规则执行器。T02b2已将新任务接入分步LangGraph持久规则图，T03c已接方法任务的真实知识引用，DeepSeek决策与生成仍未接入。M2-R01—R04继续阻断正式诊断发布。
 
 ## 1. 目标与首轮范围
 
@@ -221,3 +221,13 @@ Windows通过暂停创建、先加入Job Object再恢复执行，配置关闭Job
 [08设计](08-knowledge-design.md)已接固定BGE-M3身份、真实本地Embedding和pgvector精确cosine检索；新路径/api/v1/knowledge-indexes独立于开发原型。0016新增索引代、向量、活动头及检索账本4表，当前42张业务表、4张检查点表。构建须显式审核能力，失败不覆盖原索引；查询先按发布/组织/设备/适用范围/模型及运行版本过滤，排名后再次授权并返回稳定块来源。
 
 [T03b2验证](acceptance/M3-T03b2-verification.md)说明同步128块/120秒构建、10000候选/top5、开发内容默认排除、原发起人账本和撤回历史边界。Agent尚未调用该服务，explain_method继续拒答正式知识未接入；方法解释与信号诊断事实仍分开。T03c完成只读动作、预算和引用校验后再改此拒答，T04才接DeepSeek决策；不得把可检索块或cosine分数直接当成设备故障证据。
+
+## 20. T03c 方法任务知识图与引用
+
+新explain_method使用rules_knowledge_v1/rules-knowledge-v1，节点prepare→knowledge；数值图和旧方法任务仍保留rules-graph-v1。knowledge_scope显式指定设备/部件及可选设备ID，缺范围则给出有限组织范围选项；超过2000字符的查询必须显式补充短查询。新方法任务不绑定采集输入，资料不建立测量根。
+
+search_published_knowledge进入agent_calls工具账本，固定排除developer_test，耗用同一任务20次工具/120秒预算。0017追加任务/调用与检索回执的唯一、不可变、数据库租约校验绑定，不新增表。回执先成功但调用结果或检查点未知时，恢复复用同一回执，不重新查询或重置预算。客户端模型等待被任务剩余时间限制，取消拒绝迟到持久结果但不硬杀模型服务。
+
+提交草稿前重查来源和引用角色，并锁定对应文档/版本/索引头及授权；读取终态时仍重查，撤回、索引替换和撤权后隐藏过期草稿或拒绝范围访问。仅允许真实knowledge_chunk支持method_explanation，不接受跨任务回执、未解析UUID或资料冒充数值事实；原文独立授权留档。
+
+本轮输出待复核资料引用，正文标untrusted_content，不执行其中指令、不复制为维修建议。相关性未准入时保持completed_degraded与knowledge_relevance_not_qualified，无有效来源则拒答；model_called仍表示LLM决策且为false，embedding_called单独记录。见[T03c验收](acceptance/M3-T03c-verification.md)。下一步T04受限DeepSeek决策与草稿生成，再由T05评测。

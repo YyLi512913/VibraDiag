@@ -16,11 +16,18 @@ class Strict(BaseModel):
         revalidate_instances='always')
 
 
+class MethodKnowledgeScope(Strict):
+    equipment: Literal['motor','pump','fan','rotating_generic']
+    component: Literal['bearing','rotating_assembly','general']
+    asset_id: UUID | None=None
+
+
 class CreateAgentTask(Strict):
     measurement_revision_id: UUID | None = None
     goal: Goal
     description: Annotated[Text,Field(max_length=4000)]
     comparison_declaration_id: UUID | None = None
+    knowledge_scope: MethodKnowledgeScope | None = None
 
     @model_validator(mode='after')
     def task_inputs(self):
@@ -28,6 +35,8 @@ class CreateAgentTask(Strict):
             raise ValueError('a measurement task requires an explicit input revision')
         if (self.goal=='compare_measurements')!=(self.comparison_declaration_id is not None):
             raise ValueError('only comparison tasks require a controlled declaration')
+        if self.goal!='explain_method' and self.knowledge_scope is not None:
+            raise ValueError('knowledge scope belongs only to method tasks')
         return self
 
 
@@ -136,7 +145,8 @@ class CandidateQuestion(Strict):
     task_id: UUID
     organization_id: UUID
     code: Literal['input_confirmation_required','measurement_parameters_required','target_context_required',
-        'profile_required','comparison_conditions_required','source_uncertainty_required','task_clarification_required']
+        'profile_required','comparison_conditions_required','source_uncertainty_required','task_clarification_required',
+        'knowledge_scope_required','knowledge_query_required']
 
 
 class Reservation(Strict):

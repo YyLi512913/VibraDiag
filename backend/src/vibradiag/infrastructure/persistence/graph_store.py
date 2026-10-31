@@ -6,7 +6,7 @@ from psycopg.rows import dict_row
 from langgraph.checkpoint.postgres import PostgresSaver
 from langgraph.checkpoint.serde.jsonplus import JsonPlusSerializer
 from sqlalchemy import text
-from vibradiag.agents.graph_state import GRAPH_VERSION,CHECKPOINT_SCHEMA,NODES,CursorBinding
+from vibradiag.agents.graph_state import CHECKPOINT_SCHEMA,GRAPH_NODES,GRAPH_EXECUTORS,CursorBinding
 from vibradiag.domain.measurement_errors import MeasurementError
 from vibradiag.infrastructure.persistence.database import database_url,transaction
 
@@ -37,23 +37,24 @@ class TaskSaver(PostgresSaver):
 
     def _validate(self,checkpoint,pending=()):
         try:
+            version=self.binding['graph_version'];nodes=GRAPH_NODES[version]
             if len(json.dumps(checkpoint,allow_nan=False).encode())>MAX_BYTES:invalid()
             values=checkpoint['channel_values']
             for key,value in values.items():
                 if key in {'task_id','graph_version'}:
-                    expected=str(self.task_id) if key=='task_id' else GRAPH_VERSION
+                    expected=str(self.task_id) if key=='task_id' else version
                     if value!=expected:invalid()
-                elif key=='__start__':CursorBinding.model_validate(value).check(self.task_id)
-                elif key.startswith('branch:to:') and key[len('branch:to:'):] in NODES:
+                elif key=='__start__':CursorBinding.model_validate(value).check(self.task_id,version)
+                elif key.startswith('branch:to:') and key[len('branch:to:'):] in nodes:
                     if value is not None:invalid()
                 else:invalid()
             if ('task_id' in values)!=('graph_version' in values):invalid()
             for _,key,value in pending:
                 if key in {'task_id','graph_version'}:
-                    if value!=(str(self.task_id) if key=='task_id' else GRAPH_VERSION):invalid()
+                    if value!=(str(self.task_id) if key=='task_id' else version):invalid()
                 elif key=='__error__':
                     if not isinstance(value,str) or len(value)>512:invalid()
-                elif key.startswith('branch:to:') and key[len('branch:to:'):] in NODES:
+                elif key.startswith('branch:to:') and key[len('branch:to:'):] in nodes:
                     if value is not None:invalid()
                 else:invalid()
         except MeasurementError:raise
@@ -89,7 +90,8 @@ class TaskSaver(PostgresSaver):
             row,_,_=service._authorize(connection,self.principal,self.task_id,write=True,current_only=True)
             if row['status']!='running' or row['lease_token']!=self.token:raise service.Fenced()
             binding=connection.execute(text('SELECT * FROM agent_graph_bindings WHERE task_id=:id'),dict(id=self.task_id)).mappings().one()
-            if binding['graph_version']!=GRAPH_VERSION or binding['thread_id']!=self.binding['thread_id'] or binding['input_fingerprint']!=row['input_fingerprint']:invalid()
+            if (binding['graph_version']!=self.binding['graph_version'] or GRAPH_EXECUTORS.get(binding['graph_version'])!=row['input_snapshot']['executor']
+                    or binding['thread_id']!=self.binding['thread_id'] or binding['input_fingerprint']!=row['input_fingerprint']):invalid()
         try:
             with self.lock,self.conn.transaction():
                 with self.conn.cursor(row_factory=dict_row) as cursor:
@@ -113,7 +115,7 @@ def task_saver(task,principal):
         row,_,_=service._authorize(connection,principal,task['id'],write=True,current_only=True)
         if row['status']!='running' or row['lease_token']!=task['lease_token']:raise service.Fenced()
         binding=connection.execute(text('SELECT * FROM agent_graph_bindings WHERE task_id=:id'),dict(id=task['id'])).mappings().one()
-        if binding['graph_version']!=GRAPH_VERSION or binding['input_fingerprint']!=row['input_fingerprint']:invalid()
+        if GRAPH_EXECUTORS.get(binding['graph_version'])!=row['input_snapshot']['executor'] or binding['input_fingerprint']!=row['input_fingerprint']:invalid()
     url=database_url().set(drivername='postgresql').render_as_string(hide_password=False)
     try:
         with psycopg.connect(url,autocommit=True,row_factory=dict_row,connect_timeout=5) as connection:

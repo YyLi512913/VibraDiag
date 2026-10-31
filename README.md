@@ -8,7 +8,7 @@
 
 “模型实验（开发）”保留DeepSeek工具调用及本地开发检索，仍读取原型数据，尚未接入正式取证闭环。M2已提供包络、理论频率、探索匹配和条件比较；正式故障定类、知识审核界面、模型Agent取证决策和工单仍待实现。见[操作指南](docs/05-m1-local-guide.md)与[M1验收](docs/acceptance/M1-acceptance.md)。
 
-**M2软件交付完工，本机探索工具范围有条件通过**，见[M2总验收](docs/acceptance/M2-acceptance.md)。四类工具API、来源追溯、双输入比较和最小工作台齐备；匹配算法为frequency-matching-v2，已修复不显著多峰误标歧义。18项验收有完整追溯，公开数据/正式诊断资格保留明确限制，不能据此称工厂试用已通过。[M3-T01设计与契约](docs/acceptance/M3-T01-verification.md)与[T02a持久任务/规则执行基础](docs/acceptance/M3-T02a-verification.md)已实现：任务API、挂起恢复、真实授权工具、调用账本及进程重启对账；[T02b2](docs/acceptance/M3-T02b2-verification.md)已将新任务接入分步LangGraph持久规则图，加入任务绑定、当前身份与租约围栏；正式RAG和模型决策仍待接入。当前42张业务表，另有4张检查点表，单API/单托管消费者。[T02b3](docs/acceptance/M3-T02b3-verification.md)已将五类纯数值核心接入可终止子进程，统一共享两名额；数值超时/任务取消会终止对应计算，宿主文件/数据库收尾仍独立处理。[T03a](docs/acceptance/M3-T03a-verification.md)已提供独立MD/TXT原文、版本、显式审核发布与撤回；向量检索由T03b2实现，Agent知识引用尚未接入。
+**M2软件交付完工，本机探索工具范围有条件通过**，见[M2总验收](docs/acceptance/M2-acceptance.md)。四类工具API、来源追溯、双输入比较和最小工作台齐备；匹配算法为frequency-matching-v2，已修复不显著多峰误标歧义。18项验收有完整追溯，公开数据/正式诊断资格保留明确限制，不能据此称工厂试用已通过。[M3-T01设计与契约](docs/acceptance/M3-T01-verification.md)与[T02a持久任务/规则执行基础](docs/acceptance/M3-T02a-verification.md)已实现：任务API、挂起恢复、真实授权工具、调用账本及进程重启对账；[T02b2](docs/acceptance/M3-T02b2-verification.md)已将新任务接入分步LangGraph持久规则图，加入任务绑定、当前身份与租约围栏；正式RAG和模型决策仍待接入。当前42张业务表，另有4张检查点表，单API/单托管消费者。[T02b3](docs/acceptance/M3-T02b3-verification.md)已将五类纯数值核心接入可终止子进程，统一共享两名额；数值超时/任务取消会终止对应计算，宿主文件/数据库收尾仍独立处理。[T03a](docs/acceptance/M3-T03a-verification.md)已提供独立MD/TXT原文、版本、显式审核发布与撤回；向量检索由T03b2实现，方法任务知识引用由T03c接入，尚未生成完整回答。
 
 ## 工程结构
 
@@ -46,7 +46,7 @@ VibraDiag/
 └─ .runtime/                   # 忽略入库的原始上传、索引与运行结果
 ```
 
-真实密钥和数据库连接保存在 `backend/.env`；前端不持有密钥。数据库使用SQLAlchemy Core连接/事务及Alembic显式SQL迁移；原型JSON/NPZ尚未迁移。M3已提供持久规则任务，持久规则图与数值隔离已接入，模型决策和Agent知识引用留后续阶段。
+真实密钥和数据库连接保存在 `backend/.env`；前端不持有密钥。数据库使用SQLAlchemy Core连接/事务及Alembic显式SQL迁移；原型JSON/NPZ尚未迁移。M3已提供持久规则任务，持久规则图与数值隔离已接入，方法任务已接知识引用，模型决策与生成留T04。
 
 ## 本机启动
 
@@ -111,4 +111,6 @@ node scripts\check-docs.cjs
 - [知识发布与检索设计](docs/08-knowledge-design.md)
 - [模型选型与对比记录](docs/appendices/model-selection.md)
 
-[T03b2](docs/acceptance/M3-T03b2-verification.md)已接真实本地BGE-M3、pgvector 0.8.6、不可变索引代与权限过滤后的精确检索；失败重建保留旧索引，撤回后不进入新检索，历史原文保留。模型/索引状态与诊断正确性分开，Agent知识引用留T03c。
+[T03b2](docs/acceptance/M3-T03b2-verification.md)已接真实本地BGE-M3、pgvector 0.8.6、不可变索引代与权限过滤后的精确检索；失败重建保留旧索引，撤回后不进入新检索，历史原文保留。模型/索引状态与诊断正确性分开，方法任务知识引用由T03c接入。
+
+[T03c](docs/acceptance/M3-T03c-verification.md)已将授权检索接入方法任务：显式范围澄清、真实块引用、任务/调用回执绑定、进程恢复重附着及撤回后的草稿失效。输出仍是待复核资料，未调用DeepSeek决策或生成答案；下一步T04。

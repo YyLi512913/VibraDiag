@@ -262,3 +262,23 @@ GET /knowledge-indexes/revisions/{id}和/runs/{id}按原文范围授权；GET /r
 ```
 
 详见[T03b2验收](../docs/acceptance/M3-T03b2-verification.md)。上述命令从仓库根目录执行，HTTP验证须在pytest结束后运行，使用专用测试库和真实本地模型。旧阶段回执保留历史范围，新记录不覆盖旧结果。
+
+## M3-T03c 方法任务知识引用
+
+迁移0017后重启API，新explain_method任务使用rules_knowledge_v1/rules-knowledge-v1；数值与既有方法任务保留原图版本。创建任务时可提供knowledge_scope={equipment,component,asset_id?}，仅方法任务可用；不能绑定measurement_revision_id。没有范围会挂起并提供有限组织范围选项，恢复时answer必须是已提供的选项ID；设备范围须创建时显式提供且有读取权。
+
+查询超过2000字符或不符合纯文本约束时挂起knowledge_query_required，恢复显式输入合规短查询，普通回答不改变设备/采集参数。search_published_knowledge占用工具预留，固定排除开发内容，受任务剩余120秒预算和当前租约限制。503挂起等待显式重试；回执已提交而响应未知时，同call_id恢复不重新调用Embedding。
+
+任务详情新增knowledge_references、embedding_called和draft_validity.knowledge_current；model_called仍表示LLM决策，本轮false。有来源也因相关性尚未准入而返回completed_degraded/knowledge_relevance_not_qualified，无来源拒答。资料正文标untrusted_content，固定观察不复制原文建议。撤回、索引头变化或撤权后隐藏草稿/资料或拒绝任务范围访问，历史账本和原文独立保留。
+
+```bat
+.venv\Scripts\python.exe backend\scripts\migrate.py
+.venv\Scripts\python.exe backend\scripts\export_m3_agent_contract.py
+.venv\Scripts\python.exe -m pytest -c backend\pyproject.toml backend\tests -q --junitxml=experiments\m3-t03c-tests.xml
+.venv\Scripts\python.exe -m pytest -c backend\pyproject.toml backend\tests\integration\test_agent_knowledge.py -q --junitxml=experiments\m3-t03c-agent-tests.xml
+.venv\Scripts\python.exe backend\scripts\verify_agent_knowledge.py
+```
+
+实际进程验证须等所有pytest结束；使用专用测试库和真实本地模型。探针只在自建进程暂停/终止及恢复指定任务，普通API/消费者不加载故障模式。详见[T03c验收](../docs/acceptance/M3-T03c-verification.md)，下一步T04模型决策和生成，知识界面仍留M4。
+
+Embedding活动按已提交回执确认：embedding_activity区分confirmed_called、not_called和unknown。取消或失败时没有成功回执不能据此断言模型从未执行；model_called仍单独表示LLM决策。

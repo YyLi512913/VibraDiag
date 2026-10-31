@@ -108,9 +108,9 @@ def test_bearing_actual_tools_and_uncertainty_degradation(case):
 
 def test_method_refusal_has_no_fabricated_rag(case):
     task=create(case,'explain_method').json();execute(task);result=read(case,task)
-    assert result['status']=='refused' and result['calls']==[]
-    assert result['draft']['missing_requirements']==['published_knowledge_service_not_integrated']
-    assert result['draft']['observations']==[]
+    assert result['status']=='waiting_information' and result['calls']==[]
+    assert result['question']['code']=='knowledge_scope_required'
+    assert result['draft'] is None
 
 
 def test_auth_csrf_owner_scope_and_override_rejection(case):

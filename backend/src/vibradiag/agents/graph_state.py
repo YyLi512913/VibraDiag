@@ -8,6 +8,10 @@ GRAPH_VERSION='rules-graph-v1'
 EXECUTOR='rules_graph_v1'
 CHECKPOINT_SCHEMA='public_agent_checkpoints'
 NODES=('prepare','basic','profile','envelope','context','frequency','bound_envelope','matching','comparison')
+KNOWLEDGE_GRAPH='rules-knowledge-v1'
+KNOWLEDGE_EXECUTOR='rules_knowledge_v1'
+GRAPH_NODES={GRAPH_VERSION:NODES,KNOWLEDGE_GRAPH:('prepare','knowledge')}
+GRAPH_EXECUTORS={GRAPH_VERSION:EXECUTOR,KNOWLEDGE_GRAPH:KNOWLEDGE_EXECUTOR}
 defer_wait=ContextVar('agent_graph_defer_wait',default=False)
 
 
@@ -19,10 +23,11 @@ class Cursor(TypedDict):
 class CursorBinding(BaseModel):
     model_config=ConfigDict(extra='forbid',strict=True,frozen=True)
     task_id: str
-    graph_version: Literal['rules-graph-v1']
+    graph_version: Literal['rules-graph-v1','rules-knowledge-v1']
 
-    def check(self,task_id):
+    def check(self,task_id,version=None):
         if self.task_id!=str(task_id) or str(UUID(self.task_id))!=self.task_id:raise ValueError('Invalid graph task binding')
+        if version is not None and self.graph_version!=version:raise ValueError('Invalid graph version binding')
 
 
 class GraphWait(Exception):

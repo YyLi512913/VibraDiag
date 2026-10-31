@@ -209,8 +209,9 @@ def _resolve(c,current,row):
         similarity=float(np.clip(1-row['distance'],-1,1)),relevance_qualified=False,diagnostic_probability=False)
 
 
-def _search(payload,principal):
+def _search(payload,principal,*,control=None,binding=None):
     started=monotonic();identity=configured_identity();timing={};runtime=None
+    allowance=min(60,control() if control else 60)
     with transaction() as c:
         current=_search_access(c,principal,payload)
         eligible=c.execute(text('SELECT count(*) FROM ('+ELIGIBLE+') candidates'),_parameters(current,payload,identity)).scalar_one()
@@ -218,7 +219,8 @@ def _search(payload,principal):
     ranked=[]
     if eligible:
         def local():
-            remaining=60-(monotonic()-started)
+            remaining=allowance-(monotonic()-started)
+            if control:remaining=min(remaining,control())
             if remaining<=0:raise MeasurementError('KNOWLEDGE_SEARCH_DEADLINE','Search deadline exceeded',status=409)
             return provider(identity,min(remaining,60))
         runtime=local().inspect()['ollama_version'];vector,timing=local().encode([payload.query])
@@ -237,6 +239,7 @@ def _search(payload,principal):
               unique_content AS (SELECT DISTINCT ON(text_sha256) * FROM ranked ORDER BY text_sha256,distance,id)
               SELECT * FROM unique_content ORDER BY distance,id LIMIT :limit'''),params).mappings().all()
     with transaction() as c:
+        if control:control(c)
         current=_search_access(c,principal,payload);hits=[];matches=[]
         for row in ranked:
             # Requery eligible IDs after inference/ranking, so observed withdrawal or regrant takes effect.
@@ -245,21 +248,23 @@ def _search(payload,principal):
             hit=_resolve(c,current,row)
             if hit:
                 hit['formal_retrieval_available']=not payload.include_developer
-                hits.append(hit);matches.append(dict(chunk_id=hit['id'],revision_id=hit['revision_id'],index_id=hit['index_id'],text_sha256=hit['text_sha256'],similarity=hit['similarity']))
+                hits.append(hit);matches.append(dict(chunk_id=hit['id'],revision_id=hit['revision_id'],index_id=hit['index_id'],text_sha256=hit['text_sha256'],similarity=hit['similarity'],
+                    source_sha256=hit['source_sha256'],line_start=hit['line_start'],line_end=hit['line_end'],char_start=hit['char_start'],char_end=hit['char_end']))
         identifier=uuid4();timing=dict(timing,wall_seconds=monotonic()-started)
-        c.execute(text('''INSERT INTO knowledge_retrieval_runs(id,organization_id,actor_id,query,query_sha256,filters,identity_sha256,runtime_version,model_called,matches,eligible_count,timing)
-            VALUES (:id,:org,:actor,:query,:sha,CAST(:filters AS jsonb),:identity,:runtime,:called,CAST(:matches AS jsonb),:count,CAST(:timing AS jsonb))'''),
+        if binding:c.execute(text("SELECT set_config('vibradiag.knowledge_lease',:lease,true)"),dict(lease=str(binding['lease_token'])))
+        c.execute(text('''INSERT INTO knowledge_retrieval_runs(id,organization_id,actor_id,query,query_sha256,filters,identity_sha256,runtime_version,model_called,matches,eligible_count,timing,agent_task_id,agent_call_id)
+            VALUES (:id,:org,:actor,:query,:sha,CAST(:filters AS jsonb),:identity,:runtime,:called,CAST(:matches AS jsonb),:count,CAST(:timing AS jsonb),:task,:call)'''),
             dict(id=identifier,org=current.organization_id,actor=current.user_id,query=payload.query,sha=sha256(payload.query.encode()).hexdigest(),
                 filters=json.dumps(payload.model_dump(mode='json',exclude={'query'})),identity=identity.fingerprint,runtime=runtime,called=bool(runtime),
-                matches=json.dumps(matches),count=eligible,timing=json.dumps(timing)))
+                matches=json.dumps(matches),count=eligible,timing=json.dumps(timing),task=binding['task_id'] if binding else None,call=binding['call_id'] if binding else None))
         audit(c,current.organization_id,current.user_id,'knowledge.search','knowledge_retrieval',identifier)
         return dict(id=str(identifier),hits=hits,identity_sha256=identity.fingerprint,model_called=bool(runtime),timing=timing,
             retrieval_mode='developer_verification' if payload.include_developer else 'published_dense_exact',
             relevance_qualified=False,diagnostic_probability=False,agent_knowledge_integrated=False)
 
 
-def search(payload,principal):
-    try:return _search(payload,principal)
+def search(payload,principal,*,control=None,binding=None):
+    try:return _search(payload,principal,control=control,binding=binding)
     except (MeasurementError,DBAPIError) as error:
         code=error.code if isinstance(error,MeasurementError) else 'KNOWLEDGE_SEARCH_DATABASE_UNAVAILABLE'
         try:

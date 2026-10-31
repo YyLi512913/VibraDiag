@@ -4,7 +4,7 @@ from hashlib import sha256
 import json
 from uuid import UUID,uuid4
 
-from vibradiag.agents.graph_state import EXECUTOR,GRAPH_VERSION,GraphWait,defer_wait
+from vibradiag.agents.graph_state import EXECUTOR,GRAPH_VERSION,KNOWLEDGE_EXECUTOR,KNOWLEDGE_GRAPH,GraphWait,defer_wait
 from pydantic import TypeAdapter
 from sqlalchemy import text
 from vibradiag.agents.formal_contracts import CreateAgentTask,ResumeAgentTask,ExecutionBudget,ExploratoryDraft
@@ -80,7 +80,10 @@ def _change(connection,row,status,*,question=None,draft=None,error=None,budget=N
 
 
 def _roots(connection,current,payload):
-    if payload.goal=='explain_method':return []
+    if payload.goal=='explain_method':
+        from .agent_knowledge_service import authorize_scope
+        authorize_scope(connection,current,payload.knowledge_scope)
+        return []
     if payload.goal=='compare_measurements':
         row,_,resolved=comparisons.resolve_declaration(connection,current,payload.comparison_declaration_id,write=True,current_only=True,lock=True)
         if row['after_revision_id']!=payload.measurement_revision_id:conflict('COMPARISON_INPUT_MISMATCH')
@@ -107,6 +110,9 @@ def _authorize(connection,principal,identifier,*,write=False,lock=False,current_
         if str(record['id'])!=root['measurement_id'] or record['sha256']!=root['sha256']:conflict('TASK_SOURCE_INTEGRITY')
         active=active and record['current_revision_id']==rev['id']
     if current_only and not active:conflict('STALE_TASK_INPUT')
+    if row['input_snapshot']['executor']==KNOWLEDGE_EXECUTOR:
+        from .agent_knowledge_service import authorize_scope,scope
+        authorize_scope(connection,current,scope(row))
     return row,current,bool(active)
 
 
@@ -131,18 +137,22 @@ def _save_command(connection,current,task_id,operation,digest,request):
 
 def create_task(payload,key,principal):
     payload=CreateAgentTask.model_validate(payload);data=payload.model_dump(mode='json');runtime.ensure()
+    if payload.knowledge_scope is None:data.pop('knowledge_scope',None)  # Preserve older command hashes for absent optional scope.
     with transaction() as connection:
         current=fresh(connection,principal,write=True)
         existing,digest,request=_command(connection,current,key,'create',data)
         if existing:
             _authorize(connection,current,existing['task_id']);identifier=existing['task_id'];status=200
         else:
+            if payload.goal=='explain_method' and payload.measurement_revision_id is not None:
+                raise MeasurementError('METHOD_TASK_INPUT_NOT_ALLOWED','Method knowledge tasks do not bind measurement inputs',status=422)
             # Serialize per-actor admission independently of the request key.
             connection.execute(text('SELECT id FROM users WHERE id=:actor FOR UPDATE'),dict(actor=current.user_id))
             count=connection.execute(text('''SELECT count(*) FROM agent_tasks WHERE organization_id=:org AND requested_by=:actor
                 AND status IN ('queued','running','waiting_information','interrupted')'''),dict(org=current.organization_id,actor=current.user_id)).scalar_one()
             if count>=MAX_PENDING:raise MeasurementError('AGENT_QUEUE_FULL','Too many unfinished tasks',status=429)
-            roots=_roots(connection,current,payload);snapshot={'roots':roots,'executor':EXECUTOR}
+            roots=_roots(connection,current,payload);method=payload.goal=='explain_method'
+            snapshot={'roots':roots,'executor':KNOWLEDGE_EXECUTOR if method else EXECUTOR}
             identifier=uuid4()
             before=next((root['revision_id'] for root in roots if root['revision_id']!=str(payload.measurement_revision_id)),None)
             if payload.goal=='compare_measurements' and before is None:before=str(payload.measurement_revision_id)
@@ -154,7 +164,7 @@ def create_task(payload,key,principal):
             row=connection.execute(text('SELECT * FROM agent_tasks WHERE id=:id'),dict(id=identifier)).mappings().one()
             connection.execute(text('''INSERT INTO agent_graph_bindings(task_id,organization_id,requested_by,thread_id,graph_version,input_fingerprint)
                 VALUES (:task,:org,:actor,:thread,:version,:fingerprint)'''),dict(task=identifier,org=current.organization_id,
-                actor=current.user_id,thread=str(uuid4()),version=GRAPH_VERSION,fingerprint=row['input_fingerprint']))
+                actor=current.user_id,thread=str(uuid4()),version=KNOWLEDGE_GRAPH if method else GRAPH_VERSION,fingerprint=row['input_fingerprint']))
             _event(connection,row,'accepted');_save_command(connection,current,identifier,'create',digest,request);status=202
     return read_task(identifier,principal),status
 
@@ -164,23 +174,30 @@ def read_task(identifier,principal):
         row,current,active=_authorize(connection,principal,identifier)
         calls=connection.execute(text('SELECT * FROM agent_calls WHERE task_id=:id ORDER BY call_no'),dict(id=identifier)).mappings().all()
         events=connection.execute(text('SELECT task_version,kind,details,created_at FROM agent_events WHERE task_id=:id ORDER BY created_at,id LIMIT 200'),dict(id=identifier)).mappings().all()
+        knowledge_calls=[call['id'] for call in calls if call['resource_kind']=='knowledge_retrieval']
+        confirmed_embedding=bool(knowledge_calls and connection.execute(text('SELECT 1 FROM knowledge_retrieval_runs WHERE agent_call_id=ANY(CAST(:calls AS uuid[])) AND model_called LIMIT 1'),dict(calls=knowledge_calls)).first())
     with transaction() as connection:
         binding=connection.execute(text('SELECT * FROM agent_graph_bindings WHERE task_id=:id'),dict(id=identifier)).mappings().first()
         checkpoint_count=connection.execute(text('SELECT count(*) FROM public_agent_checkpoints.checkpoints WHERE thread_id=:thread'),dict(thread=binding['thread_id'])).scalar_one() if binding else 0
-    confirmations=True;contexts=True
+    confirmations=True;contexts=True;knowledge_current=True;knowledge_references=[];embedding_called=confirmed_embedding
     for call in calls:
         if call['resource_id']:
             result=_read_source(call,current)
             confirmations=confirmations and result.get('input_confirmation_active',True) and result.get('parent_confirmations_active',True)
             contexts=contexts and result.get('is_current_bearing_revision') is not False
+            if call['resource_kind']=='knowledge_retrieval':
+                knowledge_current=knowledge_current and result['current_and_valid']
+                knowledge_references.extend(result['hits']);embedding_called=embedding_called or result['embedding_called']
     with transaction() as connection:
         _,_,latest_active=_authorize(connection,principal,identifier)
-    valid=active and latest_active and confirmations and contexts
+    valid=active and latest_active and confirmations and contexts and knowledge_current
     return {'id':str(row['id']),'goal':row['goal'],'description':row['payload']['description'],'status':row['status'],
         'version':row['version'],'question':row['question'],'selection':row['selection'],'budget':row['budget'],
         'draft':row['draft'] if valid else None,'error_code':row['error_code'],'input_snapshot':row['input_snapshot'],
         'draft_validity':{'inputs_current':bool(active and latest_active),'confirmations_active':bool(confirmations),
-            'contexts_current':bool(contexts),'usable':bool(valid and row['draft'])},
+            'contexts_current':bool(contexts),'knowledge_current':bool(knowledge_current),'usable':bool(valid and row['draft'])},
+        'knowledge_references':knowledge_references if valid else [],'embedding_called':embedding_called,
+        'embedding_activity':'confirmed_called' if embedding_called else 'unknown' if any(c['resource_kind']=='knowledge_retrieval' and c['state'] in {'running','interrupted','failed'} for c in calls) else 'not_called',
         'created_at':row['created_at'],'updated_at':row['updated_at'],'finished_at':row['finished_at'],
         'calls':[{'id':str(c['id']),'call_no':c['call_no'],'action':c['action_name'],'state':c['state'],
             'resource_kind':c['resource_kind'],'resource_id':str(c['resource_id']) if c['resource_id'] else None,
@@ -219,6 +236,9 @@ def resume_task(identifier,payload,key,principal):
             if question.get('choices'):
                 if payload.answer not in {choice['id'] for choice in question['choices']}:conflict('CHOICE_NOT_OFFERED')
                 field=question['selection_field'];selection[field]=payload.answer
+            elif question.get('selection_field')=='knowledge_query':
+                from .agent_knowledge_service import validate_query_answer
+                validate_query_answer(row,payload.answer);selection['knowledge_query']=payload.answer
             status='budget_exhausted' if row['resume_count']>=20 or row['budget']['active_ms']>=120000 else 'queued'
             _change(connection,row,status,selection=selection,session_id=current.session_id if status=='queued' else row['session_id'],resume=status=='queued',
                 error='RESUME_BUDGET_EXHAUSTED' if status=='budget_exhausted' else None)
@@ -258,6 +278,9 @@ def _wait(identifier,token,code,*,choices=None,selection_field=None,status='wait
 
 def _read_source(call,principal):
     if call['resource_kind']=='analysis':return basic.read_analysis(call['resource_id'],principal)
+    if call['resource_kind']=='knowledge_retrieval':
+        from .agent_knowledge_service import resolve
+        return resolve(call['resource_id'],principal,call['task_id'],call['id'])
     return tools.read_run(call['resource_id'],principal)
 
 
@@ -284,7 +307,7 @@ def _selection(identifier,token,field,items):
 
 
 def _dispatch(identifier,token,action,payload,principal):
-    resource_kind='analysis' if action=='analyze_basic' else 'tool'
+    resource_kind='analysis' if action=='analyze_basic' else 'knowledge_retrieval' if action=='search_published_knowledge' else 'tool'
     with transaction() as connection:
         row=_running(connection,identifier,token);_authorize(connection,principal,identifier,write=True,current_only=True)
         operation=logical_call_key(identifier,row['input_fingerprint'],{'action':action,'payload':payload})
@@ -326,8 +349,11 @@ def _dispatch(identifier,token,action,payload,principal):
         from vibradiag.infrastructure.compute.runner import bound_task
         with bound_task(identifier,token,principal):
             if resource_kind=='analysis':result,_=basic.create_analysis(AnalysisRequest.model_validate(execution_payload),call['logical_key'],principal,uuid4())
+            elif resource_kind=='knowledge_retrieval':
+                from .agent_knowledge_service import search_for_call
+                result=search_for_call(identifier,token,call,principal)
             else:result,_=tools.create_run(TypeAdapter(ToolRunRequest).validate_python(execution_payload),call['logical_key'],principal,uuid4())
-        rid=UUID(result['analysis_id'] if resource_kind=='analysis' else result['tool_execution_id'])
+        rid=UUID(result['analysis_id'] if resource_kind=='analysis' else result['retrieval_id'] if resource_kind=='knowledge_retrieval' else result['tool_execution_id'])
         state=result['status']
         if state=='completed':state={'unavailable':'unavailable','failed':'failed'}.get(result.get('result_status'),'completed')
         elif state=='running':state='interrupted'
@@ -356,25 +382,30 @@ def _dispatch(identifier,token,action,payload,principal):
                 except PolicyStop:pass
             if not deferred:_change(connection,row,'running',budget=budget.model_dump(mode='json'),charge=False)
         if deferred:raise YieldTask()
+        if resource_kind=='knowledge_retrieval' and error.status==503:_wait(identifier,token,'knowledge_retrieval_retry_required',status='interrupted')
         raise
 
 
 def _finish(identifier,token,principal,status,observations,missing=(),error=None):
-    draft=ExploratoryDraft(status='insufficient_evidence' if missing else 'analysis_only',
-        summary='规则托管执行完成；尚未执行模型Agent诊断。' if not missing else '已保留可用分析；必要条件仍不足。',
-        observations=tuple(observations),missing_requirements=tuple(dict.fromkeys(missing)),
-        limitations=('持久规则执行基础，未执行DeepSeek模型自主决策。','探索数值不能直接用于故障定类、健康或维修有效结论。'),
-        next_steps=('结合有来源的参数及人工复核；后续接入正式Agent与知识服务。',)).model_dump(mode='json')
-    # Re-read all referenced outcomes after computation; no stale/corrupt result can be published.
     with transaction() as connection:
         row=_running(connection,identifier,token)
         calls=connection.execute(text('SELECT * FROM agent_calls WHERE task_id=:id AND resource_id IS NOT NULL'),dict(id=identifier)).mappings().all()
+    method=row['input_snapshot']['executor']==KNOWLEDGE_EXECUTOR
+    draft=ExploratoryDraft(status='insufficient_evidence' if missing else 'analysis_only',
+        summary=('已定位待复核方法资料；未生成诊断或方法结论。' if observations else '当前没有可用于此任务的已发布知识引用。') if method else '规则托管执行完成；尚未执行模型Agent诊断。' if not missing else '已保留可用分析；必要条件仍不足。',
+        observations=tuple(observations),missing_requirements=tuple(dict.fromkeys(missing)),
+        limitations=('持久规则执行基础，未执行DeepSeek模型自主决策。','探索数值不能直接用于故障定类、健康或维修有效结论。'),
+        next_steps=('人工核对方法资料与问题的相关性；后续接模型生成与独立评测。' if method else '结合有来源的参数及人工复核；后续接入正式Agent与知识服务。',)).model_dump(mode='json')
+    # Re-read all referenced outcomes after computation; no stale/corrupt result can be published.
     for call in calls:
         source=_read_source(call,principal)
         if source.get('is_current_bearing_revision') is False:conflict('STALE_TASK_BINDING')
         if not source.get('input_confirmation_active',True) or not source.get('parent_confirmations_active',True):conflict('INPUT_CONFIRMATION_REVOKED')
     with transaction() as connection:
         row=_running(connection,identifier,token);_authorize(connection,principal,identifier,write=True,current_only=True)
+        if method:
+            from .agent_knowledge_service import validate_draft
+            validate_draft(connection,row,principal,draft,calls)
         if row['budget']['active_ms']>=120000:status='timed_out';draft=None;error='ACTIVE_TIME_EXHAUSTED'
         _change(connection,row,status,draft=draft,error=error)
 
@@ -390,6 +421,9 @@ def execute_claimed(task):
         with transaction() as connection:
             _running(connection,identifier,token);row,current,_=_authorize(connection,principal,identifier,write=True,current_only=True)
         principal=current;payload=CreateAgentTask.model_validate(row['payload'])
+        if row['input_snapshot']['executor']==KNOWLEDGE_EXECUTOR:
+            from vibradiag.agents.knowledge_graph import execute
+            execute(task,principal);return
         if row['input_snapshot']['executor']==EXECUTOR:
             from vibradiag.agents.rules_graph import execute
             execute(task,principal);return

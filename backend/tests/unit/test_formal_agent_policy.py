@@ -141,4 +141,5 @@ def test_exported_contract_matches_schemas_and_actual_scope(monkeypatch):
     saved=json.loads((PROJECT_ROOT/'docs/contracts/m3-agent-contract.json').read_text(encoding='utf8'))
     assert saved==exporter.contract()
     assert not saved['formal_diagnostic_release']
-    assert 'formal task API' in saved['not_implemented_here']
+    assert 'LLM action selection and answer generation' in saved['not_implemented_here']
+    assert saved['knowledge']['durable_retrieval_binding'] and not saved['knowledge']['generated_answer']
