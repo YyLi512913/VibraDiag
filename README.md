@@ -120,3 +120,5 @@ node scripts\check-docs.cjs
 [T04b1](docs/acceptance/M3-T04b1-verification.md)已提供可选方法模型图：VIBRADIAG_METHOD_EXECUTOR=model对新方法任务启用模型候选选择、授权检索和逐字摘录草稿；分发默认rules，旧任务/数值图保留。配置在受理时固定，模型/工具完成回执可在恢复时复用；相关性未准入，不输出诊断结论。下一步T04b2数值候选编排。
 
 [T04b2](docs/acceptance/M3-T04b2-verification.md)已提供可选数值模型图：VIBRADIAG_NUMERIC_EXECUTOR=model对新数值任务启用受控候选选择与实际工具执行，最多5工具/6决策；参数、父结果与引用由服务器验证。分发默认rules，方法配置独立，草稿不代表正式诊断。下一步T05对照评测。
+
+[T05a](docs/acceptance/M3-T05a-verification.md)新增正式数值链路的规则/单次模型路由/逐步Agent开发对照，协议与源码运行前冻结，记录真实工具覆盖、引用链接、状态、耗时及token；不作为故障准确率或工厂准入。设计见[10评测设计](docs/10-agent-evaluation-design.md)。

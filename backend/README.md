@@ -321,3 +321,7 @@ VIBRADIAG_FORMAL_LLM_PROVIDER显式为deepseek或ollama；默认deepseek，云�
 VIBRADIAG_NUMERIC_EXECUTOR=rules/model独立控制新数值任务，分发默认rules。model模式使用model_numeric_v1 / model-numeric-v1，受理时固定数值提示策略和模型配置。基础、包络、理想频率、绑定包络、匹配及比较使用既有真实服务；只有条件满足才提供候选，模型不生成参数。最多5工具/6决策，完成回执及检查点重入不重复调用；服务器组装带实际引用的未发布草稿。
 
 真实验证命令为.venv\Scripts\python.exe backend\scripts\verify_model_numeric_graph.py，须等全部pytest结束，使用专用测试数据库及已授权DeepSeek额度。数值任务不代表故障分类或诊断资格，详见[T04b2验收](../docs/acceptance/M3-T04b2-verification.md)。下一步T05对照评测。
+
+## M3-T05a 正式开发对照
+
+benchmark_agent.py仍为M0历史实验。正式对照使用backend/scripts/benchmark_formal_agent.py --allow-paid-model-calls，在专用测试数据库运行规则、一次工作流路由及正式Agent。先完成pytest；命令固定DeepSeek、单次轮换三组，运行前冻结配置/源码，已有公开回执拒绝覆盖。结果记录客观开发预期、来源、开销及token，缺货币价格/账单时不估算金额。单次路由是离线评测适配器，其模型调用单独回执并计入预算，不冒充生产图账本。详见[T05a验收](../docs/acceptance/M3-T05a-verification.md)。
