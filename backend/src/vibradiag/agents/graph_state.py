@@ -12,8 +12,11 @@ KNOWLEDGE_GRAPH='rules-knowledge-v1'
 KNOWLEDGE_EXECUTOR='rules_knowledge_v1'
 MODEL_GRAPH='model-method-v1'
 MODEL_EXECUTOR='model_method_v1'
-GRAPH_NODES={GRAPH_VERSION:NODES,KNOWLEDGE_GRAPH:('prepare','knowledge'),MODEL_GRAPH:('prepare','decide','knowledge','compose')}
-GRAPH_EXECUTORS={GRAPH_VERSION:EXECUTOR,KNOWLEDGE_GRAPH:KNOWLEDGE_EXECUTOR,MODEL_GRAPH:MODEL_EXECUTOR}
+NUMERIC_GRAPH='model-numeric-v1'
+NUMERIC_EXECUTOR='model_numeric_v1'
+NUMERIC_NODES=('prepare',)+tuple(f'decide_{i}' for i in range(6))+tuple(f'act_{i}' for i in range(5))
+GRAPH_NODES={NUMERIC_GRAPH:NUMERIC_NODES,GRAPH_VERSION:NODES,KNOWLEDGE_GRAPH:('prepare','knowledge'),MODEL_GRAPH:('prepare','decide','knowledge','compose')}
+GRAPH_EXECUTORS={NUMERIC_GRAPH:NUMERIC_EXECUTOR,GRAPH_VERSION:EXECUTOR,KNOWLEDGE_GRAPH:KNOWLEDGE_EXECUTOR,MODEL_GRAPH:MODEL_EXECUTOR}
 defer_wait=ContextVar('agent_graph_defer_wait',default=False)
 
 
@@ -25,7 +28,7 @@ class Cursor(TypedDict):
 class CursorBinding(BaseModel):
     model_config=ConfigDict(extra='forbid',strict=True,frozen=True)
     task_id: str
-    graph_version: Literal['rules-graph-v1','rules-knowledge-v1','model-method-v1']
+    graph_version: Literal['rules-graph-v1','rules-knowledge-v1','model-method-v1','model-numeric-v1']
 
     def check(self,task_id,version=None):
         if self.task_id!=str(task_id) or str(UUID(self.task_id))!=self.task_id:raise ValueError('Invalid graph task binding')

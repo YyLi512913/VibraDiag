@@ -118,3 +118,5 @@ node scripts\check-docs.cjs
 [T04a](docs/acceptance/M3-T04a-verification.md)已建立DeepSeek/本地Qwen的统一受控网关、每任务模型绑定和预算账本；校验候选ID与逐字摘录，无静默回退。此阶段尚未让正式图消费模型建议，下一步T04b。配置与边界见[09设计](docs/09-model-runtime-design.md)。
 
 [T04b1](docs/acceptance/M3-T04b1-verification.md)已提供可选方法模型图：VIBRADIAG_METHOD_EXECUTOR=model对新方法任务启用模型候选选择、授权检索和逐字摘录草稿；分发默认rules，旧任务/数值图保留。配置在受理时固定，模型/工具完成回执可在恢复时复用；相关性未准入，不输出诊断结论。下一步T04b2数值候选编排。
+
+[T04b2](docs/acceptance/M3-T04b2-verification.md)已提供可选数值模型图：VIBRADIAG_NUMERIC_EXECUTOR=model对新数值任务启用受控候选选择与实际工具执行，最多5工具/6决策；参数、父结果与引用由服务器验证。分发默认rules，方法配置独立，草稿不代表正式诊断。下一步T05对照评测。

@@ -315,3 +315,9 @@ VIBRADIAG_FORMAL_LLM_PROVIDER显式为deepseek或ollama；默认deepseek，云�
 ```
 
 真实脚本要等全部pytest结束，使用专用测试库、真实DeepSeek与本地Qwen；API与探针交替持有同一租约，不是允许多执行器。数值任务仍保留规则图，开放式回答/数值模型编排/效果准入与界面留后续。详见[T04b1验收](../docs/acceptance/M3-T04b1-verification.md)。
+
+## M3-T04b2 可选数值模型图
+
+VIBRADIAG_NUMERIC_EXECUTOR=rules/model独立控制新数值任务，分发默认rules。model模式使用model_numeric_v1 / model-numeric-v1，受理时固定数值提示策略和模型配置。基础、包络、理想频率、绑定包络、匹配及比较使用既有真实服务；只有条件满足才提供候选，模型不生成参数。最多5工具/6决策，完成回执及检查点重入不重复调用；服务器组装带实际引用的未发布草稿。
+
+真实验证命令为.venv\Scripts\python.exe backend\scripts\verify_model_numeric_graph.py，须等全部pytest结束，使用专用测试数据库及已授权DeepSeek额度。数值任务不代表故障分类或诊断资格，详见[T04b2验收](../docs/acceptance/M3-T04b2-verification.md)。下一步T05对照评测。

@@ -8,7 +8,7 @@ from vibradiag.agents.formal_contracts import (CreateAgentTask,ResumeAgentTask,A
 
 
 def contract():
-    return {'contract_version':'m3-t04b1-runtime-contract-v1','implementation_stage':'Persistent numerical rules and opt-in model-driven method graph',
+    return {'contract_version':'m3-t04b2-runtime-contract-v1','implementation_stage':'Persistent rules and opt-in model-driven method/numerical graphs',
         'schemas':{'create_task':CreateAgentTask.model_json_schema(),'resume_task':ResumeAgentTask.model_json_schema(),
             'model_decision':TypeAdapter(AgentDecision).json_schema(),'unpublished_draft':ExploratoryDraft.model_json_schema(),
             'internal_budget':ExecutionBudget.model_json_schema(),'task_status':TypeAdapter(TaskStatus).json_schema(),
@@ -24,7 +24,10 @@ def contract():
             'semantic_relevance_qualified':False,'generated_answer':False,'durable_retrieval_binding':True},
         'model_method':{'graph_version':'model-method-v1','executor':'model_method_v1','enabled_by':'VIBRADIAG_METHOD_EXECUTOR=model',
             'default_mode':'rules','decision_drives_authorized_search':True,'extractive_draft_only':True,'configuration_pinned_at_acceptance':True},
-        'not_implemented_here':['Numerical-task model candidate orchestration','open-ended diagnostic generation','retrieval relevance qualification',
+        'model_numeric':{'graph_version':'model-numeric-v1','executor':'model_numeric_v1','enabled_by':'VIBRADIAG_NUMERIC_EXECUTOR=model',
+            'default_mode':'rules','decision_drives_authorized_tools':True,'max_graph_tools':5,'max_graph_decisions':6,
+            'free_form_generated_draft':False,'server_assembled_cited_draft':True,'configuration_pinned_at_acceptance':True},
+        'not_implemented_here':['open-ended diagnostic generation','retrieval relevance qualification',
             'knowledge frontend','formal model/draft semantic evaluation'],
         'formal_diagnostic_release':False,'factory_trial_approved':False}
 
@@ -33,7 +36,7 @@ def main():
     target=PROJECT_ROOT/'docs/contracts/m3-agent-contract.json'
     target.write_text(json.dumps(contract(),ensure_ascii=False,indent=2)+'\n',encoding='utf8')
     print(json.dumps({'contract':target.relative_to(PROJECT_ROOT).as_posix(),'sha256':sha256(target.read_bytes()).hexdigest(),
-        'formal_rule_runtime_implemented':True,'model_method_decision_integrated':True,'numerical_model_decision_integrated':False}))
+        'formal_rule_runtime_implemented':True,'model_method_decision_integrated':True,'numerical_model_decision_integrated':True}))
 
 
 if __name__=='__main__':main()

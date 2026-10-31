@@ -131,3 +131,11 @@ def test_response_after_deadline_is_not_success(monkeypatch):
         if request.url.path=='/chat/completions':clock[0]=61.
     with pytest.raises(MeasurementError) as caught:gateway(override=delayed)[0].invoke('decision',{},dict(type='object'))
     assert caught.value.code=='MODEL_DEADLINE'
+
+
+@pytest.mark.parametrize('phase,purpose',[('numeric_decision','method'),('decision','numeric')])
+def test_phase_cannot_cross_pinned_method_and_numeric_policy(phase,purpose):
+    requests=[]
+    client=Gateway(configuration('deepseek',purpose=purpose),transport=httpx.MockTransport(lambda request:requests.append(request)))
+    with pytest.raises(MeasurementError) as caught:client.invoke(phase,{},dict(type='object'))
+    assert caught.value.code=='MODEL_POLICY_MISMATCH' and not requests

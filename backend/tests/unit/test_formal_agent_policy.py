@@ -141,6 +141,7 @@ def test_exported_contract_matches_schemas_and_actual_scope(monkeypatch):
     saved=json.loads((PROJECT_ROOT/'docs/contracts/m3-agent-contract.json').read_text(encoding='utf8'))
     assert saved==exporter.contract()
     assert not saved['formal_diagnostic_release']
-    assert 'Numerical-task model candidate orchestration' in saved['not_implemented_here']
+    assert saved['model_numeric']['decision_drives_authorized_tools']
+    assert 'open-ended diagnostic generation' in saved['not_implemented_here']
     assert saved['knowledge']['durable_retrieval_binding'] and not saved['knowledge']['generated_answer']
     assert saved['model_method']['decision_drives_authorized_search']

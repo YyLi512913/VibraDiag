@@ -1,6 +1,6 @@
 {
-  "contract_version": "m3-t04b1-runtime-contract-v1",
-  "implementation_stage": "Persistent numerical rules and opt-in model-driven method graph",
+  "contract_version": "m3-t04b2-runtime-contract-v1",
+  "implementation_stage": "Persistent rules and opt-in model-driven method/numerical graphs",
   "schemas": {
     "create_task": {
       "$defs": {
@@ -559,8 +559,19 @@
     "extractive_draft_only": true,
     "configuration_pinned_at_acceptance": true
   },
+  "model_numeric": {
+    "graph_version": "model-numeric-v1",
+    "executor": "model_numeric_v1",
+    "enabled_by": "VIBRADIAG_NUMERIC_EXECUTOR=model",
+    "default_mode": "rules",
+    "decision_drives_authorized_tools": true,
+    "max_graph_tools": 5,
+    "max_graph_decisions": 6,
+    "free_form_generated_draft": false,
+    "server_assembled_cited_draft": true,
+    "configuration_pinned_at_acceptance": true
+  },
   "not_implemented_here": [
-    "Numerical-task model candidate orchestration",
     "open-ended diagnostic generation",
     "retrieval relevance qualification",
     "knowledge frontend",

@@ -4,7 +4,7 @@ from hashlib import sha256
 import json
 from uuid import UUID,uuid4
 
-from vibradiag.agents.graph_state import EXECUTOR,GRAPH_VERSION,KNOWLEDGE_EXECUTOR,KNOWLEDGE_GRAPH,MODEL_EXECUTOR,MODEL_GRAPH,GraphWait,defer_wait
+from vibradiag.agents.graph_state import EXECUTOR,GRAPH_VERSION,KNOWLEDGE_EXECUTOR,KNOWLEDGE_GRAPH,MODEL_EXECUTOR,MODEL_GRAPH,NUMERIC_EXECUTOR,NUMERIC_GRAPH,GraphWait,defer_wait
 from pydantic import TypeAdapter
 from sqlalchemy import text
 from vibradiag.agents.formal_contracts import CreateAgentTask,ResumeAgentTask,ExecutionBudget,ExploratoryDraft
@@ -165,6 +165,16 @@ def create_task(payload,key,principal):
                     try:snapshot.update(executor=MODEL_EXECUTOR,model_configuration=asdict(configuration()))
                     except (ValueError,TypeError,OSError):raise MeasurementError('MODEL_CONFIGURATION_INVALID','Formal model configuration unavailable',status=503) from None
                     graph_version=MODEL_GRAPH
+            if not method:
+                from vibradiag.core.config import setting
+                mode=setting('VIBRADIAG_NUMERIC_EXECUTOR','rules')
+                if mode not in {'rules','model'}:raise MeasurementError('NUMERIC_EXECUTOR_INVALID','Explicit rules or model numerical mode required',status=503)
+                if mode=='model':
+                    from dataclasses import asdict
+                    from vibradiag.infrastructure.llm.formal_gateway import configuration
+                    try:snapshot.update(executor=NUMERIC_EXECUTOR,model_configuration=asdict(configuration(purpose='numeric')))
+                    except (ValueError,TypeError,OSError):raise MeasurementError('MODEL_CONFIGURATION_INVALID','Formal numerical model configuration unavailable',status=503) from None
+                    graph_version=NUMERIC_GRAPH
             identifier=uuid4()
             before=next((root['revision_id'] for root in roots if root['revision_id']!=str(payload.measurement_revision_id)),None)
             if payload.goal=='compare_measurements' and before is None:before=str(payload.measurement_revision_id)
@@ -437,6 +447,9 @@ def execute_claimed(task):
         with transaction() as connection:
             _running(connection,identifier,token);row,current,_=_authorize(connection,principal,identifier,write=True,current_only=True)
         principal=current;payload=CreateAgentTask.model_validate(row['payload'])
+        if row['input_snapshot']['executor']==NUMERIC_EXECUTOR:
+            from vibradiag.agents.model_numeric_graph import execute
+            execute(task,principal);return
         if row['input_snapshot']['executor']==MODEL_EXECUTOR:
             from vibradiag.agents.model_method_graph import execute
             execute(task,principal);return
