@@ -1,0 +1,38 @@
+{
+  "recorded_at": "2026-11-01T15:43:48.075008+00:00",
+  "stage": "M4-T01b initial task write interactions",
+  "passed": true,
+  "frontend_tests": 21,
+  "browser_cases": 10,
+  "typecheck_passed": true,
+  "production_build_passed": true,
+  "backend_baseline_unchanged_entries": 285,
+  "full_backend_suite_rerun": false,
+  "prior_backend_tests": 850,
+  "external_model_calls": 0,
+  "owned_test_ports_closed": [
+    8054,
+    5174
+  ],
+  "browser_task_finished": true,
+  "browser_forced_cleanup": false,
+  "pending_browser_positive_flows": [
+    "comparison creation",
+    "profile choice"
+  ],
+  "narrow_visual_acceptance": false,
+  "full_m4_acceptance": false,
+  "factory_trial_qualified": false,
+  "files_sha256": {
+    "docs/acceptance/M4-T01b-verification.md": "39e3b3f2b854c4606a04eefc30770c924c7f6304568e6c73bec1a27038e09bc6",
+    "docs/11-m4-workbench-design.md": "a1b08dc4f009fcade063ba80f455789db13cc094b96a4e9ec2798e6625e008ca",
+    "docs/README.md": "c41232366a100dd6df6ab5287346de8f77f4e11a96d58139d65bcf720b20b368",
+    "docs/03-milestones.md": "cfcebd36e950c681c6d833bd5e67fa62d3b24ece50ce0ebce8af07012101c65c",
+    "README.md": "e317f8155aa5cdb72fdca73613be9179949f33bd9706dd7388fcf624d13c96a3",
+    "backend/README.md": "b2c89c76ff2dd678a85dc8b76ae28ccb0c57a00737164141ac924edadfa2c3a4",
+    "scripts/check-docs.cjs": "a6ebcff025ca359c61262d722518895a5662b0399a967240f07cfe46bc87543c",
+    "experiments/m4-t01b-frontend.json": "97553ee35012aec016ca55afec4eb80149c296bde2b959a186b928d171298a61",
+    "experiments/m4-t01b-browser.json": "82cc77a27ddf066a693ebb76d5d33abb4e20c2492bf49a2c1bdf6711bc0838e7",
+    "experiments/m4-t01b-workbench.png": "dbf119e15eb91260dc10ee373e8e5a46ef404a3930acc1318a2bc763ce74bfc2"
+  }
+}

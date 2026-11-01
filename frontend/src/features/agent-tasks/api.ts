@@ -1,6 +1,8 @@
-import { get } from '../../api/formal'
+import { get, post } from '../../api/formal'
 import type { Page } from '../../types/formal'
-import type { Citation, TaskDetail, TaskRow } from './types'
+import type { Citation, TaskCommand, TaskDetail, TaskRow } from './types'
+
+export const command = (input: TaskCommand, key: string, signal: AbortSignal) => post<TaskDetail>(input.kind === 'create' ? '/agent-tasks' : `/agent-tasks/${encodeURIComponent(input.taskId)}/${input.kind}`, input.body, { 'Idempotency-Key': key }, signal)
 
 export const list = (page: number, signal: AbortSignal) => get<Page<TaskRow>>(`/agent-tasks?page=${page}&page_size=20`, signal)
 export const read = (id: string, signal: AbortSignal) => get<TaskDetail>(`/agent-tasks/${encodeURIComponent(id)}`, signal)

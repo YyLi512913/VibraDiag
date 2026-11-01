@@ -2,6 +2,8 @@
 import { computed, onMounted, onBeforeUnmount, ref } from 'vue'
 import { useAgentTasks } from './useAgentTasks'
 import { conditionLabels, goalLabels, statusLabels } from './types'
+import type { TaskDetail } from './types'
+import TaskActions from './TaskActions.vue'
 const visible = ref(!document.hidden), w = useAgentTasks(visible)
 const { items, detail, preview, visibleDraft, selectedId, page, status, listBusy, detailBusy, sourceBusy, lastRead } = w
 const showTime = (value: string | null | undefined) => value ? new Date(value).toLocaleString('zh-CN') : '未记录'
@@ -14,12 +16,13 @@ const sourceMetrics = computed(() => {
   const metrics = data.metrics as Record<string, { value?: unknown; unit?: string }> | undefined
   return metrics ? Object.entries(metrics).map(([name, metric]) => ({ name, value: metric.value ?? '不可用', unit: metric.unit || '' })) : []
 })
+async function accepted(task: TaskDetail) { await w.refreshList(1); await w.select(task.id) }
 function visibility() { visible.value = !document.hidden }
 onMounted(() => { document.addEventListener('visibilitychange', visibility); void w.refreshList() })
 onBeforeUnmount(() => document.removeEventListener('visibilitychange', visibility))
 </script>
 <template>
-  <section class="task-heading"><div><p class="eyebrow">正式任务 / 只读工作台</p><h2>Agent 取证任务</h2><p class="muted">查看本人任务、真实调用与引用。创建和补充信息入口将在下一步接入。</p></div><span class="tag">未发布草稿 · 待人工复核</span></section>
+  <section class="task-heading"><div><p class="eyebrow">正式任务 / 受控取证</p><h2>Agent 取证任务</h2><p class="muted">创建本人任务，核对问题后显式恢复或取消；查看真实调用与引用。</p></div><span class="tag">未发布草稿 · 待人工复核</span></section>
   <div class="status formal-status" role="status" aria-live="polite">{{ status }}</div>
   <main class="formal-workspace task-workspace">
     <aside class="record-sidebar"><section class="panel"><div class="section-heading"><h2>本人任务</h2><button class="text-button" :disabled="listBusy" @click="w.refreshList()">刷新列表</button></div>
@@ -28,6 +31,7 @@ onBeforeUnmount(() => document.removeEventListener('visibilitychange', visibilit
       <div class="button-row"><button class="secondary" :disabled="listBusy || page <= 1" @click="w.refreshList(page - 1)">上一页</button><span>第 {{ page }} 页</span><button class="secondary" :disabled="listBusy" @click="w.refreshList(page + 1)">下一页</button></div>
     </section><p class="notice">任务完成仅表示流程结果；探索观察和资料摘录不等于故障确诊或维修建议。</p></aside>
     <div class="workspace-content">
+      <TaskActions :task="detail" :reading="detailBusy" @accepted="accepted" @refresh="selectedId ? w.refreshDetail() : w.refreshList()" />
       <section v-if="!selectedId" class="panel empty-state"><h2>选择一条取证任务</h2><p class="muted">在左侧查看本人任务。没有任务时不会填充演示结论。</p></section>
       <section v-else class="panel task-detail">
         <div class="section-heading"><h2>任务详情</h2><button class="text-button" :disabled="detailBusy || sourceBusy" @click="w.refreshDetail">刷新任务</button></div>
@@ -39,7 +43,7 @@ onBeforeUnmount(() => document.removeEventListener('visibilitychange', visibilit
           <div class="task-meta"><span>模型：{{ activity[detail.model_call_activity] || '未确认' }}</span><span>Embedding：{{ activity[detail.embedding_activity] || '未确认' }}</span><span>读取于 {{ lastRead }}</span></div>
           <p v-if="detail.error_code" class="notice">运行信息：{{ detail.error_code }}</p>
           <p v-if="!detail.draft_validity.inputs_current || !detail.draft_validity.confirmations_active || !detail.draft_validity.contexts_current || !detail.draft_validity.knowledge_current" class="error" role="alert">输入、确认或资料已失效，草稿不能作为当前依据。</p>
-          <section v-if="detail.question" class="task-question"><h3>等待条件</h3><p>{{ conditionLabels[detail.question.code] || '需要核对任务条件' }}</p><p class="muted">补充信息和显式恢复入口将在下一步提供；本页不会替您确认条件。</p><ul v-if="detail.question.choices.length"><li v-for="choice in detail.question.choices" :key="choice.id">{{ choice.name || choice.equipment || choice.id }}</li></ul></section>
+          <section v-if="detail.question" class="task-question"><h3>等待条件</h3><p>{{ conditionLabels[detail.question.code] || '需要核对任务条件' }}</p><p class="muted">请在任务操作区核对当前问题并显式恢复；本页不会替您确认输入条件。</p><ul v-if="detail.question.choices.length"><li v-for="choice in detail.question.choices" :key="choice.id">{{ choice.name || choice.equipment || choice.id }}</li></ul></section>
           <section v-if="visibleDraft" class="task-draft" data-testid="task-draft"><div class="section-heading"><h3>未发布草稿</h3><span class="tag">相关性与工程适用性待复核</span></div><p>{{ visibleDraft.summary }}</p>
             <h3 v-if="visibleDraft.missing_requirements.length">必要条件与缺项</h3><ul><li v-for="item in visibleDraft.missing_requirements" :key="item">{{ conditionLabels[item] || item }}</li></ul>
             <article v-for="(observation, index) in visibleDraft.observations" :key="index" class="task-observation"><p>{{ observation.text }}</p><div class="button-row"><button v-for="citation in observation.citations" :key="citation.kind + citation.id" class="secondary" :disabled="sourceBusy" @click="w.readSource(citation)">查看{{ citation.kind === 'knowledge_chunk' ? '资料' : '数值' }}来源 · {{ citation.id.slice(0, 8) }}</button></div></article>

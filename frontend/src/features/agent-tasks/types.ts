@@ -10,7 +10,7 @@ export interface Draft {
 export interface TaskDetail extends Omit<TaskRow, 'inputs_current'> {
   description: string; executor: string; error_code: string | null
   created_at: string; updated_at: string; finished_at: string | null
-  question: { code: string; choices: { id: string; [key: string]: unknown }[]; selection_field: string | null } | null
+  question: { id: string; code: string; choices: { id: string; [key: string]: unknown }[]; selection_field: string | null } | null
   draft: Draft | null
   draft_validity: { inputs_current: boolean; confirmations_active: boolean; contexts_current: boolean; knowledge_current: boolean; usable: boolean }
   input_snapshot: { roots: { revision_id: string; measurement_id: string; sha256: string }[]; model_configuration?: { provider: string; model: string } }
@@ -23,6 +23,8 @@ export interface TaskDetail extends Omit<TaskRow, 'inputs_current'> {
   events: { task_version: number; kind: string; created_at: string; details: unknown }[]
 }
 export interface SourcePreview { citation: Citation; data: Record<string, unknown> }
+export interface CreateTask { goal: Goal; description: string; measurement_revision_id?: string; comparison_declaration_id?: string; knowledge_scope?: { equipment: 'motor' | 'pump' | 'fan' | 'rotating_generic'; component: 'bearing' | 'rotating_assembly' | 'general' } }
+export type TaskCommand = { kind: 'create'; body: CreateTask } | { kind: 'resume'; taskId: string; body: { expected_version: number; question_id: string; answer: string } } | { kind: 'cancel'; taskId: string; body: { expected_version: number } }
 export const statusLabels: Record<TaskStatus, string> = { queued: '排队中', running: '执行中', waiting_information: '等待补充信息', completed: '流程已完成', completed_degraded: '受限完成', refused: '无法支持本次请求', failed: '执行失败', cancelled: '已取消', interrupted: '已中断', superseded: '输入已被替代', budget_exhausted: '预算耗尽', timed_out: '执行超时' }
 export const goalLabels: Record<Goal, string> = { inspect_signal: '基础信号检查', bearing_observations: '轴承探索观察', compare_measurements: '双数据比较', explain_method: '方法资料查询' }
 export const activeStates = new Set<TaskStatus>(['queued', 'running'])

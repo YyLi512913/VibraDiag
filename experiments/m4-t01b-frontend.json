@@ -1,0 +1,83 @@
+{
+  "passed": true,
+  "recorded_at": "2026-11-01T15:41:03.582379+00:00",
+  "state_tests": 21,
+  "node_version": "v22.23.2",
+  "commands": [
+    {
+      "command": [
+        "node",
+        "--import",
+        "./tests/register.mjs",
+        "--test",
+        "tests/task-state.test.mjs",
+        "tests/task-commands.test.mjs"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "9c603ccbcce6909e7bac2c9ec1ba8be5364bedbb4c00ab5d6cb439470b0d838d",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "node",
+        "node_modules/vue-tsc/bin/vue-tsc.js",
+        "--noEmit"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "node",
+        "node_modules/vite/bin/vite.js",
+        "build"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "b89d1957612518c84c56bc19c4b327cae4bcfe0d6e67549af9d7ba59511ec2a4",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "source_sha256": {
+    "frontend/index.html": "e975739ae67f9cc03471fa90cf5460302c517245c442e1e36dc2bea6afec1a74",
+    "frontend/package-lock.json": "f039ffb3aa0213284fbbfcb417662237d06b691745701a6fef0473972e37562b",
+    "frontend/package.json": "17ef23c52c174fab0d06cc45ac0cd87895909d29243c89e7b7b3dca6b3d017a4",
+    "frontend/src/api/client.ts": "b7ad0928adf66c762a6bdf6270bc97184331f6625472a66a76ea3e250cfbc7f4",
+    "frontend/src/api/formal.ts": "98de5aecd661507d937c1351cae93fdc7a021b5cdab7bb1ced4058fc955a85a7",
+    "frontend/src/App.vue": "fe1466f225709fc82e488dfe6911c912221bc1b064eafa713a42ffe92830b03e",
+    "frontend/src/components/AgentPanel.vue": "511f628cd2808e8161e41314a7c4f350e52a323488554eb4e0f06e5129e596a5",
+    "frontend/src/components/AgentResult.vue": "d24461092d40ba2c94065832b528ed26d687ced63da2abfd69fffb0b94f2fbc8",
+    "frontend/src/components/AnalysisResults.vue": "ff4f8d79653fcbb178d947ff8ff2bf603d02242c2e117934c298f4bfd48afd2b",
+    "frontend/src/components/ComparisonWorkbench.vue": "c0c2d2cd9bc1108a6f090ea50aff05af2d94d6c5d69ed1e9094a2e2c5d8a0a1c",
+    "frontend/src/components/DataImportPanel.vue": "308a3b405206a8167cb1c39c9ccef57efce173a07e1a93a916025380f43b43da",
+    "frontend/src/components/FormalWorkbench.vue": "4600c334910ba7b0a1e8fb73b98a8510d337e14b7acb44ca14a085ae6c96770f",
+    "frontend/src/components/KnowledgeSearchPanel.vue": "fe09d566d0908a6cd09ce09818b94aa99223cdb942806e532087c8a273917274",
+    "frontend/src/components/MetadataForm.vue": "19829b95c5242ab5db673c29fa652b78e3f2966d101b604e909f22b241f7a558",
+    "frontend/src/components/SessionGate.vue": "d185300144db469a58b46e69bd7eebf7a4494c8a88be6d1f3d868e88a0f3b571",
+    "frontend/src/components/SignalChart.vue": "664e5d16d41a83ec1fb42c38ef71f00ade83e2dcf055b2200f6a92850186cc9f",
+    "frontend/src/components/ToolWorkbench.vue": "8ba397e8f2e7c0342db10ba21a791c872e1fbc7d150107dd1ae59a03b826a3d9",
+    "frontend/src/composables/useFormalWorkbench.ts": "b9ac015b0463b1f56ed6a321ec86ad47717d963cfbdd47717ca8c6c67e9ab990",
+    "frontend/src/composables/useSession.ts": "f360807fc7d994342578ef74e3e4c34d797a48bc7c0ec2dfc32496480d48f22b",
+    "frontend/src/composables/useWorkbench.ts": "96fc211aa37a608d77c519641431dcad032a508607697c057bc0ea382a87d688",
+    "frontend/src/features/agent-tasks/AgentTaskWorkbench.vue": "8ac0b52832ad6c46ec44b5e4b22a0ef1e930df8557d31c1dd23713afc9fb9a9f",
+    "frontend/src/features/agent-tasks/api.ts": "98d61528e25f07411b396c98059253a8ac206b81c630eefc428b03e25abdaeba",
+    "frontend/src/features/agent-tasks/TaskActions.vue": "850d618784686377f40eb68b3df0f500159063c3992e3e4630137d0829bf1a63",
+    "frontend/src/features/agent-tasks/TaskCreator.vue": "64d519aa6055bd10338370e28f149c1fe6bd7d473c60150a16eb803c4cb4796e",
+    "frontend/src/features/agent-tasks/types.ts": "230ac24a978433d17f9c07c1525b33444bd37ff86e44a53f4f5c145a3b43fb2e",
+    "frontend/src/features/agent-tasks/useAgentTasks.ts": "b25cd6d1f1c8e40f67df760abad37b95232409dddf995be5e8541121e7e7e7cd",
+    "frontend/src/features/agent-tasks/useTaskCommands.ts": "0938e5ed934e10a526c980b45d3f1c676333384d64e59ff4c23d853dc5fa459d",
+    "frontend/src/main.ts": "5a0a0696a077583bd158e44acd55eec7442ebcec6d4b5886a9f7f165d853f6fc",
+    "frontend/src/PrototypeWorkbench.vue": "12395f8551a931c1bd4b783c11aa0edb3ae485bcc91eadb1d7d514b1ac00ce78",
+    "frontend/src/styles/main.css": "2693d60f094b68e95323b88dee908db4b69cff86c622b009c38652fd8f9c1ed7",
+    "frontend/src/types/api.ts": "55a5fecffc4a0bf73005d51640fc8bdac42341007443896d5ef2927b7450aad9",
+    "frontend/src/types/comparison.ts": "637479a6d8c723133be4302d9183eb95673b9f54a5891cd73bf2935732f6454d",
+    "frontend/src/types/formal.ts": "d02f54af58e3afdfe79f92edf4aef2f68d6376c78e2862663d82fc0dc4656686",
+    "frontend/src/types/tools.ts": "af8a570e0834727d952dc730f727f3e52fd444a402df89de3b8415b2420c53bf",
+    "frontend/tests/register.mjs": "dbb5ab2ff0750d9f98b08216884e15322eaf283a0e54f04f4320e3eb65480b15",
+    "frontend/tests/task-commands.test.mjs": "487d1b50e162a94eaf76ee863f76bfab0107fc25e217e1e01bdecbe5e41e732b",
+    "frontend/tests/task-state.test.mjs": "f9caf6a36de53a4d1078fa3b90117a9bf7e39fca73d53b03836c894de8989ec9",
+    "frontend/tsconfig.json": "8a7cb825bd3006939fcf4a289e3aef943806385020d670634f2377d56a42d07e",
+    "frontend/vite.config.ts": "9448a868682c0052a36bd21b0ef15202e3c1785825271a82aafcc5bfec639865"
+  },
+  "external_model_calls": 0
+}

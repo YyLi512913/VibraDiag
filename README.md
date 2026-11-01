@@ -136,4 +136,4 @@ T05c1真实新版本开发回归8/8通过，保留旧F02失败及rules默认；�
 [T05c3b](docs/acceptance/M3-T05c3b-verification.md)新增可显式启用的model_method_v2字段协议，保留旧方法/数值策略与默认rules。全量850项通过；新版本真实已知开发回归功能5/5、生命周期2/2、0次schema错误，旧失败保留。下一步收口M3本机条件验收，再进入M4知识与Agent工作台；独立语义及工厂准入仍未通过。
 
 
-[T05d：M3本机条件验收](docs/acceptance/M3-acceptance.md)已完成证据收口：14个软件核验项可追溯至既有850项全量，新增审计器19项通过；完整M3语义/诊断及工厂资格仍未通过。[M4-T01a只读任务工作台](docs/acceptance/M4-T01a-verification.md)已实现共享登录、本人分页/详情及授权来源预览，12项状态测试、类型/构建和15项浏览器流程通过；窄屏最终视觉验收待补。下一步按[11设计](docs/11-m4-workbench-design.md)接任务创建、回答、恢复及取消。
+[T05d：M3本机条件验收](docs/acceptance/M3-acceptance.md)已完成证据收口：14个软件核验项可追溯至既有850项全量，新增审计器19项通过；完整M3语义/诊断及工厂资格仍未通过。[M4-T01a只读任务工作台](docs/acceptance/M4-T01a-verification.md)已实现共享登录、本人分页/详情及授权来源预览，12项状态测试、类型/构建和15项浏览器流程通过；窄屏最终视觉验收待补。[M4-T01b任务写交互](docs/acceptance/M4-T01b-verification.md)已接创建、回答、恢复及取消，保留原幂等命令并处理版本冲突；21项前端测试、类型/构建和10项真实浏览器流程通过。下一步按[11设计](docs/11-m4-workbench-design.md)接M4-T02知识管理页面，完整M4及工厂准入仍待完成。
