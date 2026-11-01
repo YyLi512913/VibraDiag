@@ -7,6 +7,7 @@ from pydantic import TypeAdapter,ValidationError
 from sqlalchemy import text
 from vibradiag.agents.formal_contracts import AgentDecision,CandidateAction,TaskScope,ChooseAction,FinishDecision
 from vibradiag.agents.model_contracts import ExtractiveMethodDraft
+from vibradiag.agents.model_validation import ModelSchemaError
 from vibradiag.agents.formal_policy import validate_decision,logical_call_key,reserve_call,PolicyStop
 from vibradiag.domain.measurement_errors import MeasurementError
 from vibradiag.infrastructure.llm.formal_gateway import Gateway,ModelConfig,configuration,digest,PROMPT_VERSION,prompt_version
@@ -56,8 +57,10 @@ def _validate(phase,raw,prepared):
                 body=prepared['texts'].get(str(selected.source_id))
                 if body is None or selected.quote not in body:raise PolicyStop('MODEL_QUOTE_UNGROUNDED')
         return output.model_dump(mode='json')
-    except (ValidationError,PolicyStop) as error:
-        raise MeasurementError(error.code if isinstance(error,PolicyStop) else 'MODEL_OUTPUT_SCHEMA_INVALID','Model output did not pass local policy checks',status=409) from None
+    except ValidationError as error:
+        raise ModelSchemaError(raw,error) from None
+    except PolicyStop as error:
+        raise MeasurementError(error.code,'Model output did not pass local policy checks',status=409) from None
 
 
 def _fence(c,token):c.execute(text("SELECT set_config('vibradiag.model_lease',:token,true)"),dict(token=str(token)))
@@ -115,8 +118,9 @@ def run_round(identifier,token,principal,phase,*,provider=None,read_only=False,s
         try:
             with transaction() as c:
                 row=tasks._running(c,identifier,token);_fence(c,token)
-                c.execute(text("UPDATE agent_model_rounds SET state='failed',finished_at=now(),error_code=:error,raw_output_sha256=:raw,trace=CAST(:trace AS jsonb) WHERE id=:id AND state='running'"),
-                    dict(id=model_id,error=getattr(error,'code','MODEL_ROUND_FAILED'),raw=sha256(raw.encode()).hexdigest() if raw else None,trace=json.dumps(trace) if trace else None))
+                c.execute(text("UPDATE agent_model_rounds SET state='failed',finished_at=now(),error_code=:error,raw_output_sha256=:raw,trace=CAST(:trace AS jsonb),validation_diagnostics=CAST(:diagnostics AS jsonb) WHERE id=:id AND state='running'"),
+                    dict(id=model_id,error=getattr(error,'code','MODEL_ROUND_FAILED'),raw=sha256(raw.encode()).hexdigest() if raw else None,trace=json.dumps(trace) if trace else None,
+                         diagnostics=json.dumps(error.validation_diagnostics) if isinstance(error,ModelSchemaError) else None))
                 tasks._change(c,row,'running')
         except tasks.Fenced:pass
         except PolicyStop:

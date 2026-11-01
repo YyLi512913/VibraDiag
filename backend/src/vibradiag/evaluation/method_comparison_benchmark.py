@@ -192,10 +192,11 @@ def comparison_case(client,principal,case,spec):
     return row
 
 
-def run(private,progress=lambda value:None):
+def run(private,progress=lambda value:None,*,protocol_path=None):
     from vibradiag.main import app
     if os.environ.get('VIBRADIAG_AGENT_WORKER_ENABLED')!='false':raise RuntimeError('Sequential owned-task runner requires disabled worker')
-    spec=json.loads(PROTOCOL.read_text(encoding='utf8'));org,user,admin=uuid4(),uuid4(),uuid4();password=str(uuid4())+str(uuid4())
+    selected_protocol=protocol_path or PROTOCOL
+    spec=json.loads(selected_protocol.read_text(encoding='utf8'));org,user,admin=uuid4(),uuid4(),uuid4();password=str(uuid4())+str(uuid4())
     with transaction() as c:
         c.execute(text('INSERT INTO organizations(id,name) VALUES (:id,:name)'),dict(id=org,name='Authored method/comparison evaluation '+str(org)))
         for identifier,name,role in [(user,'evaluation','engineer'),(admin,'administrator','admin')]:
@@ -223,7 +224,7 @@ def run(private,progress=lambda value:None):
             else:os.environ[key]=value
     usages=[t.get('usage',{}) for r in rows for t in r['model_traces']]
     token_usage={key:sum(u[key] for u in usages) if usages and all(type(u.get(key)) is int for u in usages) else None for key in ('prompt_tokens','completion_tokens','total_tokens')}
-    return dict(protocol_version=spec['version'],protocol_sha256=sha256(PROTOCOL.read_bytes()).hexdigest(),configuration=asdict(configuration('deepseek')),
+    return dict(protocol_version=spec['version'],protocol_sha256=sha256(selected_protocol.read_bytes()).hexdigest(),configuration=asdict(configuration('deepseek')),
                 embedding_identity=asdict(configured_identity()),rows=rows,
                 summary={kind:dict(runs=sum(r['kind']==kind for r in rows),passed=sum(r['kind']==kind and r['metrics']['met_expectations'] for r in rows)) for kind in ('method','comparison')},
                 model_reserved=sum(r['model_reserved'] for r in rows),model_confirmed=sum(r['model_confirmed'] for r in rows),model_unknown=sum(r['model_unknown'] for r in rows),

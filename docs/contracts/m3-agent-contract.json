@@ -1,5 +1,5 @@
 {
-  "contract_version": "m3-t05c1-runtime-contract-v1",
+  "contract_version": "m3-t05c3a-runtime-contract-v1",
   "implementation_stage": "Persistent rules and opt-in model-driven method/numerical graphs",
   "schemas": {
     "create_task": {
@@ -514,7 +514,173 @@
       ],
       "title": "MethodKnowledgeScope",
       "type": "object"
+    },
+    "model_validation_diagnostics": {
+      "$defs": {
+        "Issue": {
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "enum": [
+                "missing",
+                "extra_forbidden",
+                "union_tag_invalid",
+                "union_tag_not_found",
+                "uuid_parsing",
+                "uuid_type",
+                "string_type",
+                "string_too_long",
+                "string_too_short",
+                "list_type",
+                "too_long",
+                "too_short",
+                "model_type",
+                "model_attributes_type",
+                "literal_error",
+                "json_invalid",
+                "value_error",
+                "validation_error"
+              ],
+              "title": "Kind",
+              "type": "string"
+            },
+            "location": {
+              "items": {
+                "anyOf": [
+                  {
+                    "enum": [
+                      "action",
+                      "candidate_id",
+                      "rationale",
+                      "outcome",
+                      "selections",
+                      "question_id",
+                      "source_id",
+                      "quote",
+                      "choose_action",
+                      "ask_information",
+                      "finish",
+                      "unrecognized_field",
+                      "index_out_of_range"
+                    ],
+                    "type": "string"
+                  },
+                  {
+                    "maximum": 20,
+                    "minimum": 0,
+                    "type": "integer"
+                  }
+                ]
+              },
+              "maxItems": 6,
+              "title": "Location",
+              "type": "array"
+            }
+          },
+          "required": [
+            "kind",
+            "location"
+          ],
+          "title": "Issue",
+          "type": "object"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "version": {
+          "const": "model-validation-diagnostics-v1",
+          "default": "model-validation-diagnostics-v1",
+          "title": "Version",
+          "type": "string"
+        },
+        "top_level_type": {
+          "enum": [
+            "object",
+            "array",
+            "string",
+            "number",
+            "boolean",
+            "null",
+            "invalid_json"
+          ],
+          "title": "Top Level Type",
+          "type": "string"
+        },
+        "action_kind": {
+          "enum": [
+            "choose_action",
+            "ask_information",
+            "finish",
+            "other",
+            "absent"
+          ],
+          "title": "Action Kind",
+          "type": "string"
+        },
+        "known_fields": {
+          "items": {
+            "enum": [
+              "action",
+              "candidate_id",
+              "rationale",
+              "outcome",
+              "selections",
+              "question_id",
+              "source_id",
+              "quote"
+            ],
+            "type": "string"
+          },
+          "maxItems": 8,
+          "title": "Known Fields",
+          "type": "array"
+        },
+        "unknown_field_count": {
+          "minimum": 0,
+          "title": "Unknown Field Count",
+          "type": "integer"
+        },
+        "error_count": {
+          "minimum": 1,
+          "title": "Error Count",
+          "type": "integer"
+        },
+        "issues": {
+          "items": {
+            "$ref": "#/$defs/Issue"
+          },
+          "maxItems": 8,
+          "minItems": 1,
+          "title": "Issues",
+          "type": "array"
+        },
+        "truncated": {
+          "title": "Truncated",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "top_level_type",
+        "action_kind",
+        "known_fields",
+        "unknown_field_count",
+        "error_count",
+        "issues",
+        "truncated"
+      ],
+      "title": "ValidationDiagnostics",
+      "type": "object"
     }
+  },
+  "model_validation": {
+    "version": "model-validation-diagnostics-v1",
+    "failed_schema_rounds_only": true,
+    "legacy_rounds_not_backfilled": true,
+    "raw_response_retained": false,
+    "raw_validator_messages_retained": false,
+    "max_issues": 8,
+    "max_location_depth": 6,
+    "unknown_field_names_redacted": true
   },
   "limits": {
     "model_logical_rounds": 8,

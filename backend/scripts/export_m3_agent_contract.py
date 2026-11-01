@@ -5,14 +5,19 @@ from pydantic import TypeAdapter
 from vibradiag.core.paths import PROJECT_ROOT
 from vibradiag.agents.formal_contracts import (CreateAgentTask,ResumeAgentTask,AgentDecision,
     ExploratoryDraft,ExecutionBudget,TaskStatus,MethodKnowledgeScope)
+from vibradiag.agents.model_validation import ValidationDiagnostics
 
 
 def contract():
-    return {'contract_version':'m3-t05c1-runtime-contract-v1','implementation_stage':'Persistent rules and opt-in model-driven method/numerical graphs',
+    return {'contract_version':'m3-t05c3a-runtime-contract-v1','implementation_stage':'Persistent rules and opt-in model-driven method/numerical graphs',
         'schemas':{'create_task':CreateAgentTask.model_json_schema(),'resume_task':ResumeAgentTask.model_json_schema(),
             'model_decision':TypeAdapter(AgentDecision).json_schema(),'unpublished_draft':ExploratoryDraft.model_json_schema(),
             'internal_budget':ExecutionBudget.model_json_schema(),'task_status':TypeAdapter(TaskStatus).json_schema(),
-            'method_knowledge_scope':MethodKnowledgeScope.model_json_schema()},
+            'method_knowledge_scope':MethodKnowledgeScope.model_json_schema(),
+            'model_validation_diagnostics':ValidationDiagnostics.model_json_schema()},
+        'model_validation':{'version':'model-validation-diagnostics-v1','failed_schema_rounds_only':True,
+            'legacy_rounds_not_backfilled':True,'raw_response_retained':False,'raw_validator_messages_retained':False,
+            'max_issues':8,'max_location_depth':6,'unknown_field_names_redacted':True},
         'limits':{'model_logical_rounds':8,'logical_tool_calls':20,'automatic_retries_per_logical_call':1,'active_execution_ms':120000},
         'budget_semantics':{'reserve_before_dispatch':True,'unknown_outcome_does_not_refund':True,
             'resume_preserves_reservations_and_time':True,'manual_wait_is_not_active_execution':True,

@@ -1,0 +1,62 @@
+{
+  "version": "m3-t05c3a-closure-v1",
+  "recorded_at": "2026-11-01T13:28:47.879Z",
+  "observation_receipt_sha256": "b5182301d6a770d678ed2edfdf6611378f48b964e7815b94e8aa564b5a850f02",
+  "original_t05c2b_receipt_sha256": "65bf7a3aee3be709d64781e456a5d8b575784fb4efb5ff6884a69afbe6d6ff31",
+  "original_t05c2b_receipt_unchanged": true,
+  "all_pre_run_fingerprints_unchanged": true,
+  "pre_run_frozen_file_count": 283,
+  "post_measurement_documentation_or_evidence": {
+    "README.md": "6e5d3aa9e92c37b1a1dc95040508a38816463425ffac6d156fe1baece23177f6",
+    "backend/README.md": "9dfc74f4aecb4fd98dffbe299503a28cb2643ce312bf1f0bd3f98ea8a06ec95c",
+    "docs/03-milestones.md": "51d882795a747a110408d69370fc7106c314ed4df084c1f1427ba2ba57b5b8f4",
+    "docs/07-m3-agent-design.md": "586059c8482db283673605ff12349cbf0fd9f41c8dbac61f6d70897e3f78f48d",
+    "docs/09-model-runtime-design.md": "b99815c41f27e23744990b898466746441895f2e3a0405e8936e9045b63668d9",
+    "docs/10-agent-evaluation-design.md": "e0f3edc67bf90f6fc3e1b717f8530f082873f780bc2bbd87bb99862328923760",
+    "docs/README.md": "69b19d4eca626c9c3861737d0d9d784deecd478424bb32d23cc0f60be1b2b895",
+    "docs/acceptance/M3-T05c3a-verification.md": "507683ef8507b77febdf12f8419d3d8e10111538989d16c0883d8207aeaec258",
+    "experiments/m3-t05c3a-model-evidence.json": "937dd291dda01e709bdc601a287533d934feb8c8f257d5873ce6676de659334e"
+  },
+  "model_reserved": 6,
+  "model_confirmed": 6,
+  "model_unknown": 0,
+  "total_tokens": 4213,
+  "schema_failures": 4,
+  "all_schema_failures_have_diagnostics": true,
+  "all_observed_schema_failures_extra_forbidden": true,
+  "quality_summary": {
+    "method_functional": {
+      "runs": 4,
+      "passed": 1
+    },
+    "method_lifecycle": {
+      "runs": 1,
+      "passed": 0
+    },
+    "comparison": {
+      "runs": 0,
+      "passed": 0
+    }
+  },
+  "unchanged_method_policy": true,
+  "original_failure_root_cause_reconstructed": false,
+  "legacy_rounds_still_null": true,
+  "all_trace_policies_match": true,
+  "verification": {
+    "full_tests": 828,
+    "full_seconds": 780.91,
+    "focused_tests": 44,
+    "all_passed": true,
+    "development_schema_head": "0023_diagnostics_null_guard",
+    "business_tables": 44,
+    "checkpoint_tables": 4
+  },
+  "paid_observations": 1,
+  "provider_calls_repeated_for_documentation": false,
+  "diagnostic_collection_target_met": true,
+  "method_quality_admitted": false,
+  "independent_holdout": false,
+  "diagnostic_release": false,
+  "factory_trial_approved": false,
+  "next_step": "T05c3b explicit decision field protocol and separately versioned method graph regression"
+}

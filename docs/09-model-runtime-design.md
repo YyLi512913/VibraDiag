@@ -1,6 +1,6 @@
 # 09 正式模型调用与受限决策设计
 
-> 版本：v0.4；日期：2026-10-31。T04a为网关预检，T04b1/T04b2已接可选方法及数值模型图；效果评测留T05。
+> 版本：v0.5；日期：2026-11-01。新增T05c3a校验失败最小诊断，既有提示策略与模型绑定保留；方法质量仍未准入。
 > 上游：[07 Agent设计](07-m3-agent-design.md)、[08 知识设计](08-knowledge-design.md)。
 
 ## 1. 分步范围
@@ -68,3 +68,11 @@ VIBRADIAG_NUMERIC_EXECUTOR=model启用独立数值图，默认rules。受理固�
 VIBRADIAG_NUMERIC_EXECUTOR=model_v2为新任务选择独立图与numeric_decision_v2阶段。原model/v1和方法策略hash保持，新策略在受理时固定。额外上下文按实际工具状态与执行模式区分执行阻断、频率匹配前提、诊断发布限制和未知项；原始缺项不删，频率uncertainty_complete直接取实际布尔值，候选只表示探索机会。
 
 修正F02把诊断缺项套作频率停止条件的解释歧义，不强制模型继续，不解除资格或注入参数。未知项和不可用结果仍保守处理，所有实际工具继续当前权限/租约/输入和父条件检查。见[T05c1验收](acceptance/M3-T05c1-verification.md)。旧失败保留，新测量仅为已知开发回归，非独立留出或本地模型准入。
+
+## 10. T05c3a 结构错误的最小诊断
+
+新失败轮可保存model-validation-diagnostics-v1元数据。Pydantic错误仅取允许的类型标签与脱敏loc；不保存msg、ctx、input、原始JSON、未知字段名或任意action值。顶层shape、已知字段列表和未知字段数量可帮助区分根结构、缺字段、错误标签及额外字段；未知类型统一validation_error，未知位置统一unrecognized_field，超过位置范围用固定标签。错误条数/路径有界，超出标记truncated。
+
+任务查询的model_rounds增加可空validation_diagnostics，仍由既有身份和任务所有者授权；旧轮、成功轮、非结构策略拒绝和被取消的轮均为空。该列只允许在当前租约下关闭新schema失败轮时写入，关闭后不可更改。不会把诊断当作供应商调用回执，model_called与用量仍依据真实trace，未知调用不改为已确认。
+
+0022/0023不新增业务表、不回填历史、不改变模型配置指纹、prompt版本、输出schema或重试行为。新观察必须新建任务并记录新协议/源码/测试hash；旧hash不能恢复已丢弃的正文。补齐观测不等于模型质量已修复，下一版本策略需基于可核查新证据另行验证。
