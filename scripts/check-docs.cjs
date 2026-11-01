@@ -7,7 +7,7 @@ const duplicates = stories.filter((x,i)=>stories.indexOf(x)!==i);
 const outdated = requirement.split('\n').filter(x=>/下一主题|尚待.*修订|为历史需求骨架|## 5. 待确认/.test(x));
 const broken = [];
 // Include stage exits and the current workbench design, alongside the original design baseline.
-const additionalDocs = ['11-m4-workbench-design.md', 'acceptance/M3-acceptance.md'];
+const additionalDocs = ['11-m4-workbench-design.md', 'acceptance/M3-acceptance.md', 'acceptance/M4-T01a-verification.md'];
 for (const file of additionalDocs) {
   const full = path.join(docs, file);
   for (const match of fs.readFileSync(full, 'utf8').matchAll(/\]\(([^)]+)\)/g)) {

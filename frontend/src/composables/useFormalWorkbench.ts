@@ -1,10 +1,12 @@
-import { onBeforeUnmount, ref } from 'vue'
+import { onBeforeUnmount, ref, watch } from 'vue'
+import { useSession } from './useSession'
 import * as api from '../api/formal'
-import type { AnalysisInput, Asset, FormalAnalysis, Identity, Measurement, Metadata, RecordSummary, Revision, RunSummary, Spectrum, Waveform } from '../types/formal'
+import type { AnalysisInput, Asset, FormalAnalysis, Measurement, Metadata, RecordSummary, Revision, RunSummary, Spectrum, Waveform } from '../types/formal'
 
 interface Pending { key: string; input: AnalysisInput; measurementId: string; analysisId?: string }
 export function useFormalWorkbench() {
-  const identity = ref<Identity | null>(null), busy = ref(false), status = ref('请登录后导入数据。')
+  const session = useSession(), identity = session.identity
+  const busy = ref(false), status = ref('正在读取授权数据…')
   const records = ref<RecordSummary[]>([]), assets = ref<Asset[]>([]), page = ref(1)
   const selected = ref<Measurement | null>(null), versions = ref<Revision[]>([]), runs = ref<RunSummary[]>([])
   const versionPage = ref(1), runPage = ref(1), result = ref<FormalAnalysis | null>(null)
@@ -13,7 +15,8 @@ export function useFormalWorkbench() {
   const key = (suffix: string) => `vibradiag:${identity.value?.organization_id}:${identity.value?.user_id}:${suffix}`
   const writer = () => identity.value?.roles.some(r => ['inspector', 'engineer'].includes(r)) || false
   function clearData() { clearTimeout(poll); records.value = []; assets.value = []; selected.value = null; versions.value = []; runs.value = []; result.value = null; waveform.value = null; spectrum.value = null; pending.value = null }
-  function reset() { generation++; clearData(); identity.value = null; api.forgetCsrf() }
+  const stopSession = watch(session.revision, () => { generation++; clearData(); busy.value = false }, { flush: 'sync' })
+  function reset() { session.invalidate() }
   async function act(fn: (epoch: number) => Promise<void>) {
     if (busy.value) return
     busy.value = true; const epoch = generation
@@ -23,7 +26,7 @@ export function useFormalWorkbench() {
         if (error instanceof api.ApiError && error.status === 401) { reset(); status.value = '会话失效，请重新登录。' }
         else status.value = error instanceof Error ? error.message : '请求失败，请重试。'
       }
-    } finally { busy.value = false }
+    } finally { if (epoch === generation) busy.value = false }
   }
   async function loadList(epoch: number) { const response = await api.records(page.value); if (epoch === generation) records.value = response.items }
   async function loadHistory(epoch: number) {
@@ -63,7 +66,7 @@ export function useFormalWorkbench() {
   async function initialize(epoch: number) {
     page.value = 1
     const response = await api.assets(); if (epoch !== generation) return
-    assets.value = response.items; await loadList(epoch)
+    assets.value = response.items; await loadList(epoch); if (epoch !== generation) return
     const saved = sessionStorage.getItem(key('pending'))
     if (saved) { try { pending.value = JSON.parse(saved) } catch { sessionStorage.removeItem(key('pending')) } }
     const id = pending.value?.measurementId || sessionStorage.getItem(key('measurement'))
@@ -74,13 +77,7 @@ export function useFormalWorkbench() {
     }
     status.value = pending.value ? '存在未确认响应的分析请求，请重试原请求以查询，避免重复分析。' : '已登录，可导入或选择授权数据。'
   }
-  const restore = () => act(async epoch => {
-    if (!api.hasCsrf()) { status.value = '请在本标签页登录以继续。'; return }
-    try { identity.value = await api.me() } catch (error) { if (error instanceof api.ApiError && error.status === 401) return; throw error }
-    if (epoch === generation) await initialize(epoch)
-  })
-  const login = (org: string, username: string, password: string) => act(async epoch => { identity.value = await api.login(org, username, password); if (epoch === generation) await initialize(epoch) })
-  const logout = () => act(async () => { clearData(); await api.logout(); reset(); status.value = '已退出登录。' })
+  const restore = () => act(async epoch => { if (identity.value) await initialize(epoch) })
   const select = (id: string) => act(async epoch => { await selectInner(id, epoch); status.value = '输入已加载，请核对当前参数版本。' })
   const refresh = () => act(async epoch => { await loadList(epoch); if (selected.value) await selectInner(selected.value.id, epoch) })
   const turnPage = (delta: number) => act(async epoch => { page.value += delta; await loadList(epoch) })
@@ -117,6 +114,6 @@ export function useFormalWorkbench() {
   const download = (path: string, filename: string) => act(async () => { await api.download(path, filename) })
   const stopTracking = () => { pending.value = null; sessionStorage.removeItem(key('pending')); status.value = '已停止本页请求跟踪；服务端任务未被取消，可从分析历史查询。' }
   const requireLogin = () => { reset(); status.value = '请重新登录以更新当前标签页会话。' }
-  onBeforeUnmount(() => { generation++; clearTimeout(poll) })
-  return { identity, busy, status, records, assets, selected, versions, runs, result, waveform, spectrum, pending, page, versionPage, runPage, writer, restore, login, logout, select, refresh, turnPage, historyPage, upload, revise, confirm, run, viewResult, download, stopTracking, requireLogin }
+  onBeforeUnmount(() => { generation++; clearTimeout(poll); stopSession() })
+  return { identity, busy, status, records, assets, selected, versions, runs, result, waveform, spectrum, pending, page, versionPage, runPage, writer, restore, select, refresh, turnPage, historyPage, upload, revise, confirm, run, viewResult, download, stopTracking, requireLogin }
 }

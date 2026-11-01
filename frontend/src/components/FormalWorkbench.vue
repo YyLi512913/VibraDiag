@@ -12,7 +12,6 @@ const { identity, busy: baseBusy, status, records, assets, selected, versions, r
 const toolBusy = ref(false)
 const comparisonBusy = ref(false)
 const busy = computed(() => baseBusy.value || toolBusy.value || comparisonBusy.value)
-const org = ref(localStorage.getItem('vibradiag-org') || ''), username = ref(localStorage.getItem('vibradiag-username') || ''), password = ref('')
 const importing = ref(false), editing = ref(false), accepted = ref(false)
 watch(() => identity.value?.user_id, () => { importing.value = false; editing.value = false; accepted.value = false })
 const labels: Record<string, string> = { mean: '均值', rms: 'RMS（含直流）', ac_rms: 'AC RMS', absolute_peak: '绝对峰值', peak_to_peak: '峰峰值', crest_factor: '峰值因子', pearson_kurtosis: 'Pearson 峭度' }
@@ -24,7 +23,6 @@ const rawPoints = computed<[number, number][]>(() => selected.value?.preview.tim
 const wavePoints = computed<[number, number][]>(() => waveform.value?.time_s.map((t, i) => [t, waveform.value!.values[i]!]) || [])
 const spectrumPoints = computed<[number, number][]>(() => spectrum.value?.frequency_hz.map((f, i) => [f, spectrum.value!.amplitude_m_s2[i]!]) || [])
 const retryable = computed(() => result.value && ['failed', 'interrupted'].includes(result.value.status) && result.value.is_current_revision)
-async function signIn() { try { await w.login(org.value.trim(), username.value.trim(), password.value); if (identity.value) { localStorage.setItem('vibradiag-org', org.value.trim()); localStorage.setItem('vibradiag-username', username.value.trim()) } } finally { password.value = '' } }
 async function save(metadata: Metadata, reason: string, file: File | null) {
   if (editing.value) { const old = selected.value?.current_revision_id; await w.revise(metadata, reason); if (old !== selected.value?.current_revision_id) editing.value = false }
   else if (file) { const old = selected.value?.id; await w.upload(file, metadata); if (old !== selected.value?.id) importing.value = false }
@@ -36,13 +34,8 @@ onMounted(w.restore)
 </script>
 
 <template>
-  <header class="formal-header"><div><p class="eyebrow">VIBRADIAG / 基础分析</p><h1>振动数据工作台</h1><p class="muted">导入数据、核对参数，保存可追溯的分析结果。</p></div><div v-if="identity"><span class="tag">{{ identity.roles.join(' / ') || '只读账号' }}</span><button class="text-button" :disabled="busy" @click="w.requireLogin">重新登录</button><button class="secondary" :disabled="busy" @click="w.logout">退出登录</button></div><span v-else class="tag">本机开发验证</span></header>
   <div class="status formal-status" role="status" aria-live="polite">{{ status }}</div>
-  <section v-if="!identity" class="panel login-panel">
-    <h2>登录工作台</h2><p class="muted">使用已分配的组织和账号。应用密码与数据库密码不同。</p>
-    <form @submit.prevent="signIn"><fieldset :disabled="busy"><label>组织 ID<input v-model="org" required autocomplete="organization" placeholder="组织 UUID"></label><label>用户名<input v-model="username" required autocomplete="username"></label><label>密码<input v-model="password" type="password" required autocomplete="current-password"></label><button type="submit">登录</button></fieldset></form>
-  </section>
-  <main v-else class="formal-workspace">
+  <main v-if="identity" class="formal-workspace">
     <aside class="record-sidebar"><section class="panel">
       <div class="section-heading"><h2>采集记录</h2><button class="text-button" :disabled="busy" @click="w.refresh">刷新列表</button></div>
       <button v-if="w.writer()" :disabled="busy || !!pending" @click="importing = true; editing = false">导入 CSV</button>

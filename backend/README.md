@@ -344,4 +344,4 @@ T05c3a增加可空model_rounds.validation_diagnostics响应字段，需先升级
 T05c3b需迁移到0024_method_model_v2；VIBRADIAG_METHOD_EXECUTOR=model_v2对新方法任务使用独立字段协议，model保留v1、rules仍默认，与数值开关分开。全量850项及新版本真实7条已知开发回归通过，见[实测边界](../docs/acceptance/M3-T05c3b-verification.md)。本地模型新策略未实测，不宣称与DeepSeek效果等价。
 
 
-M3受限后端的[本机条件验收](../docs/acceptance/M3-acceptance.md)已收口。verify_m3_acceptance.py只审计冻结测试/回执/源码，保留完整M3未通过和工厂准入false，不启动模型/服务器；本轮业务运行时代码不变，850项既有全量与19项新审计工具测试分开计。下一步M4-T01a正式任务只读工作台。
+M3受限后端的[本机条件验收](../docs/acceptance/M3-acceptance.md)已收口。verify_m3_acceptance.py只审计冻结测试/回执/源码，保留完整M3未通过和工厂准入false，不启动模型/服务器；本轮业务运行时代码不变，850项既有全量与19项新审计工具测试分开计。[M4-T01a](../docs/acceptance/M4-T01a-verification.md)已通过前端状态/构建及本机浏览器流程验证，本轮后端业务代码不变；下一步T01b正式任务写操作。

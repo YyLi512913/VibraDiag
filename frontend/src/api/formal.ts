@@ -4,7 +4,8 @@ export class ApiError extends Error {
   constructor(message: string, public status: number) { super(message) }
 }
 let csrf = sessionStorage.getItem('vibradiag-csrf') || ''
-export function forgetCsrf() { csrf = ''; sessionStorage.removeItem('vibradiag-csrf') }
+let authRevision = 0
+export function forgetCsrf() { authRevision++; csrf = ''; sessionStorage.removeItem('vibradiag-csrf') }
 export const hasCsrf = () => !!csrf
 async function send(path: string, options: RequestInit = {}, blob = false): Promise<unknown> {
   const headers = new Headers(options.headers)
@@ -23,15 +24,18 @@ async function send(path: string, options: RequestInit = {}, blob = false): Prom
   if (response.status === 204) return null
   return blob ? response.blob() : response.json()
 }
-export const get = <T>(path: string) => send(path) as Promise<T>
-export const post = <T>(path: string, body: unknown, extra = {}) => send(path, { method: 'POST', headers: { 'Content-Type': 'application/json', ...extra }, body: JSON.stringify(body) }) as Promise<T>
-export async function login(organization_id: string, username: string, password: string) {
+export const get = <T>(path: string, signal?: AbortSignal) => send(path, { signal }) as Promise<T>
+export const post = <T>(path: string, body: unknown, extra = {}, signal?: AbortSignal) => send(path, { method: 'POST', headers: { 'Content-Type': 'application/json', ...extra }, body: JSON.stringify(body), signal }) as Promise<T>
+export async function login(organization_id: string, username: string, password: string, current = () => true) {
   const result = await post<{ csrf_token: string }>('/auth/login', { organization_id, username, password })
+  if (!current()) throw new DOMException('Session changed', 'AbortError')
   csrf = result.csrf_token; sessionStorage.setItem('vibradiag-csrf', csrf)
-  return me()
+  const identity = await me()
+  if (!current()) throw new DOMException('Session changed', 'AbortError')
+  return identity
 }
 export const me = () => get<Identity>('/auth/me')
-export async function logout() { await post('/auth/logout', {}); forgetCsrf() }
+export async function logout() { const token = csrf; forgetCsrf(); await post('/auth/logout', {}, { 'X-CSRF-Token': token }) }
 export const assets = () => get<Page<Asset>>('/assets?page_size=100')
 export const points = (id: string) => get<Page<Asset>>(`/assets/${id}/measurement-points?page_size=100`)
 export const records = (page = 1) => get<Page<RecordSummary>>(`/measurements?page=${page}&page_size=10`)
@@ -49,7 +53,9 @@ export const analysis = (id: string) => get<FormalAnalysis>(`/analyses/${id}`)
 export const waveform = (id: string) => get<Waveform>(`/analyses/${id}/series?kind=waveform`)
 export const spectrum = (id: string) => get<Spectrum>(`/analyses/${id}/series?kind=spectrum`)
 export async function download(path: string, filename: string) {
+  const revision = authRevision
   const blob = await send(path, {}, true) as Blob
+  if (revision !== authRevision) return
   const url = URL.createObjectURL(blob), link = document.createElement('a')
   link.href = url; link.download = filename; link.click()
   setTimeout(() => URL.revokeObjectURL(url), 1000)

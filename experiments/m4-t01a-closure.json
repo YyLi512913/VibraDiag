@@ -1,0 +1,29 @@
+{
+  "recorded_at": "2026-11-01T15:25:45.977058+00:00",
+  "stage": "M4-T01a read-only task workbench",
+  "passed": true,
+  "frontend_tests": 12,
+  "m3_auditor_tests": 19,
+  "m3_auditor_seconds": 6.53,
+  "backend_baseline_unchanged_entries": 285,
+  "full_backend_suite_rerun": false,
+  "prior_backend_tests": 850,
+  "external_model_calls": 0,
+  "owned_test_ports_closed": [
+    8054,
+    5174
+  ],
+  "browser_task_finished": true,
+  "browser_forced_cleanup": false,
+  "full_m4_acceptance": false,
+  "factory_trial_qualified": false,
+  "files_sha256": {
+    "docs/acceptance/M4-T01a-verification.md": "5a64578cd2967c62b3a7b08cc0863acb9ee3543d8253c76e2c0e1e6f81553722",
+    "docs/11-m4-workbench-design.md": "ffa0761c14fc34ceff76f64a6c1abdee58a92ebcaa35ea1aa60497ff5c6565c1",
+    "experiments/m4-t01a-frontend-v2.json": "293648870be95390008b8a86e61e753450a2367e05883833808820fb1b240037",
+    "experiments/m4-t01a-browser.json": "9ab3ba49ecbf2bd45589aae03b7b6418394a34a9f0497d2ecb144a609c34f1b3",
+    "experiments/m4-t01a-workbench.png": "ff8613e55c72e47e7cdbe44d08b7ecb2edfac1b7826d1d6bd618c2babd5ddc6a",
+    "frontend/src/composables/useSession.ts": "f360807fc7d994342578ef74e3e4c34d797a48bc7c0ec2dfc32496480d48f22b",
+    "scripts/check-docs.cjs": "f85f70dfec377975c4713db924c86e848bf513ea2b814fef1a9c7afcaf31c5eb"
+  }
+}
