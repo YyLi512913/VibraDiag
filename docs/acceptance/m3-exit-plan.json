@@ -1,0 +1,276 @@
+{
+  "version": "m3-local-software-exit-v1",
+  "scope": "Bounded exploratory Agent backend on the current local Windows environment",
+  "expected_full_test_count": 850,
+  "expected_software_case_count": 14,
+  "full_backend_tests": {
+    "path": "experiments/m3-t05c3b-tests.xml",
+    "sha256": "9e53c8d0cba93c8ca9e2d5bc54caf2cf58374d2d85e4bb2c39e1998056a2137f"
+  },
+  "method_v2": {
+    "path": "experiments/m3-t05c3b-method-regression.json",
+    "sha256": "4c9e41f482b60b71aae1cd528163a17b9542a7c95ecf1765a46b28e70afd2361"
+  },
+  "numeric_v2": {
+    "path": "experiments/m3-t05c1-scoped-regression.json",
+    "sha256": "43756ff678d4c67d5d00646a6eba2aba2492b3b442a6a35b98f31df8a735eb2a"
+  },
+  "contract": {
+    "path": "docs/contracts/m3-agent-contract.json",
+    "sha256": "e3c1397602573cb2ab7e9974151852435eb6b0a6dcb4f76c53e408328c4c372b"
+  },
+  "allowed_new_backend_sources": [
+    "backend/scripts/m3_acceptance_evidence.py",
+    "backend/scripts/verify_m3_acceptance.py",
+    "backend/tests/unit/test_m3_acceptance.py"
+  ],
+  "software_cases": [
+    {
+      "id": "M3-L01",
+      "requirement": "M3-AT01",
+      "title": "真实基础分析、确认及幂等受理",
+      "tests": [
+        "tests.integration.test_agent_tasks::test_accept_replay_conflict_and_real_basic_draft",
+        "tests.integration.test_agent_tasks::test_pause_confirmation_resume_cas_and_idempotency"
+      ],
+      "limitation": "不表示自然语言目标识别或完整诊断。"
+    },
+    {
+      "id": "M3-L02",
+      "requirement": "M3-AT01",
+      "title": "按实际频率条件选择补充工具",
+      "tests": [
+        "tests.integration.test_numeric_scope_v2::test_complete_frequency_continues_past_envelope_diagnostic_limits",
+        "tests.integration.test_numeric_scope_v2::test_incomplete_frequency_can_still_stop_without_forcing_remaining_tool"
+      ],
+      "limitation": "仅固定目标和登记候选的开发回归。"
+    },
+    {
+      "id": "M3-L03",
+      "requirement": "M3-AT01",
+      "title": "双输入比较和必要父引用",
+      "tests": [
+        "tests.integration.test_agent_tasks::test_comparison_task_binds_both_current_roots",
+        "tests.integration.test_comparison_runs::test_shared_declared_root_cannot_become_independent_before_after"
+      ],
+      "limitation": "变化不构成维修有效或故障确诊。"
+    },
+    {
+      "id": "M3-L04",
+      "requirement": "M3-AT02",
+      "title": "澄清、显式选择和重认证恢复",
+      "tests": [
+        "tests.integration.test_agent_knowledge::test_missing_scope_requires_explicit_offered_choice",
+        "tests.integration.test_agent_tasks::test_session_expiry_requires_reauthentication_and_resume"
+      ],
+      "limitation": "公共请求不能提供未登记选择或重置预算。"
+    },
+    {
+      "id": "M3-L05",
+      "requirement": "M3-AT02",
+      "title": "旧输入/引用失效及任务版本绑定",
+      "tests": [
+        "tests.integration.test_agent_tasks::test_old_revision_fails_execution_and_permission_revocation_hides_task",
+        "tests.integration.test_agent_tasks::test_confirmation_revocation_invalidates_saved_draft"
+      ],
+      "limitation": "历史读取不等于当前有效引用。"
+    },
+    {
+      "id": "M3-L06",
+      "requirement": "M3-AT02",
+      "title": "线程、组织、用户和当前范围隔离",
+      "tests": [
+        "tests.integration.test_durable_rules_graph::test_valid_thread_does_not_authorize_another_actor",
+        "tests.integration.test_method_v2_graph::test_revoked_asset_scope_hides_v2_task"
+      ],
+      "limitation": "当前任务仅本人可读；不是完整权限管理页面。"
+    },
+    {
+      "id": "M3-L07",
+      "requirement": "M3-AT03",
+      "title": "累计预算、取消及数值期限",
+      "tests": [
+        "tests.integration.test_agent_tasks::test_budget_recovery_excludes_manual_wait_and_terminal_history_immutable",
+        "tests.integration.test_numeric_process::test_task_cancel_stops_owned_child_and_keeps_cancelled_terminal",
+        "tests.integration.test_numeric_process::test_task_remaining_active_budget_bounds_child_lifetime"
+      ],
+      "limitation": "取消不能保证供应商服务端推理已停止。"
+    },
+    {
+      "id": "M3-L08",
+      "requirement": "M3-AT03",
+      "title": "落库与检查点窗口恢复不重复执行",
+      "tests": [
+        "tests.integration.test_method_v2_graph::test_recovery_reuses_actual_ledgers_and_version",
+        "tests.integration.test_numeric_scope_v2::test_v2_completed_receipt_recovery_reuses_same_model_and_tool",
+        "tests.integration.test_durable_rules_graph::test_call_commit_before_checkpoint_save_replays_ledger_instead_of_compute"
+      ],
+      "limitation": "当前回归加历史实际进程恢复证据；非多API发布准入。"
+    },
+    {
+      "id": "M3-L09",
+      "requirement": "M3-AT03",
+      "title": "真实子进程、凭据清理及共享容量",
+      "tests": [
+        "tests.integration.test_numeric_process::test_actual_basic_child_result_and_scrubbed_environment",
+        "tests.integration.test_numeric_process::test_mixed_m1_m2_share_two_slots_across_actual_children",
+        "tests.integration.test_numeric_process::test_watchdog_terminates_even_when_host_guard_is_slow"
+      ],
+      "limitation": "Windows可信数值隔离，不是任意代码安全沙箱或Linux验证。"
+    },
+    {
+      "id": "M3-L10",
+      "requirement": "M3-AT04",
+      "title": "发布/权限过滤与向量空间隔离",
+      "tests": [
+        "tests.integration.test_knowledge_indexes::test_asset_org_equipment_and_component_acl_before_model_and_ranking",
+        "tests.integration.test_knowledge_indexes::test_runtime_change_does_not_mix_old_index_with_new_query",
+        "tests.integration.test_knowledge_indexes::test_failed_rebuild_preserves_active_and_same_key_never_reexecutes"
+      ],
+      "limitation": "精确cosine和微型语料链路，不代表召回/相关性准入。"
+    },
+    {
+      "id": "M3-L11",
+      "requirement": "M3-AT04",
+      "title": "撤回、引用原文及非可信资料边界",
+      "tests": [
+        "tests.integration.test_method_v2_graph::test_withdrawal_after_generation_hides_new_and_existing_draft",
+        "tests.integration.test_agent_knowledge::test_untrusted_knowledge_never_becomes_tool_instruction_or_numeric_evidence"
+      ],
+      "limitation": "已知注入控制不是全面语义安全证明。"
+    },
+    {
+      "id": "M3-L12",
+      "requirement": "M3-AT03",
+      "title": "显式模型配置、外发与错误分层",
+      "tests": [
+        "tests.integration.test_method_v2_graph::test_v1_and_v2_keep_accepted_configs_after_default_changes",
+        "tests.unit.test_formal_model_gateway::test_provider_errors_redacted_no_redirect_or_fallback",
+        "tests.integration.test_model_validation_diagnostics::test_failed_round_retains_bounded_diagnostics_without_dispatch_or_free_retry"
+      ],
+      "limitation": "供应商故障由受控transport替身验证；本地质量仍未准入。"
+    },
+    {
+      "id": "M3-L13",
+      "requirement": "M3-AT05",
+      "title": "冻结开发评测及拒答/质量分离",
+      "tests": [
+        "tests.integration.test_method_v2_regression::test_frozen_repetitions_use_v2_tasks_and_predeclared_audit",
+        "tests.unit.test_method_comparison_review::test_runtime_schema_rejection_is_safe_but_not_semantic_success",
+        "tests.integration.test_agent_feedback_evaluation::test_feedback_rules_router_agent_and_scoped_faults_use_actual_results"
+      ],
+      "limitation": "真实模型回执另验；不构成独立留出或四分类准确率。"
+    },
+    {
+      "id": "M3-L14",
+      "requirement": "M3-AT03",
+      "title": "迁移重建、不可变账本及配置兼容",
+      "tests": [
+        "tests.integration.test_migration_rebuild::test_all_migrations_build_an_empty_schema_and_rollback_cleanly",
+        "tests.integration.test_model_validation_diagnostics::test_database_rejects_wrong_state_and_unbounded_diagnostic_envelope",
+        "tests.unit.test_method_v2_policy::test_original_method_and_numeric_policy_fingerprints_remain_unchanged"
+      ],
+      "limitation": "不替代生产备份恢复和升级回退演练。"
+    }
+  ],
+  "requirement_decisions": [
+    {
+      "id": "M3-AT01",
+      "status": "limited",
+      "reason": "Bounded explicit goals and registered candidates verified; open-ended hypothesis/semantic quality not admitted."
+    },
+    {
+      "id": "M3-AT02",
+      "status": "passed_local",
+      "reason": "CAS, budget, input versions, ownership and checkpoint/resume validated in local software scope."
+    },
+    {
+      "id": "M3-AT03",
+      "status": "passed_local",
+      "reason": "Provider faults use controlled transports; real numeric child limits and recovery tested locally, historical HTTP evidence version-labelled."
+    },
+    {
+      "id": "M3-AT04",
+      "status": "limited",
+      "reason": "Publication/ACL/vector identity/revocation and known injection controls verified; general relevance and semantic conflict handling not admitted."
+    },
+    {
+      "id": "M3-AT05",
+      "status": "limited",
+      "reason": "Development comparison and known regressions recorded; four-class fault metrics and independent holdout absent."
+    }
+  ],
+  "qualification_blockers": [
+    {
+      "id": "M3-R01",
+      "owner_stage": "M2/M6",
+      "missing": "Qualified diagnostic profiles, verifiable acquisition/time/uncertainty and independent four-class diagnostic validation",
+      "effect": "No formal fault, health, severity or repair-effectiveness release."
+    },
+    {
+      "id": "M3-R02",
+      "owner_stage": "M3/M6",
+      "missing": "Independent engineer relevance annotations, unseen physical-entity holdout and sufficient semantic evaluation",
+      "effect": "No general RAG/Agent accuracy or reasoning qualification."
+    },
+    {
+      "id": "M3-R03",
+      "owner_stage": "M6",
+      "missing": "Local model-v2 end-to-end quality and deployment validation",
+      "effect": "No equivalent offline/internal-network model capability claim."
+    },
+    {
+      "id": "M3-R04",
+      "owner_stage": "M4/M5/M6",
+      "missing": "Full workbench, report review/work orders and trial deployment, monitoring, backup/restore and independent usability acceptance",
+      "effect": "Factory trial approval remains false."
+    }
+  ],
+  "historical_evidence": [
+    {
+      "id": "checkpoint",
+      "path": "experiments/m3-t02b1-checkpoints.json",
+      "sha256": "3e96fc4353235c7e0d244c135db0390c6612a55a70c77674d769b2d89e304744",
+      "scope": "Historical official checkpointer/isolated process probe"
+    },
+    {
+      "id": "isolation",
+      "path": "experiments/m3-t02b3-isolation.json",
+      "sha256": "e4fbae3be43b5498f7edb9369b499af55c265c1e3d9c1e6b87a4844eaa101ba7",
+      "scope": "Historical real HTTP host-death/child termination and recovery"
+    },
+    {
+      "id": "retrieval",
+      "path": "experiments/m3-t03b2-retrieval.json",
+      "sha256": "af14e9cba7e090ca38009a6b8ea0ede83aea42a805208bd463e59782b4b66ca9",
+      "scope": "Historical real BGE-M3 HTTP/index/NumPy cosine cross-check"
+    }
+  ],
+  "retained_observations": [
+    {
+      "path": "experiments/m3-t05a-development-comparison.json",
+      "sha256": "db9cfc023c5ff640a5e2dd4d9b25fb182211a6d1484de525a9bca0fe3f5a310d",
+      "expected_all_cases_met": true
+    },
+    {
+      "path": "experiments/m3-t05b-feedback-comparison.json",
+      "sha256": "02fed478c01d559ed9df5738f602e8ba2ee2b08f598d23a8345f9457d5a58b41",
+      "expected_all_cases_met": false
+    },
+    {
+      "path": "experiments/m3-t05c2b-method-comparison.json",
+      "sha256": "65bf7a3aee3be709d64781e456a5d8b575784fb4efb5ff6884a69afbe6d6ff31",
+      "expected_all_cases_met": false
+    },
+    {
+      "path": "experiments/m3-t05c2b-outcome-review.json",
+      "sha256": "1f9c9b5c2892309f167f63d80651e6ce8a477ddf9d835282f1e7af489e2cdb93",
+      "expected_all_cases_met": false
+    },
+    {
+      "path": "experiments/m3-t05c3a-method-diagnostics.json",
+      "sha256": "b5182301d6a770d678ed2edfdf6611378f48b964e7815b94e8aa564b5a850f02",
+      "expected_all_cases_met": false
+    }
+  ]
+}

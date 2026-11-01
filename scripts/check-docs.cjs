@@ -6,6 +6,16 @@ const stories = [...requirement.matchAll(/^\*\*(US-[A-Z]\d+(?:\.\d+)?) /gm)].map
 const duplicates = stories.filter((x,i)=>stories.indexOf(x)!==i);
 const outdated = requirement.split('\n').filter(x=>/下一主题|尚待.*修订|为历史需求骨架|## 5. 待确认/.test(x));
 const broken = [];
+// Include stage exits and the current workbench design, alongside the original design baseline.
+const additionalDocs = ['11-m4-workbench-design.md', 'acceptance/M3-acceptance.md'];
+for (const file of additionalDocs) {
+  const full = path.join(docs, file);
+  for (const match of fs.readFileSync(full, 'utf8').matchAll(/\]\(([^)]+)\)/g)) {
+    const target = match[1];
+    if (/^(?:https?:|[A-Z]:|#)/i.test(target)) continue;
+    if (!fs.existsSync(path.resolve(path.dirname(full), target.split('#')[0]))) broken.push({ file, target });
+  }
+}
 for (const file of ['README.md','00-project-charter.md','01-requirements.md','02-system-design.md','03-milestones.md','04-first-iteration.md','05-m1-local-guide.md','06-m2-tool-design.md','07-m3-agent-design.md','acceptance/M1-acceptance.md','acceptance/M2-T02a-verification.md','acceptance/M2-T02b1-verification.md','acceptance/M2-T02b2-verification.md','acceptance/M2-T03a-verification.md','acceptance/M2-T03b-verification.md','acceptance/M2-T04a-verification.md','acceptance/M2-T04b-verification.md','acceptance/M2-T05a-verification.md','acceptance/M2-T05b-verification.md','acceptance/M2-T05b2-verification.md','acceptance/M2-acceptance.md','acceptance/M3-T01-verification.md','../datasets/public-data-v2/README.md','../datasets/public-data-v1/README.md','appendices/open-source-verification.md','appendices/model-selection.md']) {
   const full = path.join(docs,file);
   for (const match of fs.readFileSync(full,'utf8').matchAll(/\]\(([^)]+)\)/g)) {

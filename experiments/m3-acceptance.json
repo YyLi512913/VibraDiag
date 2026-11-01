@@ -1,0 +1,518 @@
+{
+  "status": "conditionally_passed_local_software",
+  "stage": "M3 bounded exploratory Agent backend",
+  "local_software_conditional_pass": true,
+  "m3_full_acceptance_pass": false,
+  "m4_development_ready": true,
+  "test_results": {
+    "tests": 850,
+    "seconds": 783.221
+  },
+  "full_suite_rerun": false,
+  "selected_unique_testcases": 45,
+  "software_cases": [
+    {
+      "id": "M3-L01",
+      "requirement": "M3-AT01",
+      "title": "真实基础分析、确认及幂等受理",
+      "status": "verified_local",
+      "executed_tests": [
+        {
+          "selector": "tests.integration.test_agent_tasks::test_accept_replay_conflict_and_real_basic_draft",
+          "executed_cases": 1
+        },
+        {
+          "selector": "tests.integration.test_agent_tasks::test_pause_confirmation_resume_cas_and_idempotency",
+          "executed_cases": 1
+        }
+      ],
+      "limitation": "不表示自然语言目标识别或完整诊断。"
+    },
+    {
+      "id": "M3-L02",
+      "requirement": "M3-AT01",
+      "title": "按实际频率条件选择补充工具",
+      "status": "verified_local",
+      "executed_tests": [
+        {
+          "selector": "tests.integration.test_numeric_scope_v2::test_complete_frequency_continues_past_envelope_diagnostic_limits",
+          "executed_cases": 1
+        },
+        {
+          "selector": "tests.integration.test_numeric_scope_v2::test_incomplete_frequency_can_still_stop_without_forcing_remaining_tool",
+          "executed_cases": 1
+        }
+      ],
+      "limitation": "仅固定目标和登记候选的开发回归。"
+    },
+    {
+      "id": "M3-L03",
+      "requirement": "M3-AT01",
+      "title": "双输入比较和必要父引用",
+      "status": "verified_local",
+      "executed_tests": [
+        {
+          "selector": "tests.integration.test_agent_tasks::test_comparison_task_binds_both_current_roots",
+          "executed_cases": 1
+        },
+        {
+          "selector": "tests.integration.test_comparison_runs::test_shared_declared_root_cannot_become_independent_before_after",
+          "executed_cases": 1
+        }
+      ],
+      "limitation": "变化不构成维修有效或故障确诊。"
+    },
+    {
+      "id": "M3-L04",
+      "requirement": "M3-AT02",
+      "title": "澄清、显式选择和重认证恢复",
+      "status": "verified_local",
+      "executed_tests": [
+        {
+          "selector": "tests.integration.test_agent_knowledge::test_missing_scope_requires_explicit_offered_choice",
+          "executed_cases": 1
+        },
+        {
+          "selector": "tests.integration.test_agent_tasks::test_session_expiry_requires_reauthentication_and_resume",
+          "executed_cases": 1
+        }
+      ],
+      "limitation": "公共请求不能提供未登记选择或重置预算。"
+    },
+    {
+      "id": "M3-L05",
+      "requirement": "M3-AT02",
+      "title": "旧输入/引用失效及任务版本绑定",
+      "status": "verified_local",
+      "executed_tests": [
+        {
+          "selector": "tests.integration.test_agent_tasks::test_old_revision_fails_execution_and_permission_revocation_hides_task",
+          "executed_cases": 1
+        },
+        {
+          "selector": "tests.integration.test_agent_tasks::test_confirmation_revocation_invalidates_saved_draft",
+          "executed_cases": 1
+        }
+      ],
+      "limitation": "历史读取不等于当前有效引用。"
+    },
+    {
+      "id": "M3-L06",
+      "requirement": "M3-AT02",
+      "title": "线程、组织、用户和当前范围隔离",
+      "status": "verified_local",
+      "executed_tests": [
+        {
+          "selector": "tests.integration.test_durable_rules_graph::test_valid_thread_does_not_authorize_another_actor",
+          "executed_cases": 3
+        },
+        {
+          "selector": "tests.integration.test_method_v2_graph::test_revoked_asset_scope_hides_v2_task",
+          "executed_cases": 1
+        }
+      ],
+      "limitation": "当前任务仅本人可读；不是完整权限管理页面。"
+    },
+    {
+      "id": "M3-L07",
+      "requirement": "M3-AT03",
+      "title": "累计预算、取消及数值期限",
+      "status": "verified_local",
+      "executed_tests": [
+        {
+          "selector": "tests.integration.test_agent_tasks::test_budget_recovery_excludes_manual_wait_and_terminal_history_immutable",
+          "executed_cases": 1
+        },
+        {
+          "selector": "tests.integration.test_numeric_process::test_task_cancel_stops_owned_child_and_keeps_cancelled_terminal",
+          "executed_cases": 1
+        },
+        {
+          "selector": "tests.integration.test_numeric_process::test_task_remaining_active_budget_bounds_child_lifetime",
+          "executed_cases": 1
+        }
+      ],
+      "limitation": "取消不能保证供应商服务端推理已停止。"
+    },
+    {
+      "id": "M3-L08",
+      "requirement": "M3-AT03",
+      "title": "落库与检查点窗口恢复不重复执行",
+      "status": "verified_local",
+      "executed_tests": [
+        {
+          "selector": "tests.integration.test_method_v2_graph::test_recovery_reuses_actual_ledgers_and_version",
+          "executed_cases": 3
+        },
+        {
+          "selector": "tests.integration.test_numeric_scope_v2::test_v2_completed_receipt_recovery_reuses_same_model_and_tool",
+          "executed_cases": 2
+        },
+        {
+          "selector": "tests.integration.test_durable_rules_graph::test_call_commit_before_checkpoint_save_replays_ledger_instead_of_compute",
+          "executed_cases": 1
+        }
+      ],
+      "limitation": "当前回归加历史实际进程恢复证据；非多API发布准入。"
+    },
+    {
+      "id": "M3-L09",
+      "requirement": "M3-AT03",
+      "title": "真实子进程、凭据清理及共享容量",
+      "status": "verified_local",
+      "executed_tests": [
+        {
+          "selector": "tests.integration.test_numeric_process::test_actual_basic_child_result_and_scrubbed_environment",
+          "executed_cases": 1
+        },
+        {
+          "selector": "tests.integration.test_numeric_process::test_mixed_m1_m2_share_two_slots_across_actual_children",
+          "executed_cases": 1
+        },
+        {
+          "selector": "tests.integration.test_numeric_process::test_watchdog_terminates_even_when_host_guard_is_slow",
+          "executed_cases": 1
+        }
+      ],
+      "limitation": "Windows可信数值隔离，不是任意代码安全沙箱或Linux验证。"
+    },
+    {
+      "id": "M3-L10",
+      "requirement": "M3-AT04",
+      "title": "发布/权限过滤与向量空间隔离",
+      "status": "verified_local",
+      "executed_tests": [
+        {
+          "selector": "tests.integration.test_knowledge_indexes::test_asset_org_equipment_and_component_acl_before_model_and_ranking",
+          "executed_cases": 1
+        },
+        {
+          "selector": "tests.integration.test_knowledge_indexes::test_runtime_change_does_not_mix_old_index_with_new_query",
+          "executed_cases": 1
+        },
+        {
+          "selector": "tests.integration.test_knowledge_indexes::test_failed_rebuild_preserves_active_and_same_key_never_reexecutes",
+          "executed_cases": 1
+        }
+      ],
+      "limitation": "精确cosine和微型语料链路，不代表召回/相关性准入。"
+    },
+    {
+      "id": "M3-L11",
+      "requirement": "M3-AT04",
+      "title": "撤回、引用原文及非可信资料边界",
+      "status": "verified_local",
+      "executed_tests": [
+        {
+          "selector": "tests.integration.test_method_v2_graph::test_withdrawal_after_generation_hides_new_and_existing_draft",
+          "executed_cases": 1
+        },
+        {
+          "selector": "tests.integration.test_agent_knowledge::test_untrusted_knowledge_never_becomes_tool_instruction_or_numeric_evidence",
+          "executed_cases": 1
+        }
+      ],
+      "limitation": "已知注入控制不是全面语义安全证明。"
+    },
+    {
+      "id": "M3-L12",
+      "requirement": "M3-AT03",
+      "title": "显式模型配置、外发与错误分层",
+      "status": "verified_local",
+      "executed_tests": [
+        {
+          "selector": "tests.integration.test_method_v2_graph::test_v1_and_v2_keep_accepted_configs_after_default_changes",
+          "executed_cases": 1
+        },
+        {
+          "selector": "tests.unit.test_formal_model_gateway::test_provider_errors_redacted_no_redirect_or_fallback",
+          "executed_cases": 6
+        },
+        {
+          "selector": "tests.integration.test_model_validation_diagnostics::test_failed_round_retains_bounded_diagnostics_without_dispatch_or_free_retry",
+          "executed_cases": 1
+        }
+      ],
+      "limitation": "供应商故障由受控transport替身验证；本地质量仍未准入。"
+    },
+    {
+      "id": "M3-L13",
+      "requirement": "M3-AT05",
+      "title": "冻结开发评测及拒答/质量分离",
+      "status": "verified_local",
+      "executed_tests": [
+        {
+          "selector": "tests.integration.test_method_v2_regression::test_frozen_repetitions_use_v2_tasks_and_predeclared_audit",
+          "executed_cases": 1
+        },
+        {
+          "selector": "tests.unit.test_method_comparison_review::test_runtime_schema_rejection_is_safe_but_not_semantic_success",
+          "executed_cases": 1
+        },
+        {
+          "selector": "tests.integration.test_agent_feedback_evaluation::test_feedback_rules_router_agent_and_scoped_faults_use_actual_results",
+          "executed_cases": 1
+        }
+      ],
+      "limitation": "真实模型回执另验；不构成独立留出或四分类准确率。"
+    },
+    {
+      "id": "M3-L14",
+      "requirement": "M3-AT03",
+      "title": "迁移重建、不可变账本及配置兼容",
+      "status": "verified_local",
+      "executed_tests": [
+        {
+          "selector": "tests.integration.test_migration_rebuild::test_all_migrations_build_an_empty_schema_and_rollback_cleanly",
+          "executed_cases": 1
+        },
+        {
+          "selector": "tests.integration.test_model_validation_diagnostics::test_database_rejects_wrong_state_and_unbounded_diagnostic_envelope",
+          "executed_cases": 1
+        },
+        {
+          "selector": "tests.unit.test_method_v2_policy::test_original_method_and_numeric_policy_fingerprints_remain_unchanged",
+          "executed_cases": 1
+        }
+      ],
+      "limitation": "不替代生产备份恢复和升级回退演练。"
+    }
+  ],
+  "requirement_decisions": [
+    {
+      "id": "M3-AT01",
+      "status": "limited",
+      "reason": "Bounded explicit goals and registered candidates verified; open-ended hypothesis/semantic quality not admitted."
+    },
+    {
+      "id": "M3-AT02",
+      "status": "passed_local",
+      "reason": "CAS, budget, input versions, ownership and checkpoint/resume validated in local software scope."
+    },
+    {
+      "id": "M3-AT03",
+      "status": "passed_local",
+      "reason": "Provider faults use controlled transports; real numeric child limits and recovery tested locally, historical HTTP evidence version-labelled."
+    },
+    {
+      "id": "M3-AT04",
+      "status": "limited",
+      "reason": "Publication/ACL/vector identity/revocation and known injection controls verified; general relevance and semantic conflict handling not admitted."
+    },
+    {
+      "id": "M3-AT05",
+      "status": "limited",
+      "reason": "Development comparison and known regressions recorded; four-class fault metrics and independent holdout absent."
+    }
+  ],
+  "qualification_blockers": [
+    {
+      "id": "M3-R01",
+      "owner_stage": "M2/M6",
+      "missing": "Qualified diagnostic profiles, verifiable acquisition/time/uncertainty and independent four-class diagnostic validation",
+      "effect": "No formal fault, health, severity or repair-effectiveness release."
+    },
+    {
+      "id": "M3-R02",
+      "owner_stage": "M3/M6",
+      "missing": "Independent engineer relevance annotations, unseen physical-entity holdout and sufficient semantic evaluation",
+      "effect": "No general RAG/Agent accuracy or reasoning qualification."
+    },
+    {
+      "id": "M3-R03",
+      "owner_stage": "M6",
+      "missing": "Local model-v2 end-to-end quality and deployment validation",
+      "effect": "No equivalent offline/internal-network model capability claim."
+    },
+    {
+      "id": "M3-R04",
+      "owner_stage": "M4/M5/M6",
+      "missing": "Full workbench, report review/work orders and trial deployment, monitoring, backup/restore and independent usability acceptance",
+      "effect": "Factory trial approval remains false."
+    }
+  ],
+  "source_entries_verified": 291,
+  "runtime_unchanged_since_latest_full_suite": true,
+  "separately_tested_acceptance_tooling": [
+    "backend/scripts/m3_acceptance_evidence.py",
+    "backend/scripts/verify_m3_acceptance.py",
+    "backend/tests/unit/test_m3_acceptance.py"
+  ],
+  "historical_evidence": [
+    {
+      "id": "checkpoint",
+      "path": "experiments/m3-t02b1-checkpoints.json",
+      "sha256": "3e96fc4353235c7e0d244c135db0390c6612a55a70c77674d769b2d89e304744",
+      "historical_only": true,
+      "source_drift_since_run": [
+        "backend/pyproject.toml",
+        "docs/07-m3-agent-design.md",
+        "docs/README.md",
+        "docs/03-milestones.md",
+        "README.md",
+        "backend/README.md"
+      ],
+      "scope": "Historical official checkpointer/isolated process probe"
+    },
+    {
+      "id": "isolation",
+      "path": "experiments/m3-t02b3-isolation.json",
+      "sha256": "e4fbae3be43b5498f7edb9369b499af55c265c1e3d9c1e6b87a4844eaa101ba7",
+      "historical_only": true,
+      "source_drift_since_run": [
+        "backend/.env.example",
+        "backend/README.md",
+        "backend/scripts/export_m3_agent_contract.py",
+        "backend/src/vibradiag/agents/formal_contracts.py",
+        "backend/src/vibradiag/agents/graph_state.py",
+        "backend/src/vibradiag/agents/rules_graph.py",
+        "backend/src/vibradiag/api/errors.py",
+        "backend/src/vibradiag/api/router.py",
+        "backend/src/vibradiag/api/upload_limits.py",
+        "backend/src/vibradiag/infrastructure/persistence/graph_store.py",
+        "backend/src/vibradiag/services/agent_task_service.py",
+        "backend/tests/conftest.py",
+        "backend/tests/integration/test_agent_tasks.py",
+        "backend/tests/integration/test_migration_rebuild.py",
+        "backend/tests/integration/test_postgres_identity.py",
+        "backend/tests/unit/test_formal_agent_policy.py",
+        "docs/03-milestones.md",
+        "docs/07-m3-agent-design.md",
+        "docs/README.md",
+        "README.md"
+      ],
+      "scope": "Historical real HTTP host-death/child termination and recovery"
+    },
+    {
+      "id": "retrieval",
+      "path": "experiments/m3-t03b2-retrieval.json",
+      "sha256": "af14e9cba7e090ca38009a6b8ea0ede83aea42a805208bd463e59782b4b66ca9",
+      "historical_only": true,
+      "source_drift_since_run": [
+        "backend/README.md",
+        "backend/scripts/export_m3_agent_contract.py",
+        "backend/src/vibradiag/agents/formal_contracts.py",
+        "backend/src/vibradiag/agents/graph_state.py",
+        "backend/src/vibradiag/agents/rules_graph.py",
+        "backend/src/vibradiag/infrastructure/persistence/graph_store.py",
+        "backend/src/vibradiag/services/agent_task_service.py",
+        "backend/src/vibradiag/services/knowledge_index_service.py",
+        "backend/tests/conftest.py",
+        "backend/tests/integration/test_agent_tasks.py",
+        "backend/tests/integration/test_migration_rebuild.py",
+        "backend/tests/integration/test_postgres_identity.py",
+        "backend/tests/unit/test_formal_agent_policy.py",
+        "docs/03-milestones.md",
+        "docs/07-m3-agent-design.md",
+        "docs/08-knowledge-design.md",
+        "docs/README.md",
+        "README.md"
+      ],
+      "scope": "Historical real BGE-M3 HTTP/index/NumPy cosine cross-check"
+    }
+  ],
+  "retained_observations": [
+    {
+      "path": "experiments/m3-t05a-development-comparison.json",
+      "sha256": "db9cfc023c5ff640a5e2dd4d9b25fb182211a6d1484de525a9bca0fe3f5a310d",
+      "all_cases_met_expectations": true
+    },
+    {
+      "path": "experiments/m3-t05b-feedback-comparison.json",
+      "sha256": "02fed478c01d559ed9df5738f602e8ba2ee2b08f598d23a8345f9457d5a58b41",
+      "all_cases_met_expectations": false
+    },
+    {
+      "path": "experiments/m3-t05c2b-method-comparison.json",
+      "sha256": "65bf7a3aee3be709d64781e456a5d8b575784fb4efb5ff6884a69afbe6d6ff31",
+      "all_cases_met_expectations": false
+    },
+    {
+      "path": "experiments/m3-t05c2b-outcome-review.json",
+      "sha256": "1f9c9b5c2892309f167f63d80651e6ce8a477ddf9d835282f1e7af489e2cdb93",
+      "all_cases_met_expectations": false
+    },
+    {
+      "path": "experiments/m3-t05c3a-method-diagnostics.json",
+      "sha256": "b5182301d6a770d678ed2edfdf6611378f48b964e7815b94e8aa564b5a850f02",
+      "all_cases_met_expectations": false
+    }
+  ],
+  "known_development_results": {
+    "method": {
+      "method_functional": {
+        "runs": 5,
+        "passed": 5
+      },
+      "method_lifecycle": {
+        "runs": 2,
+        "passed": 2
+      },
+      "comparison": {
+        "runs": 0,
+        "passed": 0
+      }
+    },
+    "numeric_agent": {
+      "runs": 8,
+      "expectations_met": 8,
+      "statuses": {
+        "completed_degraded": 6,
+        "cancelled": 1,
+        "waiting_information": 1
+      },
+      "cited_drafts": 6,
+      "citation_links_valid": 6,
+      "model_reserved": 34,
+      "model_confirmed": 34,
+      "tools": 28,
+      "median_execution_seconds": 23.4845000000023,
+      "token_usage": {
+        "prompt_tokens": 37414,
+        "completion_tokens": 2492,
+        "total_tokens": 39906
+      },
+      "monetary_cost": null,
+      "monetary_cost_reason": "No dated provider pricing/invoice bound to this run"
+    }
+  },
+  "fault_accuracy": null,
+  "semantic_quality_qualified": false,
+  "independent_holdout_admitted": false,
+  "formal_diagnostic_release": false,
+  "factory_trial_approved": false,
+  "default_mode": "rules",
+  "approved_next_step": "M4 workbench development with current authorization, draft validity and release limitations",
+  "recorded_at": "2026-11-01T14:35:31.007031+00:00",
+  "protocol_version": "m3-local-software-exit-v1",
+  "acceptance_tool_tests": {
+    "tests": 19,
+    "seconds": 2.594
+  },
+  "acceptance_tool_tests_sha256": "fb1b26d23422d9db7afb3c07ed0f9ea93803cf8a82b8aaca55390e75206246c1",
+  "model_calls_added": 0,
+  "database_or_server_started": false,
+  "live_resources_revalidated": false,
+  "evidence_sha256": {
+    "backend/scripts/m3_acceptance_evidence.py": "23a0f59384bb00f04d164da305d8a66582eccde49103c84dd79538f9b20d0515",
+    "backend/scripts/verify_m3_acceptance.py": "36505688e31e724f36e319562f6bb23706d99db289bf079985965899f8a1fab0",
+    "backend/tests/unit/test_m3_acceptance.py": "d85f48d06b7959ab8f67349ed0eb71e1bdb33cea40cff3945a64f096fc8046fc",
+    "docs/11-m4-workbench-design.md": "0276c9437683009fa8b4749f0a2a073177c15c2d07443067c3a7a5511af32569",
+    "docs/acceptance/M3-acceptance.md": "96c23c26cb35ebb3d4d8b0db2c72789314a60f74347694e940400c76dde0cd4c",
+    "docs/acceptance/m3-exit-plan.json": "030907734d7463680b87cbe6801b3155d6dfa9d5be817f9629804454390240b3",
+    "docs/contracts/m3-agent-contract.json": "e3c1397602573cb2ab7e9974151852435eb6b0a6dcb4f76c53e408328c4c372b",
+    "experiments/m3-t02b1-checkpoints.json": "3e96fc4353235c7e0d244c135db0390c6612a55a70c77674d769b2d89e304744",
+    "experiments/m3-t02b3-isolation.json": "e4fbae3be43b5498f7edb9369b499af55c265c1e3d9c1e6b87a4844eaa101ba7",
+    "experiments/m3-t03b2-retrieval.json": "af14e9cba7e090ca38009a6b8ea0ede83aea42a805208bd463e59782b4b66ca9",
+    "experiments/m3-t05a-development-comparison.json": "db9cfc023c5ff640a5e2dd4d9b25fb182211a6d1484de525a9bca0fe3f5a310d",
+    "experiments/m3-t05b-feedback-comparison.json": "02fed478c01d559ed9df5738f602e8ba2ee2b08f598d23a8345f9457d5a58b41",
+    "experiments/m3-t05c1-scoped-regression.json": "43756ff678d4c67d5d00646a6eba2aba2492b3b442a6a35b98f31df8a735eb2a",
+    "experiments/m3-t05c2b-method-comparison.json": "65bf7a3aee3be709d64781e456a5d8b575784fb4efb5ff6884a69afbe6d6ff31",
+    "experiments/m3-t05c2b-outcome-review.json": "1f9c9b5c2892309f167f63d80651e6ce8a477ddf9d835282f1e7af489e2cdb93",
+    "experiments/m3-t05c3a-method-diagnostics.json": "b5182301d6a770d678ed2edfdf6611378f48b964e7815b94e8aa564b5a850f02",
+    "experiments/m3-t05c3b-method-regression.json": "4c9e41f482b60b71aae1cd528163a17b9542a7c95ecf1765a46b28e70afd2361",
+    "experiments/m3-t05c3b-tests.xml": "9e53c8d0cba93c8ca9e2d5bc54caf2cf58374d2d85e4bb2c39e1998056a2137f",
+    "experiments/m3-t05d-audit-tests.xml": "fb1b26d23422d9db7afb3c07ed0f9ea93803cf8a82b8aaca55390e75206246c1"
+  },
+  "provenance": "Repository bytes, pinned test/model receipts and executed test selectors; not independent attestation"
+}

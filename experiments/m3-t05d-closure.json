@@ -1,0 +1,31 @@
+{
+  "version": "m3-t05d-closure-v1",
+  "recorded_at": "2026-11-01T14:41:19.836Z",
+  "acceptance_receipt_sha256": "add0fcb38207883cb6a92e6df6b1c4e5ad062fdb6828261fd2cd77601c552fce",
+  "acceptance_evidence_bytes_unchanged": true,
+  "runtime_code_changed": false,
+  "latest_full_backend_test_count": 850,
+  "full_suite_rerun": false,
+  "new_acceptance_tool_tests": 19,
+  "software_cases": 14,
+  "mapped_selectors": 35,
+  "selected_unique_executed_testcases": 45,
+  "source_entries_verified": 291,
+  "model_calls_added": 0,
+  "live_resources_revalidated": false,
+  "post_acceptance_index_documentation": {
+    "README.md": "ccf00c707ae97fddb4f332d3cbb3796e5350c390bfa2018148b5d71f1c86b822",
+    "backend/README.md": "6811c0c11b2655f776b8d77ef344afecc879cf5f9bb1375c25e83ebac2d9f386",
+    "docs/03-milestones.md": "f29865141a2aa213ef9e6082710461cf70df8e8040052e1520a533663b193804",
+    "docs/07-m3-agent-design.md": "7be3e1504888a528e85da18381ededc17ae144bbb8a1cab07175dcb6e8cb9d75",
+    "docs/10-agent-evaluation-design.md": "a69752308d124dcc879828d15ba68e68cb692205eebe6477be71c54ee118e874",
+    "docs/README.md": "7722818bb340f38023a530f4c61b9d350aa7b5c134850d6b02c471b5d4e9a616",
+    "scripts/check-docs.cjs": "582e707f24e03e60a7d78b1926cc1b7d1f6f492771e1a1c2082747ae381c1366"
+  },
+  "local_software_conditional_pass": true,
+  "m3_full_acceptance_pass": false,
+  "m4_development_ready": true,
+  "formal_diagnostic_release": false,
+  "factory_trial_approved": false,
+  "next_step": "M4-T01a shared formal session and owner-only read-only task workbench"
+}

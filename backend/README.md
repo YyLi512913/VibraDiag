@@ -342,3 +342,6 @@ T05c2b已接方法固定语料与双输入比较评测运行器，见[首轮实�
 T05c3a增加可空model_rounds.validation_diagnostics响应字段，需先升级到0023_diagnostics_null_guard，业务表数不变。只保存新schema失败的固定类型及脱敏位置，不含原始正文/错误值，旧记录为null。全量828项通过，真实新观察仍未取得方法质量准入，见[诊断与实测记录](../docs/acceptance/M3-T05c3a-verification.md)；旧提示策略不变，下一步T05c3b新版本字段协议。
 
 T05c3b需迁移到0024_method_model_v2；VIBRADIAG_METHOD_EXECUTOR=model_v2对新方法任务使用独立字段协议，model保留v1、rules仍默认，与数值开关分开。全量850项及新版本真实7条已知开发回归通过，见[实测边界](../docs/acceptance/M3-T05c3b-verification.md)。本地模型新策略未实测，不宣称与DeepSeek效果等价。
+
+
+M3受限后端的[本机条件验收](../docs/acceptance/M3-acceptance.md)已收口。verify_m3_acceptance.py只审计冻结测试/回执/源码，保留完整M3未通过和工厂准入false，不启动模型/服务器；本轮业务运行时代码不变，850项既有全量与19项新审计工具测试分开计。下一步M4-T01a正式任务只读工作台。
