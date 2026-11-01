@@ -1,0 +1,92 @@
+{
+  "review_version": "method-comparison-outcome-audit-v1",
+  "post_measurement_review": true,
+  "model_calls_added": 0,
+  "rows": [
+    {
+      "case_id": "K01",
+      "group": "method_functional",
+      "classification": "runtime_rejection_not_semantic_refusal",
+      "passed": false,
+      "original_rubric_met": false
+    },
+    {
+      "case_id": "K02",
+      "group": "method_functional",
+      "classification": "unsupported_source_refusal",
+      "passed": true,
+      "original_rubric_met": true
+    },
+    {
+      "case_id": "K03",
+      "group": "method_functional",
+      "classification": "empty_corpus_refusal",
+      "passed": true,
+      "original_rubric_met": true
+    },
+    {
+      "case_id": "K04",
+      "group": "method_lifecycle",
+      "classification": "withdrawal_not_exercised_or_failed",
+      "passed": false,
+      "original_rubric_met": false
+    },
+    {
+      "case_id": "K05",
+      "group": "method_functional",
+      "classification": "runtime_rejection_not_semantic_refusal",
+      "passed": false,
+      "original_rubric_met": true
+    },
+    {
+      "case_id": "C01",
+      "group": "comparison",
+      "classification": "comparison_rubric_pass",
+      "passed": true,
+      "original_rubric_met": true
+    },
+    {
+      "case_id": "C02",
+      "group": "comparison",
+      "classification": "comparison_rubric_pass",
+      "passed": true,
+      "original_rubric_met": true
+    },
+    {
+      "case_id": "C03",
+      "group": "comparison",
+      "classification": "comparison_rubric_pass",
+      "passed": true,
+      "original_rubric_met": true
+    },
+    {
+      "case_id": "C04",
+      "group": "comparison",
+      "classification": "comparison_rubric_pass",
+      "passed": true,
+      "original_rubric_met": true
+    }
+  ],
+  "summary": {
+    "method_functional": {
+      "runs": 4,
+      "passed": 2
+    },
+    "method_lifecycle": {
+      "runs": 1,
+      "passed": 0
+    },
+    "comparison": {
+      "runs": 4,
+      "passed": 4
+    }
+  },
+  "all_cases_met_expectations": false,
+  "independent_holdout": false,
+  "semantic_quality_qualified": false,
+  "diagnostic_release": false,
+  "factory_trial_approved": false,
+  "original_receipt_sha256": "65bf7a3aee3be709d64781e456a5d8b575784fb4efb5ff6884a69afbe6d6ff31",
+  "original_protocol_sha256": "b703689e4660c395f3dfbacbec8fc50196e865d69cd9c08fc8960012fe0df26b",
+  "audit_source_sha256": "e54043c7fe85bebecb104fd66cba2b77fd11d9e532a4860cd8bc73b0dc6b1fa0"
+}

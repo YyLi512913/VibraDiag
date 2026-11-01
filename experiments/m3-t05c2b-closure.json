@@ -1,0 +1,62 @@
+{
+  "version": "m3-t05c2b-closure-v1",
+  "recorded_at": "2026-11-01T12:53:27.702Z",
+  "original_receipt_sha256": "65bf7a3aee3be709d64781e456a5d8b575784fb4efb5ff6884a69afbe6d6ff31",
+  "all_pre_run_fingerprints_unchanged": true,
+  "pre_run_frozen_file_count": 272,
+  "post_measurement_additions_or_documentation": {
+    "backend/src/vibradiag/evaluation/method_comparison_review.py": "e54043c7fe85bebecb104fd66cba2b77fd11d9e532a4860cd8bc73b0dc6b1fa0",
+    "backend/scripts/review_method_comparison.py": "6d5f4f58c438f52073cb75c1ae70893a91ed7f653cc135ae8396bdd07f322dc4",
+    "backend/tests/unit/test_method_comparison_review.py": "2f3c18c256e05c0024214df34e12bf99e101e450d8cde46d509e6a06f33b4af1",
+    "experiments/m3-t05c2b-review-tests.xml": "f812549dab8b7c8a427c39bc2d90d70a6c299e7ee1fe4672e6ed27f1bda197f4",
+    "experiments/m3-t05c2b-model-evidence.json": "22b2491775dca7644ebabf550443a441b2fd87b1f2b88947aef001afdec57121",
+    "experiments/m3-t05c2b-outcome-review.json": "1f9c9b5c2892309f167f63d80651e6ce8a477ddf9d835282f1e7af489e2cdb93",
+    "README.md": "dc21759f27d32a4922e514e23833eea1692aedaf581202ef5a4fc994505bb3c3",
+    "backend/README.md": "667cae07b40edd4c368767ec9bb1aeb4a492fcc9ed6161a63f4d2e709c1ce4f9",
+    "docs/03-milestones.md": "6659d88e0850826d088ae24a8373efcb5a6d6788d21827187e2d2355789f8cd8",
+    "docs/10-agent-evaluation-design.md": "dbf31c18405d99c289154fe9f7de28c1646c743e8e898c084fca2d8cb3685b84",
+    "docs/README.md": "21c06341b6254b13b570bd9ee442c150fef22d5f119a7b9cfba9ebfdbcec1cd3",
+    "docs/acceptance/M3-T05c2b-verification.md": "87e2856429f4f06934b9413dd9f11e823c6077ee82b65ba690c765c8338b6785"
+  },
+  "provider_calls_repeated": false,
+  "model_reserved": 6,
+  "model_confirmed": 6,
+  "model_unknown": 0,
+  "total_tokens": 4190,
+  "raw_summary": {
+    "method": {
+      "runs": 5,
+      "passed": 3
+    },
+    "comparison": {
+      "runs": 4,
+      "passed": 4
+    }
+  },
+  "review_summary": {
+    "method_functional": {
+      "runs": 4,
+      "passed": 2
+    },
+    "method_lifecycle": {
+      "runs": 1,
+      "passed": 0
+    },
+    "comparison": {
+      "runs": 4,
+      "passed": 4
+    }
+  },
+  "verification": {
+    "runner_and_scorer_tests": 12,
+    "post_measurement_review_tests": 5,
+    "full_suite_rerun": false,
+    "production_modules_changed": false,
+    "documentation_checks_passed": true
+  },
+  "method_quality_admitted": false,
+  "independent_holdout": false,
+  "diagnostic_release": false,
+  "factory_trial_approved": false,
+  "next_step": "T05c3 minimal schema-validation diagnostics and separately versioned regression"
+}

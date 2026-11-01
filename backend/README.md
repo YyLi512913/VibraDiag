@@ -335,3 +335,6 @@ backend/scripts/benchmark_agent_feedback.py --allow-paid-model-calls使用新冻
 新任务可显式配置VIBRADIAG_NUMERIC_EXECUTOR=model_v2，绑定model_numeric_v2/model-numeric-v2与numeric_decision_v2；model仍表示原v1，默认rules。0021扩展图/阶段/绑定允许值，不新增表。上下文按实际结果/模式分类执行阻断、频率匹配、诊断发布及未知缺项，原缺项保留，合法拒答不强制执行。旧提示hash/配置与检查点不升级。
 
 完成pytest后运行backend/scripts/benchmark_agent_scoped.py --allow-paid-model-calls，只对新Agent跑8条已知开发回归，旧基线不重测。仅验证DeepSeek，本地较长上下文字节限制及质量未准入。详见[T05c1验收](../docs/acceptance/M3-T05c1-verification.md)。
+
+
+T05c2b已接方法固定语料与双输入比较评测运行器，见[首轮实测及审计](../docs/acceptance/M3-T05c2b-verification.md)。真实模型结果未通过：方法功能2/4、生命周期0/1；规则比较4/4。结构错误被安全拦截不等于有依据的内容拒答，保留原回执，下一步T05c3最小失败诊断及新版本回归。

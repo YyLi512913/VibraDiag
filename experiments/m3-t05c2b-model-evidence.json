@@ -1,0 +1,890 @@
+{
+  "original_receipt_sha256": "65bf7a3aee3be709d64781e456a5d8b575784fb4efb5ff6884a69afbe6d6ff31",
+  "rows": [
+    {
+      "case_id": "K01",
+      "task_id": "747aa55a-8b26-4a72-8154-dd668a69b6ea",
+      "rounds": [
+        {
+          "id": "28819977-7f94-4fee-a189-171584683c4a",
+          "round_no": 1,
+          "phase": "decision",
+          "state": "failed",
+          "error_code": "MODEL_OUTPUT_SCHEMA_INVALID",
+          "context": {
+            "question": "What should be verified before interpreting ideal bearing frequencies? Quote only directly relevant method facts; if no source answers this question, return insufficient evidence.",
+            "candidates": [
+              {
+                "action": "search_published_knowledge",
+                "candidate_id": "b36897e5-e133-543a-9f09-4f9aff550460"
+              }
+            ],
+            "allowed_finish": "insufficient_evidence"
+          },
+          "context_sha256": "cfa18611c89e30877f092d7c108aebf058862b27825638778391b485d4de9d18",
+          "output_schema": {
+            "$defs": {
+              "ChooseAction": {
+                "type": "object",
+                "title": "ChooseAction",
+                "required": [
+                  "action",
+                  "candidate_id",
+                  "rationale"
+                ],
+                "properties": {
+                  "action": {
+                    "type": "string",
+                    "const": "choose_action",
+                    "title": "Action"
+                  },
+                  "rationale": {
+                    "type": "string",
+                    "title": "Rationale",
+                    "maxLength": 500,
+                    "minLength": 1
+                  },
+                  "candidate_id": {
+                    "type": "string",
+                    "title": "Candidate Id",
+                    "format": "uuid"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "AskInformation": {
+                "type": "object",
+                "title": "AskInformation",
+                "required": [
+                  "action",
+                  "question_id",
+                  "rationale"
+                ],
+                "properties": {
+                  "action": {
+                    "type": "string",
+                    "const": "ask_information",
+                    "title": "Action"
+                  },
+                  "rationale": {
+                    "type": "string",
+                    "title": "Rationale",
+                    "maxLength": 500,
+                    "minLength": 1
+                  },
+                  "question_id": {
+                    "type": "string",
+                    "title": "Question Id",
+                    "format": "uuid"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "FinishDecision": {
+                "type": "object",
+                "title": "FinishDecision",
+                "required": [
+                  "action",
+                  "outcome",
+                  "rationale"
+                ],
+                "properties": {
+                  "action": {
+                    "type": "string",
+                    "const": "finish",
+                    "title": "Action"
+                  },
+                  "outcome": {
+                    "enum": [
+                      "analysis_only",
+                      "insufficient_evidence"
+                    ],
+                    "type": "string",
+                    "title": "Outcome"
+                  },
+                  "rationale": {
+                    "type": "string",
+                    "title": "Rationale",
+                    "maxLength": 500,
+                    "minLength": 1
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/ChooseAction"
+              },
+              {
+                "$ref": "#/$defs/AskInformation"
+              },
+              {
+                "$ref": "#/$defs/FinishDecision"
+              }
+            ],
+            "discriminator": {
+              "mapping": {
+                "finish": "#/$defs/FinishDecision",
+                "choose_action": "#/$defs/ChooseAction",
+                "ask_information": "#/$defs/AskInformation"
+              },
+              "propertyName": "action"
+            }
+          },
+          "schema_sha256": "1af3c1552e2fae9328ec839f545d5ac83358b5ba0cc7e5de35ee548a1d3b899f",
+          "prompt_version": "formal-method-json-v2",
+          "validated_output": null,
+          "output_sha256": null,
+          "raw_output_sha256": "585be006ce66f167c16b8dc908f350aa485fa16e38d3fb3b0a7f71734f437405",
+          "trace": {
+            "usage": {
+              "total_tokens": 747,
+              "prompt_tokens": 667,
+              "completion_tokens": 80
+            },
+            "provider": "deepseek",
+            "local_digest": null,
+            "served_model": "deepseek-flash",
+            "wall_seconds": 1.2810000000026776,
+            "finish_reason": "stop",
+            "policy_sha256": "bd8de8b2529248ad0809aa1ef9d7757844f34e81ab21ff1992d6bcf8f0c60c74",
+            "requested_model": "deepseek-flash",
+            "runtime_version": null,
+            "structured_output": "json_with_local_validation",
+            "provider_weight_version_attested": false
+          }
+        }
+      ]
+    },
+    {
+      "case_id": "K02",
+      "task_id": "35ebe1b2-c855-457d-ba7a-55bf1839e5b6",
+      "rounds": [
+        {
+          "id": "a7807975-7d2b-42cc-8e11-58ea30a8c1a7",
+          "round_no": 1,
+          "phase": "decision",
+          "state": "completed",
+          "error_code": null,
+          "context": {
+            "question": "What should be verified before interpreting ideal bearing frequencies? Quote only directly relevant method facts; if no source answers this question, return insufficient evidence.",
+            "candidates": [
+              {
+                "action": "search_published_knowledge",
+                "candidate_id": "f2feb5c7-09cc-540d-ae63-04b83cf50d2b"
+              }
+            ],
+            "allowed_finish": "insufficient_evidence"
+          },
+          "context_sha256": "2fc4d96e80bb6974eac42ffb66328af5c9ea83d1a2841abbe89af3789c4cb47d",
+          "output_schema": {
+            "$defs": {
+              "ChooseAction": {
+                "type": "object",
+                "title": "ChooseAction",
+                "required": [
+                  "action",
+                  "candidate_id",
+                  "rationale"
+                ],
+                "properties": {
+                  "action": {
+                    "type": "string",
+                    "const": "choose_action",
+                    "title": "Action"
+                  },
+                  "rationale": {
+                    "type": "string",
+                    "title": "Rationale",
+                    "maxLength": 500,
+                    "minLength": 1
+                  },
+                  "candidate_id": {
+                    "type": "string",
+                    "title": "Candidate Id",
+                    "format": "uuid"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "AskInformation": {
+                "type": "object",
+                "title": "AskInformation",
+                "required": [
+                  "action",
+                  "question_id",
+                  "rationale"
+                ],
+                "properties": {
+                  "action": {
+                    "type": "string",
+                    "const": "ask_information",
+                    "title": "Action"
+                  },
+                  "rationale": {
+                    "type": "string",
+                    "title": "Rationale",
+                    "maxLength": 500,
+                    "minLength": 1
+                  },
+                  "question_id": {
+                    "type": "string",
+                    "title": "Question Id",
+                    "format": "uuid"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "FinishDecision": {
+                "type": "object",
+                "title": "FinishDecision",
+                "required": [
+                  "action",
+                  "outcome",
+                  "rationale"
+                ],
+                "properties": {
+                  "action": {
+                    "type": "string",
+                    "const": "finish",
+                    "title": "Action"
+                  },
+                  "outcome": {
+                    "enum": [
+                      "analysis_only",
+                      "insufficient_evidence"
+                    ],
+                    "type": "string",
+                    "title": "Outcome"
+                  },
+                  "rationale": {
+                    "type": "string",
+                    "title": "Rationale",
+                    "maxLength": 500,
+                    "minLength": 1
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/ChooseAction"
+              },
+              {
+                "$ref": "#/$defs/AskInformation"
+              },
+              {
+                "$ref": "#/$defs/FinishDecision"
+              }
+            ],
+            "discriminator": {
+              "mapping": {
+                "finish": "#/$defs/FinishDecision",
+                "choose_action": "#/$defs/ChooseAction",
+                "ask_information": "#/$defs/AskInformation"
+              },
+              "propertyName": "action"
+            }
+          },
+          "schema_sha256": "1af3c1552e2fae9328ec839f545d5ac83358b5ba0cc7e5de35ee548a1d3b899f",
+          "prompt_version": "formal-method-json-v2",
+          "validated_output": {
+            "action": "choose_action",
+            "rationale": "The question asks for published method facts about prerequisites for interpreting ideal bearing frequencies; the supplied search candidate can retrieve that method context.",
+            "candidate_id": "f2feb5c7-09cc-540d-ae63-04b83cf50d2b"
+          },
+          "output_sha256": "6723d3e4264d46ecc03c289ebcbd4d97ef386eeb1fa6fb89b083df980f4a4292",
+          "raw_output_sha256": "6723d3e4264d46ecc03c289ebcbd4d97ef386eeb1fa6fb89b083df980f4a4292",
+          "trace": {
+            "usage": {
+              "total_tokens": 736,
+              "prompt_tokens": 671,
+              "completion_tokens": 65
+            },
+            "provider": "deepseek",
+            "local_digest": null,
+            "served_model": "deepseek-flash",
+            "wall_seconds": 0.9219999999986612,
+            "finish_reason": "stop",
+            "policy_sha256": "bd8de8b2529248ad0809aa1ef9d7757844f34e81ab21ff1992d6bcf8f0c60c74",
+            "requested_model": "deepseek-flash",
+            "runtime_version": null,
+            "structured_output": "json_with_local_validation",
+            "provider_weight_version_attested": false
+          }
+        },
+        {
+          "id": "0360254f-ec20-4674-a1d3-02efbf7772d2",
+          "round_no": 2,
+          "phase": "extractive_draft",
+          "state": "completed",
+          "error_code": null,
+          "context": {
+            "sources": [
+              {
+                "text": "# Developer-authored office control\nOffice attendance is recorded at reception. Meeting rooms are reserved through the office calendar. This document contains no vibration analysis method.\n",
+                "source_id": "e59b5c26-3c9a-4227-afc0-bade8ee829df",
+                "untrusted_content": true
+              }
+            ],
+            "question": "What should be verified before interpreting ideal bearing frequencies? Quote only directly relevant method facts; if no source answers this question, return insufficient evidence."
+          },
+          "context_sha256": "88169078ea042d0b991ed1a76431c87b3e354159918a977a4eae57ea695fded8",
+          "output_schema": {
+            "type": "object",
+            "$defs": {
+              "SelectedQuote": {
+                "type": "object",
+                "title": "SelectedQuote",
+                "required": [
+                  "source_id",
+                  "quote"
+                ],
+                "properties": {
+                  "quote": {
+                    "type": "string",
+                    "title": "Quote",
+                    "maxLength": 400,
+                    "minLength": 1
+                  },
+                  "source_id": {
+                    "type": "string",
+                    "title": "Source Id",
+                    "format": "uuid"
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "title": "ExtractiveMethodDraft",
+            "required": [
+              "outcome",
+              "selections"
+            ],
+            "properties": {
+              "outcome": {
+                "enum": [
+                  "cited_context",
+                  "insufficient_evidence"
+                ],
+                "type": "string",
+                "title": "Outcome"
+              },
+              "selections": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/SelectedQuote"
+                },
+                "title": "Selections",
+                "maxItems": 3
+              }
+            },
+            "additionalProperties": false
+          },
+          "schema_sha256": "46e51401ae371a52518595e8e3d5b7d1f1d407f94813e98253161caa4e2801e1",
+          "prompt_version": "formal-method-json-v2",
+          "validated_output": {
+            "outcome": "insufficient_evidence",
+            "selections": []
+          },
+          "output_sha256": "1ff0662fab6cfbd2ecb3e01e18c98b5bc65e040dcf57a72c257ec38b8cb5c826",
+          "raw_output_sha256": "1ff0662fab6cfbd2ecb3e01e18c98b5bc65e040dcf57a72c257ec38b8cb5c826",
+          "trace": {
+            "usage": {
+              "total_tokens": 467,
+              "prompt_tokens": 453,
+              "completion_tokens": 14
+            },
+            "provider": "deepseek",
+            "local_digest": null,
+            "served_model": "deepseek-flash",
+            "wall_seconds": 1.0,
+            "finish_reason": "stop",
+            "policy_sha256": "bd8de8b2529248ad0809aa1ef9d7757844f34e81ab21ff1992d6bcf8f0c60c74",
+            "requested_model": "deepseek-flash",
+            "runtime_version": null,
+            "structured_output": "json_with_local_validation",
+            "provider_weight_version_attested": false
+          }
+        }
+      ]
+    },
+    {
+      "case_id": "K03",
+      "task_id": "ce7ec1a4-cb7d-4ddf-aa98-7443b4d2b882",
+      "rounds": [
+        {
+          "id": "314a532a-b66d-4bb7-81cb-08818869bb91",
+          "round_no": 1,
+          "phase": "decision",
+          "state": "completed",
+          "error_code": null,
+          "context": {
+            "question": "What should be verified before interpreting ideal bearing frequencies? Quote only directly relevant method facts; if no source answers this question, return insufficient evidence.",
+            "candidates": [
+              {
+                "action": "search_published_knowledge",
+                "candidate_id": "f74532bd-95c0-5766-a9ad-5579b30ac628"
+              }
+            ],
+            "allowed_finish": "insufficient_evidence"
+          },
+          "context_sha256": "f9c57d7b72bf6b57fb792247b6dcd362b5558889604310984696afbc77d129be",
+          "output_schema": {
+            "$defs": {
+              "ChooseAction": {
+                "type": "object",
+                "title": "ChooseAction",
+                "required": [
+                  "action",
+                  "candidate_id",
+                  "rationale"
+                ],
+                "properties": {
+                  "action": {
+                    "type": "string",
+                    "const": "choose_action",
+                    "title": "Action"
+                  },
+                  "rationale": {
+                    "type": "string",
+                    "title": "Rationale",
+                    "maxLength": 500,
+                    "minLength": 1
+                  },
+                  "candidate_id": {
+                    "type": "string",
+                    "title": "Candidate Id",
+                    "format": "uuid"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "AskInformation": {
+                "type": "object",
+                "title": "AskInformation",
+                "required": [
+                  "action",
+                  "question_id",
+                  "rationale"
+                ],
+                "properties": {
+                  "action": {
+                    "type": "string",
+                    "const": "ask_information",
+                    "title": "Action"
+                  },
+                  "rationale": {
+                    "type": "string",
+                    "title": "Rationale",
+                    "maxLength": 500,
+                    "minLength": 1
+                  },
+                  "question_id": {
+                    "type": "string",
+                    "title": "Question Id",
+                    "format": "uuid"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "FinishDecision": {
+                "type": "object",
+                "title": "FinishDecision",
+                "required": [
+                  "action",
+                  "outcome",
+                  "rationale"
+                ],
+                "properties": {
+                  "action": {
+                    "type": "string",
+                    "const": "finish",
+                    "title": "Action"
+                  },
+                  "outcome": {
+                    "enum": [
+                      "analysis_only",
+                      "insufficient_evidence"
+                    ],
+                    "type": "string",
+                    "title": "Outcome"
+                  },
+                  "rationale": {
+                    "type": "string",
+                    "title": "Rationale",
+                    "maxLength": 500,
+                    "minLength": 1
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/ChooseAction"
+              },
+              {
+                "$ref": "#/$defs/AskInformation"
+              },
+              {
+                "$ref": "#/$defs/FinishDecision"
+              }
+            ],
+            "discriminator": {
+              "mapping": {
+                "finish": "#/$defs/FinishDecision",
+                "choose_action": "#/$defs/ChooseAction",
+                "ask_information": "#/$defs/AskInformation"
+              },
+              "propertyName": "action"
+            }
+          },
+          "schema_sha256": "1af3c1552e2fae9328ec839f545d5ac83358b5ba0cc7e5de35ee548a1d3b899f",
+          "prompt_version": "formal-method-json-v2",
+          "validated_output": {
+            "action": "choose_action",
+            "rationale": "The question asks which method facts should be verified before interpreting ideal bearing frequencies; this requires published method context, and a matching search candidate is supplied to obtain that evidence.",
+            "candidate_id": "f74532bd-95c0-5766-a9ad-5579b30ac628"
+          },
+          "output_sha256": "7b2185eddc610d76e19675b2ca2a049589a83cb6686d7e16c4f817e170100cfc",
+          "raw_output_sha256": "7b2185eddc610d76e19675b2ca2a049589a83cb6686d7e16c4f817e170100cfc",
+          "trace": {
+            "usage": {
+              "total_tokens": 736,
+              "prompt_tokens": 667,
+              "completion_tokens": 69
+            },
+            "provider": "deepseek",
+            "local_digest": null,
+            "served_model": "deepseek-flash",
+            "wall_seconds": 0.8909999999959837,
+            "finish_reason": "stop",
+            "policy_sha256": "bd8de8b2529248ad0809aa1ef9d7757844f34e81ab21ff1992d6bcf8f0c60c74",
+            "requested_model": "deepseek-flash",
+            "runtime_version": null,
+            "structured_output": "json_with_local_validation",
+            "provider_weight_version_attested": false
+          }
+        }
+      ]
+    },
+    {
+      "case_id": "K04",
+      "task_id": "02949b85-83ee-4b10-a1f0-bdb1ed7b3373",
+      "rounds": [
+        {
+          "id": "37f6aef7-d059-412d-975c-9b7b2d8423d7",
+          "round_no": 1,
+          "phase": "decision",
+          "state": "failed",
+          "error_code": "MODEL_OUTPUT_SCHEMA_INVALID",
+          "context": {
+            "question": "What should be verified before interpreting ideal bearing frequencies? Quote only directly relevant method facts; if no source answers this question, return insufficient evidence.",
+            "candidates": [
+              {
+                "action": "search_published_knowledge",
+                "candidate_id": "8d49b3f6-08f2-50a3-8003-dc0c58296e30"
+              }
+            ],
+            "allowed_finish": "insufficient_evidence"
+          },
+          "context_sha256": "cfe98919ae5694f79f731d2e9ee8c93e0426a1863305488feda1b3528fd6c885",
+          "output_schema": {
+            "$defs": {
+              "ChooseAction": {
+                "type": "object",
+                "title": "ChooseAction",
+                "required": [
+                  "action",
+                  "candidate_id",
+                  "rationale"
+                ],
+                "properties": {
+                  "action": {
+                    "type": "string",
+                    "const": "choose_action",
+                    "title": "Action"
+                  },
+                  "rationale": {
+                    "type": "string",
+                    "title": "Rationale",
+                    "maxLength": 500,
+                    "minLength": 1
+                  },
+                  "candidate_id": {
+                    "type": "string",
+                    "title": "Candidate Id",
+                    "format": "uuid"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "AskInformation": {
+                "type": "object",
+                "title": "AskInformation",
+                "required": [
+                  "action",
+                  "question_id",
+                  "rationale"
+                ],
+                "properties": {
+                  "action": {
+                    "type": "string",
+                    "const": "ask_information",
+                    "title": "Action"
+                  },
+                  "rationale": {
+                    "type": "string",
+                    "title": "Rationale",
+                    "maxLength": 500,
+                    "minLength": 1
+                  },
+                  "question_id": {
+                    "type": "string",
+                    "title": "Question Id",
+                    "format": "uuid"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "FinishDecision": {
+                "type": "object",
+                "title": "FinishDecision",
+                "required": [
+                  "action",
+                  "outcome",
+                  "rationale"
+                ],
+                "properties": {
+                  "action": {
+                    "type": "string",
+                    "const": "finish",
+                    "title": "Action"
+                  },
+                  "outcome": {
+                    "enum": [
+                      "analysis_only",
+                      "insufficient_evidence"
+                    ],
+                    "type": "string",
+                    "title": "Outcome"
+                  },
+                  "rationale": {
+                    "type": "string",
+                    "title": "Rationale",
+                    "maxLength": 500,
+                    "minLength": 1
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/ChooseAction"
+              },
+              {
+                "$ref": "#/$defs/AskInformation"
+              },
+              {
+                "$ref": "#/$defs/FinishDecision"
+              }
+            ],
+            "discriminator": {
+              "mapping": {
+                "finish": "#/$defs/FinishDecision",
+                "choose_action": "#/$defs/ChooseAction",
+                "ask_information": "#/$defs/AskInformation"
+              },
+              "propertyName": "action"
+            }
+          },
+          "schema_sha256": "1af3c1552e2fae9328ec839f545d5ac83358b5ba0cc7e5de35ee548a1d3b899f",
+          "prompt_version": "formal-method-json-v2",
+          "validated_output": null,
+          "output_sha256": null,
+          "raw_output_sha256": "3d28299979fbc33f4a50cc91435023653e661a796cf0efd8a11f0a10c1dc97c2",
+          "trace": {
+            "usage": {
+              "total_tokens": 756,
+              "prompt_tokens": 672,
+              "completion_tokens": 84
+            },
+            "provider": "deepseek",
+            "local_digest": null,
+            "served_model": "deepseek-flash",
+            "wall_seconds": 1.2030000000013388,
+            "finish_reason": "stop",
+            "policy_sha256": "bd8de8b2529248ad0809aa1ef9d7757844f34e81ab21ff1992d6bcf8f0c60c74",
+            "requested_model": "deepseek-flash",
+            "runtime_version": null,
+            "structured_output": "json_with_local_validation",
+            "provider_weight_version_attested": false
+          }
+        }
+      ]
+    },
+    {
+      "case_id": "K05",
+      "task_id": "a8e840ce-d125-4b6d-89d9-da1cb0de4e59",
+      "rounds": [
+        {
+          "id": "ad5960ff-74ca-408c-8f61-d13860bd7a87",
+          "round_no": 1,
+          "phase": "decision",
+          "state": "failed",
+          "error_code": "MODEL_OUTPUT_SCHEMA_INVALID",
+          "context": {
+            "question": "What should be verified before interpreting ideal bearing frequencies? Quote only directly relevant method facts; if no source answers this question, return insufficient evidence.",
+            "candidates": [
+              {
+                "action": "search_published_knowledge",
+                "candidate_id": "8e98c339-eaa6-558a-b8cf-ce2dab5d6c71"
+              }
+            ],
+            "allowed_finish": "insufficient_evidence"
+          },
+          "context_sha256": "d55149fac8aaee40b933b24c2ef2c968f909ac832ec0b623958bd4444fec1d00",
+          "output_schema": {
+            "$defs": {
+              "ChooseAction": {
+                "type": "object",
+                "title": "ChooseAction",
+                "required": [
+                  "action",
+                  "candidate_id",
+                  "rationale"
+                ],
+                "properties": {
+                  "action": {
+                    "type": "string",
+                    "const": "choose_action",
+                    "title": "Action"
+                  },
+                  "rationale": {
+                    "type": "string",
+                    "title": "Rationale",
+                    "maxLength": 500,
+                    "minLength": 1
+                  },
+                  "candidate_id": {
+                    "type": "string",
+                    "title": "Candidate Id",
+                    "format": "uuid"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "AskInformation": {
+                "type": "object",
+                "title": "AskInformation",
+                "required": [
+                  "action",
+                  "question_id",
+                  "rationale"
+                ],
+                "properties": {
+                  "action": {
+                    "type": "string",
+                    "const": "ask_information",
+                    "title": "Action"
+                  },
+                  "rationale": {
+                    "type": "string",
+                    "title": "Rationale",
+                    "maxLength": 500,
+                    "minLength": 1
+                  },
+                  "question_id": {
+                    "type": "string",
+                    "title": "Question Id",
+                    "format": "uuid"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "FinishDecision": {
+                "type": "object",
+                "title": "FinishDecision",
+                "required": [
+                  "action",
+                  "outcome",
+                  "rationale"
+                ],
+                "properties": {
+                  "action": {
+                    "type": "string",
+                    "const": "finish",
+                    "title": "Action"
+                  },
+                  "outcome": {
+                    "enum": [
+                      "analysis_only",
+                      "insufficient_evidence"
+                    ],
+                    "type": "string",
+                    "title": "Outcome"
+                  },
+                  "rationale": {
+                    "type": "string",
+                    "title": "Rationale",
+                    "maxLength": 500,
+                    "minLength": 1
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/ChooseAction"
+              },
+              {
+                "$ref": "#/$defs/AskInformation"
+              },
+              {
+                "$ref": "#/$defs/FinishDecision"
+              }
+            ],
+            "discriminator": {
+              "mapping": {
+                "finish": "#/$defs/FinishDecision",
+                "choose_action": "#/$defs/ChooseAction",
+                "ask_information": "#/$defs/AskInformation"
+              },
+              "propertyName": "action"
+            }
+          },
+          "schema_sha256": "1af3c1552e2fae9328ec839f545d5ac83358b5ba0cc7e5de35ee548a1d3b899f",
+          "prompt_version": "formal-method-json-v2",
+          "validated_output": null,
+          "output_sha256": null,
+          "raw_output_sha256": "d56b407617bd8ff1664a28530244f3398c9b6fcb4ac8fa9cad9dd34f3caec1a8",
+          "trace": {
+            "usage": {
+              "total_tokens": 748,
+              "prompt_tokens": 669,
+              "completion_tokens": 79
+            },
+            "provider": "deepseek",
+            "local_digest": null,
+            "served_model": "deepseek-flash",
+            "wall_seconds": 1.3909999999959837,
+            "finish_reason": "stop",
+            "policy_sha256": "bd8de8b2529248ad0809aa1ef9d7757844f34e81ab21ff1992d6bcf8f0c60c74",
+            "requested_model": "deepseek-flash",
+            "runtime_version": null,
+            "structured_output": "json_with_local_validation",
+            "provider_weight_version_attested": false
+          }
+        }
+      ]
+    }
+  ],
+  "raw_model_body_retained": false,
+  "validation_error_detail_retained": false,
+  "all_traces_match_method_policy": true
+}
