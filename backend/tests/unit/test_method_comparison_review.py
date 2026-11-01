@@ -26,6 +26,15 @@ def test_refusal_before_retrieval_does_not_prove_source_relevance_judgment():
     assert not review(receipt,spec)['all_cases_met_expectations']
 
 
+def test_method_v2_audit_requires_its_own_extraction_phase():
+    receipt,spec=example()
+    assert not review(receipt,spec,extract_phase='extractive_method_v2')['all_cases_met_expectations']
+    receipt['rows'][0]['model_rounds'][0]['phase']='extractive_method_v2'
+    result=review(receipt,spec,extract_phase='extractive_method_v2')
+    assert result['all_cases_met_expectations'] and result['review_version']=='method-comparison-outcome-audit-v2'
+    assert review(receipt,spec)['review_version']=='method-comparison-outcome-audit-v1'
+
+
 def test_withdrawal_must_actually_happen_and_observe_provider_response():
     receipt,spec=example();spec['method_cases'][0]['withdraw_after_generation']=True
     receipt['rows'][0]['metrics']['lifecycle_injected']=False

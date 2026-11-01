@@ -1,7 +1,7 @@
 """Opt-in durable model method graph; candidates are proposals, authority stays server-side."""
 from langgraph.graph import StateGraph,START,END
 from sqlalchemy import text
-from vibradiag.agents.graph_state import Cursor,CursorBinding,MODEL_GRAPH,defer_wait
+from vibradiag.agents.graph_state import Cursor,CursorBinding,MODEL_GRAPH,MODEL_GRAPH_V2,MODEL_EXECUTOR,MODEL_EXECUTOR_V2,defer_wait
 from vibradiag.domain.measurement_errors import MeasurementError
 from vibradiag.infrastructure.persistence.database import transaction
 from vibradiag.infrastructure.persistence.graph_store import task_saver,invalid
@@ -11,9 +11,13 @@ from vibradiag.services.model_method_service import finish_task
 
 def execute(task,principal):
     identifier,token=task['id'],task['lease_token']
+    executor=task['input_snapshot']['executor']
+    if executor not in {MODEL_EXECUTOR,MODEL_EXECUTOR_V2}:raise MeasurementError('TASK_EXECUTOR_UNSUPPORTED','Unsupported method graph',status=409)
+    version=MODEL_GRAPH_V2 if executor==MODEL_EXECUTOR_V2 else MODEL_GRAPH
+    decision_phase,extract_phase=models.method_phases(task)
     def model(phase,read_only=False):return models.run_round(identifier,token,principal,phase,read_only=read_only)
     def decision():
-        try:return model('decision',True)['output']['action']
+        try:return model(decision_phase,True)['output']['action']
         except MeasurementError as error:
             if error.status in {401,403}:raise
             return 'unavailable'
@@ -27,12 +31,12 @@ def execute(task,principal):
         return bool(result and result['current_and_valid'] and result['hits'])
     def node(name):
         def run(state):
-            CursorBinding.model_validate(state).check(identifier,MODEL_GRAPH)
+            CursorBinding.model_validate(state).check(identifier,version)
             flag=defer_wait.set(True)
             try:
                 payload=knowledge.prepare(identifier,token,principal)
                 if name in {'decide','compose'}:
-                    try:model('decision' if name=='decide' else 'extractive_draft')
+                    try:model(decision_phase if name=='decide' else extract_phase)
                     except MeasurementError as error:
                         if error.status in {401,403}:raise
                         with transaction() as c:
@@ -42,8 +46,8 @@ def execute(task,principal):
                     # Re-reading the decision regenerated/validated its registered candidate; payload remains server-owned.
                     tasks._dispatch(identifier,token,'search_published_knowledge',payload.model_dump(mode='json'),principal)
                 with transaction() as c:
-                    row=tasks._running(c,identifier,token);tasks._event(c,row,'graph.node',dict(node=name,graph_version=MODEL_GRAPH))
-                return dict(task_id=str(identifier),graph_version=MODEL_GRAPH)
+                    row=tasks._running(c,identifier,token);tasks._event(c,row,'graph.node',dict(node=name,graph_version=version))
+                return dict(task_id=str(identifier),graph_version=version)
             finally:defer_wait.reset(flag)
         return run
     with task_saver(task,principal) as saver:
@@ -54,6 +58,6 @@ def execute(task,principal):
         builder.add_conditional_edges('knowledge',lambda _:'compose' if ready() else END)
         builder.add_edge('compose',END)
         graph=builder.compile(checkpointer=saver);config=dict(configurable=dict(thread_id=saver.binding['thread_id']),recursion_limit=12)
-        graph.invoke(None if saver.get_tuple(config) else dict(task_id=str(identifier),graph_version=MODEL_GRAPH),config,durability='sync')
+        graph.invoke(None if saver.get_tuple(config) else dict(task_id=str(identifier),graph_version=version),config,durability='sync')
         if graph.get_state(config).next:invalid()
     finish_task(identifier,token,principal)

@@ -12,9 +12,10 @@ CONTEXT_TEXT='已定位已发布方法资料；模型摘录未完成，需人工
 def finish_task(identifier,token,principal):
     with transaction() as c:
         row=tasks._running(c,identifier,token);tasks._authorize(c,principal,identifier,write=True,current_only=True)
+        decision_phase,extract_phase=models.method_phases(row)
         observations=[];missing=[];status='refused';error=None
         calls=c.execute(text('SELECT * FROM agent_calls WHERE task_id=:id AND resource_id IS NOT NULL ORDER BY call_no'),dict(id=identifier)).mappings().all()
-        try:decision=models.completed_output(c,identifier,token,principal,'decision')
+        try:decision=models.completed_output(c,identifier,token,principal,decision_phase)
         except MeasurementError as failure:
             if failure.status in {401,403}:raise
             decision=None;missing=['model_decision_unavailable'];error='MODEL_DECISION_UNAVAILABLE'
@@ -25,7 +26,7 @@ def finish_task(identifier,token,principal):
             hits=source['hits'] if source and source['current_and_valid'] else []
             if not hits:missing=['published_knowledge_not_found_or_no_longer_available'];error='PUBLISHED_KNOWLEDGE_UNAVAILABLE'
             else:
-                try:output=models.completed_output(c,identifier,token,principal,'extractive_draft')
+                try:output=models.completed_output(c,identifier,token,principal,extract_phase)
                 except MeasurementError as failure:
                     if failure.status in {401,403}:raise
                     output=None

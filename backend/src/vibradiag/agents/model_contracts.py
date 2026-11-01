@@ -1,7 +1,14 @@
-from typing import Annotated,Literal
+from typing import Annotated,Literal,Union
 from uuid import UUID
 from pydantic import Field,model_validator
-from .formal_contracts import Strict
+from .formal_contracts import Strict,ChooseAction,FinishDecision
+
+
+class MethodFinishDecision(FinishDecision):
+    outcome:Literal['insufficient_evidence']
+
+
+MethodDecision=Annotated[Union[ChooseAction,MethodFinishDecision],Field(discriminator='action')]
 
 
 class SelectedQuote(Strict):

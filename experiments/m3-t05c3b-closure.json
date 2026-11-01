@@ -1,0 +1,76 @@
+{
+  "version": "m3-t05c3b-closure-v1",
+  "recorded_at": "2026-11-01T14:18:20.487Z",
+  "observation_receipt_sha256": "4c9e41f482b60b71aae1cd528163a17b9542a7c95ecf1765a46b28e70afd2361",
+  "all_pre_run_fingerprints_unchanged": true,
+  "pre_run_frozen_file_count": 291,
+  "previous_receipts": [
+    {
+      "path": "experiments/m3-t05c2b-method-comparison.json",
+      "sha256": "65bf7a3aee3be709d64781e456a5d8b575784fb4efb5ff6884a69afbe6d6ff31",
+      "unchanged": true
+    },
+    {
+      "path": "experiments/m3-t05c3a-method-diagnostics.json",
+      "sha256": "b5182301d6a770d678ed2edfdf6611378f48b964e7815b94e8aa564b5a850f02",
+      "unchanged": true
+    }
+  ],
+  "post_measurement_documentation_or_evidence": {
+    "README.md": "59231454f6d623d3cef4bf18eb98218abfa33d846a44544e84eb774a60b14cde",
+    "backend/README.md": "4a98ab5392884f20697e1f06da0a56ccaf9ee5a44ffc4b3b0c5b992a9f8d68cb",
+    "docs/03-milestones.md": "75a941c6e626b926ded538085b5e258aa17c694cbdbb376258f4204136296ee4",
+    "docs/07-m3-agent-design.md": "290843300dca030e651d47b4fc7e2813e3ea119934d741ec504bab17efc560f4",
+    "docs/09-model-runtime-design.md": "e1b91bbc0ac76cc019fb35eb679586bf0e1fe3346fe42a7d65fa6a08a9046ed5",
+    "docs/10-agent-evaluation-design.md": "36a8a4df9d178cb3bdefca27547c131766627b06fe1d2c6f85c825440aff13b4",
+    "docs/README.md": "206ac7857defd271cddfbca23ef8198780794ceb37b2cc61390fe247ad86fa0c",
+    "docs/acceptance/M3-T05c3b-verification.md": "f294689527606a6429dda23048c5e0f969f3c3a93c04a6af1f791181edde909d",
+    "experiments/m3-t05c3b-model-evidence.json": "f0592840b2a520c931fdd2ce1d21bf5030e472498ad262aeb10689362ed56b86"
+  },
+  "quality_summary": {
+    "method_functional": {
+      "runs": 5,
+      "passed": 5
+    },
+    "method_lifecycle": {
+      "runs": 2,
+      "passed": 2
+    },
+    "comparison": {
+      "runs": 0,
+      "passed": 0
+    }
+  },
+  "all_cases_met_expectations": true,
+  "graph_and_policy_bindings_match": true,
+  "model_reserved": 13,
+  "model_confirmed": 13,
+  "model_unknown": 0,
+  "total_tokens": 9380,
+  "task_tools": 7,
+  "schema_failures": 0,
+  "withdrawals_injected": [
+    "K04",
+    "K04-R2"
+  ],
+  "legacy_method_schema_hashes_checked": 6,
+  "legacy_method_schema_hashes_unchanged": true,
+  "legacy_model_configurations_unchanged": true,
+  "verification": {
+    "full_tests": 850,
+    "full_seconds": 783.29,
+    "focused_tests": 57,
+    "all_passed": true,
+    "development_schema_head": "0024_method_model_v2",
+    "business_tables": 44,
+    "checkpoint_tables": 4
+  },
+  "paid_measurement_runs": 1,
+  "provider_calls_repeated_for_documentation": false,
+  "default_mode": "rules",
+  "independent_holdout": false,
+  "semantic_quality_qualified": false,
+  "diagnostic_release": false,
+  "factory_trial_approved": false,
+  "next_step": "T05d local conditional M3 acceptance and remaining qualification matrix before M4 workbench"
+}

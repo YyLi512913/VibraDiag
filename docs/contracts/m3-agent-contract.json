@@ -1,5 +1,5 @@
 {
-  "contract_version": "m3-t05c3a-runtime-contract-v1",
+  "contract_version": "m3-t05c3b-runtime-contract-v1",
   "implementation_stage": "Persistent rules and opt-in model-driven method/numerical graphs",
   "schemas": {
     "create_task": {
@@ -670,6 +670,81 @@
       ],
       "title": "ValidationDiagnostics",
       "type": "object"
+    },
+    "method_v2_decision": {
+      "$defs": {
+        "ChooseAction": {
+          "additionalProperties": false,
+          "properties": {
+            "action": {
+              "const": "choose_action",
+              "title": "Action",
+              "type": "string"
+            },
+            "candidate_id": {
+              "format": "uuid",
+              "title": "Candidate Id",
+              "type": "string"
+            },
+            "rationale": {
+              "maxLength": 500,
+              "minLength": 1,
+              "title": "Rationale",
+              "type": "string"
+            }
+          },
+          "required": [
+            "action",
+            "candidate_id",
+            "rationale"
+          ],
+          "title": "ChooseAction",
+          "type": "object"
+        },
+        "MethodFinishDecision": {
+          "additionalProperties": false,
+          "properties": {
+            "action": {
+              "const": "finish",
+              "title": "Action",
+              "type": "string"
+            },
+            "outcome": {
+              "const": "insufficient_evidence",
+              "title": "Outcome",
+              "type": "string"
+            },
+            "rationale": {
+              "maxLength": 500,
+              "minLength": 1,
+              "title": "Rationale",
+              "type": "string"
+            }
+          },
+          "required": [
+            "action",
+            "outcome",
+            "rationale"
+          ],
+          "title": "MethodFinishDecision",
+          "type": "object"
+        }
+      },
+      "discriminator": {
+        "mapping": {
+          "choose_action": "#/$defs/ChooseAction",
+          "finish": "#/$defs/MethodFinishDecision"
+        },
+        "propertyName": "action"
+      },
+      "oneOf": [
+        {
+          "$ref": "#/$defs/ChooseAction"
+        },
+        {
+          "$ref": "#/$defs/MethodFinishDecision"
+        }
+      ]
     }
   },
   "model_validation": {
@@ -724,6 +799,20 @@
     "decision_drives_authorized_search": true,
     "extractive_draft_only": true,
     "configuration_pinned_at_acceptance": true
+  },
+  "model_method_v2": {
+    "graph_version": "model-method-v2",
+    "executor": "model_method_v2",
+    "enabled_by": "VIBRADIAG_METHOD_EXECUTOR=model_v2",
+    "default_mode": "rules",
+    "explicit_response_examples": true,
+    "additional_fields_rejected": true,
+    "format_repair": false,
+    "decision_phase": "decision_method_v2",
+    "extract_phase": "extractive_method_v2",
+    "legacy_method_policy_preserved": true,
+    "configuration_pinned_at_acceptance": true,
+    "legitimate_refusal_preserved": true
   },
   "model_numeric": {
     "graph_version": "model-numeric-v1",

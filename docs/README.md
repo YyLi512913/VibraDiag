@@ -9,14 +9,14 @@
 | 00 | [项目定义](00-project-charter.md) | v1.1 范围基线草案，后续随评审记录修订 |
 | 01 | [需求规格](01-requirements.md) | v0.9 完整草案；已覆盖功能、非功能、评测与试用验收，待评审和后续实测 |
 | 02 | [总体设计](02-system-design.md) | v0.3 草案；含工程包结构及前后端分离的当前实现边界，完整试用能力待实施 |
-| 03 | [版本计划与验收](03-milestones.md) | M1通过、M2探索范围有条件通过，M3至T05c3a诊断与新观察已实施，方法质量未通过，M4—M6待实施 |
+| 03 | [版本计划与验收](03-milestones.md) | M1通过、M2探索范围有条件通过，M3至T05c3b已知回归通过，本机总验收待收口，M4—M6待实施 |
 | 04 | [第一轮详细设计](04-first-iteration.md) | v0.1 M1设计及实施补充；T01—T05和本机阶段验收已完成 |
 | 05 | [M1本机操作指南](05-m1-local-guide.md) | 登录、导入、确认、分析/历史、迁移与验证步骤 |
 | 06 | [M2轴承工具详细设计](06-m2-tool-design.md) | v1.2；M2本机探索工具交付完工，有条件通过；正式诊断资格保留阻断 |
-| 07 | [M3 Agent详细设计](07-m3-agent-design.md) | v1.4；保留旧图与策略，新增最小校验诊断 |
+| 07 | [M3 Agent详细设计](07-m3-agent-design.md) | v1.5；新增显式字段方法图v2，旧图保留 |
 | 08 | [知识发布与检索设计](08-knowledge-design.md) | v0.4；T03b2索引检索、T03c方法任务回执绑定与引用已实现；相关性待评测 |
-| 09 | [正式模型调用与受限决策设计](09-model-runtime-design.md) | v0.5；新增失败字段诊断，旧策略及历史保留 |
-| 10 | [Agent对照评测设计](10-agent-evaluation-design.md) | v0.5；补新诊断观察协议，运行拒绝与方法质量分开 |
+| 09 | [正式模型调用与受限决策设计](09-model-runtime-design.md) | v0.6；方法v2阶段与字段协议，旧策略保留 |
+| 10 | [Agent对照评测设计](10-agent-evaluation-design.md) | v0.6；新增7条预登记的方法v2开发回归 |
 
 编号按阅读顺序排列。M1本机阶段已通过；M2-T02b2工具配置、运行API和受控产物完成，T03a匹配数值核心完成，T03b已接匹配API/事实/探索证据及最小界面，T04a比较核心完成，T04b双输入服务/页面已完成，T05a公开数据清单/开发基线已完成，T05b1实体分组/验证准入已完成，T05b2条件性研究适配/特征已完成，M2本机探索范围已结项，M3-T01契约及T02a持久任务/真实规则执行已实现，T02b1已验证官方检查点及子进程终止，T02b2已接业务图/权限围栏，T02b3已接受控数值子进程，T03a文本发布、T03b1真实Embedding及T03b2授权索引检索已实现，T03c已接方法任务知识引用，下一步T04模型决策与生成。文档状态、软件阶段和工厂试用准入分别记录。
 
@@ -35,7 +35,7 @@
 
 M1已执行基线：135项后端测试及前端类型/构建通过；实际浏览器、迁移、空schema重建和性能基线已验证，见[M1验收](acceptance/M1-acceptance.md)。120000点100次合成分析0失败，P95约0.484s；这不是现场故障效果或M6性能准入。历史记录：[T04](acceptance/M1-T04-verification.md)、[T03](acceptance/M1-T03-verification.md)、[T02](acceptance/M1-T02-verification.md)。
 
-当前进度：**M3-T05c3a最小诊断与新观察已完成，方法质量未通过，继续T05c3b新版本字段协议**，见[T02a记录](acceptance/M3-T02a-verification.md)、[T02b1验证](acceptance/M3-T02b1-verification.md)、[T02b2接入](acceptance/M3-T02b2-verification.md)、[T02b3隔离](acceptance/M3-T02b3-verification.md)、[T03a发布](acceptance/M3-T03a-verification.md)及[08知识设计](08-knowledge-design.md)、[07设计](07-m3-agent-design.md)。新增任务API、命令幂等、调用账本、挂起恢复、取消围栏与托管消费者，调用M1/M2真实授权工具。当前44张业务表、4张检查点表；新任务运行分步持久规则图，旧任务保留原执行器。五类纯数值核心在受控子进程运行，知识文本已具备版本/显式审核/撤回；固定身份的Embedding、pgvector索引与授权检索已实现，方法任务知识引用已接入，方法任务可选模型驱动检索与逐字摘录，数值任务可选受控模型工具编排；分发默认rules，效果评测待T05。M2正式诊断条件继续阻断。
+当前进度：**M3-T05c3b新方法图与已知开发回归通过，继续T05d本机条件验收收口**，见[T02a记录](acceptance/M3-T02a-verification.md)、[T02b1验证](acceptance/M3-T02b1-verification.md)、[T02b2接入](acceptance/M3-T02b2-verification.md)、[T02b3隔离](acceptance/M3-T02b3-verification.md)、[T03a发布](acceptance/M3-T03a-verification.md)及[08知识设计](08-knowledge-design.md)、[07设计](07-m3-agent-design.md)。新增任务API、命令幂等、调用账本、挂起恢复、取消围栏与托管消费者，调用M1/M2真实授权工具。当前44张业务表、4张检查点表；新任务运行分步持久规则图，旧任务保留原执行器。五类纯数值核心在受控子进程运行，知识文本已具备版本/显式审核/撤回；固定身份的Embedding、pgvector索引与授权检索已实现，方法任务知识引用已接入，方法任务可选模型驱动检索与逐字摘录，数值任务可选受控模型工具编排；分发默认rules，效果评测待T05。M2正式诊断条件继续阻断。
 
 本机原型已整理为 `backend/` 和 `frontend/` 两个独立工程。后端采用src包布局，路由、服务、Agent、分析和基础设施分开；前端使用Vue3/TypeScript/Vite，组件、API客户端和状态分开。模型验证脚本位于backend/scripts，仓库级工具位于scripts；实际运行结果仍保存在experiments，原文件和索引仍保存在忽略入库的.runtime。
 
@@ -88,3 +88,5 @@ T05c2a已完成[协议及评分器](acceptance/M3-T05c2a-verification.md)：预�
 T05c2b最新推进：[首轮实测与审计](acceptance/M3-T05c2b-verification.md)。方法功能2/4、生命周期0/1、规则比较4/4；保留原始结构错误与评分口径缺陷。下一步T05c3最小失败诊断及新版本回归，M3尚未结项。
 
 T05c3a最新推进：[诊断实现与新观察](acceptance/M3-T05c3a-verification.md)。全量828项通过；4次结构错误均有脱敏诊断，显示候选选择对象多出1个不允许的字段。方法功能1/4、生命周期0/1，保留原策略和失败，下一步T05c3b新字段协议及方法图回归。
+
+T05c3b最新推进：[方法v2及首轮回归](acceptance/M3-T05c3b-verification.md)。全量850项通过，真实7条已知任务达到功能5/5、生命周期2/2，0次schema错误，旧失败不改写；下一步T05d本机条件验收收口，再进入M4知识/Agent工作台，工厂准入仍未通过。

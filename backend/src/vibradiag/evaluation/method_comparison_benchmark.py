@@ -75,7 +75,7 @@ def withdraw_after_generation(client, revision):
         def __init__(self, cfg): self.gateway = original(cfg)
         def invoke(self, phase, *args, **kwargs):
             response = self.gateway.invoke(phase, *args, **kwargs)
-            if phase == 'extractive_draft' and not state['injected']:
+            if phase in {'extractive_draft','extractive_method_v2'} and not state['injected']:
                 document_action(client, get(client, PREFIX+'/revisions/'+revision['id']), 'withdraw')
                 state['injected'] = True
             return response
@@ -192,9 +192,10 @@ def comparison_case(client,principal,case,spec):
     return row
 
 
-def run(private,progress=lambda value:None,*,protocol_path=None):
+def run(private,progress=lambda value:None,*,protocol_path=None,method_mode='model'):
     from vibradiag.main import app
     if os.environ.get('VIBRADIAG_AGENT_WORKER_ENABLED')!='false':raise RuntimeError('Sequential owned-task runner requires disabled worker')
+    if method_mode not in {'model','model_v2'}:raise RuntimeError('Explicit supported method evaluation mode required')
     selected_protocol=protocol_path or PROTOCOL
     spec=json.loads(selected_protocol.read_text(encoding='utf8'));org,user,admin=uuid4(),uuid4(),uuid4();password=str(uuid4())+str(uuid4())
     with transaction() as c:
@@ -203,7 +204,7 @@ def run(private,progress=lambda value:None,*,protocol_path=None):
             c.execute(text('INSERT INTO users(id,organization_id,username_normalized,password_hash) VALUES (:id,:org,:name,:hash)'),dict(id=identifier,org=org,name=name,hash=password_hasher.hash(password)))
             c.execute(text('INSERT INTO role_assignments(user_id,organization_id,role,granted_by) VALUES (:id,:org,:role,:id)'),dict(id=identifier,org=org,role=role))
     rows=[];old_method=os.environ.get('VIBRADIAG_METHOD_EXECUTOR');old_numeric=os.environ.get('VIBRADIAG_NUMERIC_EXECUTOR')
-    os.environ.update(VIBRADIAG_METHOD_EXECUTOR='model',VIBRADIAG_NUMERIC_EXECUTOR='rules')
+    os.environ.update(VIBRADIAG_METHOD_EXECUTOR=method_mode,VIBRADIAG_NUMERIC_EXECUTOR='rules')
     try:
         with TestClient(app) as client:
             response=post(client,'/api/v1/auth/login',json=dict(organization_id=str(org),username='evaluation',password=password));client.headers['x-csrf-token']=response['csrf_token']
@@ -224,10 +225,10 @@ def run(private,progress=lambda value:None,*,protocol_path=None):
             else:os.environ[key]=value
     usages=[t.get('usage',{}) for r in rows for t in r['model_traces']]
     token_usage={key:sum(u[key] for u in usages) if usages and all(type(u.get(key)) is int for u in usages) else None for key in ('prompt_tokens','completion_tokens','total_tokens')}
-    return dict(protocol_version=spec['version'],protocol_sha256=sha256(selected_protocol.read_bytes()).hexdigest(),configuration=asdict(configuration('deepseek')),
+    return dict(protocol_version=spec['version'],protocol_sha256=sha256(selected_protocol.read_bytes()).hexdigest(),configuration=asdict(configuration('deepseek',purpose='method_v2' if method_mode=='model_v2' else 'method')),
                 embedding_identity=asdict(configured_identity()),rows=rows,
                 summary={kind:dict(runs=sum(r['kind']==kind for r in rows),passed=sum(r['kind']==kind and r['metrics']['met_expectations'] for r in rows)) for kind in ('method','comparison')},
                 model_reserved=sum(r['model_reserved'] for r in rows),model_confirmed=sum(r['model_confirmed'] for r in rows),model_unknown=sum(r['model_unknown'] for r in rows),
                 token_usage=token_usage,all_cases_met_expectations=all(r['metrics']['met_expectations'] for r in rows),independent_holdout=False,semantic_quality_qualified=False,diagnostic_release=False,factory_trial_approved=False,
-                methodology=dict(transport='Real PostgreSQL and production ASGI/services',repetitions=1,method_mode='model_method_v1',comparison_mode='rules_graph_v1',
+                methodology=dict(transport='Real PostgreSQL and production ASGI/services',repetitions=1,method_mode='model_method_v2' if method_mode=='model_v2' else 'model_method_v1',comparison_mode='rules_graph_v1',
                                  corpus_origin='Developer-authored controls imported as internal_note only in isolated test database',withdrawal='After unchanged provider response, before generation receipt commit',monetary_cost=None),limitations=spec['limitations'])

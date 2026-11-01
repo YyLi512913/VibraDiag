@@ -4,7 +4,7 @@ from hashlib import sha256
 import json
 from uuid import UUID,uuid4
 
-from vibradiag.agents.graph_state import EXECUTOR,GRAPH_VERSION,KNOWLEDGE_EXECUTOR,KNOWLEDGE_GRAPH,MODEL_EXECUTOR,MODEL_GRAPH,NUMERIC_EXECUTOR,NUMERIC_GRAPH,NUMERIC_EXECUTOR_V2,NUMERIC_GRAPH_V2,GraphWait,defer_wait
+from vibradiag.agents.graph_state import EXECUTOR,GRAPH_VERSION,KNOWLEDGE_EXECUTOR,KNOWLEDGE_GRAPH,MODEL_EXECUTOR,MODEL_GRAPH,MODEL_EXECUTOR_V2,MODEL_GRAPH_V2,NUMERIC_EXECUTOR,NUMERIC_GRAPH,NUMERIC_EXECUTOR_V2,NUMERIC_GRAPH_V2,GraphWait,defer_wait
 from pydantic import TypeAdapter
 from sqlalchemy import text
 from vibradiag.agents.formal_contracts import CreateAgentTask,ResumeAgentTask,ExecutionBudget,ExploratoryDraft
@@ -111,7 +111,7 @@ def _authorize(connection,principal,identifier,*,write=False,lock=False,current_
         if str(record['id'])!=root['measurement_id'] or record['sha256']!=root['sha256']:conflict('TASK_SOURCE_INTEGRITY')
         active=active and record['current_revision_id']==rev['id']
     if current_only and not active:conflict('STALE_TASK_INPUT')
-    if row['input_snapshot']['executor'] in {KNOWLEDGE_EXECUTOR,MODEL_EXECUTOR}:
+    if row['input_snapshot']['executor'] in {KNOWLEDGE_EXECUTOR,MODEL_EXECUTOR,MODEL_EXECUTOR_V2}:
         from .agent_knowledge_service import authorize_scope,scope
         authorize_scope(connection,current,scope(row))
     return row,current,bool(active)
@@ -158,13 +158,13 @@ def create_task(payload,key,principal):
             if method:
                 from vibradiag.core.config import setting
                 mode=setting('VIBRADIAG_METHOD_EXECUTOR','rules')
-                if mode not in {'rules','model'}:raise MeasurementError('METHOD_EXECUTOR_INVALID','Explicit rules or model method mode required',status=503)
-                if mode=='model':
+                if mode not in {'rules','model','model_v2'}:raise MeasurementError('METHOD_EXECUTOR_INVALID','Explicit rules, model or model_v2 method mode required',status=503)
+                if mode in {'model','model_v2'}:
                     from dataclasses import asdict
                     from vibradiag.infrastructure.llm.formal_gateway import configuration
-                    try:snapshot.update(executor=MODEL_EXECUTOR,model_configuration=asdict(configuration()))
+                    try:snapshot.update(executor=MODEL_EXECUTOR_V2 if mode=='model_v2' else MODEL_EXECUTOR,model_configuration=asdict(configuration(purpose='method_v2' if mode=='model_v2' else 'method')))
                     except (ValueError,TypeError,OSError):raise MeasurementError('MODEL_CONFIGURATION_INVALID','Formal model configuration unavailable',status=503) from None
-                    graph_version=MODEL_GRAPH
+                    graph_version=MODEL_GRAPH_V2 if mode=='model_v2' else MODEL_GRAPH
             if not method:
                 from vibradiag.core.config import setting
                 mode=setting('VIBRADIAG_NUMERIC_EXECUTOR','rules')
@@ -450,7 +450,7 @@ def execute_claimed(task):
         if row['input_snapshot']['executor'] in {NUMERIC_EXECUTOR,NUMERIC_EXECUTOR_V2}:
             from vibradiag.agents.model_numeric_graph import execute
             execute(task,principal);return
-        if row['input_snapshot']['executor']==MODEL_EXECUTOR:
+        if row['input_snapshot']['executor'] in {MODEL_EXECUTOR,MODEL_EXECUTOR_V2}:
             from vibradiag.agents.model_method_graph import execute
             execute(task,principal);return
         if row['input_snapshot']['executor']==KNOWLEDGE_EXECUTOR:

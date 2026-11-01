@@ -6,15 +6,17 @@ from vibradiag.core.paths import PROJECT_ROOT
 from vibradiag.agents.formal_contracts import (CreateAgentTask,ResumeAgentTask,AgentDecision,
     ExploratoryDraft,ExecutionBudget,TaskStatus,MethodKnowledgeScope)
 from vibradiag.agents.model_validation import ValidationDiagnostics
+from vibradiag.agents.model_contracts import MethodDecision
 
 
 def contract():
-    return {'contract_version':'m3-t05c3a-runtime-contract-v1','implementation_stage':'Persistent rules and opt-in model-driven method/numerical graphs',
+    return {'contract_version':'m3-t05c3b-runtime-contract-v1','implementation_stage':'Persistent rules and opt-in model-driven method/numerical graphs',
         'schemas':{'create_task':CreateAgentTask.model_json_schema(),'resume_task':ResumeAgentTask.model_json_schema(),
             'model_decision':TypeAdapter(AgentDecision).json_schema(),'unpublished_draft':ExploratoryDraft.model_json_schema(),
             'internal_budget':ExecutionBudget.model_json_schema(),'task_status':TypeAdapter(TaskStatus).json_schema(),
             'method_knowledge_scope':MethodKnowledgeScope.model_json_schema(),
-            'model_validation_diagnostics':ValidationDiagnostics.model_json_schema()},
+            'model_validation_diagnostics':ValidationDiagnostics.model_json_schema(),
+            'method_v2_decision':TypeAdapter(MethodDecision).json_schema()},
         'model_validation':{'version':'model-validation-diagnostics-v1','failed_schema_rounds_only':True,
             'legacy_rounds_not_backfilled':True,'raw_response_retained':False,'raw_validator_messages_retained':False,
             'max_issues':8,'max_location_depth':6,'unknown_field_names_redacted':True},
@@ -29,6 +31,10 @@ def contract():
             'semantic_relevance_qualified':False,'generated_answer':False,'durable_retrieval_binding':True},
         'model_method':{'graph_version':'model-method-v1','executor':'model_method_v1','enabled_by':'VIBRADIAG_METHOD_EXECUTOR=model',
             'default_mode':'rules','decision_drives_authorized_search':True,'extractive_draft_only':True,'configuration_pinned_at_acceptance':True},
+        'model_method_v2':{'graph_version':'model-method-v2','executor':'model_method_v2','enabled_by':'VIBRADIAG_METHOD_EXECUTOR=model_v2',
+            'default_mode':'rules','explicit_response_examples':True,'additional_fields_rejected':True,'format_repair':False,
+            'decision_phase':'decision_method_v2','extract_phase':'extractive_method_v2','legacy_method_policy_preserved':True,
+            'configuration_pinned_at_acceptance':True,'legitimate_refusal_preserved':True},
         'model_numeric':{'graph_version':'model-numeric-v1','executor':'model_numeric_v1','enabled_by':'VIBRADIAG_NUMERIC_EXECUTOR=model',
             'default_mode':'rules','decision_drives_authorized_tools':True,'max_graph_tools':5,'max_graph_decisions':6,
             'free_form_generated_draft':False,'server_assembled_cited_draft':True,'configuration_pinned_at_acceptance':True},

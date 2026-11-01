@@ -63,10 +63,27 @@ NUMERIC_V2_POLICY_SHA256=digest(dict(prompt_version=NUMERIC_V2_PROMPT_VERSION,sy
     local_prompt_bytes=6000,cloud_prompt_bytes=MAX_PROMPT,temperature=0,seed=42,thinking=False))
 
 
-def phase_policy(phase):return NUMERIC_V2_POLICY_SHA256 if phase=='numeric_decision_v2' else NUMERIC_POLICY_SHA256 if phase=='numeric_decision' else POLICY_SHA256
+METHOD_V2_PROMPT_VERSION='formal-method-json-v3'
+METHOD_V2_PHASES=frozenset({'decision_method_v2','extractive_method_v2'})
+SYSTEMS['decision_method_v2']=SYSTEMS['decision']+'''
+Wire protocol: return ONLY the exact fields of one supplied response example, choosing the supported action for the question.
+For choose_action the complete key set is action, candidate_id, rationale. For finish the complete key set is action, outcome, rationale.
+Never add another key, including null or empty fields. Do not add arguments, parameters, tool calls, source data, explanation objects or schema metadata.
+Use action choose_action, not the candidate's tool_kind, to select a registered candidate. Copy candidate_id exactly from the offered candidate.
+Finish only with outcome insufficient_evidence when the offered candidate cannot help; the examples do not force retrieval or refusal.
+All tool arguments and execution remain server-owned. Do not request ask_information; scope clarification is performed by the server before this phase.'''
+SYSTEMS['extractive_method_v2']=SYSTEMS['extractive_draft']+'''
+Wire protocol: the only root keys are outcome and selections. Each selected item has exactly source_id and quote.
+Do not add fields or null placeholders. For insufficient_evidence use selections []. No supported passage means no quote.'''
+METHOD_V2_POLICY_SHA256=digest(dict(prompt_version=METHOD_V2_PROMPT_VERSION,systems={k:SYSTEMS[k] for k in sorted(METHOD_V2_PHASES)},
+    context_policy='method-explicit-fields-v1',decision_schema='choose-or-insufficient-finish-v1',local_context=8192,cpu_threads=4,
+    local_prompt_bytes=6000,cloud_prompt_bytes=MAX_PROMPT,temperature=0,seed=42,thinking=False))
 
 
-def prompt_version(phase):return NUMERIC_V2_PROMPT_VERSION if phase=='numeric_decision_v2' else NUMERIC_PROMPT_VERSION if phase=='numeric_decision' else PROMPT_VERSION
+def phase_policy(phase):return METHOD_V2_POLICY_SHA256 if phase in METHOD_V2_PHASES else NUMERIC_V2_POLICY_SHA256 if phase=='numeric_decision_v2' else NUMERIC_POLICY_SHA256 if phase=='numeric_decision' else POLICY_SHA256
+
+
+def prompt_version(phase):return METHOD_V2_PROMPT_VERSION if phase in METHOD_V2_PHASES else NUMERIC_V2_PROMPT_VERSION if phase=='numeric_decision_v2' else NUMERIC_PROMPT_VERSION if phase=='numeric_decision' else PROMPT_VERSION
 
 
 @dataclass(frozen=True)
@@ -79,7 +96,7 @@ class ModelConfig:
 
     def __post_init__(self):
         if type(self.max_output_tokens) is not int or not 64<=self.max_output_tokens<=1024:raise ValueError('Invalid formal token cap')
-        if self.policy_sha256 not in {POLICY_SHA256,NUMERIC_POLICY_SHA256,NUMERIC_V2_POLICY_SHA256}:raise ValueError('Pinned model policy changed; new task required')
+        if self.policy_sha256 not in {POLICY_SHA256,NUMERIC_POLICY_SHA256,NUMERIC_V2_POLICY_SHA256,METHOD_V2_POLICY_SHA256}:raise ValueError('Pinned model policy changed; new task required')
         if self.provider=='deepseek':
             if self.model!='deepseek-flash' or self.digest is not None:raise ValueError('Unsupported cloud configuration')
         elif self.provider=='ollama':
@@ -94,8 +111,8 @@ def configuration(provider=None,*,purpose='method'):
     selected=provider or setting('VIBRADIAG_FORMAL_LLM_PROVIDER','deepseek')
     values=json.loads((BACKEND_ROOT/'config/formal-models.json').read_text(encoding='utf8'))
     if selected not in values:raise ValueError('Unknown formal provider; no fallback')
-    if purpose not in {'method','numeric','numeric_v2'}:raise ValueError('Unknown model purpose')
-    return ModelConfig(**dict(values[selected],policy_sha256=NUMERIC_V2_POLICY_SHA256 if purpose=='numeric_v2' else NUMERIC_POLICY_SHA256 if purpose=='numeric' else POLICY_SHA256))
+    if purpose not in {'method','method_v2','numeric','numeric_v2'}:raise ValueError('Unknown model purpose')
+    return ModelConfig(**dict(values[selected],policy_sha256=METHOD_V2_POLICY_SHA256 if purpose=='method_v2' else NUMERIC_V2_POLICY_SHA256 if purpose=='numeric_v2' else NUMERIC_POLICY_SHA256 if purpose=='numeric' else POLICY_SHA256))
 
 
 class Gateway:

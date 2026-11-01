@@ -5,7 +5,8 @@ pre-registered scores. Lifecycle coverage is separate from content functionality
 """
 
 
-def review(receipt, protocol):
+def review(receipt, protocol, *, extract_phase='extractive_draft'):
+    if extract_phase not in {'extractive_draft','extractive_method_v2'}:raise ValueError('Unsupported extraction phase')
     cases=protocol['method_cases']+protocol['comparison_cases']
     identifiers=[r['case_id'] for r in receipt['rows']]
     if len(identifiers)!=len(set(identifiers)) or set(identifiers)!={c['id'] for c in cases}:
@@ -17,11 +18,11 @@ def review(receipt, protocol):
             group='comparison';passed=metric['met_expectations'];classification='comparison_rubric_pass' if passed else 'comparison_rubric_failure'
         else:
             group='method_lifecycle' if case['withdraw_after_generation'] else 'method_functional'
-            generated=any(r['phase']=='extractive_draft' and r['state']=='completed' and r['trace'] for r in rounds)
+            generated=any(r['phase']==extract_phase and r['state']=='completed' and r['trace'] for r in rounds)
             failed=any(r['state']!='completed' for r in rounds)
             safe=row['status']=='refused' and not (row['draft'] or {}).get('observations')
             if case['withdraw_after_generation']:
-                observed_generation=any(r['phase']=='extractive_draft' and r['trace'] for r in rounds)
+                observed_generation=any(r['phase']==extract_phase and r['trace'] for r in rounds)
                 passed=bool(metric['met_expectations'] and metric['lifecycle_injected'] and observed_generation and safe)
                 classification='withdrawal_boundary_pass' if passed else 'withdrawal_not_exercised_or_failed'
             elif failed:
@@ -37,6 +38,6 @@ def review(receipt, protocol):
                 passed=bool(metric['met_expectations'] and generated)
                 classification='supported_extract' if passed else 'supported_extract_missing'
         rows.append(dict(case_id=case['id'],group=group,classification=classification,passed=bool(passed),original_rubric_met=metric['met_expectations']))
-    return dict(review_version='method-comparison-outcome-audit-v1',post_measurement_review=True,model_calls_added=0,rows=rows,
+    return dict(review_version='method-comparison-outcome-audit-v1' if extract_phase=='extractive_draft' else 'method-comparison-outcome-audit-v2',post_measurement_review=True,model_calls_added=0,rows=rows,
                 summary={group:dict(runs=sum(r['group']==group for r in rows),passed=sum(r['group']==group and r['passed'] for r in rows)) for group in ('method_functional','method_lifecycle','comparison')},
                 all_cases_met_expectations=all(r['passed'] for r in rows),independent_holdout=False,semantic_quality_qualified=False,diagnostic_release=False,factory_trial_approved=False)

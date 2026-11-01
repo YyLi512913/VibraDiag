@@ -6,14 +6,18 @@ from uuid import UUID,uuid4,uuid5
 from pydantic import TypeAdapter,ValidationError
 from sqlalchemy import text
 from vibradiag.agents.formal_contracts import AgentDecision,CandidateAction,TaskScope,ChooseAction,FinishDecision
-from vibradiag.agents.model_contracts import ExtractiveMethodDraft
+from vibradiag.agents.model_contracts import ExtractiveMethodDraft,MethodDecision
 from vibradiag.agents.model_validation import ModelSchemaError
 from vibradiag.agents.formal_policy import validate_decision,logical_call_key,reserve_call,PolicyStop
 from vibradiag.domain.measurement_errors import MeasurementError
-from vibradiag.infrastructure.llm.formal_gateway import Gateway,ModelConfig,configuration,digest,PROMPT_VERSION,prompt_version
+from vibradiag.infrastructure.llm.formal_gateway import Gateway,ModelConfig,configuration,digest,PROMPT_VERSION,prompt_version,METHOD_V2_PHASES
 from vibradiag.infrastructure.persistence.database import transaction
 from vibradiag.schemas.knowledge_indexes import KnowledgeSearch
 from vibradiag.services import agent_task_service as tasks,agent_knowledge_service as knowledge
+
+
+def method_phases(row):
+    return ('decision_method_v2','extractive_method_v2') if row['input_snapshot']['executor']=='model_method_v2' else ('decision','extractive_draft')
 
 
 def _prepared(c,identifier,token,principal,phase,*,lock=False,step=None):
@@ -21,20 +25,25 @@ def _prepared(c,identifier,token,principal,phase,*,lock=False,step=None):
     if phase in {'numeric_decision','numeric_decision_v2'}:
         from .agent_numeric_service import prepared
         return prepared(c,row,current,step,phase=phase)
-    if row['goal']!='explain_method' or row['input_snapshot']['executor'] not in {'rules_knowledge_v1','model_method_v1'}:
+    if row['goal']!='explain_method' or row['input_snapshot']['executor'] not in {'rules_knowledge_v1','model_method_v1','model_method_v2'}:
         raise MeasurementError('MODEL_METHOD_SCOPE_REQUIRED','This model stage accepts explicit method tasks only',status=409)
+    decision_phase,extract_phase=method_phases(row)
+    if phase not in {decision_phase,extract_phase}:raise MeasurementError('MODEL_PHASE_INVALID','Model phase must match the accepted method executor',status=409)
     selected=knowledge.scope(row)
     if selected is None:raise MeasurementError('MODEL_SCOPE_REQUIRED','Resolve method scope before a model call',status=409)
     try:query=KnowledgeSearch(query=row['selection'].get('knowledge_query',row['payload']['description']),**selected.model_dump())
     except ValidationError:raise MeasurementError('MODEL_QUERY_REQUIRED','Resolve a valid short method query first',status=422) from None
     scope=TaskScope(task_id=identifier,organization_id=row['organization_id'],measurement_revision_ids=())
-    if phase=='decision':
+    if phase==decision_phase:
         key=logical_call_key(identifier,row['input_fingerprint'],dict(action='search_published_knowledge',payload=query.model_dump(mode='json')))
         candidate=CandidateAction(id=uuid5(identifier,'method-search/'+key),task_id=identifier,organization_id=row['organization_id'],
             measurement_revision_ids=(),kind='search_published_knowledge',logical_call_key=key)
         context=dict(question=query.query,candidates=[dict(candidate_id=str(candidate.id),action=candidate.kind)],allowed_finish='insufficient_evidence')
-        return row,current,context,TypeAdapter(AgentDecision).json_schema(),dict(scope=scope,candidates=(candidate,))
-    if phase!='extractive_draft':raise MeasurementError('MODEL_PHASE_INVALID','Unsupported formal model phase',status=422)
+        if phase=='decision_method_v2':
+            context=dict(question=query.query,candidates=[dict(candidate_id=str(candidate.id),tool_kind=candidate.kind)],allowed_finish='insufficient_evidence',
+                response_examples=[dict(action='choose_action',candidate_id=str(candidate.id),rationale='Retrieve authorized method sources.'),
+                                   dict(action='finish',outcome='insufficient_evidence',rationale='Available candidate cannot support this method request.')])
+        return row,current,context,TypeAdapter(MethodDecision if phase=='decision_method_v2' else AgentDecision).json_schema(),dict(scope=scope,candidates=(candidate,))
     call=c.execute(text("SELECT * FROM agent_calls WHERE task_id=:id AND action_name='search_published_knowledge' AND state IN ('completed','unavailable') ORDER BY call_no DESC LIMIT 1"),dict(id=identifier)).mappings().first()
     if not call or not call['resource_id']:raise MeasurementError('MODEL_SOURCE_REQUIRED','A bound completed retrieval is required',status=409)
     source=knowledge.resolve(call['resource_id'],current,identifier,call['id'],c,lock=lock)
@@ -46,8 +55,8 @@ def _prepared(c,identifier,token,principal,phase,*,lock=False,step=None):
 
 def _validate(phase,raw,prepared):
     try:
-        if phase in {'decision','numeric_decision','numeric_decision_v2'}:
-            output=TypeAdapter(AgentDecision).validate_json(raw)
+        if phase in {'decision','decision_method_v2','numeric_decision','numeric_decision_v2'}:
+            output=TypeAdapter(MethodDecision if phase=='decision_method_v2' else AgentDecision).validate_json(raw)
             validate_decision(output,prepared['scope'],prepared['candidates'],())
             if not isinstance(output,(ChooseAction,FinishDecision)) or isinstance(output,FinishDecision) and output.outcome not in ({'analysis_only','insufficient_evidence'} if phase in {'numeric_decision','numeric_decision_v2'} else {'insufficient_evidence'}):
                 raise PolicyStop('MODEL_DECISION_UNSUPPORTED')
@@ -77,7 +86,7 @@ def run_round(identifier,token,principal,phase,*,provider=None,read_only=False,s
         except (ValueError,TypeError):tasks.conflict('MODEL_POLICY_OR_CONFIGURATION_CHANGED')
         if binding and cfg.fingerprint!=binding['configuration_sha256']:tasks.conflict('MODEL_CONFIGURATION_INTEGRITY')
         if row['input_snapshot'].get('model_configuration') and asdict(cfg)!=row['input_snapshot']['model_configuration']:tasks.conflict('MODEL_CONFIGURATION_PINNED')
-        if provider is not None and cfg!=configuration(provider):tasks.conflict('MODEL_CONFIGURATION_PINNED')
+        if provider is not None and cfg!=configuration(provider,purpose='method_v2' if phase in METHOD_V2_PHASES else 'method'):tasks.conflict('MODEL_CONFIGURATION_PINNED')
         key=logical_call_key(identifier,row['input_fingerprint'],dict(phase=phase,context_sha256=digest(context),configuration_sha256=cfg.fingerprint,schema_sha256=digest(schema),prompt_version=prompt_version(phase)))
         existing=c.execute(text('SELECT * FROM agent_model_rounds WHERE task_id=:id AND logical_key=:key'),dict(id=identifier,key=key)).mappings().first()
         if existing:

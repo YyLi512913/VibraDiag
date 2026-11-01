@@ -340,3 +340,5 @@ backend/scripts/benchmark_agent_feedback.py --allow-paid-model-calls使用新冻
 T05c2b已接方法固定语料与双输入比较评测运行器，见[首轮实测及审计](../docs/acceptance/M3-T05c2b-verification.md)。真实模型结果未通过：方法功能2/4、生命周期0/1；规则比较4/4。结构错误被安全拦截不等于有依据的内容拒答，保留原回执，下一步T05c3最小失败诊断及新版本回归。
 
 T05c3a增加可空model_rounds.validation_diagnostics响应字段，需先升级到0023_diagnostics_null_guard，业务表数不变。只保存新schema失败的固定类型及脱敏位置，不含原始正文/错误值，旧记录为null。全量828项通过，真实新观察仍未取得方法质量准入，见[诊断与实测记录](../docs/acceptance/M3-T05c3a-verification.md)；旧提示策略不变，下一步T05c3b新版本字段协议。
+
+T05c3b需迁移到0024_method_model_v2；VIBRADIAG_METHOD_EXECUTOR=model_v2对新方法任务使用独立字段协议，model保留v1、rules仍默认，与数值开关分开。全量850项及新版本真实7条已知开发回归通过，见[实测边界](../docs/acceptance/M3-T05c3b-verification.md)。本地模型新策略未实测，不宣称与DeepSeek效果等价。

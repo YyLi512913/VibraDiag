@@ -1,6 +1,6 @@
 # 09 正式模型调用与受限决策设计
 
-> 版本：v0.5；日期：2026-11-01。新增T05c3a校验失败最小诊断，既有提示策略与模型绑定保留；方法质量仍未准入。
+> 版本：v0.6；日期：2026-11-01。新增T05c3b独立方法v2字段协议，保留旧策略与最小诊断；方法质量仍待扩大验证。
 > 上游：[07 Agent设计](07-m3-agent-design.md)、[08 知识设计](08-knowledge-design.md)。
 
 ## 1. 分步范围
@@ -76,3 +76,11 @@ VIBRADIAG_NUMERIC_EXECUTOR=model_v2为新任务选择独立图与numeric_decisio
 任务查询的model_rounds增加可空validation_diagnostics，仍由既有身份和任务所有者授权；旧轮、成功轮、非结构策略拒绝和被取消的轮均为空。该列只允许在当前租约下关闭新schema失败轮时写入，关闭后不可更改。不会把诊断当作供应商调用回执，model_called与用量仍依据真实trace，未知调用不改为已确认。
 
 0022/0023不新增业务表、不回填历史、不改变模型配置指纹、prompt版本、输出schema或重试行为。新观察必须新建任务并记录新协议/源码/测试hash；旧hash不能恢复已丢弃的正文。补齐观测不等于模型质量已修复，下一版本策略需基于可核查新证据另行验证。
+
+## 11. T05c3b 方法显式字段协议
+
+原model_method_v1及formal-method-json-v2保留。新method_v2模型配置使用独立formal-method-json-v3策略hash，两个新阶段分别为decision_method_v2、extractive_method_v2；显式VIBRADIAG_METHOD_EXECUTOR=model_v2对新任务生效，与数值任务的同名模式配置分开。
+
+决策采用MethodDecision，只含ChooseAction和仅允许insufficient_evidence的结束对象。上下文候选使用tool_kind描述工具；response_examples提供本轮真实候选ID与结束对象的合法字段示例，明确拒绝任何多余字段，包括null、空参数对象和schema元数据。不添加格式修复轮，不对无效对象投影/裁剪后执行。摘录根字段仍为outcome/selections，条目只含source_id/quote；原文、作用域及发布状态检查不变。
+
+模型阶段必须匹配受理执行器；错阶段在预算预留前拒绝。每任务模型配置、图光标和最终来源重建均遵循已受理版本；默认供应商改变不能升级旧任务。新策略仍可明确拒答，不强迫检索或摘录。新协议实测先使用DeepSeek；Ollama可配置并继续受本地字节/digest限制，本轮不授予其相同质量结论。
