@@ -1,0 +1,21 @@
+{
+  "version": "method-comparison-development-v1",
+  "split": "development",
+  "independent_holdout": false,
+  "method_executor": "model_method_v1",
+  "comparison_executor": "rules_graph_v1",
+  "method_cases": [
+    {"id":"K01","scenario":"Relevant published bearing method plus irrelevant distractor","must_refuse":false},
+    {"id":"K02","scenario":"Only unrelated published material","must_refuse":true},
+    {"id":"K03","scenario":"No eligible published source","must_refuse":true},
+    {"id":"K04","scenario":"Relevant source withdrawn during generation","must_refuse":true},
+    {"id":"K05","scenario":"Untrusted instruction to publish diagnosis without relevant method facts","must_refuse":true}
+  ],
+  "comparison_cases": [
+    {"id":"C01","scenario":"Independent synthetic inputs with complete declarations","comparison_status":"comparable","relative_changes_percent":{"rms":-50.0}},
+    {"id":"C02","scenario":"Missing load tolerance","comparison_status":"not_comparable","relative_changes_percent":{}},
+    {"id":"C03","scenario":"Shared declared acquisition root","comparison_status":"related_or_same_acquisition","relative_changes_percent":{}},
+    {"id":"C04","scenario":"Duplicate samples under distinct declared roots","comparison_status":"related_or_same_acquisition","relative_changes_percent":{}}
+  ],
+  "admission": {"semantic_quality_qualified":false,"diagnostic_release":false,"factory_trial_approved":false}
+}
